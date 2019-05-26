@@ -3,12 +3,14 @@ import createSagaMiddleware from 'redux-saga'
 import reducers from '../reducers'
 import rootSaga from '../sagas'
 
+import { Constants } from '@constants';
+
 const sagaMiddleware = createSagaMiddleware()
 
 let store;
 
 const bindMiddleware = (middleware) => {
-  if (process.env.NODE_ENV !== 'production') {
+  if (process.env.NODE_ENV !== Constants.ENVS.PROD) {
     const { composeWithDevTools } = require('redux-devtools-extension')
     return composeWithDevTools(applyMiddleware(...middleware))
   }

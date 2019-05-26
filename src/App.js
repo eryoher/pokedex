@@ -6,6 +6,7 @@ import contextTheme from './themes';
 import Home from './containers/Home';
 import Order from './containers/Order';
 import configureStore from './store';
+import { translate, setLocale } from '@translations';
 
 type Props = {
   className?: string,

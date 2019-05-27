@@ -38,6 +38,7 @@ class Shortcut {
   }
 }
 
+// TODO jfarina: this should work in combination with a HOC "withShortcuts(component:Component, actionsIDs:Array<string>) which has to call the enableShortcuts on componentDidMount and disableShortcuts on componentWillUnmount"
 class ShortcutsHandler {
   /**
    * Registry of enabled shortcuts, with keys created out of the shortcut's keys combination.
@@ -67,21 +68,28 @@ class ShortcutsHandler {
      * 2.1- if so, raise error or warning and replace existing shortcut
      * 2.2- otherwise, register shortcut for specified action, as per configuration
      * */
+    throw new Error("Method not implemented.");
   }
 
   /**
    * Unloads the shortcuts associated to the specified actions from the registry and stops listening for their associated combination of keys.
    * @param {Array<string>} actions: the IDs of the actions whose shortcuts configuration are to be unloaded
    */
-  disableShortcuts(actions) {}
+  disableShortcuts(actions) {
+    throw new Error("Method not implemented.");
+  }
 
-  getShortcutConfiguration(actionID: string): Shortcut {
+  /**
+   * Returns an array of Shortcuts (maybe zero or more) associated for the specified actionID
+   * @param actionID 
+   */
+  getShortcutConfiguration(actionID: string): Array<Shortcut> {
     return actionID && actionID in this.shortcuts
       ? this.shortcuts[actionID]
       : null;
   }
-  
-  parseConfiguration(shortcutsConfig: Object): Shortcut[] {
+
+  private parseConfiguration(shortcutsConfig: Object): Shortcut[] {
     throw new Error("Method not implemented.");
   }
 }

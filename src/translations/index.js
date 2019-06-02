@@ -1,5 +1,5 @@
 import i18n from "i18next";
-import { Constants } from '@constants';
+import { Constants } from 'constants/index';
 import { initReactI18next } from "react-i18next";
 
 i18n.use(initReactI18next)

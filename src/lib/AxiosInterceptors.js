@@ -1,10 +1,11 @@
 import Axios from "axios";
 import NProgress from "nprogress";
-import getAppConfiguration from "@lib/AppConfiguration";
-import { showLoader, hideLoader, userSignOut, showMessage } from "@actions";
+// import getAppConfiguration from "lib/AppConfiguration";
+import { showLoader, hideLoader, userSignOut, showMessage } from "actions";
 
 export default function configureAxios(store) {
-  const config = getAppConfiguration();
+  // const config = getAppConfiguration();//TODO jfarina grab from store
+  const config = {};
 
   Axios.defaults.baseURL = config.apiURL;
   Axios.defaults.timeout = 30000;

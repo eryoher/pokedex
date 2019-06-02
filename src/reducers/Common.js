@@ -5,7 +5,7 @@ import {
   CLEAR_ERROR,
   SHOW_MESSAGE,
   CLEAR_MESSAGE,
-} from '@constants/ActionsTypes'
+} from 'constants/ActionsTypes'
 
 const initialState = {}
 

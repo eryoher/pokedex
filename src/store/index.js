@@ -3,9 +3,9 @@ import createSagaMiddleware from 'redux-saga'
 import reducers from '../reducers'
 import rootSaga from '../sagas'
 
-import configureAxios from '@lib/configureAxios'
+import configureAxios from 'lib/AxiosInterceptors'
 
-import { Constants } from '@constants';
+import { Constants } from 'constants/index';
 
 const sagaMiddleware = createSagaMiddleware()
 

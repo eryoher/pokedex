@@ -3,7 +3,7 @@ import {
   GET_USER_SUCCESS,
   GET_PERMISSIONS_SUCCESS,
   SIGNOUT_USER_SUCCESS,
-} from '@constants/ActionsTypes'
+} from 'constants/ActionsTypes'
 
 const initialState = {}
 

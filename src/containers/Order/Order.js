@@ -11,7 +11,7 @@ export default class Order extends Component<Props> {
   render() {
     return (
       <div>
-        PEDIDO PAGE
+        PEDIDO PAGE 
       </div>
     )
   }

@@ -7,6 +7,7 @@ import Home from './containers/Home';
 import Order from './containers/Order';
 import Voucher from './containers/Voucher';
 import configureStore from './store';
+import { translate, setLocale } from 'translations/index';
 
 type Props = {
   className?: string,

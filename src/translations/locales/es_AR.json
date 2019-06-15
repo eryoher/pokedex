@@ -1,0 +1,16 @@
+{
+    "screen": {
+        "title": "Resetear Stack a siguiente pantalla",
+        "change_language_to_english": "Cambiar lenguaje a ingles",
+        "change_language_to_spanish": "Cambiar lenguaje a español"
+    },
+    "voucher":{
+        "step":{
+            "select_client":"Selección del cliente ",
+            "load_headboard":"Cargar cabeceras",
+            "load_items":"Cargar Items",
+            "affectation_vouchers":"Afectación comprobantes",
+            "generate":"Generar"
+        }
+    }
+}

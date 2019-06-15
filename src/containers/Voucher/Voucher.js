@@ -1,26 +1,28 @@
 import React, { Component } from 'react'
-import { Grid } from 'react-bootstrap';
 import withMenu from '../../components/common/withMenu'
 import Steps from '../../components/common/steps';
+import { withTranslation } from 'react-i18next';
 
 class Voucher extends Component {
     render() {
+        const {t} = this.props
+
         const steps = [
             {
-                label:'Seleccion del cliente',
+                label:t('voucher.step.select_client'),
                 main:true
             },
             {
-                label:'Carga de Cabecera',
+                label:t('voucher.step.load_headboard'),
             },
             {
-                label:'Carga de Items',
+                label:t('voucher.step.load_items'),
             },
             {
-                label:'Afectacion Comprobantes',
+                label:t('voucher.step.affectation_vouchers'),
             },
             {
-                label:'Generar',
+                label:t('voucher.step.generate'),
             },            
             
         ]
@@ -33,4 +35,4 @@ class Voucher extends Component {
     }
 }
 
-export default withMenu( Voucher );
+export default (withTranslation()(withMenu( Voucher )));

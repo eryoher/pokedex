@@ -11,6 +11,48 @@
             "load_items":"Cargar Items",
             "affectation_vouchers":"Afectación comprobantes",
             "generate":"Generar"
+        },
+        "form":{
+            "insert_customer_criterion":"Ingrese el criterio cliente",
+            "business_name":"Razón social",
+            "insert_business_name":"Ingrese la Razón social",
+            "code":"Codigo",
+            "insert_code_client": "Codigo del cliente",
+            "responsible_type":"Tipo responsable",
+            "insert_responsible_type":"Ingrese el Tipo responsable",
+            "cuit":"C.U.I.T",
+            "insert_cuit":"Identificador Cliente"
+        }       
+
+    },
+    "client":{
+        "form":{
+            "contact":"Contacto",
+            "insert_contact":"Ingrese el Contacto",
+            "phone":"Teléfono",
+            "insert_phone":"Ingrese el teléfono",
+            "email":"Correo",
+            "insert_email":"Ingrese el correo",
+            "address":"Domocilio",
+            "insert_address":"Ingrese el domicilio",
+            "location":"Localidad",
+            "insert_location":"Ingrese la localidad",
+            "province":"Provincia",
+            "insert_province":"Ingrese la provincia",
+            "postalCode":"Código postal",
+            "insert_postal_code":"Ingrese el código postal",
+            "client_branch":"Cliente Sucursal",
+            "insert_client_branch":"Ingrese cliente sucursal",
+            "obs_current_account":"Obs. Cta. Cte.",
+            "insert_obs_current_account":"Ingrese la Observaciones de la cuenta corriente",
+            "obs_sales":"Obs. Ventas",
+            "insert_obs_sales":"Ingrese las Observaciones de la venta",
+            "limit_credit":"Limite Crédito",
+            "insert_limit_credit":"Ingre limite del crédito",
+            "pendingCredit":"Crédito pendiente",
+            "insert_pending_credit":"Ingrese crédito pendiente",
+            "balance":"Saldo",
+            "insert_client_balance":"Ingrese saldo cliente"
         }
     }
 }

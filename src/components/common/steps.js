@@ -23,7 +23,7 @@ class Steps extends Component {
         const {steps} = this.props;
         
         return (
-            <Row className="mt-3 mb-3"  style={{fontFamily:'Arial', fontSize:'14px'}} >
+            <Row className="mt-3 mb-3 col-12"  style={{fontFamily:'Arial', fontSize:'14px'}} >
                 {steps && this.renderSteps()}
             </Row>
         );

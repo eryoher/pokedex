@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
 import { Row, Col, Badge } from 'react-bootstrap';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheck  } from '@fortawesome/free-solid-svg-icons'
 class Steps extends Component {
 
     renderSteps = () => {
-        const {steps} = this.props;
-        
+        const {steps} = this.props;        
 
         const rows = steps.map((step, index) => {
-            const clasBadge = ( step.main ) ? 'badge-primary' : 'badge-secondary';
+            const clasBadge = ( step.main || step.before ) ? 'badge-primary' : 'badge-secondary';
+            const badgeNumber = (step.before) ? <FontAwesomeIcon icon={faCheck} /> : index + 1;
             return (
                 <Col className={'col-sm'} key={index}>
-                    <span className={`badge badge-pill ${clasBadge} `} >{index + 1}</span> {step.label}
+                    <span style={{
+                        borderRadius: '100%',
+                        height:'20px',
+                        width: '20px',
+                        paddingTop: '0.5em'
+                    }}  className={`badge ${clasBadge} `} >{badgeNumber}</span> {step.label}
                 </Col>
             );
         });

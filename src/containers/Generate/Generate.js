@@ -3,28 +3,35 @@ import withMenu from '../../components/common/withMenu'
 import Steps from '../../components/common/steps';
 import { withTranslation } from 'react-i18next';
 import { Row, Col } from 'react-bootstrap';
-import VoucherClientForm from 'components/voucher/voucherClientForm';
+import GenerateForm from 'components/generate/GenerateForm';
 
-class Voucher extends Component {
+class Generate extends Component {
     render() {
         const {t} = this.props
 
         const steps = [
             {
-                label:t('voucher.step.select_client'),
-                main:true
+                label:t('voucher.step.select_client'),                
+                before:true,
             },
             {
                 label:t('voucher.step.load_headboard'),
+                before:true,
+                
             },
             {
                 label:t('voucher.step.load_items'),
+                before:true,
+
             },
             {
                 label:t('voucher.step.affectation_vouchers'),
+                before:true,
+
             },
             {
                 label:t('voucher.step.generate'),
+                main:true
             },            
             
         ]
@@ -34,10 +41,10 @@ class Voucher extends Component {
                     {t("voucher.title")}
                 </Col>
                 <Steps steps={steps} />
-                <VoucherClientForm />
+                <GenerateForm />
             </Row>
         )
     }
 }
 
-export default (withTranslation()(withMenu( Voucher )));
+export default (withTranslation()(withMenu( Generate )));

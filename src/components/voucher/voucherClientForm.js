@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Form, Row, Col } from 'react-bootstrap';
+import { Form, Row, Col , Button} from 'react-bootstrap';
 import VoucherFormInput from './voucherFormInput';
 import { withTranslation } from 'react-i18next';
 import ClientFormInput from './clientFormInput';
@@ -9,6 +9,7 @@ import AccountFormInput from './accountFormInput'
 
 class VoucherClientForm extends Component {
     render() {        
+        const {t} = this.props;
         const initial= {}
         return (            
             <Col sm={12}>
@@ -69,7 +70,12 @@ class VoucherClientForm extends Component {
                                         setFieldTouched
                                     }}
                                 />
-                            </Col>                                       
+                            </Col>  
+                            <Col style={{textAlign:'right'}} className={"mt-2"} >
+                                <Button  href={'/headerboard'}  style={{ height: '33px', borderRadius: '7px',fontSize: '14px' }}  type="button" className="btn btn-primary voucher-form-button"  disabled={isSubmitting}>
+                                    {t('voucher.form.next')}
+                                </Button>
+                            </Col>                                     
                         </Form>
                     )}
                 />

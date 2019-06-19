@@ -8,7 +8,7 @@ import { withTranslation } from 'react-i18next';
 
 class VoucherFormInput extends Component {
     render() {
-        const { t, errors, touched, values, handleChange, handleBlur, setFieldValue, setFieldTouched } = this.props;    
+        const { t, errors, touched, values, handleChange, handleBlur, setFieldValue, setFieldTouched, readOnly } = this.props;    
 
         return (
             <Row>
@@ -20,12 +20,13 @@ class VoucherFormInput extends Component {
                         placeholder={t('voucher.form.insert_customer_criterion')}
                         styles={{width:'100%'}}
                         colLabel={"col-sm-2"}
-                        colInput={"col-sm-10"}
+                        colInput={"col-sm-10"} 
+                        disable={readOnly}                       
                     />
                 </Col>
-                <Col sm={1}>
+                { !readOnly &&  <Col sm={1}>
                     <FontAwesomeIcon icon={faPlus} />                    
-                </Col>
+                </Col>}
                 <Col sm={11}>
                     <InputText
                         label={t('voucher.form.business_name')}
@@ -35,11 +36,12 @@ class VoucherFormInput extends Component {
                         styles={{width:'100%'}}
                         colLabel={"col-sm-2"}
                         colInput={"col-sm-10"}
+                        disable={readOnly}                       
                     />
                 </Col>
-                <Col sm={1}>
+                { !readOnly && <Col sm={1}>
                     <FontAwesomeIcon icon={faPencilAlt} />                    
-                </Col>
+                </Col>}
                 <Col sm={11}>
                     <InputText
                         label={t('voucher.form.code')}
@@ -48,6 +50,7 @@ class VoucherFormInput extends Component {
                         placeholder={t('voucher.form.insert_code_client')}                        
                         colLabel={"col-sm-2"}
                         colInput={"col-sm-10"}
+                        disable={readOnly}                       
                     />
                 </Col>
                 <Col sm={6}>
@@ -59,6 +62,7 @@ class VoucherFormInput extends Component {
                         colLabel={"col-sm-4"}
                         colInput={"col-sm-8"}
                         divStyle= {{paddingLeft:'0px'}}
+                        disable={readOnly}                       
                     />
                 </Col>
                 <Col sm={6}>
@@ -70,7 +74,8 @@ class VoucherFormInput extends Component {
                         colLabel={"col-sm-4"}
                         colInput={"col-sm-8"}
                         divStyle= {{paddingLeft:'23px'}}
-                        styleLabel={{textAlign:'right'}}
+                        disable={readOnly}                       
+                        styleLabel={{textAlign:'right'}}                    
                     />
                 </Col>
             </Row>

@@ -10,7 +10,7 @@ import InputTextArea from '../form/inputTextArea'
 
 class AccountFormInput extends Component {
     render() {
-        const { t, errors, touched, values, handleChange, handleBlur, setFieldValue, setFieldTouched } = this.props;    
+        const { t, errors, touched, values, handleChange, handleBlur, setFieldValue, setFieldTouched, readOnly } = this.props;    
         
         return (
             <Row>                                
@@ -25,6 +25,7 @@ class AccountFormInput extends Component {
                         colInput={"col-sm-10"}
                         cols={3}
                         rows={3}
+                        disable={readOnly}
                     />
                 </Col>                
                 <Col sm={11}>    
@@ -38,6 +39,7 @@ class AccountFormInput extends Component {
                         colInput={"col-sm-10"}
                         cols={3}
                         rows={3}
+                        disable={readOnly}
                     />
                 </Col> 
                 <Col sm={6}>
@@ -49,6 +51,7 @@ class AccountFormInput extends Component {
                         colLabel={"col-sm-4"}
                         colInput={"col-sm-8"}
                         divStyle= {{paddingLeft:'0px'}}
+                        disable={readOnly}
                     />
                 </Col>
                 <Col sm={6}>
@@ -61,6 +64,7 @@ class AccountFormInput extends Component {
                         colInput={"col-sm-8"}
                         divStyle= {{paddingLeft:'23px'}}
                         styleLabel={{textAlign:'right'}}
+                        disable={readOnly}
                     />
                 </Col> 
                 <Col sm={11}>
@@ -71,6 +75,7 @@ class AccountFormInput extends Component {
                         placeholder={t('client.form.insert_client_balance')}                        
                         colLabel={"col-sm-2"}
                         colInput={"col-sm-10"}
+                        disable={readOnly}
                     />
                 </Col>
             </Row>

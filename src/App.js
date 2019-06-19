@@ -6,6 +6,9 @@ import contextTheme from './themes';
 import Home from './containers/Home';
 import Order from './containers/Order';
 import Voucher from './containers/Voucher';
+import HeaderBoard from './containers/Headboard';
+import Generate from './containers/Generate';
+
 import configureStore from './store';
 import { translate, setLocale } from 'translations/index';
 
@@ -26,6 +29,8 @@ class App extends Component<Props> {
               <Route exact path="/" component={Home} />
               <Route path="/order" component={Order} />
               <Route path="/voucher" component={Voucher} />
+              <Route path="/headerboard" component={HeaderBoard} />
+              <Route path="/generate" component={Generate} />
             </div>
           </Router>
         </ThemeProvider>

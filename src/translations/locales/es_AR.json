@@ -4,7 +4,14 @@
         "change_language_to_english": "Cambiar lenguaje a ingles",
         "change_language_to_spanish": "Cambiar lenguaje a español"
     },
+    "form":{
+        "button":{
+            "next":"Siguiente",
+            "back":"Atras"
+        }
+    },
     "voucher":{
+        "title":"Ingrese de Comprobante - Nota de Venta con Aprobación",
         "step":{
             "select_client":"Selección del cliente ",
             "load_headboard":"Cargar cabeceras",
@@ -21,11 +28,13 @@
             "responsible_type":"Tipo responsable",
             "insert_responsible_type":"Ingrese el Tipo responsable",
             "cuit":"C.U.I.T",
-            "insert_cuit":"Identificador Cliente"
+            "insert_cuit":"Identificador Cliente",
+            "next":"Siguiente"
         }       
 
     },
     "client":{
+        "title":"Cliente",
         "form":{
             "contact":"Contacto",
             "insert_contact":"Ingrese el Contacto",
@@ -53,6 +62,27 @@
             "insert_pending_credit":"Ingrese crédito pendiente",
             "balance":"Saldo",
             "insert_client_balance":"Ingrese saldo cliente"
+        }
+    },
+    "headboard":{
+        "title":"Cabecera",
+        "form":{
+            "company_branch":"Suc. Empresa",
+            "insert_company_branch":"Ingrese la Sucursal de la empresa",
+            "voucher":"Comprobante",
+            "insert_voucher":"Ingrese Comprobante",
+            "date":"Fecha",
+            "insert_date":"Ingrese Fecha",
+            "currency":"Moneda",
+            "insert_currency":"Ingrese Modena",
+            "quotation":"Cotizacion",
+            "insert_quotation":"Ingrese la cotizacion",
+            "saler":"Vendedor",
+            "insert_saler":"Ingrese Vendedor",
+            "condSale":"Cond. Vta.",
+            "insert_codition_sale":"Codic. Venta",
+            "carrier":"Transportista",
+            "insert_carrier":"Ingrese Transportista"
         }
     }
 }

@@ -9,7 +9,7 @@ import InputDropdown from '../form/inputDropdown'
 
 class ClientFormInput extends Component {
     render() {
-        const { t, errors, touched, values, handleChange, handleBlur, setFieldValue, setFieldTouched } = this.props;    
+        const { t, errors, touched, values, handleChange, handleBlur, setFieldValue, setFieldTouched, readOnly } = this.props;    
         const optionsSelect = [
             {
                 id:1, 
@@ -36,6 +36,7 @@ class ClientFormInput extends Component {
                         colLabel={"col-sm-2"}
                         colInput={"col-sm-10"}
                         options={ optionsSelect }
+                        disable={readOnly}
                     />
                 </Col>                
                 <Col sm={11}>    
@@ -47,6 +48,7 @@ class ClientFormInput extends Component {
                         styles={{width:'100%'}}
                         colLabel={"col-sm-2"}
                         colInput={"col-sm-10"}
+                        disable={readOnly}
                     />
                 </Col>                
                 <Col sm={6}>
@@ -58,6 +60,7 @@ class ClientFormInput extends Component {
                         colLabel={"col-sm-4"}
                         colInput={"col-sm-8"}
                         divStyle= {{paddingLeft:'0px'}}
+                        disable={readOnly}
                     />
                 </Col>
                 <Col sm={6}>
@@ -70,6 +73,7 @@ class ClientFormInput extends Component {
                         colInput={"col-sm-8"}
                         divStyle= {{paddingLeft:'23px'}}
                         styleLabel={{textAlign:'right'}}
+                        disable={readOnly}
                     />
                 </Col>
                 <Col sm={11}>    
@@ -81,6 +85,7 @@ class ClientFormInput extends Component {
                         styles={{width:'100%'}}
                         colLabel={"col-sm-2"}
                         colInput={"col-sm-10"}
+                        disable={readOnly}
                     />
                 </Col> 
                 <Col sm={6}>
@@ -92,6 +97,7 @@ class ClientFormInput extends Component {
                         colLabel={"col-sm-4"}
                         colInput={"col-sm-8"}
                         divStyle= {{paddingLeft:'0px'}}
+                        disable={readOnly}
                     />
                 </Col>
                 <Col sm={6}>
@@ -104,6 +110,7 @@ class ClientFormInput extends Component {
                         colInput={"col-sm-8"}
                         divStyle= {{paddingLeft:'23px'}}
                         styleLabel={{textAlign:'right'}}
+                        disable={readOnly}
                     />
                 </Col> 
                 <Col sm={11}>
@@ -114,6 +121,7 @@ class ClientFormInput extends Component {
                         placeholder={t('client.form.insert_postal_code')}                        
                         colLabel={"col-sm-2"}
                         colInput={"col-sm-10"}
+                        disable={readOnly}
                     />
                 </Col>
             </Row>

@@ -19,7 +19,7 @@ export default class InputDropdown extends Component {
     }
 
     render() {
-        const {label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, options} = this.props;
+        const {label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, options, disable} = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
         const classLabel = (label) ? colLabel : "";
 
@@ -33,8 +33,9 @@ export default class InputDropdown extends Component {
                         className="custom-select"
                         id={inputId}              
                         name={name}                          
-                        style={{margin:'5px ,0px', ...styles}}
+                        style={{margin:'5px ,0px',  width:"70%", height:'35px' , ...styles}}
                         placeholder={placeholder} 
+                        disabled={disable}
                     
                     >                        
                         { options && this.renderOptions() }

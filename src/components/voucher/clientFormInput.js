@@ -13,15 +13,15 @@ class ClientFormInput extends Component {
         const optionsSelect = [
             {
                 id:1, 
-                label:"Optcion 1"
+                label:"Opción 1"
             },
             {
                 id:2, 
-                label:"Optcion 2"
+                label:"Opción 2"
             },
             {
                 id:3, 
-                label:"Optcion 3"
+                label:"Opción 3"
             },            
         ]
         return (

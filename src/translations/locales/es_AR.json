@@ -7,7 +7,7 @@
     "form":{
         "button":{
             "next":"Siguiente",
-            "back":"Atras"
+            "back":"Atrás"
         }
     },
     "voucher":{
@@ -53,11 +53,11 @@
             "client_branch":"Cliente Sucursal",
             "insert_client_branch":"Ingrese cliente sucursal",
             "obs_current_account":"Obs. Cta. Cte.",
-            "insert_obs_current_account":"Ingrese la Observaciones de la cuenta corriente",
+            "insert_obs_current_account":"Ingrese las Observaciones de la cuenta corriente",
             "obs_sales":"Obs. Ventas",
             "insert_obs_sales":"Ingrese las Observaciones de la venta",
-            "limit_credit":"Limite Crédito",
-            "insert_limit_credit":"Ingre limite del crédito",
+            "limit_credit":"Límite Crédito",
+            "insert_limit_credit":"Ingrese límite del crédito",
             "pendingCredit":"Crédito pendiente",
             "insert_pending_credit":"Ingrese crédito pendiente",
             "balance":"Saldo",
@@ -74,13 +74,13 @@
             "date":"Fecha",
             "insert_date":"Ingrese Fecha",
             "currency":"Moneda",
-            "insert_currency":"Ingrese Modena",
+            "insert_currency":"Ingrese Moneda",
             "quotation":"Cotizacion",
-            "insert_quotation":"Ingrese la cotizacion",
+            "insert_quotation":"Ingrese la cotización",
             "saler":"Vendedor",
             "insert_saler":"Ingrese Vendedor",
             "condSale":"Cond. Vta.",
-            "insert_codition_sale":"Codic. Venta",
+            "insert_codition_sale":"Condic. Venta",
             "carrier":"Transportista",
             "insert_carrier":"Ingrese Transportista"
         }

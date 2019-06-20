@@ -7,7 +7,8 @@ import VoucherClientForm from 'components/voucher/voucherClientForm';
 
 class Voucher extends Component {
     render() {
-        const {t} = this.props
+        const {t, theme} = this.props
+        console.log(theme.Title)
 
         const steps = [
             {
@@ -30,7 +31,7 @@ class Voucher extends Component {
         ]
         return (
             <Row className="container" >
-                <Col sm={12} className={"title mt-3 "} style={{fontSize:'14pt'}} >
+                <Col sm={12} className={theme.Title} >
                     {t("voucher.title")}
                 </Col>
                 <Steps steps={steps} />

@@ -15,43 +15,14 @@ type Props = {
 class Home extends Component<Props> {
   render() {
     const { theme } = this.props;
+    console.log(theme.App);
     return (
       <div className={theme.App}>
         <header className={theme.AppHeader}>
           <img src={logo} className={theme.AppLogo} alt="logo" />
-
           <h1>Carena Gestión</h1> 
-          <small>Homepage</small>       
-
-          <Grid>
-            <Row>
-              <Col md={12}>
-                <Button>INICIAR PEDIDO</Button>
-              </Col>
-            </Row>
-            <Row>
-              <Col md={12}>
-                <Button>LLAMAR AL MOZO</Button>
-              </Col>
-            </Row>
-            <Row>
-              <Col md={12}>
-                <Button>PREFERENCIAS</Button>
-              </Col>
-            </Row>
-            <Row>
-              <Col md={12}>
-                <Button>COMPARTIR UBICACION</Button>
-              </Col>
-            </Row>
-            <Row>
-              <Col md={12}>
-                <Button>INICIAR SESIÓN</Button>
-              </Col>
-            </Row>
-          </Grid>
-
-          <Link to="/order">
+          <small>Homepage</small>  
+          <Link to="/voucher">
             <Button>Submit</Button>
           </Link>
         </header>        

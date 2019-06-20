@@ -39,15 +39,15 @@ class HeadboardForm extends Component {
                             </Col>     
                             <div className="dropdown-divider col-11 p-2" />                       
                             <Row>
-                                <Col sm={6} style={{textAlign:'left'}} className={"mt-2"} >
-                                    <Button href={"/voucher"}  style={{ height: '33px', borderRadius: '7px',fontSize: '14px' }}  type="button" className="btn btn-primary voucher-form-button" >
-                                        {t('form.button.back')}
-                                    </Button>
+                                <Col sm={6} style={{textAlign:'left'}} className={"mt-2"} >                                    
+                                    <div className="btn btn-primary" style={{ height: '35px', fontSize: '16px', borderRadius:'10px', minWidth:'90px'}} >
+                                        <a style={{color:'#fff', textDecoration:'none'}} href={"/voucher"}> {t('form.button.back')} </a>
+                                    </div>
                                 </Col>          
-                                <Col sm={5} style={{textAlign:'right'}} className={"mt-2"} >
-                                    <Button href={"/generate"}  style={{ height: '33px', fontSize: '14px' }}  type="button" className="btn btn-primary voucher-form-button">
-                                        {t('form.button.next')}
-                                    </Button>
+                                <Col sm={5} style={{textAlign:'right'}} className={"mt-2"} >                                    
+                                    <div className="btn btn-primary" style={{ height: '35px', fontSize: '16px', borderRadius:'10px'}} >
+                                        <a style={{color:'#fff', textDecoration:'none'}} href={"/generate"}> {t('form.button.next')} </a>
+                                    </div>
                                 </Col>                                     
                             </Row>
                         </Form>

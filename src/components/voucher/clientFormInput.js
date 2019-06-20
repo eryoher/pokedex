@@ -51,31 +51,32 @@ class ClientFormInput extends Component {
                         disable={readOnly}
                     />
                 </Col>                
-                <Col sm={6}>
-                    <InputText
-                        label={t('client.form.phone')}
-                        inputId={'phone'}
-                        name={'phone'}
-                        placeholder={t('client.form.insert_phone')}                        
-                        colLabel={"col-sm-4"}
-                        colInput={"col-sm-8"}
-                        divStyle= {{paddingLeft:'0px'}}
-                        disable={readOnly}
-                    />
-                </Col>
-                <Col sm={6}>
-                    <InputText
-                        label={t('client.form.email')}
-                        inputId={'email'}
-                        name={'email'}
-                        placeholder={t('client.form.insert_email')}                        
-                        colLabel={"col-sm-4"}
-                        colInput={"col-sm-8"}
-                        divStyle= {{paddingLeft:'23px'}}
-                        styleLabel={{textAlign:'right'}}
-                        disable={readOnly}
-                    />
-                </Col>
+                <Row className={'col-11'} style={{paddingRight:'0px'}} >
+                    <Col sm={6}>
+                        <InputText
+                            label={t('client.form.phone')}
+                            inputId={'phone'}
+                            name={'phone'}
+                            placeholder={t('client.form.insert_phone')}                        
+                            colLabel={"col-sm-4"}
+                            colInput={"col-sm-8"}                            
+                            disable={readOnly}
+                            divStyle={{ paddingLeft:'17px' }}    
+                        />
+                    </Col>
+                    <Col sm={6} style={{paddingRight:'0px'}}>
+                        <InputText
+                            label={t('client.form.email')}
+                            inputId={'email'}
+                            name={'email'}
+                            placeholder={t('client.form.insert_email')}                        
+                            colLabel={"col-sm-4"}
+                            colInput={"col-sm-8"}                            
+                            styleLabel={{textAlign:'right'}}
+                            disable={readOnly}
+                        />
+                    </Col>
+                </Row>
                 <Col sm={11}>    
                     <InputText
                         label={t('client.form.address')}
@@ -87,43 +88,7 @@ class ClientFormInput extends Component {
                         colInput={"col-sm-10"}
                         disable={readOnly}
                     />
-                </Col> 
-                <Col sm={6}>
-                    <InputText
-                        label={t('client.form.location')}
-                        inputId={'location'}
-                        name={'location'}
-                        placeholder={t('client.form.insert_location')}                        
-                        colLabel={"col-sm-4"}
-                        colInput={"col-sm-8"}
-                        divStyle= {{paddingLeft:'0px'}}
-                        disable={readOnly}
-                    />
-                </Col>
-                <Col sm={6}>
-                    <InputText
-                        label={t('client.form.province')}
-                        inputId={'province'}
-                        name={'province'}
-                        placeholder={t('client.form.insert_province')}                        
-                        colLabel={"col-sm-4"}
-                        colInput={"col-sm-8"}
-                        divStyle= {{paddingLeft:'23px'}}
-                        styleLabel={{textAlign:'right'}}
-                        disable={readOnly}
-                    />
-                </Col> 
-                <Col sm={11}>
-                    <InputText
-                        label={t('client.form.postalCode')}
-                        inputId={'postalCode'}
-                        name={'postalCode'}
-                        placeholder={t('client.form.insert_postal_code')}                        
-                        colLabel={"col-sm-2"}
-                        colInput={"col-sm-10"}
-                        disable={readOnly}
-                    />
-                </Col>
+                </Col>                 
             </Row>
         )
     }

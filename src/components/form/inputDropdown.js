@@ -33,7 +33,7 @@ export default class InputDropdown extends Component {
                         className="custom-select"
                         id={inputId}              
                         name={name}                          
-                        style={{margin:'5px ,0px',  width:"70%", height:'35px' , ...styles}}
+                        style={{width:"100%", height:'35px' , ...styles}}
                         placeholder={placeholder} 
                         disabled={disable}
                     

@@ -53,31 +53,34 @@ class VoucherFormInput extends Component {
                         disable={readOnly}                       
                     />
                 </Col>
-                <Col sm={6}>
-                    <InputText
-                        label={t('voucher.form.responsible_type')}
-                        inputId={'clienteId'}
-                        name={'clienteId'}
-                        placeholder={t('voucher.form.insert_responsible_type')}                        
-                        colLabel={"col-sm-4"}
-                        colInput={"col-sm-8"}
-                        divStyle= {{paddingLeft:'0px'}}
-                        disable={readOnly}                       
-                    />
-                </Col>
-                <Col sm={6}>
-                    <InputText
-                        label={t('voucher.form.cuit')}
-                        inputId={'clienteId'}
-                        name={'clienteId'}
-                        placeholder={t('voucher.form.insert_cuit')}                        
-                        colLabel={"col-sm-4"}
-                        colInput={"col-sm-8"}
-                        divStyle= {{paddingLeft:'23px'}}
-                        disable={readOnly}                       
-                        styleLabel={{textAlign:'right'}}                    
-                    />
-                </Col>
+                <Row className={"col-11"} style={{paddingRight:'0px'}} >
+                    <Col sm={6}>
+                        <InputText
+                            label={t('voucher.form.responsible_type')}
+                            inputId={'clienteId'}
+                            name={'clienteId'}
+                            placeholder={t('voucher.form.insert_responsible_type')}                        
+                            colLabel={"col-sm-4"}
+                            colInput={"col-sm-8"}                            
+                            disable={readOnly}   
+                            styleLabel={{paddingRight:'0px'}} 
+                            divStyle={{ paddingLeft:'17px' }}                   
+                        />
+                    </Col>
+                    <Col sm={6} style={{paddingRight:'0px'}}>
+                        <InputText
+                            label={t('voucher.form.cuit')}
+                            inputId={'clienteId'}
+                            name={'clienteId'}
+                            placeholder={t('voucher.form.insert_cuit')}                        
+                            colLabel={"col-sm-4"}
+                            colInput={"col-sm-8"}
+                            divStyle= {{paddingLeft:'23px'}}
+                            disable={readOnly}                       
+                            styleLabel={{textAlign:'right'}}                    
+                        />
+                    </Col>
+                </Row>
             </Row>
         )
     }

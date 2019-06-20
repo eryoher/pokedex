@@ -7,30 +7,29 @@ function withMenu(WrappedComponent){
     class WithMenu extends Component {
         render() {
             return (
-                <div className="container" >                    
-                    <Row className="show-grid">
-                        <Col md={1} style={{color:'white', backgroundColor:'#2F80ED', textAlign:"center", fontSize:'20px'}}>
-                            <Col xs={12} className="m-2" >
-                                <FontAwesomeIcon icon={faStar} />
-                            </Col>     
-                            <Col xs={12} className="m-2" >
-                                <FontAwesomeIcon icon={faSearch} />
-                            </Col>
-                            <Col xs={12} className="m-2" >
-                                <FontAwesomeIcon icon={faPlus} />
-                            </Col>                            
-                            <Col xs={12} className="m-2" >
-                                <FontAwesomeIcon icon={faClock} />
-                            </Col>                            
-                            <Col xs={12} className="m-2" >
-                                <FontAwesomeIcon icon={faBell} />
-                            </Col>                           
-                            <Col xs={12} className="m-2" >
-                                <FontAwesomeIcon icon={faCog} />
-                            </Col>                          
-                            <Col xs={12} className="m-2" >
-                                <FontAwesomeIcon icon={faUserCircle} />
-                            </Col>                               
+                <div className="" >                    
+                    <Row className="show-grid" style={{marginRight:'0px'}} >
+                        <Col md={1} style={{color:'white', backgroundColor:'#2F80ED', fontSize:'20px'}}>                            
+                            <div className="d-flex align-items-start flex-column bd-highlight mb-3" style={{height: '40%'}}>
+                                <div className="p-2 bd-highlight" style={{margin:"0px auto"}} >
+                                    <FontAwesomeIcon icon={faStar} />
+                                </div>
+                                <div className="p-2 bd-highlight" style={{margin:"0px auto"}}>
+                                    <FontAwesomeIcon icon={faSearch} />
+                                </div>
+                                <div className="mb-auto p-2 bd-highlight" style={{margin:"0px auto"}}>
+                                    <FontAwesomeIcon icon={faPlus} />
+                                </div>
+                                <div className="p-2 bd-highlight" style={{margin:"0px auto"}}>
+                                    <FontAwesomeIcon icon={faBell} />
+                                </div>
+                                <div className="p-2 bd-highlight" style={{margin:"0px auto"}}>
+                                    <FontAwesomeIcon icon={faCog} />
+                                </div>
+                                <div className="p-2 bd-highlight" style={{margin:"0px auto"}}>
+                                    <FontAwesomeIcon icon={faUserCircle} />
+                                </div>
+                            </div>                              
                         </Col>                        
                         <Col md={11}>
                             <WrappedComponent 

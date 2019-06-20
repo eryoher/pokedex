@@ -6,13 +6,14 @@ import VoucherFormInput from './voucherFormInput';
 import { withTranslation } from 'react-i18next';
 import ClientFormInput from './clientFormInput';
 import AccountFormInput from './accountFormInput'
+import LocationFormInput from './locationFormInput';
 
 class VoucherClientForm extends Component {
     render() {        
         const {t} = this.props;
         const initial= {}
         return (            
-            <Col sm={12}>
+            <Col sm={12} className={"mb-5"} >
                 <Formik
                     initialValues={{ ...initial }}
                     onSubmit={(values, actions) => {                                                        
@@ -39,7 +40,7 @@ class VoucherClientForm extends Component {
                                     }}
                                 />
                             </Col>     
-                            <div class="dropdown-divider col-11 p-2" />                       
+                            <div className="dropdown-divider col-11 p-2" />                       
                             <Col>
                                 <ClientFormInput         
                                     {...{
@@ -54,8 +55,21 @@ class VoucherClientForm extends Component {
                                         setFieldTouched
                                     }}
                                 />
+                                <LocationFormInput
+                                    {...{
+                                        values,
+                                        handleBlur,
+                                        handleChange,
+                                        errors,
+                                        touched,
+                                        isSubmitting,
+                                        handleSubmit,
+                                        setFieldValue,
+                                        setFieldTouched
+                                    }}
+                                />
                             </Col> 
-                            <div class="dropdown-divider col-11 p-2" />                       
+                            <div className="dropdown-divider col-11 p-2" />                       
                             <Col>
                                 <AccountFormInput
                                     {...{
@@ -72,9 +86,9 @@ class VoucherClientForm extends Component {
                                 />
                             </Col>  
                             <Col style={{textAlign:'right'}} className={"mt-2"} >
-                                <Button  href={'/headerboard'}  style={{ height: '33px', borderRadius: '7px',fontSize: '14px' }}  type="button" className="btn btn-primary voucher-form-button"  disabled={isSubmitting}>
-                                    {t('voucher.form.next')}
-                                </Button>
+                                <div className="btn btn-primary" style={{ height: '35px', fontSize: '16px', borderRadius:'10px'}} >
+                                    <a style={{color:'#fff', textDecoration:'none'}} href={"/headerboard"}> {t('form.button.next')} </a>
+                                </div>
                             </Col>                                     
                         </Form>
                     )}

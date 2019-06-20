@@ -42,42 +42,46 @@ class AccountFormInput extends Component {
                         disable={readOnly}
                     />
                 </Col> 
-                <Col sm={6}>
-                    <InputText
-                        label={t('client.form.limit_credit')}
-                        inputId={'limitCredit'}
-                        name={'limitCredit'}                                             
-                        placeholder={t('client.form.insert_limit_credit')}               
-                        colLabel={"col-sm-4"}
-                        colInput={"col-sm-8"}
-                        divStyle= {{paddingLeft:'0px'}}
-                        disable={readOnly}
-                    />
-                </Col>
-                <Col sm={6}>
-                    <InputText
-                        label={t('client.form.pendingCredit')}
-                        inputId={'pendingCredit'}
-                        name={'pendingCredit'}
-                        placeholder={t('client.form.insert_pending_credit')}                        
-                        colLabel={"col-sm-4"}
-                        colInput={"col-sm-8"}
-                        divStyle= {{paddingLeft:'23px'}}
-                        styleLabel={{textAlign:'right'}}
-                        disable={readOnly}
-                    />
-                </Col> 
-                <Col sm={11}>
-                    <InputText
-                        label={t('client.form.balance')}
-                        inputId={'balance'}
-                        name={'balance'}
-                        placeholder={t('client.form.insert_client_balance')}                        
-                        colLabel={"col-sm-2"}
-                        colInput={"col-sm-10"}
-                        disable={readOnly}
-                    />
-                </Col>
+                <Row className={'col-11'} style={{paddingRight:'0px'}} >
+                    <Col sm={6}>
+                        <InputText
+                            label={t('client.form.limit_credit')}
+                            inputId={'limitCredit'}
+                            name={'limitCredit'}                                             
+                            placeholder={t('client.form.insert_limit_credit')}               
+                            colLabel={"col-sm-4"}
+                            colInput={"col-sm-8"}
+                            divStyle= {{paddingLeft:'17px'}}
+                            disable={readOnly}
+                        />
+                    </Col>
+                    <Col sm={6} style={{paddingRight:'0px'}}>
+                        <InputText
+                            label={t('client.form.pendingCredit')}
+                            inputId={'pendingCredit'}
+                            name={'pendingCredit'}
+                            placeholder={t('client.form.insert_pending_credit')}                        
+                            colLabel={"col-sm-4"}
+                            colInput={"col-sm-8"}                            
+                            styleLabel={{textAlign:'right', paddingRight:'0px'}}
+                            disable={readOnly}
+                        />
+                    </Col> 
+                </Row>
+                <Row className={'col-11'} style={{paddingRight:'0px'}} >
+                    <Col sm={6}>
+                        <InputText
+                            label={t('client.form.balance')}
+                            inputId={'balance'}
+                            name={'balance'}
+                            placeholder={t('client.form.insert_client_balance')}                        
+                            colLabel={"col-sm-4"}
+                            colInput={"col-sm-8"}
+                            disable={readOnly}
+                            divStyle= {{paddingLeft:'17px'}}
+                        />
+                    </Col>
+                </Row>
             </Row>
         )
     }

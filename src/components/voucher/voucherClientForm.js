@@ -8,9 +8,13 @@ import ClientFormInput from './clientFormInput';
 import AccountFormInput from './accountFormInput'
 import LocationFormInput from './locationFormInput';
 
+import { themr } from 'react-css-themr';
+import clientForm from './voucherClienteForm.module.css';
+
 class VoucherClientForm extends Component {
     render() {        
-        const {t} = this.props;
+        const {t, theme} = this.props;
+        console.log(theme);
         const initial= {}
         return (            
             <Col sm={12} className={"mb-5"} >
@@ -86,7 +90,7 @@ class VoucherClientForm extends Component {
                                 />
                             </Col>  
                             <Col style={{textAlign:'right'}} className={"mt-2"} >
-                                <div className="btn btn-primary" style={{ height: '35px', fontSize: '16px', borderRadius:'10px'}} >
+                                <div className={` btn btn-primary ${theme.formButton} `} >
                                     <a style={{color:'#fff', textDecoration:'none'}} href={"/headerboard"}> {t('form.button.next')} </a>
                                 </div>
                             </Col>                                     
@@ -98,5 +102,5 @@ class VoucherClientForm extends Component {
     }
 }
 
-export default (withTranslation()( VoucherClientForm ));
+export default themr('CommonTheme', clientForm)(withTranslation()( VoucherClientForm ));
 

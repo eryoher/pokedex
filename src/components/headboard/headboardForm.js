@@ -4,10 +4,12 @@ import * as Yup from 'yup';
 import { Form, Row, Col , Button} from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import HeadboardFormInput from './headboardFormInput';
+import { themr } from 'react-css-themr';
+import headboardStyles from './headBoardForm.module.css';
 
 class HeadboardForm extends Component {
     render() {        
-        const {t} = this.props;
+        const {t, theme} = this.props;
         const initial= {}
         return (            
             <Col sm={12}>
@@ -40,12 +42,12 @@ class HeadboardForm extends Component {
                             <div className="dropdown-divider col-11 p-2" />                       
                             <Row>
                                 <Col sm={6} style={{textAlign:'left'}} className={"mt-2"} >                                    
-                                    <div className="btn btn-primary" style={{ height: '35px', fontSize: '16px', borderRadius:'10px', minWidth:'90px'}} >
+                                    <div className={`btn btn-primary ${theme.formButton}`} >
                                         <a style={{color:'#fff', textDecoration:'none'}} href={"/voucher"}> {t('form.button.back')} </a>
                                     </div>
                                 </Col>          
                                 <Col sm={5} style={{textAlign:'right'}} className={"mt-2"} >                                    
-                                    <div className="btn btn-primary" style={{ height: '35px', fontSize: '16px', borderRadius:'10px'}} >
+                                    <div className={`btn btn-primary ${theme.formButton}`} >
                                         <a style={{color:'#fff', textDecoration:'none'}} href={"/generate"}> {t('form.button.next')} </a>
                                     </div>
                                 </Col>                                     
@@ -58,5 +60,4 @@ class HeadboardForm extends Component {
     }
 }
 
-export default (withTranslation()( HeadboardForm ));
-
+export default themr('HeadBoardTheme', headboardStyles)(withTranslation()( HeadboardForm ));

@@ -9,8 +9,10 @@ import AccountFormInput from 'components/voucher/accountFormInput';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencilAlt, faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 import LocationFormInput from 'components/voucher/locationFormInput';
+import CollapseBotton from 'components/common/collapseBoton';
 
 class GenerateForm extends Component {
+    
     constructor (props) {
         super(props);
         this.state={
@@ -40,8 +42,11 @@ class GenerateForm extends Component {
                     <div className="dropdown-divider col-11 p-2" />                       
                     <ClientFormInput readOnly />                    
                     <Row>
-                        <Col sm={1}>
-                            <FontAwesomeIcon icon={faMinusCircle} onClick={ () => this.toggle() } />
+                        <Col sm={1}>                            
+                            <CollapseBotton 
+                                onPress = { () =>  this.toggle() } 
+                                status = { this.state.collapse }
+                            />
                         </Col>
                         <Col sm={11}>
                             <div className="dropdown-divider col-11 p-2" />

@@ -9,7 +9,7 @@ function withMenu(WrappedComponent){
             return (
                 <div className="" >                    
                     <Row className="show-grid" style={{marginRight:'0px'}} >
-                        <Col md={1} style={{color:'white', backgroundColor:'#2F80ED', fontSize:'20px'}}>                            
+                        <Col md={1} style={{ paddingRight:'0px',  color:'white', backgroundColor:'#2F80ED', fontSize:'20px'}}>                            
                             <div className="d-flex align-items-start flex-column bd-highlight mb-3" style={{height: '40%'}}>
                                 <div className="p-2 bd-highlight" style={{margin:"0px auto"}} >
                                     <FontAwesomeIcon icon={faStar} />

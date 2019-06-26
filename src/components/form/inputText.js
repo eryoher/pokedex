@@ -18,7 +18,7 @@ export default class InputText extends Component {
                         id={inputId}              
                         name={name}  
                         type="text"
-                        style={{width:'100%', height:'35px', ...styles}}
+                        style={{width:'100%', height:'35px', padding: '0.375rem 1.75rem 0.375rem 0.75rem', ...styles}}
                         placeholder={placeholder} 
                         disabled={disable}                           
                     />

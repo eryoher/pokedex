@@ -25,7 +25,7 @@ export default class InputDropdown extends Component {
 
         return (
             <Row className={"form-group"}>                
-                <Label className={classLabel} style={{...styleLabel}} >
+                <Label className={classLabel} style={{...styleLabel, paddingTop:'4px'}} >
                     {label}
                 </Label>
                 <Col className={classInput} style={{...divStyle}}>                    

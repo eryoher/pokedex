@@ -6,6 +6,7 @@ import InputText from 'components/form/inputText';
 import { withTranslation } from 'react-i18next';
 import InputDropdown from 'components/form/inputDropdown';
 import {Card, Collapse, Button, CardBody} from 'reactstrap'
+import CollapseBotton from 'components/common/collapseBoton';
 
 
 const optionsSelect = [
@@ -163,7 +164,10 @@ class HeadBoardFormInput extends Component {
                     <>
                         <Row className={"col-12"}>
                             <Col sm={1}>
-                                <FontAwesomeIcon icon={faMinusCircle} onClick={ () => this.toggle() } />
+                                <CollapseBotton
+                                    onPress = { () =>  this.toggle() } 
+                                    status = { this.state.collapse }
+                                />
                             </Col>
                             <Col sm={11}>
                                 <div className="dropdown-divider col-11 p-2" />

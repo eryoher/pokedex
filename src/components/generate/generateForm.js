@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import { Form, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
-import {Card, Collapse, Button, CardBody} from 'reactstrap'
+import {Card, Collapse} from 'reactstrap'
 import HeadboardFormInput from '../headboard/headboardFormInput'
 import VoucherFormInput from 'components/voucher/voucherFormInput';
 import ClientFormInput from 'components/voucher/clientFormInput';
 import AccountFormInput from 'components/voucher/accountFormInput';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencilAlt, faMinusCircle } from '@fortawesome/free-solid-svg-icons'
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
 import LocationFormInput from 'components/voucher/locationFormInput';
 import CollapseBotton from 'components/common/collapseBoton';
+import { themr } from 'react-css-themr';
+import styles from './generateForm.module.css';
 
 class GenerateForm extends Component {
     
@@ -24,22 +26,21 @@ class GenerateForm extends Component {
         this.setState(state => ({ collapse: !state.collapse }));
     }
 
-    render() {      
-        
-        const {t} = this.props;
+    render() {              
+        const {t, theme} = this.props;
         return (            
             <Col sm={12}>
-                <Card className={"pb-3 pt-5"} style={{paddingLeft:'4rem', borderRadius:'40px'}} >
-                    <Row className={"mb-5"}>
-                        <Col sm={6} style={{textAlign:'left', fontWeight:"bold", fontSize:'14pt'}} >
+                <Card className={`pb-3 pt-3 ${theme.containerCard}`}  >
+                    <Row className={"mb-3"}>
+                        <Col sm={6} className={theme.title} >
                             { t('client.title') }
                         </Col>
-                        <Col sm={5} style={{textAlign:'right'}} >
+                        <Col sm={5} className={"text-right"} >
                             <FontAwesomeIcon icon={faPencilAlt} /> 
                         </Col>
                     </Row>
                     <VoucherFormInput readOnly />
-                    <div className="dropdown-divider col-11 p-2" />                       
+                    <div className="dropdown-divider col-11 p-1" />                       
                     <ClientFormInput readOnly />                    
                     <Row>
                         <Col sm={1}>                            
@@ -49,21 +50,21 @@ class GenerateForm extends Component {
                             />
                         </Col>
                         <Col sm={11}>
-                            <div className="dropdown-divider col-11 p-2" />
+                            <div className="dropdown-divider col-11 p-1" />
                         </Col>
                     </Row>
                     <Collapse isOpen={this.state.collapse}>
                         <LocationFormInput readOnly />
-                        <div className="dropdown-divider col-11 p-2" />   
+                        <div className="dropdown-divider col-11 p-1"/>   
                         <AccountFormInput readOnly />          
                     </Collapse>                                               
                 </Card>
-                <Card className={"pb-3 mt-5 pt-5 mb-4"} style={{paddingLeft:'4rem', borderRadius:'40px'}} >
-                    <Row className={"mb-5"}>
-                        <Col sm={6} style={{textAlign:'left', fontWeight:"bold", fontSize:'14pt'}} >
+                <Card className={`pb-3 mt-3 pt-3 mb-4 ${theme.containerCard}`} >
+                    <Row className={"mb-3"}>
+                        <Col sm={6} className={theme.title} >
                             { t('headboard.title') }
                         </Col>
-                        <Col sm={5} style={{textAlign:'right'}} >
+                        <Col sm={5} className={"text-right"} >
                             <FontAwesomeIcon icon={faPencilAlt} /> 
                         </Col>
                     </Row>
@@ -77,5 +78,5 @@ class GenerateForm extends Component {
     }
 }
 
-export default (withTranslation()( GenerateForm ));
 
+export default themr('GenerateFormStyle', styles)(withTranslation()( GenerateForm ));

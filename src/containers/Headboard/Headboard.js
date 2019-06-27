@@ -8,7 +8,16 @@ import HeadboardForm from 'components/headboard/headboardForm';
 class Headboard extends Component {
     render() {
         const {t} = this.props
-
+        
+        const nextButton = {
+            url:'/generate',
+            label:t('form.button.next')
+        }
+        
+        const backButton = {
+            url:'/voucher',
+            label:t('form.button.back')
+        }
         const steps = [
             {
                 label:t('voucher.step.select_client'),                
@@ -30,11 +39,15 @@ class Headboard extends Component {
             
         ]
         return (
-            <Row className="container" >
+            <Row className="" >
                 <Col sm={12} className={"title mt-3 "} style={{fontSize:'14pt'}} >
                     {t("voucher.title")}
                 </Col>
-                <Steps steps={steps} />
+                <Steps 
+                    steps={steps} 
+                    nextButton={nextButton}
+                    backButton={backButton}
+                />
                 <HeadboardForm />
             </Row>
         )

@@ -9,6 +9,10 @@ import VoucherClientForm from 'components/voucher/voucherClientForm';
 class Voucher extends Component {
     render() {
         const {t, theme} = this.props
+        const nextButton = {
+            url:'headerboard',
+            label:'Siguiente'
+        }
         const steps = [
             {
                 label:t('voucher.step.select_client'),
@@ -29,11 +33,15 @@ class Voucher extends Component {
             
         ]
         return (
-            <Row className="container" >
+            <Row>
                 <Col sm={12} className={theme.Title} >
                     {t("voucher.title")}
                 </Col>
-                <Steps steps={steps} />
+                <Steps 
+                    steps={steps} 
+                    nextButton={nextButton}
+                />
+
                 <VoucherClientForm />
             </Row>
         )

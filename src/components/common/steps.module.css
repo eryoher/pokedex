@@ -13,3 +13,9 @@
 .title{
     font-size:12px;
 }
+
+.formButton{
+    height: 37px;
+    border-radius: 10px !important;
+    font-size: 16px !important;
+}

@@ -8,7 +8,8 @@ class InputText extends Component {
         const {label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, disable, theme} = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
         const classLabel = (label) ? colLabel : "";
-        console.log(theme)
+        const classText = ( disable ) ? theme.inputDisabled : '';
+        console.log(theme, disable);
         return (
             <Row className={"form-group"}>                
                 <Label className={`${classLabel} ${theme.inputLabel}`} style={{...styleLabel, paddingTop:'5px'}} >
@@ -22,7 +23,7 @@ class InputText extends Component {
                         style={styles}
                         placeholder={placeholder} 
                         disabled={disable}   
-                        className={theme.inputText}                        
+                        className={`${theme.inputText} ${classText}`}                                         
                     />
                 </Col>
                 

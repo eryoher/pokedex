@@ -3,7 +3,7 @@ import withMenu from '../../components/common/withMenu'
 import Steps from '../../components/common/steps';
 import { withTranslation } from 'react-i18next';
 import { Row, Col } from 'react-bootstrap';
-import GenerateForm from 'components/generate/GenerateForm';
+import GenerateForm from 'components/generate/generateForm';
 
 class Generate extends Component {
     render() {
@@ -36,7 +36,7 @@ class Generate extends Component {
             
         ]
         return (
-            <Row className="container" >
+            <Row>
                 <Col sm={12} className={"title mt-3 "} style={{fontSize:'14pt'}} >
                     {t("voucher.title")}
                 </Col>

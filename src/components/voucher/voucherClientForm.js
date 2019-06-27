@@ -14,10 +14,9 @@ import clientForm from './voucherClienteForm.module.css';
 class VoucherClientForm extends Component {
     render() {        
         const {t, theme} = this.props;
-        console.log(theme);
         const initial= {}
         return (            
-            <Col sm={12} className={"mb-5"} >
+            <Col sm={12} className={"mb-1"} >
                 <Formik
                     initialValues={{ ...initial }}
                     onSubmit={(values, actions) => {                                                        

@@ -11,7 +11,7 @@ class VoucherFormInput extends Component {
         const { t, errors, touched, values, handleChange, handleBlur, setFieldValue, setFieldTouched, readOnly } = this.props;    
 
         return (
-            <Row>
+            <Row >
                 <Col sm={11}>    
                     <InputText
                         label={false}

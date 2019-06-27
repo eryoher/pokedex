@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
-import { Form, Row, Col, input, Label } from 'react-bootstrap';
+import { Row, Col, Label } from 'react-bootstrap';
+import { themr } from 'react-css-themr';
+import styles from './inputText.module.css';
 
-
-export default class InputText extends Component {
+class InputText extends Component {
     render() {
-        const {label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, disable} = this.props;
+        const {label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, disable, theme} = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
         const classLabel = (label) ? colLabel : "";
-
+        console.log(theme)
         return (
             <Row className={"form-group"}>                
-                <Label className={classLabel} style={{...styleLabel, paddingTop:'3px'}} >
+                <Label className={`${classLabel} ${theme.inputLabel}`} style={{...styleLabel, paddingTop:'5px'}} >
                     {label}
                 </Label>
                 <Col className={classInput} style={{...divStyle}}>
@@ -18,9 +19,10 @@ export default class InputText extends Component {
                         id={inputId}              
                         name={name}  
                         type="text"
-                        style={{width:'100%', height:'35px', padding: '0.375rem 1.75rem 0.375rem 0.75rem', ...styles}}
+                        style={styles}
                         placeholder={placeholder} 
-                        disabled={disable}                           
+                        disabled={disable}   
+                        className={theme.inputText}                        
                     />
                 </Col>
                 
@@ -28,3 +30,5 @@ export default class InputText extends Component {
         )
     }
 }
+
+export default themr('InputTextStyle', styles)( InputText );

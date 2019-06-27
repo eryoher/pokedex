@@ -15,7 +15,7 @@ class Steps extends Component {
             const badgeNumber = (step.before) ? <FontAwesomeIcon icon={faCheck} /> : index + 1;
             return (
                 <Col className={'col-sm'} key={index}>
-                    <span className={`badge ${clasBadge} ${theme.step} `} >{badgeNumber}</span> {step.label}
+                    <span className={`badge ${clasBadge} ${theme.step} `} >{badgeNumber}</span> <span className={theme.title} > {step.label} </span>
                 </Col>
             );
         });

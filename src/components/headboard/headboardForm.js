@@ -39,7 +39,7 @@ class HeadboardForm extends Component {
                                     }}
                                 />
                             </Col>     
-                            <div className="dropdown-divider col-11 p-2" />                       
+                            <div className="dropdown-divider col-11 p-1" />                       
                             <Row>
                                 <Col sm={6} style={{textAlign:'left'}} className={"mt-2"} >                                    
                                     <div className={`btn btn-primary ${theme.formButton}`} >

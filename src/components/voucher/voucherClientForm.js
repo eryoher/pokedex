@@ -44,7 +44,7 @@ class VoucherClientForm extends Component {
                                     }}
                                 />
                             </Col>     
-                            <div className="dropdown-divider col-11 p-2" />                       
+                            <div className="dropdown-divider col-11 p-1" />                       
                             <Col>
                                 <ClientFormInput         
                                     {...{
@@ -73,7 +73,7 @@ class VoucherClientForm extends Component {
                                     }}
                                 />
                             </Col> 
-                            <div className="dropdown-divider col-11 p-2" />                       
+                            <div className="dropdown-divider col-11 p-1" />                       
                             <Col>
                                 <AccountFormInput
                                     {...{
@@ -103,4 +103,3 @@ class VoucherClientForm extends Component {
 }
 
 export default themr('CommonTheme', clientForm)(withTranslation()( VoucherClientForm ));
-

@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { Form, Row, Col, Label, select } from 'react-bootstrap';
+import { Row, Col, Label } from 'react-bootstrap';
+import { themr } from 'react-css-themr';
+import styles from './inputDropdown.module.css';
 
-
-export default class InputDropdown extends Component {
+class InputDropdown extends Component {
 
     renderOptions = () => {
         const {options} = this.props;
@@ -19,24 +20,23 @@ export default class InputDropdown extends Component {
     }
 
     render() {
-        const {label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, options, disable} = this.props;
+        const {label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, options, disable, theme} = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
         const classLabel = (label) ? colLabel : "";
 
         return (
             <Row className={"form-group"}>                
-                <Label className={classLabel} style={{...styleLabel, paddingTop:'4px'}} >
+                <Label className={`${classLabel} ${theme.inputLabel}`  } style={{...styleLabel, paddingTop:'4px'}} >
                     {label}
                 </Label>
                 <Col className={classInput} style={{...divStyle}}>                    
-                    <select 
-                        className="custom-select"
+                    <select                         
                         id={inputId}              
                         name={name}                          
-                        style={{width:"100%", height:'35px' , ...styles}}
+                        style={{styles}}
                         placeholder={placeholder} 
                         disabled={disable}
-                    
+                        className={`${theme.inputDropdown} custom-select`}
                     >                        
                         { options && this.renderOptions() }
                     </select>
@@ -46,3 +46,4 @@ export default class InputDropdown extends Component {
         )
     }
 }
+export default themr('InputDropdownStyle', styles)( InputDropdown );

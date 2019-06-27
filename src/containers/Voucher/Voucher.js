@@ -5,11 +5,10 @@ import { withTranslation } from 'react-i18next';
 import { Row, Col } from 'react-bootstrap';
 import VoucherClientForm from 'components/voucher/voucherClientForm';
 
+
 class Voucher extends Component {
     render() {
         const {t, theme} = this.props
-        console.log(theme.Title)
-
         const steps = [
             {
                 label:t('voucher.step.select_client'),

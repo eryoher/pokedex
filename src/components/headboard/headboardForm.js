@@ -8,6 +8,7 @@ import { themr } from 'react-css-themr';
 import headboardStyles from './headBoardForm.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight  } from '@fortawesome/free-solid-svg-icons';
+import InputButton from 'components/form/inputButton';
 
 class HeadboardForm extends Component {
     render() {        
@@ -44,20 +45,16 @@ class HeadboardForm extends Component {
                             <div className="dropdown-divider col-11 p-1" />                       
                             <Row>
                                 <Col style={{textAlign:'left'}} className={"mt-2 col-1 "} >                                    
-                                    <div className={`btn btn-primary ${theme.formButton}`} >
-                                        <a style={{color:'#fff', textDecoration:'none'}} href={"/voucher"}> 
-                                            {
-                                                <FontAwesomeIcon icon={faAngleLeft} />
-                                            } 
-                                        </a>
-                                    </div>
+                                    <InputButton
+                                        backButton
+                                        urlForm={"/voucher"}
+                                    />
                                 </Col>          
-                                <Col style={{textAlign:'left', paddingLeft:'0px'}} className={"mt-2 col-1 offset-10"} >                                    
-                                    <div className={`btn btn-primary ${theme.formButton}`} >
-                                        <a style={{color:'#fff', textDecoration:'none'}} href={"/generate"}>
-                                            {<FontAwesomeIcon icon={faAngleRight} />} 
-                                        </a>
-                                    </div>
+                                <Col style={{textAlign:'left', paddingLeft:'0px'}} className={"mt-2 col-1 offset-10"} >                                                                        
+                                    <InputButton
+                                        nextButton
+                                        urlForm={"/generate"}
+                                    />
                                 </Col>                                     
                             </Row>
                         </Form>

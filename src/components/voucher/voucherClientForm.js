@@ -101,4 +101,4 @@ class VoucherClientForm extends Component {
     }
 }
 
-export default themr('CommonTheme', clientForm)(withTranslation()( VoucherClientForm ));
+export default themr('VoucherFormStyles', clientForm)(withTranslation()( VoucherClientForm ));

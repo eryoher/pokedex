@@ -84,5 +84,14 @@
             "carrier":"Transportista",
             "insert_carrier":"Ingrese Transportista"
         }
+    },
+    "login":{
+        "form":{
+            "username":"Usuario",
+            "insert_username":"Ingrese el usuario",
+            "password":"Contraseña",
+            "insert_password":"Ingrese la contraseña",
+            "submit":"Ingresar"
+        }
     }
 }

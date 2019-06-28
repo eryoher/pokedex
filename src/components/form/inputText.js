@@ -5,11 +5,12 @@ import styles from './inputText.module.css';
 
 class InputText extends Component {
     render() {
-        const {label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, disable, theme} = this.props;
+        const {label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, disable, theme, type} = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
         const classLabel = (label) ? colLabel : "";
         const classText = ( disable ) ? theme.inputDisabled : '';
-        console.log(theme, disable);
+        const customType = (type) ? type : 'text';
+
         return (
             <Row className={"form-group"}>                
                 <Label className={`${classLabel} ${theme.inputLabel}`} style={{...styleLabel, paddingTop:'5px'}} >
@@ -19,7 +20,7 @@ class InputText extends Component {
                     <input        
                         id={inputId}              
                         name={name}  
-                        type="text"
+                        type={customType}
                         style={styles}
                         placeholder={placeholder} 
                         disabled={disable}   

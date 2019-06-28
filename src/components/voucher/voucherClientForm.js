@@ -7,9 +7,9 @@ import { withTranslation } from 'react-i18next';
 import ClientFormInput from './clientFormInput';
 import AccountFormInput from './accountFormInput'
 import LocationFormInput from './locationFormInput';
-
 import { themr } from 'react-css-themr';
 import clientForm from './voucherClienteForm.module.css';
+import InputButton from 'components/form/inputButton';
 
 class VoucherClientForm extends Component {
     render() {        
@@ -88,10 +88,11 @@ class VoucherClientForm extends Component {
                                     }}
                                 />
                             </Col>  
-                            <Col style={{textAlign:'right'}} className={"mt-2"} >
-                                <div className={` btn btn-primary ${theme.formButton} `} >
-                                    <a style={{color:'#fff', textDecoration:'none'}} href={"/headerboard"}> {t('form.button.next')} </a>
-                                </div>
+                            <Col style={{textAlign:'left', paddingLeft:'0px' }} className={"mt-2 offset-11 col-1"} >                                
+                                <InputButton
+                                    nextButton
+                                    urlForm={"/headerboard"}
+                                />
                             </Col>                                     
                         </Form>
                     )}

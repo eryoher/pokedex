@@ -11,7 +11,6 @@ class Voucher extends Component {
         const {t, theme} = this.props
         const nextButton = {
             url:'headerboard',
-            label:'>'
         }
         const steps = [
             {

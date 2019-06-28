@@ -9,6 +9,10 @@ class Generate extends Component {
     render() {
         const {t} = this.props
 
+        const backButton = {
+            url:'headerboard',
+        }
+
         const steps = [
             {
                 label:t('voucher.step.select_client'),                
@@ -40,7 +44,9 @@ class Generate extends Component {
                 <Col sm={12} className={"title mt-3 "} style={{fontSize:'14pt'}} >
                     {t("voucher.title")}
                 </Col>
-                <Steps steps={steps} />
+                <Steps steps={steps}
+                    backButton = {backButton}
+                />
                 <GenerateForm />
             </Row>
         )

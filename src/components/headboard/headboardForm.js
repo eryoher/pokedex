@@ -6,6 +6,9 @@ import { withTranslation } from 'react-i18next';
 import HeadboardFormInput from './headboardFormInput';
 import { themr } from 'react-css-themr';
 import headboardStyles from './headBoardForm.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleLeft, faAngleRight  } from '@fortawesome/free-solid-svg-icons';
+import InputButton from 'components/form/inputButton';
 
 class HeadboardForm extends Component {
     render() {        
@@ -41,15 +44,17 @@ class HeadboardForm extends Component {
                             </Col>     
                             <div className="dropdown-divider col-11 p-1" />                       
                             <Row>
-                                <Col sm={6} style={{textAlign:'left'}} className={"mt-2"} >                                    
-                                    <div className={`btn btn-primary ${theme.formButton}`} >
-                                        <a style={{color:'#fff', textDecoration:'none'}} href={"/voucher"}> {t('form.button.back')} </a>
-                                    </div>
+                                <Col style={{textAlign:'left'}} className={"mt-2 col-1 "} >                                    
+                                    <InputButton
+                                        backButton
+                                        urlForm={"/voucher"}
+                                    />
                                 </Col>          
-                                <Col sm={5} style={{textAlign:'right'}} className={"mt-2"} >                                    
-                                    <div className={`btn btn-primary ${theme.formButton}`} >
-                                        <a style={{color:'#fff', textDecoration:'none'}} href={"/generate"}> {t('form.button.next')} </a>
-                                    </div>
+                                <Col style={{textAlign:'left', paddingLeft:'0px'}} className={"mt-2 col-1 offset-10"} >                                                                        
+                                    <InputButton
+                                        nextButton
+                                        urlForm={"/generate"}
+                                    />
                                 </Col>                                     
                             </Row>
                         </Form>

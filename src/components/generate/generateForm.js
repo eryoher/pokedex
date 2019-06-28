@@ -7,11 +7,12 @@ import VoucherFormInput from 'components/voucher/voucherFormInput';
 import ClientFormInput from 'components/voucher/clientFormInput';
 import AccountFormInput from 'components/voucher/accountFormInput';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import { faPencilAlt, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
 import LocationFormInput from 'components/voucher/locationFormInput';
 import CollapseBotton from 'components/common/collapseBoton';
 import { themr } from 'react-css-themr';
 import styles from './generateForm.module.css';
+import InputButton from 'components/form/inputButton';
 
 class GenerateForm extends Component {
     
@@ -73,6 +74,13 @@ class GenerateForm extends Component {
                         collapse
                     />                
                 </Card>
+                <Col style={{textAlign:'left'}} className={"mt-2 col-1 "} >                                    
+                    <InputButton 
+                        backButton
+                        urlForm={"/headerboard"}
+                    />
+
+                </Col> 
             </Col>            
         )
     }

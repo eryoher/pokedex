@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Row, Col} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck  } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faAngleLeft, faAngleRight  } from '@fortawesome/free-solid-svg-icons';
 import { themr } from 'react-css-themr';
 import commonTheme from './steps.module.css';
 
@@ -16,7 +16,7 @@ class Steps extends Component {
             rows.push(
                 <Col className={'col-1'}>
                     <div className={` btn btn-primary ${theme.formButton} `} >
-                        <a style={{color:'#fff', textDecoration:'none'}} href={backButton.url}> { backButton.label } </a>
+                        <a style={{color:'#fff', textDecoration:'none'}} href={backButton.url}> { <FontAwesomeIcon icon={faAngleLeft} /> } </a>
                     </div>
                 </Col>
             )
@@ -38,7 +38,7 @@ class Steps extends Component {
             result.push(
                 <Col className={'col-1'}>
                     <div className={` btn btn-primary ${theme.formButton} `} >
-                        <a style={{color:'#fff', textDecoration:'none'}} href={nextButton.url}> { nextButton.label } </a>
+                        <a style={{color:'#fff', textDecoration:'none'}} href={nextButton.url}> { <FontAwesomeIcon icon={faAngleRight} /> } </a>
                     </div>
                 </Col>
             )

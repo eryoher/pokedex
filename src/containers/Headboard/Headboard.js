@@ -11,12 +11,12 @@ class Headboard extends Component {
         
         const nextButton = {
             url:'/generate',
-            label:t('form.button.next')
+            label:'>'
         }
         
         const backButton = {
             url:'/voucher',
-            label:t('form.button.back')
+            label:'<'
         }
         const steps = [
             {

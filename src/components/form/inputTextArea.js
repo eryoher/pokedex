@@ -1,16 +1,19 @@
 import React, { Component } from 'react'
 import { Form, Row, Col, textarea, Label } from 'react-bootstrap';
+import { themr } from 'react-css-themr';
+import styles from './inputTextArea.module.css';
 
 
-export default class InputtextArea extends Component {
+class InputTextArea extends Component {
+
     render() {
-        const {label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, cols, rows, disable} = this.props;
+        const {label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, cols, rows, disable, theme} = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
         const classLabel = (label) ? colLabel : "";
 
         return (
             <Row className={"form-group"}>                
-                <Label className={classLabel} style={{...styleLabel}} >
+                <Label className={`${theme.label}  ${classLabel}`} style={{...styleLabel}} >
                     {label}
                 </Label>
                 <Col className={classInput} style={{...divStyle}}>
@@ -22,6 +25,7 @@ export default class InputtextArea extends Component {
                         rows={rows}
                         cols={cols}
                         disabled={disable}
+                        className={theme.inputTextArea}
                     />
                 </Col>
                 
@@ -29,3 +33,5 @@ export default class InputtextArea extends Component {
         )
     }
 }
+
+export default themr('InputTextAreaStyle', styles)( InputTextArea );

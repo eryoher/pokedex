@@ -36,7 +36,7 @@ class Steps extends Component {
 
         if(nextButton){            
             result.push(
-                <Col className={'col-1'}>
+                <Col className={'col-1'} key={100} >
                     <div className={` btn btn-primary ${theme.formButton} `} >
                         <a style={{color:'#fff', textDecoration:'none'}} href={nextButton.url}> { <FontAwesomeIcon icon={faAngleRight} /> } </a>
                     </div>

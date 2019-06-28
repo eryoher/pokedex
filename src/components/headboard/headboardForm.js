@@ -6,6 +6,8 @@ import { withTranslation } from 'react-i18next';
 import HeadboardFormInput from './headboardFormInput';
 import { themr } from 'react-css-themr';
 import headboardStyles from './headBoardForm.module.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleLeft, faAngleRight  } from '@fortawesome/free-solid-svg-icons';
 
 class HeadboardForm extends Component {
     render() {        
@@ -41,14 +43,20 @@ class HeadboardForm extends Component {
                             </Col>     
                             <div className="dropdown-divider col-11 p-1" />                       
                             <Row>
-                                <Col sm={6} style={{textAlign:'left'}} className={"mt-2"} >                                    
+                                <Col style={{textAlign:'left'}} className={"mt-2 col-1 "} >                                    
                                     <div className={`btn btn-primary ${theme.formButton}`} >
-                                        <a style={{color:'#fff', textDecoration:'none'}} href={"/voucher"}> {t('form.button.back')} </a>
+                                        <a style={{color:'#fff', textDecoration:'none'}} href={"/voucher"}> 
+                                            {
+                                                <FontAwesomeIcon icon={faAngleLeft} />
+                                            } 
+                                        </a>
                                     </div>
                                 </Col>          
-                                <Col sm={5} style={{textAlign:'right'}} className={"mt-2"} >                                    
+                                <Col style={{textAlign:'left', paddingLeft:'0px'}} className={"mt-2 col-1 offset-10"} >                                    
                                     <div className={`btn btn-primary ${theme.formButton}`} >
-                                        <a style={{color:'#fff', textDecoration:'none'}} href={"/generate"}> {t('form.button.next')} </a>
+                                        <a style={{color:'#fff', textDecoration:'none'}} href={"/generate"}>
+                                            {<FontAwesomeIcon icon={faAngleRight} />} 
+                                        </a>
                                     </div>
                                 </Col>                                     
                             </Row>

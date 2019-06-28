@@ -1,6 +1,6 @@
 .sidebarWrapper {
     min-height: 100vh;
-    margin-left: -5rem;
+    margin-left: -3rem;
     -webkit-transition: margin .25s ease-out;
     -moz-transition: margin .25s ease-out;
     -o-transition: margin .25s ease-out;
@@ -13,7 +13,7 @@
 }
 
 .listGroup {
-    width: 5rem;   
+    width: 3rem;   
     height: 100%;
 }
 

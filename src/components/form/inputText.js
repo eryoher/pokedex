@@ -10,10 +10,9 @@ class InputText extends Component {
         const classLabel = (label) ? colLabel : "";
         const classText = ( disable ) ? theme.inputDisabled : '';
         const customType = (type) ? type : 'text';
-
         return (
             <Row className={"form-group"}>                
-                <Label className={`${classLabel} ${theme.inputLabel}`} style={{...styleLabel, paddingTop:'5px'}} >
+                <Label className={`${theme.inputLabel}  ${classLabel}`} style={{...styleLabel}} >
                     {label}
                 </Label>
                 <Col className={classInput} style={{...divStyle}}>

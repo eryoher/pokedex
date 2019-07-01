@@ -8,6 +8,7 @@ import styles from './loginForm.module.css';
 import InputGroupText from 'components/form/inputGroupText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
+import InputButton from 'components/form/inputButton';
 
 class LoginForm extends Component {
     render() {        
@@ -26,7 +27,7 @@ class LoginForm extends Component {
                     })}
                     render={({ values, handleBlur, handleChange, errors, touched, isSubmitting, handleSubmit, setFieldValue, setFieldTouched }) => (
                         <Form onSubmit={handleSubmit} className="voucher-info-form">
-                            <Col sm={6}>
+                            <Col sm={12}>
                                 <InputGroupText
                                     label={t('login.form.username')}
                                     inputId={'username'}
@@ -39,7 +40,7 @@ class LoginForm extends Component {
                                     stylesGroup = {{ backgroundColor:'#E8F0FD', border:'#E8F0FD' }}
                                 />
                             </Col>                           
-                            <Col sm={6}>
+                            <Col sm={12}>
                                 <InputGroupText
                                     label={t('login.form.password')}
                                     inputId={'password'}
@@ -53,10 +54,10 @@ class LoginForm extends Component {
                                     stylesGroup = {{backgroundColor:'#E8F0FD', border:'#E8F0FD'}}
                                 />
                             </Col>                              
-                            <Col style={{textAlign:'left'}} className={"mt-2"} >
-                                <button type="button" class="btn btn-primary">
-                                    {t('login.form.submit')}
-                                </button>
+                            <Col style={{textAlign:'left', paddingLeft:'15px'}} className={"mt-2"} >
+                                <InputButton 
+                                    valueButton={t('login.form.submit')}
+                                />
                             </Col> 
                         </Form>                        
                     )}

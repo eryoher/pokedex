@@ -17,9 +17,9 @@ class InputGroupText extends Component {
                     {label}
                 </Label>
                 <Col className={classInput} style={{...divStyle}}>
-                    <div class="input-group form-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" style={stylesGroup} >
+                    <div className="input-group form-group">
+                        <div className="input-group-prepend">
+                            <span className="input-group-text" style={stylesGroup} >
                                 {beforeInput}
                             </span>
                         </div>                        

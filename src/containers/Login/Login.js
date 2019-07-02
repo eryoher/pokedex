@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import {Row, Col, Image} from 'react-bootstrap';
 import LoginForm from 'components/login/loginForm';
 import {Card} from 'reactstrap';
+//import logo from '../../../public/assets/images/login_logo.png';
+
 
 type Props = {
   theme: Object
@@ -18,9 +20,12 @@ export default class Login extends Component<Props> {
             <Col sm={12} className={`mt-5 ${theme.containerLogin}`}>
               <Card className={'pt-4 pb-2'}>
                 <Col>
-                    <Image className={theme.imgLogo} src={'../../../public/assets/images/logo.svg'} />
+                    <Image className={theme.imgLogo} src="assets/images/logo.svg" />
                 </Col>
                 <LoginForm />
+                <Col className={"pt-5 text-center"} >
+                    www.carenasistemas.com.ar
+                </Col>
               </Card> 
             </Col>
           </div>

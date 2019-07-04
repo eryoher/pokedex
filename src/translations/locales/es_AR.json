@@ -84,5 +84,20 @@
             "carrier":"Transportista",
             "insert_carrier":"Ingrese Transportista"
         }
+    },
+    "landing":{
+        "title":"Comprobantes Pendientes",
+        "form":{
+            "voucher":"Comprobante",
+            "branch":"Sucursal"
+        }
+    },
+    "global":{
+        "date":"Fecha",
+        "client":"Cliente",
+        "type":"Tipo",
+        "detail":"Detalle",
+        "total":"Total"
     }
+
 }

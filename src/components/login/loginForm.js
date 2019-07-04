@@ -57,6 +57,7 @@ class LoginForm extends Component {
                             <Col style={{textAlign:'left', paddingLeft:'15px'}} className={"mt-2"} >
                                 <InputButton 
                                     valueButton={t('login.form.submit')}
+                                    urlForm={"/voucher"}
                                 />
                             </Col> 
                         </Form>                        

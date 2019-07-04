@@ -110,6 +110,9 @@
             "submit":"Ingresar"
         }
 
+    },
+    "loadItem":{
+        "title":"Ingreso de Comprobante"
     }
 
 }

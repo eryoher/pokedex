@@ -10,13 +10,12 @@ class Headboard extends Component {
         const {t} = this.props
         
         const nextButton = {
-            url:'/generate',
-            label:'>'
+            url:'/loaditems',
         }
         
         const backButton = {
             url:'/voucher',
-            label:'<'
+
         }
         const steps = [
             {

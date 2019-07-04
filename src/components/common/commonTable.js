@@ -12,7 +12,7 @@ export default class CommonTable extends Component {
     }
 
     render() {        
-        const { columns, wrapperClasses, bordered, rowStyle, rowClasses, headerClasses, data, selectRow } = this.props;
+        const { columns, wrapperClasses, bordered, rowStyle, rowClasses, headerClasses, data, selectRow, expandRow } = this.props;
         const border = (bordered) ? bordered : false;
         return (
             <>
@@ -27,6 +27,7 @@ export default class CommonTable extends Component {
                     wrapperClasses={wrapperClasses}
                     selectRow={ selectRow }
                     filter={filterFactory()}
+                    expandRow={expandRow}
                 />   
             </>
         )

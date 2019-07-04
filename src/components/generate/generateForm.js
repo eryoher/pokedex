@@ -7,7 +7,7 @@ import VoucherFormInput from 'components/voucher/voucherFormInput';
 import ClientFormInput from 'components/voucher/clientFormInput';
 import AccountFormInput from 'components/voucher/accountFormInput';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencilAlt, faAngleLeft } from '@fortawesome/free-solid-svg-icons'
+import { faPencilAlt, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import LocationFormInput from 'components/voucher/locationFormInput';
 import CollapseBotton from 'components/common/collapseBoton';
 import { themr } from 'react-css-themr';

@@ -9,8 +9,9 @@ import Login from './containers/Login';
 import Order from './containers/Order';
 import Voucher from './containers/Voucher';
 import Landing from './containers/Landing';
+import Loaditems from './containers/Loaditems';
 
-import { GENERATE, HEADERBOARD, HOME, LOGIN, ORDER, VOUCHER, LANDING } from './utils/RoutePath';
+import { GENERATE, HEADERBOARD, HOME, LOGIN, ORDER, VOUCHER, LANDING, LOADITEMS } from './utils/RoutePath';
 
 const publicRoutes = [
   { path: HOME, component: Home, exact: true },
@@ -22,7 +23,8 @@ const privateRoutes = [
   { path: VOUCHER, component: Voucher },
   { path: HEADERBOARD, component: HeaderBoard },
   { path: GENERATE, component: Generate },
-  { path: LANDING, component: Landing }
+  { path: LANDING, component: Landing },
+  { path: LOADITEMS, component: Loaditems },
 ]
 
 const AppRouter = props => (

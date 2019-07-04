@@ -10,7 +10,7 @@ class Generate extends Component {
         const {t} = this.props
 
         const backButton = {
-            url:'headerboard',
+            url:'/loaditems',
         }
 
         const steps = [
@@ -44,6 +44,7 @@ class Generate extends Component {
                 <Col sm={12} className={"title mt-3 "} style={{fontSize:'14pt'}} >
                     {t("voucher.title")}
                 </Col>
+                
                 <Steps steps={steps}
                     backButton = {backButton}
                 />

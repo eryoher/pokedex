@@ -7,10 +7,9 @@ import { withTranslation } from 'react-i18next';
 import ClientFormInput from './clientFormInput';
 import AccountFormInput from './accountFormInput'
 import LocationFormInput from './locationFormInput';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleRight  } from '@fortawesome/free-solid-svg-icons';
 import { themr } from 'react-css-themr';
 import clientForm from './voucherClienteForm.module.css';
+import InputButton from 'components/form/inputButton';
 
 class VoucherClientForm extends Component {
     render() {        
@@ -89,12 +88,11 @@ class VoucherClientForm extends Component {
                                     }}
                                 />
                             </Col>  
-                            <Col style={{textAlign:'left', paddingLeft:'0px' }} className={"mt-2 offset-11 col-1"} >
-                                <div className={` btn btn-primary ${theme.formButton} `} >
-                                    <a style={{color:'#fff', textDecoration:'none'}} href={"/headerboard"}> {
-                                        <FontAwesomeIcon icon={faAngleRight} /> 
-                                    } </a>
-                                </div>
+                            <Col style={{textAlign:'left', paddingLeft:'0px' }} className={"mt-2 offset-11 col-1"} >                                
+                                <InputButton
+                                    nextButton
+                                    urlForm={"/headerboard"}
+                                />
                             </Col>                                     
                         </Form>
                     )}
@@ -104,4 +102,4 @@ class VoucherClientForm extends Component {
     }
 }
 
-export default themr('CommonTheme', clientForm)(withTranslation()( VoucherClientForm ));
+export default themr('VoucherFormStyles', clientForm)(withTranslation()( VoucherClientForm ));

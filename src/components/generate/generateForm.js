@@ -12,6 +12,7 @@ import LocationFormInput from 'components/voucher/locationFormInput';
 import CollapseBotton from 'components/common/collapseBoton';
 import { themr } from 'react-css-themr';
 import styles from './generateForm.module.css';
+import InputButton from 'components/form/inputButton';
 
 class GenerateForm extends Component {
     
@@ -74,13 +75,11 @@ class GenerateForm extends Component {
                     />                
                 </Card>
                 <Col style={{textAlign:'left'}} className={"mt-2 col-1 "} >                                    
-                    <div className={`btn btn-primary ${theme.formButton}`} >
-                        <a style={{color:'#fff', textDecoration:'none'}} href={"/voucher"}> 
-                            {
-                                <FontAwesomeIcon icon={faAngleLeft} />
-                            } 
-                        </a>
-                    </div>
+                    <InputButton 
+                        backButton
+                        urlForm={"/headerboard"}
+                    />
+
                 </Col> 
             </Col>            
         )

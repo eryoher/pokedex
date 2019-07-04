@@ -85,6 +85,7 @@
             "insert_carrier":"Ingrese Transportista"
         }
     },
+
     "landing":{
         "title":"Comprobantes Pendientes",
         "form":{
@@ -97,7 +98,18 @@
         "client":"Cliente",
         "type":"Tipo",
         "detail":"Detalle",
-        "total":"Total"
+        "total":"Total", 
+        "start":"Comenzar"
+    },
+    "login":{
+        "form":{
+            "username":"Usuario",
+            "insert_username":"Ingrese el usuario",
+            "password":"Contraseña",
+            "insert_password":"Ingrese la contraseña",
+            "submit":"Ingresar"
+        }
+
     }
 
 }

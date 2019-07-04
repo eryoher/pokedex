@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Row, Col} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faAngleLeft, faAngleRight  } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { themr } from 'react-css-themr';
 import commonTheme from './steps.module.css';
+import InputButton from 'components/form/inputButton';
 
 
 class Steps extends Component {
@@ -14,10 +15,11 @@ class Steps extends Component {
 
         if(backButton){            
             rows.push(
-                <Col className={'col-1'}>
-                    <div className={` btn btn-primary ${theme.formButton} `} >
-                        <a style={{color:'#fff', textDecoration:'none'}} href={backButton.url}> { <FontAwesomeIcon icon={faAngleLeft} /> } </a>
-                    </div>
+                <Col className={'col-1'}>                    
+                    <InputButton 
+                        backButton
+                        urlForm={ backButton.url }
+                    />
                 </Col>
             )
         }
@@ -36,10 +38,11 @@ class Steps extends Component {
 
         if(nextButton){            
             result.push(
-                <Col className={'col-1'} key={100} >
-                    <div className={` btn btn-primary ${theme.formButton} `} >
-                        <a style={{color:'#fff', textDecoration:'none'}} href={nextButton.url}> { <FontAwesomeIcon icon={faAngleRight} /> } </a>
-                    </div>
+                <Col className={'col-1'} key={100} >                    
+                    <InputButton 
+                        nextButton
+                        urlForm={ nextButton.url }
+                    />
                 </Col>
             )
         }

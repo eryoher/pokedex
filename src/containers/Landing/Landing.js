@@ -6,6 +6,7 @@ import CommonTable from 'components/common/commonTable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye  } from '@fortawesome/free-solid-svg-icons';
 import { selectFilter, textFilter, dateFilter, customFilter, Comparator } from 'react-bootstrap-table2-filter';
+import InputButton from 'components/form/inputButton';
 
 const voucher = [
     {
@@ -165,6 +166,31 @@ class Landing extends Component {
                         rowClasses={ theme.tableRow }
                         headerClasses={ theme.tableHeader }
                     />
+                </Col>
+                <Col sm={12} className={"text-right pr-3"}>
+                    <InputButton
+                        valueButton={t('global.start')}
+                        urlForm={"/landing"}
+                    />
+                </Col>
+                <Col sm={12}>
+                    <div className="dropdown-divider col-12 p-2" />
+                </Col>
+                <Col sm={12} className={"mb-5"}>
+                    <div className={theme.Title}>
+                        Comprobantes
+                    </div>
+                </Col>
+                <Col sm={12}>
+                    <div className="dropdown-divider col-12 p-2" />
+                </Col>
+                <Col sm={12}>
+                    <div className={theme.Title}>
+                        Filtros Guardados
+                    </div>
+                    <div className={"mt-4"}>
+                        Factura de la última semana
+                    </div>
                 </Col>
             </Row>
         )

@@ -7,7 +7,15 @@ import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'nprogress/nprogress.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+if (process.env.NODE_ENV === 'development') {
+  import('__mocks__').then( () => {
+    ReactDOM.render(<App />, document.getElementById('root'));
+  })
+} else {
+  ReactDOM.render(<App />, document.getElementById('root'));
+}
+
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

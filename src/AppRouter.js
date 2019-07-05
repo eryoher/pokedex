@@ -13,7 +13,7 @@ import Landing from './containers/Landing';
 import { GENERATE, HEADERBOARD, HOME, LOGIN, ORDER, VOUCHER, LANDING } from './utils/RoutePath';
 
 const publicRoutes = [
-  { path: HOME, component: Home, exact: true },
+  { path: HOME, component: Login, exact: true },
   { path: LOGIN, component: Login },
 ]
 

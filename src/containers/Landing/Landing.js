@@ -65,7 +65,7 @@ class Landing extends Component {
                 dataField: 'date',
                 text: t('global.date'),     
                 align:'center',
-                headerAlign:'center',  
+                headerAlign:'center',                  
                 filter: dateFilter({
                     delay: 400,
                     placeholder: 'custom placeholder',
@@ -129,7 +129,7 @@ class Landing extends Component {
                 headerAlign:'center',
             },{
                 dataField: 'actions',
-                text: 'Acciones',
+                text: '',
                 align:'center',
                 headerAlign:'center',
                 formatter:((cell, row, rowIndex) => {

@@ -4,6 +4,20 @@ import { themr } from 'react-css-themr';
 import styles from './inputText.module.css';
 
 class InputText extends Component {
+    
+    // eslint-disable-next-line no-useless-constructor
+    constructor(props){
+        super(props);
+        this.state={
+            valueInput: (props.value) ? props.value: ''
+        }
+    }
+
+    handleSetValue = (data) => {
+        
+        this.setState({valueInput:data.target.value});
+    }
+
     render() {
         const {label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, disable, theme, type} = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
@@ -23,7 +37,9 @@ class InputText extends Component {
                         style={styles}
                         placeholder={placeholder} 
                         disabled={disable}   
-                        className={`${theme.inputText} ${classText}`}                                         
+                        className={`${theme.inputText} ${classText}`}
+                        value={this.state.valueInput}     
+                        onChange = { (value) => this.handleSetValue(value) }                                    
                     />
                 </Col>
                 

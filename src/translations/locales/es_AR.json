@@ -99,7 +99,12 @@
         "type":"Tipo",
         "detail":"Detalle",
         "total":"Total", 
-        "start":"Comenzar"
+        "start":"Comenzar",
+        "code":"Codigo", 
+        "description":"Descripción",
+        "unit":"Unidad",
+        "quantity":"Cantidad",
+        "deal":"Oferta"
     },
     "login":{
         "form":{
@@ -112,7 +117,13 @@
 
     },
     "loadItem":{
-        "title":"Ingreso de Comprobante"
+        "title":"Ingreso de Comprobante",
+        "table":{
+            "cufOrigin":"CUF Origin",
+            "unitPrice":"Precio Unitario",
+            "netAmount":"Importe Neto",
+            "deliveryDate":"Fecha de Entrega"
+        }
     }
 
 }

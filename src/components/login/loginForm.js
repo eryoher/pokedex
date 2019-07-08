@@ -15,7 +15,7 @@ class LoginForm extends Component {
         const {t, theme} = this.props;
         const initial= {}
         return (            
-            <Col sm={8} className={"mb-1"} >
+            <Col sm={12} className={"mb-1"} style={{margin:'0px auto'}} >
                 <Formik
                     initialValues={{ ...initial }}
                     onSubmit={(values, actions) => {                                                        
@@ -33,8 +33,8 @@ class LoginForm extends Component {
                                     inputId={'username'}
                                     name={'username'}
                                     placeholder={t('login.form.insert_username')}                        
-                                    colLabel={"col-sm-2"}
-                                    colInput={"col-sm-7"}
+                                    colLabel={"col-3 offset-3"}
+                                    colInput={"col-6"}
                                     beforeInput={ <FontAwesomeIcon icon={faUser} /> }                                
                                     styles = {{ width:'60%', backgroundColor:'#E8F0FD', border:'#E8F0FD', color:'#000' }}
                                     stylesGroup = {{ backgroundColor:'#E8F0FD', border:'#E8F0FD' }}
@@ -47,14 +47,14 @@ class LoginForm extends Component {
                                     name={'password'}
                                     type={'password'}
                                     placeholder={t('login.form.insert_password')}                        
-                                    colLabel={"col-sm-2"}
-                                    colInput={"col-sm-7"}     
+                                    colLabel={"col-3 offset-3"}
+                                    colInput={"col-6"}     
                                     beforeInput={ <FontAwesomeIcon icon={faLock} /> }                            
                                     styles = {{ width:'60%', backgroundColor:'#E8F0FD', border:'#E8F0FD' }}
                                     stylesGroup = {{backgroundColor:'#E8F0FD', border:'#E8F0FD'}}
                                 />
                             </Col>                              
-                            <Col style={{textAlign:'left', paddingLeft:'15px'}} className={"mt-2"} >
+                            <Col style={{textAlign:'left', paddingLeft:'15px'}} className={"mt-2 col-6 offset-3"} >
                                 <InputButton 
                                     valueButton={t('login.form.submit')}
                                     urlForm={"/landing"}

@@ -18,8 +18,8 @@ export default class Login extends Component<Props> {
         <Row >
           <div className={"container"} >
             <Col sm={12} className={`mt-5 ${theme.containerLogin}`}>
-              <Card className={'pt-4 pb-2'}>
-                <Col>
+              <Card className={'pt-4 pb-2'} style={{width:'70%', margin:'0px auto'}}>
+                <Col className={"text-center"}>
                     <Image className={theme.imgLogo} src="assets/images/logo.svg" />
                 </Col>
                 <LoginForm />

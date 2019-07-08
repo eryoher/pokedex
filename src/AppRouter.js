@@ -28,8 +28,7 @@ const privateRoutes = [
 ]
 
 const AppRouter = props => (
-  // <BrowserRouter basename="/calendar"> Use in case app is served from a sub-directory
-  <BrowserRouter>
+  <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Switch>
       {publicRoutes.map((route, index) => <RouteWithSubRoutes key={index} {...route} />)}
       {privateRoutes.map((route, index) => <PrivateRouteWithSubRoutes key={index} { ...route } { ...props }/>)}

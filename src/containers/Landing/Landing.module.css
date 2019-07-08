@@ -8,6 +8,13 @@
     height: 30px !important;
     width: 90% !important;
     margin: 0px auto !important;
+    font-weight: bold !important;
+    color:#000 !important;
+    font-style: normal !important;
+}
+
+.inputFilter:-moz-placeholder{
+    font-size: 12pt;
 }
 
 .tableRow{    
@@ -15,5 +22,5 @@
 }
 
 .tableHeader{    
-    font-size: 12pt;
+    font-size: 10pt;
 }

@@ -4,14 +4,15 @@ import { withTranslation } from 'react-i18next';
 import { Row, Col } from 'react-bootstrap';
 import CommonTable from 'components/common/commonTable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye  } from '@fortawesome/free-solid-svg-icons';
+import { faEye, faPlus  } from '@fortawesome/free-solid-svg-icons';
 import { selectFilter, textFilter, dateFilter, customFilter, Comparator } from 'react-bootstrap-table2-filter';
 import InputButton from 'components/form/inputButton';
+import DisplayAmount from 'components/common/displayAmount';
 
 const voucher = [
     {
         id:0,
-        date:'07/02/2019',
+        date:'07022019',
         client:14297,
         type:1,
         voucher:235655,
@@ -21,7 +22,7 @@ const voucher = [
     },
     {
         id:1,        
-        date:'06/22/2019',
+        date:'06222019',
         client:14922,
         type:2,
         voucher:235656,
@@ -36,6 +37,11 @@ const selectOptions = {
     14297: 'Ericson Hernandez',
     14922: 'Yohany Hernandez',
 };
+
+const dateOptions = {
+    '07022019':'07/02/2019',
+    '06222019':'06/22/2019'
+}
 
 const optionsType = {
     1:'NV/CA',
@@ -63,24 +69,18 @@ class Landing extends Component {
         const columns = [
             {
                 dataField: 'date',
-                text: t('global.date'),     
+                text: '',     
                 align:'center',
-                headerAlign:'center',                  
-                filter: dateFilter({
-                    delay: 400,
-                    placeholder: 'custom placeholder',
-                    withoutEmptyComparatorOption: true,
-                    comparators: [Comparator.EQ, Comparator.GT, Comparator.LT],
-                    style: { display: 'inline-grid' },
-                    className: '',
-                    //comparatorStyle: {},
-                    comparatorClassName:`${theme.inputFilter} mt-2`,
-                    //dateStyle: { margin: '0px', width:'100%' },
-                    dateClassName: theme.inputFilter
-                  })           
+                headerAlign:'center',  
+                formatter: ( cell => dateOptions[cell]),
+                filter: selectFilter({
+                    options: dateOptions,    
+                    className: `${theme.inputFilter} mt-2`,     
+                    placeholder:t('global.date')           
+                }),          
             }, {
                 dataField: 'client',
-                text: t('global.client'),
+                text: '',
                 align:'center',
                 headerAlign:'center',
                 formatter: ( cell => selectOptions[cell]),
@@ -92,7 +92,7 @@ class Landing extends Component {
 
             }, {
                 dataField: 'type',
-                text: t('global.type'),
+                text: '',
                 align:'center',
                 headerAlign:'center',
                 formatter: ( cell => optionsType[cell]),
@@ -103,7 +103,7 @@ class Landing extends Component {
                 }),  
             }, {
                 dataField: 'voucher',
-                text: t('landing.form.voucher'),
+                text: '',
                 align:'center',
                 headerAlign:'center',
                 formatter: ( cell => optionsVoucher[cell]),
@@ -127,6 +127,12 @@ class Landing extends Component {
                 text: t('global.total'),
                 align:'center',
                 headerAlign:'center',
+                formatter:((cell, row, rowIndex) => {
+                    //console.log(cell, row, rowIndex);
+                    return(
+                        <DisplayAmount amount={cell} />
+                    )
+                }),
             },{
                 dataField: 'actions',
                 text: '',
@@ -141,7 +147,6 @@ class Landing extends Component {
                 
             }
         ];
-
         
         const selectRow = {
             mode: 'checkbox',
@@ -151,8 +156,7 @@ class Landing extends Component {
             //selectionHeaderRenderer: ({ mode, checked, indeterminate }) => ( <div>Prueba</div> ),
             //selectionRenderer: ({ mode, checked, disabled }) => (<div>columns</div>)
         };
-        
-        
+                
         return (
             <Row>
                 <Col sm={12} className={`${theme.Title} mt-4`} >
@@ -187,9 +191,17 @@ class Landing extends Component {
                 <Col sm={12}>
                     <div className={theme.Title}>
                         Filtros Guardados
+                        <Col className={"m-2"}>
+                            <InputButton
+                                valueButton={<FontAwesomeIcon icon={faPlus} />}
+                                urlForm={"/voucher"}
+                            />
+                        </Col>
                     </div>
                     <div className={"mt-4"}>
-                        Factura de la última semana
+                        <a href={"#"} >
+                            Factura de la última semana
+                        </a>
                     </div>
                 </Col>
             </Row>

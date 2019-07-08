@@ -7,8 +7,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import DisplayAmount from 'components/common/displayAmount';
 import LoadItemsTable from 'components/loadItems/loadItemsTable';
+import ShoppingCart from 'components/loadItems/shoppingCart';
 
 class Loaditems extends Component {
+
+    constructor(props){
+        super(props);
+        this.state ={
+            showModal:false
+        }
+    }
+    
+    togleeModal = () => {
+        console.log('cambiando estado', this.state.showModal);
+        this.setState({ showModal: !this.state.showModal });
+    }
 
     render() {
         const { theme, t } = this.props;    
@@ -54,8 +67,11 @@ class Loaditems extends Component {
                 </Col>
                 
                 <Col sm={2} className={"text-center  mt-3"} >
-                    <FontAwesomeIcon icon={faShoppingCart} />
+                    <FontAwesomeIcon icon={faShoppingCart} onClick={ this.togleeModal } />
                 </Col>
+                <ShoppingCart 
+                    showModal={this.state.showModal}
+                />
                 <Steps
                     steps={steps} 
                     nextButton={nextButton}

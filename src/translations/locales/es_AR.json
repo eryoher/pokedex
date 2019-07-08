@@ -122,7 +122,15 @@
             "cufOrigin":"CUF Origin",
             "unitPrice":"Precio Unitario",
             "netAmount":"Importe Neto",
-            "deliveryDate":"Fecha de Entrega"
+            "deliveryDate":"Fecha de Entrega",
+            "therapeutic_action":"Acción Terapéutica",
+            "require_cold_chain":"Require cadena de frío",
+            "monodroga":"Monodroga",
+            "labt_manufacturer":"Laboratorio fabricante",
+            "previos_price":"Precio Anterior",
+            "export_IMS":"Exportar a IMS/CID",
+            "traceability_type":"Tipo Trazabilidad",
+            "last_update_date":"Fecha última actualización"
         }
     }
 

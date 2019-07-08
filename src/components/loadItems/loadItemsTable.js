@@ -10,8 +10,9 @@ import DisplayLight from 'components/common/displayLight';
 import DisplayAmount from 'components/common/displayAmount';
 import { themr } from 'react-css-themr';
 import styles from './itemsTable.module.css';
+import SearchBox from 'components/common/searchBox';
 
-const voucher = [
+const Items = [
     {
         id:1,
         code:'KLN000003',
@@ -158,11 +159,32 @@ class LoadItemsTable extends Component {
 
         const expandRow = {
             renderer: row => (
-              <div>
-                <p>{ `This Expand row is belong to rowKey ${row.id}` }</p>
-                <p>You can render anything here, also you can add additional data on every row object</p>
-                <p>expandRow.renderer callback will pass the origin row object to you</p>
-              </div>
+              <Row className={"container mt-2"}>
+                <Col className={"col-6 p-2"}>
+                    <b>{`${t('loadItem.table.therapeutic_action')}:`}</b> Analgésico, antipirético y espasmolítico
+                </Col>
+                <Col className={"col-6 p-2"}>
+                    <b>{`${t('loadItem.table.require_cold_chain')}:`}</b> No
+                </Col>
+                <Col className={"col-6 p-2"}>
+                    <b>{`${t('loadItem.table.monodroga')}:`}</b> Dipirona
+                </Col>
+                <Col className={"col-6 p-2"}>
+                    <b>{`${t('loadItem.table.labt_manufacturer')}:`}</b> Klonal
+                </Col>
+                <Col className={"col-6 p-2"}>
+                    <b>{`${t('loadItem.table.previos_price')}:`}</b> <DisplayAmount amount={35} />
+                </Col>
+                <Col className={"col-6 p-2"}>
+                    <b>{`${t('loadItem.table.export_IMS')}:`}</b> Se exportan datos del producto.
+                </Col>
+                <Col className={"col-6 p-2"}>
+                    <b>{`${t('loadItem.table.traceability_type')}:`}</b> Ninguna
+                </Col>
+                <Col className={"col-6 p-2"}>
+                    <b>{`${t('loadItem.table.last_update_date')}:`}</b> 02/05/2019 9:07:50
+                </Col>
+              </Row>
             ),
             showExpandColumn: true,
             nonExpandable: noExpand,
@@ -176,14 +198,14 @@ class LoadItemsTable extends Component {
                 }               
             },            
         };
-
       
         return (
-            <Row>
+            <Row>               
+                <SearchBox />
                 <Col className={"m-4"}>
                     <CommonTable
                         columns={columns}
-                        data={voucher}
+                        data={Items}
                         rowClasses={ theme.tableRow }
                         headerClasses={ theme.tableHeader }
                         expandRow={expandRow}

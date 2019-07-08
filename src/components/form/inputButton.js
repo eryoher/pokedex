@@ -11,13 +11,13 @@ class InputButton extends Component {
             ( ( nextButton ) ? <FontAwesomeIcon icon={faAngleRight} /> : ( backButton ) ? <FontAwesomeIcon icon={faAngleLeft} /> : 'Button' ) : valueButton;
 
         return (
-            <div className={`btn btn-primary ${theme.formButton}`} >
-                <a className={theme.linkClass} href={urlForm}> 
+            <a className={theme.linkClass} href={urlForm}> 
+                <div className={`btn btn-primary ${theme.formButton}`} >
                     {
                         labelButton
                     } 
-                </a>
-            </div>
+                </div>
+            </a>            
         )
     }
 }

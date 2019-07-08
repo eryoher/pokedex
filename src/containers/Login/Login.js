@@ -13,7 +13,7 @@ type Props = {
 export default class Login extends Component<Props> {
   render() {
     const { theme } = this.props;
-    console.log(theme);
+    
     return (
         <Row >
           <div className={"container"} >

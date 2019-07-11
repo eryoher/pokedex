@@ -184,19 +184,19 @@ class Landing extends Component {
                     <div className={theme.Title}>
                         Comprobantes
                     </div>
+                    <Col className={"m-2"}>
+                            <InputButton
+                                valueButton={<FontAwesomeIcon icon={faPlus} />}
+                                urlForm={"/voucher"}
+                            />
+                        </Col>
                 </Col>
                 <Col sm={12}>
                     <div className="dropdown-divider col-12 p-2" />
                 </Col>
                 <Col sm={12}>
                     <div className={theme.Title}>
-                        Filtros Guardados
-                        <Col className={"m-2"}>
-                            <InputButton
-                                valueButton={<FontAwesomeIcon icon={faPlus} />}
-                                urlForm={"/voucher"}
-                            />
-                        </Col>
+                        Filtros Guardados                        
                     </div>
                     <div className={"mt-4"}>
                         <a href={"#"} >

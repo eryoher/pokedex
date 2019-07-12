@@ -130,8 +130,13 @@
             "previos_price":"Precio Anterior",
             "export_IMS":"Exportar a IMS/CID",
             "traceability_type":"Tipo Trazabilidad",
-            "last_update_date":"Fecha última actualización"
+            "last_update_date":"Fecha última actualización",
+            "totalImp":"Importe Total",
+            "total_gross_margin":"Total Margen Bruto"
         }
+    },
+    "shoppingCart":{
+        "title":"Ítems afectados"
     }
 
 }

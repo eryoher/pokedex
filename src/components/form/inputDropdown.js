@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Label } from 'react-bootstrap';
+import { Row, Col} from 'react-bootstrap';
 import { themr } from 'react-css-themr';
 import styles from './inputDropdown.module.css';
 
@@ -26,9 +26,9 @@ class InputDropdown extends Component {
 
         return (
             <Row className={"form-group"}>                
-                <Label className={`${classLabel} ${theme.inputLabel}`  } style={{...styleLabel, paddingTop:'4px'}} >
+                <label className={`${classLabel} ${theme.inputLabel}`  } style={{...styleLabel, paddingTop:'4px'}} >
                     {label}
-                </Label>
+                </label>
                 <Col className={classInput} style={{...divStyle}}>                    
                     <select                         
                         id={inputId}              

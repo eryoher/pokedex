@@ -11,6 +11,8 @@ import DisplayAmount from 'components/common/displayAmount';
 import { themr } from 'react-css-themr';
 import styles from './itemsTable.module.css';
 import SearchBox from 'components/common/searchBox';
+import { selectFilter } from 'react-bootstrap-table2-filter';
+import PopupImage from 'components/common/popupImage';
 
 const Items = [
     {
@@ -25,7 +27,7 @@ const Items = [
         netAmount:'3879',
         deliveryDate:'07/02/2019',
         client:14297,
-        deal:' Por la compra de 5 lleva la 6 gratis. ',
+        deal:1,
     },
     {
         id:2,    
@@ -38,17 +40,32 @@ const Items = [
         unitPrice:'37.42',
         netAmount:'0',
         deliveryDate:'06/22/2019',
-        deal:'',
+        deal:2,
     }
 ]
 
-class LoadItemsTable extends Component {
-    
+const optionsDeal = {
+    1:'Por la compra de 5 lleva la 6 gratis.',
+    2:'3 x 2'
+}
+
+class LoadItemsTable extends Component {   
 
     render() {
-        const { theme, t } = this.props
+        const { theme, t, searchBox, divClass } = this.props;
 
         const columns = [
+            {
+                dataField: 'picture',
+                text: '',
+                align:'rigth',
+                headerStyle:{width:'2%'}, 
+                formatter:((cell, row, rowIndex) => {                    
+                    return(
+                        <PopupImage src={cell} />
+                    )
+                }), 
+            },
             {
                 dataField: 'code',
                 text: t('global.code'),     
@@ -129,11 +146,18 @@ class LoadItemsTable extends Component {
                 headerStyle:{width:'10%'},                  
             },{
                 dataField: 'deal',
-                text: t('global.deal'),
+                text: '',
                 align:'center',
                 headerAlign:'center',
-                headerStyle:{width:'5%'},                  
-                title:true,
+                headerStyle:{width:'8%'},                  
+                title:(cell, row, rowIndex, colIndex) =>  { 
+                    return optionsDeal[cell];
+                },                
+                filter: selectFilter({
+                    options: optionsDeal,    
+                    className: `${theme.inputFilter} mt-2`,     
+                    placeholder:t('global.deal')           
+                }),  
                 formatter:((cell, row, rowIndex) => {
                     const result = ( cell ) ? <FontAwesomeIcon icon={faPercent} /> : null;
                     return(
@@ -201,8 +225,8 @@ class LoadItemsTable extends Component {
       
         return (
             <Row>               
-                <SearchBox />
-                <Col className={"m-4"}>
+                { searchBox && <SearchBox />}
+                <Col className={`${divClass} col-12`}>
                     <CommonTable
                         columns={columns}
                         data={Items}

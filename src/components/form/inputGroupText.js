@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Label } from 'react-bootstrap';
+import { Row, Col} from 'react-bootstrap';
 import { themr } from 'react-css-themr';
 import styles from './inputGroupText.module.css';
 
@@ -13,9 +13,9 @@ class InputGroupText extends Component {
 
         return (
             <Row className={"form-group"}>                
-                <Label className={`${classLabel} ${theme.inputLabel}`} style={{...styleLabel, paddingTop:'5px'}} >
+                <label className={`${classLabel} ${theme.inputLabel}`} style={{...styleLabel, paddingTop:'5px'}} >
                     {label}
-                </Label>
+                </label>
                 <Col className={classInput} style={{...divStyle}}>
                     <div className="input-group form-group">
                         <div className="input-group-prepend">

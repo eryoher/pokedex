@@ -77,7 +77,7 @@ class GenerateForm extends Component {
                 <Col style={{textAlign:'left'}} className={"mt-2 col-1 "} >                                    
                     <InputButton 
                         backButton
-                        urlForm={"/headerboard"}
+                        urlForm={"/loaditems"}
                     />
 
                 </Col> 

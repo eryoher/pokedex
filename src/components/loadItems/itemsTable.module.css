@@ -6,3 +6,13 @@
 .tableHeader{
     font-size: 12pt;
 }
+
+.inputFilter{
+    font-size: 12pt !important;    
+    height: 30px !important;
+    width: 90% !important;
+    margin: 0px auto !important;
+    font-weight: bold !important;
+    color:#000 !important;
+    font-style: normal !important;
+}

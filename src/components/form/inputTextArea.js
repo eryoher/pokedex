@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Row, Col, textarea, Label } from 'react-bootstrap';
+import { Form, Row, Col } from 'react-bootstrap';
 import { themr } from 'react-css-themr';
 import styles from './inputTextArea.module.css';
 
@@ -13,9 +13,9 @@ class InputTextArea extends Component {
 
         return (
             <Row className={"form-group"}>                
-                <Label className={`${theme.label}  ${classLabel}`} style={{...styleLabel}} >
+                <label className={`${theme.label}  ${classLabel}`} style={{...styleLabel}} >
                     {label}
-                </Label>
+                </label>
                 <Col className={classInput} style={{...divStyle}}>
                     <textarea        
                         id={inputId}              

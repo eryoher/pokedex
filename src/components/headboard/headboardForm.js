@@ -53,7 +53,7 @@ class HeadboardForm extends Component {
                                 <Col style={{textAlign:'left', paddingLeft:'0px'}} className={"mt-2 col-1 offset-10"} >                                                                        
                                     <InputButton
                                         nextButton
-                                        urlForm={"/generate"}
+                                        urlForm={"/loaditems"}
                                     />
                                 </Col>                                     
                             </Row>

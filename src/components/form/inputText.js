@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Label } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { themr } from 'react-css-themr';
 import styles from './inputText.module.css';
 
@@ -26,9 +26,9 @@ class InputText extends Component {
         const customType = (type) ? type : 'text';
         return (
             <Row className={"form-group"}>                
-                <Label className={`${theme.inputLabel}  ${classLabel}`} style={{...styleLabel}} >
+                <label className={`${theme.inputLabel}  ${classLabel}`} style={{...styleLabel}} >
                     {label}
-                </Label>
+                </label>
                 <Col className={classInput} style={{...divStyle}}>
                     <input        
                         id={inputId}              

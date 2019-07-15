@@ -17,3 +17,9 @@ export const SHOW_ERROR = 'show_error';
 export const CLEAR_ERROR = 'clear_error';
 export const SHOW_MESSAGE = 'show_message';
 export const CLEAR_MESSAGE = 'clear_message';
+
+//Client
+export const GET_CLIENT = 'GET_CLIENT';
+export const GET_CLIENT_SUCCESS = 'GET_CLIENT_SUCCESS';
+export const SEARCH_CLIENTS = 'SEARCH_CLIENTS';
+export const SEARCH_CLIENTS_SUCCESS = 'SEARCH_CLIENTS_SUCCESS';

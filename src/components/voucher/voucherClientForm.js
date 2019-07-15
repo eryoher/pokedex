@@ -12,8 +12,7 @@ import clientForm from './voucherClienteForm.module.css';
 import InputButton from 'components/form/inputButton';
 
 class VoucherClientForm extends Component {
-    render() {        
-        const {t, theme} = this.props;
+    render() {                
         const initial= {}
         return (            
             <Col sm={12} className={"mb-1"} >
@@ -28,7 +27,7 @@ class VoucherClientForm extends Component {
                     })}
                     render={({ values, handleBlur, handleChange, errors, touched, isSubmitting, handleSubmit, setFieldValue, setFieldTouched }) => (
                         <Form onSubmit={handleSubmit} className="voucher-info-form">
-                            <Col >
+                            <Col>
                                 <VoucherFormInput         
                                     {...{
                                         values,

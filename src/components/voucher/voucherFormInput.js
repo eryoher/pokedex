@@ -4,16 +4,27 @@ import { faPlus, faPencilAlt  } from '@fortawesome/free-solid-svg-icons';
 import { Row, Col } from 'react-bootstrap';
 import InputText from 'components/form/inputText';
 import { withTranslation } from 'react-i18next';
-
+import { connect } from 'react-redux';
+import { getClient } from '../../actions';
+import InputAutocomplete from 'components/form/inputAutocomplete';
 
 class VoucherFormInput extends Component {
+
+    componentDidMount(){
+       
+    }
+
+    handleSearch = (value) => {
+       this.props.getClient(value);        
+    }
+
     render() {
         const { t, errors, touched, values, handleChange, handleBlur, setFieldValue, setFieldTouched, readOnly } = this.props;    
 
         return (
-            <Row >
+            <Row>
                 <Col sm={11}>    
-                    <InputText
+                    <InputAutocomplete 
                         label={false}
                         inputId={'clienteId'}
                         name={'clienteId'}
@@ -21,7 +32,7 @@ class VoucherFormInput extends Component {
                         styles={{width:'100%'}}
                         colLabel={"col-sm-2"}
                         colInput={"col-sm-10"} 
-                        disable={readOnly}                       
+                        handleSearch={this.handleSearch}                                   
                     />
                 </Col>
                 { !readOnly &&  <Col sm={1}>
@@ -86,4 +97,13 @@ class VoucherFormInput extends Component {
     }
 }
 
-export default (withTranslation()( VoucherFormInput ));
+const mapStateToProps = ({ auth, banners }) => {
+    const { token } = auth;    
+
+    return { token };
+
+};
+
+
+
+export default connect(mapStateToProps, {getClient})(withTranslation()( VoucherFormInput ));

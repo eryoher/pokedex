@@ -28,7 +28,7 @@ class Steps extends Component {
             const clasBadge = ( step.main || step.before ) ? 'badge-primary' : 'badge-secondary';
             const badgeNumber = (step.before) ? <FontAwesomeIcon icon={faCheck} /> : index + 1;
             return (
-                <Col className={'col-sm pt-2'} key={index}>
+                <Col className={'col-sm pt-2'} key={index + 1}>
                     <span className={`badge ${clasBadge} ${theme.step} `} >{badgeNumber}</span> <span className={theme.title} > {step.label} </span>
                 </Col>
             );
@@ -36,9 +36,9 @@ class Steps extends Component {
 
         const result = rows.concat(tmps);
 
-        if(nextButton){            
+        if(nextButton){                      
             result.push(
-                <Col className={'col-1'} key={ rows.length * 5} >                    
+                <Col className={'col-1'} key={ result.length * 5} >                    
                     <InputButton 
                         nextButton
                         urlForm={ nextButton.url }

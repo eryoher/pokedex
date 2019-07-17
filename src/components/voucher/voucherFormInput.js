@@ -5,21 +5,17 @@ import { Row, Col } from 'react-bootstrap';
 import InputText from 'components/form/inputText';
 import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { getClient } from '../../actions';
+import { searchClients } from '../../actions';
 import InputAutocomplete from 'components/form/inputAutocomplete';
 
 class VoucherFormInput extends Component {
 
     componentDidMount(){
        
-    }
+    }    
 
-    handleSearch = (value) => {
-       this.props.getClient(value);        
-    }
-
-    render() {
-        const { t, errors, touched, values, handleChange, handleBlur, setFieldValue, setFieldTouched, readOnly } = this.props;    
+    render() {               
+        const { t, errors, touched, values, handleChange, handleBlur, setFieldValue, setFieldTouched, readOnly, handleSearch, auoptions, handleLoading } = this.props;    
 
         return (
             <Row>
@@ -32,7 +28,9 @@ class VoucherFormInput extends Component {
                         styles={{width:'100%'}}
                         colLabel={"col-sm-2"}
                         colInput={"col-sm-10"} 
-                        handleSearch={this.handleSearch}                                   
+                        handleSearch={handleSearch}   
+                        auoptions={auoptions} 
+                        handleLoading = {handleLoading}                               
                     />
                 </Col>
                 { !readOnly &&  <Col sm={1}>
@@ -97,13 +95,13 @@ class VoucherFormInput extends Component {
     }
 }
 
-const mapStateToProps = ({ auth, banners }) => {
-    const { token } = auth;    
+const mapStateToProps = ({ client }) => {
+    const { search } = client;    
 
-    return { token };
+    return { search };
 
 };
 
 
 
-export default connect(mapStateToProps, {getClient})(withTranslation()( VoucherFormInput ));
+export default connect(mapStateToProps, {searchClients})(withTranslation()( VoucherFormInput ));

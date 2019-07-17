@@ -22,9 +22,9 @@ function* getClientRequest() {
   }
 }
 
-function* searchClientsRequest() {
+function* searchClientsRequest({payload}) {
   try {
-    const clients = yield call(searchClients);
+    const clients = yield call(searchClients, payload);
     yield put(searchClientsSuccess(clients));
   } catch (error) {
   }

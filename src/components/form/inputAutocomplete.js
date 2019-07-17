@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import {AsyncTypeahead} from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import { Row, Col } from 'react-bootstrap';
@@ -11,9 +11,8 @@ class InputAutocomplete extends Component {
     constructor(props){
         super(props);
         this.state = {
-            isLoading: false,
-            options: [],
-            query: '',
+            isLoading: false,        
+            
         };
     }
 
@@ -47,43 +46,44 @@ class InputAutocomplete extends Component {
         if (this._cache[query]) {
           this.setState({options: this._cache[query].options});
           return;
-        }
+        }        
 
-        this.setState({isLoading: true});
+        this.props.handleSearch(query);     
+        
 
-        this.props.handleSearch(query);        
     }
 
     render() {
-        const {label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, theme, maxResults} = this.props;
+        const {label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, theme, maxResults, auoptions, handleLoading } = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
         const classLabel = (label) ? colLabel : "";
+        console.log(auoptions)
         return (
-            
-
-          <Row className={"form-group"}>                
+            <Row className={"form-group"}>                
                 <label className={`${theme.inputLabel}  ${classLabel}`} style={{...styleLabel}} >
                     {label}
                 </label>
                 <Col className={classInput} style={{...divStyle}}>
-                    <AsyncTypeahead
-                        {...this.state}
-                        id={inputId}
-                        name={name}
-                        labelKey="login"
-                        maxResults={maxResults}
-                        minLength={2}
-                        onInputChange={this._handleInputChange}
-                        onPaginate={this._handlePagination}
-                        onSearch={this._handleSearch}
-                        className={`${theme.inputText}`}
-                        paginate
-                        placeholder={placeholder}
-                        renderMenuItemChildren={(option, props) => (
-                            console.log(option, props)
-                        )}
-                        useCache={false}
-                    />
+                    <Fragment>
+                        <AsyncTypeahead
+                            isLoading = { handleLoading }
+                            id={inputId}
+                            options={auoptions}
+                            name={name}  
+                            labelKey="Clave_impo"  
+                            filterBy={['Clave_impo', 'Cod_cliente']}                                                                      
+                            minLength={3}
+                            //onInputChange={this._handleInputChange}                       
+                            onSearch={this._handleSearch}
+                            className={`${theme.inputText}`}                            
+                            placeholder={placeholder}                        
+                            renderMenuItemChildren={(option) => {
+                                console.log(option, 'render')
+                                return(<label key={option.Cod_cliente} >{option.Cod_cliente}</label>);
+                            }}
+
+                        />
+                    </Fragment>
                 </Col>
                 
             </Row>

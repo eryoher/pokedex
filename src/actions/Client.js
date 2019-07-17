@@ -20,7 +20,7 @@ export const getClientSuccess = (response) => {
     }
 };
 
-export const searchClients = (params) => {
+export const searchClients = (params) => {  
   return {
     type: SEARCH_CLIENTS,
     payload: params

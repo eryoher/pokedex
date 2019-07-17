@@ -19,7 +19,7 @@ import {
       case SEARCH_CLIENTS:
         return { ...state, search: [] }
       case SEARCH_CLIENTS_SUCCESS:
-        return { ...state, search: action.payload }     
+        return { ...state, search: action.payload.data }     
       default:
         return state
     }

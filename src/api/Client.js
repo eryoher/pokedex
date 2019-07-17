@@ -6,7 +6,8 @@ export const getClient = async (params) => {
 }
 
 
-export const searchClients = async (params) => {
-  const response = await Axios.post('/Clientes/consulta', params);
+export const searchClients = async (params) => {     
+  const response = await Axios.get('/Cliente/consulta',{ params: { idOperacion: params.idOperacion }});
+  
   return response.data;
 }

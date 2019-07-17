@@ -10,9 +10,32 @@ import LocationFormInput from './locationFormInput';
 import { themr } from 'react-css-themr';
 import clientForm from './voucherClienteForm.module.css';
 import InputButton from 'components/form/inputButton';
+import { connect } from 'react-redux';
+
+import { searchClients } from '../../actions';
 
 class VoucherClientForm extends Component {
-    render() {                
+    
+    constructor(props){
+        super(props)
+        this.state={
+            loading:false
+        }
+    }
+
+    componentDidUpdate = (prevProps) => {
+        if(this.props.search !== prevProps.search && this.props.search.length ){
+            this.setState({loading:false});
+        }
+    }
+
+    handleSearch = (value) => {
+        this.props.searchClients({criterio_cliente:value, idOperacion:1});   
+        this.setState({loading:true});
+    }
+
+    render() {           
+        const { search } = this.props;        
         const initial= {}
         return (            
             <Col sm={12} className={"mb-1"} >
@@ -29,6 +52,9 @@ class VoucherClientForm extends Component {
                         <Form onSubmit={handleSubmit} className="voucher-info-form">
                             <Col>
                                 <VoucherFormInput         
+                                    handleSearch={this.handleSearch}
+                                    auoptions = {search}
+                                    handleLoading = { this.state.loading }
                                     {...{
                                         values,
                                         handleBlur,
@@ -39,6 +65,7 @@ class VoucherClientForm extends Component {
                                         handleSubmit,
                                         setFieldValue,
                                         setFieldTouched
+                                        
                                     }}
                                 />
                             </Col>     
@@ -101,4 +128,13 @@ class VoucherClientForm extends Component {
     }
 }
 
-export default themr('VoucherFormStyles', clientForm)(withTranslation()( VoucherClientForm ));
+const mapStateToProps = ({ client }) => {
+    const { search } = client;    
+
+    return { search };
+
+};
+
+
+//themr('VoucherFormStyles', clientForm),
+export default connect(mapStateToProps, {searchClients})(withTranslation()( VoucherClientForm ));

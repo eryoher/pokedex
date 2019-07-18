@@ -12,7 +12,7 @@ import clientForm from './voucherClienteForm.module.css';
 import InputButton from 'components/form/inputButton';
 import { connect } from 'react-redux';
 
-import { searchClients } from '../../actions';
+import { searchClients, getVoucherType } from '../../actions';
 
 class VoucherClientForm extends Component {
     
@@ -23,6 +23,10 @@ class VoucherClientForm extends Component {
         }
     }
 
+    componentDidMount = () => {
+        this.props.getVoucherType({ idComprobante:1,  idOperacion:1});
+    }
+
     componentDidUpdate = (prevProps) => {
         if(this.props.search !== prevProps.search && this.props.search.length ){
             this.setState({loading:false});
@@ -30,7 +34,7 @@ class VoucherClientForm extends Component {
     }
 
     handleSearch = (value) => {
-        this.props.searchClients({criterio_cliente:value, idOperacion:1});   
+        this.props.searchClients({criterio_cliente:value, idOperacion:1});         
         this.setState({loading:true});
     }
 
@@ -137,4 +141,4 @@ const mapStateToProps = ({ client }) => {
 
 
 //themr('VoucherFormStyles', clientForm),
-export default connect(mapStateToProps, {searchClients})(withTranslation()( VoucherClientForm ));
+export default connect(mapStateToProps, {searchClients, getVoucherType})(withTranslation()( VoucherClientForm ));

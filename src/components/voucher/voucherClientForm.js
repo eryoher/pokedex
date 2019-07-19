@@ -1,64 +1,89 @@
 import React, { Component } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Form, Row, Col , Button} from 'react-bootstrap';
+import { Form, Col } from 'react-bootstrap';
 import VoucherFormInput from './voucherFormInput';
 import { withTranslation } from 'react-i18next';
 import ClientFormInput from './clientFormInput';
 import AccountFormInput from './accountFormInput'
 import LocationFormInput from './locationFormInput';
-import { themr } from 'react-css-themr';
-import clientForm from './voucherClienteForm.module.css';
 import InputButton from 'components/form/inputButton';
 import { connect } from 'react-redux';
+import { searchClients, getVoucherType, getClient } from '../../actions';
+import { HEADERBOARD } from '../../utils/RoutePath';
 
-import { searchClients, getVoucherType } from '../../actions';
 
 class VoucherClientForm extends Component {
-    
-    constructor(props){
+
+    constructor(props) {
         super(props)
-        this.state={
-            loading:false
+        this.state = {
+            loading: false
         }
     }
 
     componentDidMount = () => {
-        this.props.getVoucherType({ idComprobante:1,  idOperacion:1});
+        //this.props.getVoucherType({ idComprobante:1,  idOperacion:1});
     }
 
     componentDidUpdate = (prevProps) => {
-        if(this.props.search !== prevProps.search && this.props.search.length ){
-            this.setState({loading:false});
+        if (this.props.search !== prevProps.search && this.props.search.length) {
+            this.setState({ loading: false });
         }
     }
 
     handleSearch = (value) => {
-        this.props.searchClients({criterio_cliente:value, idOperacion:1});         
-        this.setState({loading:true});
+        this.props.searchClients({ criterio_cliente: value, idOperacion: 1 });
+        this.setState({ loading: true });
     }
 
-    render() {           
-        const { search } = this.props;        
-        const initial= {}
-        return (            
+    handleSelect = (client) => {
+        const selected = client[0];
+        this.props.getClient({ cod_cliente: selected.Cod_cliente });
+    }
+
+    render() {
+        const { search, client } = this.props;
+        const defaultInitial = {
+            rsocial: '',
+            tipo_resp: '',
+            cuit: '',
+            contacto: '',
+            tel: '',
+            email: '',
+            dom_calle: '',
+            dom_local: '',
+            dom_nom_prov: '',
+            dom_cpos: '',
+            obs_cc: '',
+            obs_ventas: '',
+            credito: '',
+            saldo_pend: '',
+            credito_saldo: ''
+        }
+
+        const initial = (client) ? client : defaultInitial;
+        return (
             <Col sm={12} className={"mb-1"} >
+
                 <Formik
                     initialValues={{ ...initial }}
-                    onSubmit={(values, actions) => {                                                        
-                        
+                    onSubmit={(values, actions) => {
+
                     }}
                     validationSchema={Yup.object().shape({
                         //secuencia: Yup.number().required(t('validation-required', { field: t('Sequence') })).min(0, t('sequence-error-min')),
                         //descripcion: Yup.string().required(t('validation-required', { field: t('Description') })),                                
                     })}
+                    enableReinitialize={true}
                     render={({ values, handleBlur, handleChange, errors, touched, isSubmitting, handleSubmit, setFieldValue, setFieldTouched }) => (
                         <Form onSubmit={handleSubmit} className="voucher-info-form">
                             <Col>
-                                <VoucherFormInput         
+                                <VoucherFormInput
                                     handleSearch={this.handleSearch}
-                                    auoptions = {search}
-                                    handleLoading = { this.state.loading }
+                                    auoptions={search}
+                                    handleLoading={this.state.loading}
+                                    handleSelect={this.handleSelect}
                                     {...{
                                         values,
                                         handleBlur,
@@ -69,13 +94,13 @@ class VoucherClientForm extends Component {
                                         handleSubmit,
                                         setFieldValue,
                                         setFieldTouched
-                                        
+
                                     }}
                                 />
-                            </Col>     
-                            <div className="dropdown-divider col-11 p-1" />                       
+                            </Col>
+                            <div className="dropdown-divider col-11 p-1" />
                             <Col>
-                                <ClientFormInput         
+                                <ClientFormInput
                                     {...{
                                         values,
                                         handleBlur,
@@ -101,8 +126,8 @@ class VoucherClientForm extends Component {
                                         setFieldTouched
                                     }}
                                 />
-                            </Col> 
-                            <div className="dropdown-divider col-11 p-1" />                       
+                            </Col>
+                            <div className="dropdown-divider col-11 p-1" />
                             <Col>
                                 <AccountFormInput
                                     {...{
@@ -117,28 +142,24 @@ class VoucherClientForm extends Component {
                                         setFieldTouched
                                     }}
                                 />
-                            </Col>  
-                            <Col style={{textAlign:'left', paddingLeft:'0px' }} className={"mt-2 offset-11 col-1"} >                                
+                            </Col>
+                            <Col style={{ textAlign: 'left', paddingLeft: '0px' }} className={"mt-2 offset-11 col-1"} >
                                 <InputButton
                                     nextButton
-                                    urlForm={"/headerboard"}
+                                    urlForm={HEADERBOARD}
                                 />
-                            </Col>                                     
+                            </Col>
                         </Form>
                     )}
                 />
-            </Col>            
+            </Col>
         )
     }
 }
 
-const mapStateToProps = ({ client }) => {
-    const { search } = client;    
-
-    return { search };
-
+const mapStateToProps = ({ clients }) => {
+    const { search, client } = clients;
+    return { search, client };
 };
 
-
-//themr('VoucherFormStyles', clientForm),
-export default connect(mapStateToProps, {searchClients, getVoucherType})(withTranslation()( VoucherClientForm ));
+export default connect(mapStateToProps, { searchClients, getVoucherType, getClient })(withTranslation()(VoucherClientForm));

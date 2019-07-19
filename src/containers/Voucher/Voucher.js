@@ -4,13 +4,13 @@ import Steps from '../../components/common/steps';
 import { withTranslation } from 'react-i18next';
 import { Row, Col } from 'react-bootstrap';
 import VoucherClientForm from 'components/voucher/voucherClientForm';
-
+import { HEADERBOARD } from '../../utils/RoutePath';
 
 class Voucher extends Component {
     render() {
         const {t, theme} = this.props
         const nextButton = {
-            url:'headerboard',
+            url:HEADERBOARD,
         }
         const steps = [
             {

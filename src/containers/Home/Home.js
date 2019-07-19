@@ -1,9 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Row, Col, Button } from 'reactstrap';
-import { Grid } from 'react-bootstrap';
-
+import { Button } from 'reactstrap';
+import { VOUCHER } from '../../utils/RoutePath';
 import logo from './../../logo.svg';
 
 type Props = {
@@ -22,7 +21,7 @@ class Home extends Component<Props> {
           <img src={logo} className={theme.AppLogo} alt="logo" />
           <h1>Carena Gestión</h1> 
           <small>Homepage</small>  
-          <Link to="/voucher">
+          <Link to={VOUCHER}>
             <Button>Submit</Button>
           </Link>
         </header>        

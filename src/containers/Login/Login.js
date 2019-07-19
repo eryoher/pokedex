@@ -15,7 +15,7 @@ export default class Login extends Component<Props> {
     const { theme } = this.props;
     
     return (
-        <Row >
+        < >
           <div className={"container"} >
             <Col sm={12} className={`mt-5 ${theme.containerLogin}`}>
               <Card className={'pt-4 pb-2'} style={{width:'70%', margin:'0px auto'}}>
@@ -29,7 +29,7 @@ export default class Login extends Component<Props> {
               </Card> 
             </Col>
           </div>
-        </Row>
+        </>
     )
   }
 }

@@ -4,17 +4,18 @@ import Steps from '../../components/common/steps';
 import { withTranslation } from 'react-i18next';
 import { Row, Col } from 'react-bootstrap';
 import HeadboardForm from 'components/headboard/headboardForm';
+import { VOUCHER, LOADITEMS } from '../../utils/RoutePath';
 
 class Headboard extends Component {
     render() {
         const {t} = this.props
         
         const nextButton = {
-            url:'/loaditems',
+            url:LOADITEMS,
         }
         
         const backButton = {
-            url:'/voucher',
+            url:VOUCHER,
 
         }
         const steps = [

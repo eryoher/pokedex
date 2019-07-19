@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import { Form, Row, Col , Button} from 'react-bootstrap';
+import { Form, Row, Col } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import HeadboardFormInput from './headboardFormInput';
 import { themr } from 'react-css-themr';
 import headboardStyles from './headBoardForm.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleLeft, faAngleRight  } from '@fortawesome/free-solid-svg-icons';
 import InputButton from 'components/form/inputButton';
+import { VOUCHER, LOADITEMS } from '../../utils/RoutePath';
+
 
 class HeadboardForm extends Component {
     render() {        
@@ -47,13 +47,13 @@ class HeadboardForm extends Component {
                                 <Col style={{textAlign:'left'}} className={"mt-2 col-1 "} >                                    
                                     <InputButton
                                         backButton
-                                        urlForm={"/voucher"}
+                                        urlForm={VOUCHER}
                                     />
                                 </Col>          
                                 <Col style={{textAlign:'left', paddingLeft:'0px'}} className={"mt-2 col-1 offset-10"} >                                                                        
                                     <InputButton
                                         nextButton
-                                        urlForm={"/loaditems"}
+                                        urlForm={LOADITEMS}
                                     />
                                 </Col>                                     
                             </Row>

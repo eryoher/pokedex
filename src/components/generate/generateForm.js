@@ -13,6 +13,7 @@ import CollapseBotton from 'components/common/collapseBoton';
 import { themr } from 'react-css-themr';
 import styles from './generateForm.module.css';
 import InputButton from 'components/form/inputButton';
+import { LOADITEMS } from '../../utils/RoutePath';
 
 class GenerateForm extends Component {
     
@@ -77,7 +78,7 @@ class GenerateForm extends Component {
                 <Col style={{textAlign:'left'}} className={"mt-2 col-1 "} >                                    
                     <InputButton 
                         backButton
-                        urlForm={"/loaditems"}
+                        urlForm={LOADITEMS}
                     />
 
                 </Col> 

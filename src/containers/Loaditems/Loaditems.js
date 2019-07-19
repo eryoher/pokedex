@@ -5,12 +5,11 @@ import { Row, Col } from 'react-bootstrap';
 import Steps from '../../components/common/steps';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
-
-
 import DisplayAmount from 'components/common/displayAmount';
 import LoadItemsTable from 'components/loadItems/loadItemsTable';
 import ShoppingCart from 'components/loadItems/shoppingCart';
 import InputButton from 'components/form/inputButton';
+import { HEADERBOARD, GENERATE } from '../../utils/RoutePath';
 
 class Loaditems extends Component {
 
@@ -34,11 +33,11 @@ class Loaditems extends Component {
         const { theme, t } = this.props;
 
         const nextButton = {
-            url: '/generate',
+            url: GENERATE,
         }
 
         const backButton = {
-            url: '/headerboard',
+            url: HEADERBOARD,
         }
 
         const steps = [
@@ -108,13 +107,13 @@ class Loaditems extends Component {
                 <Col sm={1} style={{textAlign:'left', paddingLeft:'2rem'}} className={"mt-2"} >                                    
                     <InputButton
                         backButton
-                        urlForm={"/headerboard"}
+                        urlForm={HEADERBOARD}
                     />
                 </Col>          
                 <Col style={{textAlign:'center'}} className={"mt-2 col-2 offset-9"} >                                                                        
                     <InputButton
                         nextButton
-                        urlForm={"/generate"}
+                        urlForm={GENERATE}
                     />
                 </Col>   
             </Row>

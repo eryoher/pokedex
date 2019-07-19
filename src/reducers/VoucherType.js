@@ -9,7 +9,7 @@ import { GET_VOUCHER_TYPE, GET_VOUCHER_TYPE_SUCCESS } from 'constants/ActionsTyp
       case GET_VOUCHER_TYPE:
         return { ...state, voucherType: null }
       case GET_VOUCHER_TYPE_SUCCESS:
-        return { ...state, voucherType: action.payload }          
+        return { ...state, voucherType: action.payload.data }          
       default:
         return state
     }

@@ -10,13 +10,12 @@ import InputAutocomplete from 'components/form/inputAutocomplete';
 
 class VoucherFormInput extends Component {
 
-    componentDidMount(){
-       
+    componentDidMount(){       
     }    
 
     render() {               
-        const { t, errors, touched, values, handleChange, handleBlur, setFieldValue, setFieldTouched, readOnly, handleSearch, auoptions, handleLoading } = this.props;    
-
+        const { t, errors, touched, values, handleChange, handleBlur, setFieldValue, setFieldTouched, readOnly, handleSearch, auoptions, handleLoading, handleSelect } = this.props;    
+        
         return (
             <Row>
                 <Col sm={11}>    
@@ -30,7 +29,9 @@ class VoucherFormInput extends Component {
                         colInput={"col-sm-10"} 
                         handleSearch={handleSearch}   
                         auoptions={auoptions} 
-                        handleLoading = {handleLoading}                               
+                        handleLoading = {handleLoading}    
+                        handleSelect = {handleSelect}                           
+                        labelKey={"Rsocial"}
                     />
                 </Col>
                 { !readOnly &&  <Col sm={1}>
@@ -39,13 +40,17 @@ class VoucherFormInput extends Component {
                 <Col sm={11}>
                     <InputText
                         label={t('voucher.form.business_name')}
-                        inputId={'bussines-name'}
-                        name={'business-name'}                        
+                        inputId={'rsocial'}
+                        name={'rsocial'}                        
                         placeholder={t('voucher.form.insert_business_name')}
                         styles={{width:'100%'}}
                         colLabel={"col-sm-2"}
                         colInput={"col-sm-10"}
                         disable={readOnly}                       
+                        value={values.rsocial}
+                        onChange={ (data) => {
+                            setFieldValue('rsocial', data.target.value);
+                        }}
                     />
                 </Col>
                 { !readOnly && <Col sm={1}>
@@ -66,27 +71,35 @@ class VoucherFormInput extends Component {
                     <Col sm={6}>
                         <InputText
                             label={t('voucher.form.responsible_type')}
-                            inputId={'clienteId'}
-                            name={'clienteId'}
+                            inputId={'tipo_resp'}
+                            name={'tipo_resp'}
                             placeholder={t('voucher.form.insert_responsible_type')}                        
                             colLabel={"col-sm-4"}
                             colInput={"col-sm-8"}                            
                             disable={readOnly}   
                             styleLabel={{paddingRight:'0px'}} 
-                            divStyle={{ paddingLeft:'17px' }}                   
+                            divStyle={{ paddingLeft:'17px' }}  
+                            value={values.tipo_resp}
+                            onChange={ (data) => {
+                              setFieldValue('tipo_resp', data.target.value);                            
+                            }}                 
                         />
                     </Col>
                     <Col sm={6} style={{paddingRight:'0px'}}>
                         <InputText
                             label={t('voucher.form.cuit')}
-                            inputId={'clienteId'}
-                            name={'clienteId'}
+                            inputId={'cuit'}
+                            name={'cuit'}
                             placeholder={t('voucher.form.insert_cuit')}                        
                             colLabel={"col-sm-4"}
                             colInput={"col-sm-8"}
                             divStyle= {{paddingLeft:'23px'}}
                             disable={readOnly}                       
-                            styleLabel={{textAlign:'right'}}                    
+                            styleLabel={{textAlign:'right'}} 
+                            value={values.cuit}
+                            onChange={ (data) => {
+                              setFieldValue('cuit', data.target.value);                            
+                            }}                     
                         />
                     </Col>
                 </Row>
@@ -95,13 +108,5 @@ class VoucherFormInput extends Component {
     }
 }
 
-const mapStateToProps = ({ client }) => {
-    const { search } = client;    
 
-    return { search };
-
-};
-
-
-
-export default connect(mapStateToProps, {searchClients})(withTranslation()( VoucherFormInput ));
+export default withTranslation()( VoucherFormInput );

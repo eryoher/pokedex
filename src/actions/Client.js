@@ -2,7 +2,9 @@ import {
     GET_CLIENT,
     GET_CLIENT_SUCCESS,
     SEARCH_CLIENTS,
-    SEARCH_CLIENTS_SUCCESS
+    SEARCH_CLIENTS_SUCCESS,
+    CONFIRMATION_CLIENT,
+    CONFIRMATION_CLIENT_SUCCESS
 } from '../constants/ActionsTypes';
 
 
@@ -30,6 +32,20 @@ export const searchClients = (params) => {
 export const searchClientsSuccess = (response) => {
   return {
     type: SEARCH_CLIENTS_SUCCESS,
+    payload: response
+  }
+};
+
+export const confirmationClient = (params) => {  
+  return {
+    type: CONFIRMATION_CLIENT,
+    payload: params
+  }
+};
+
+export const confirmationClientSuccess = (response) => {
+  return {
+    type: CONFIRMATION_CLIENT_SUCCESS,
     payload: response
   }
 };

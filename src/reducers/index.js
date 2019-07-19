@@ -7,7 +7,7 @@ import VoucherType from "./VoucherType";
 const reducers = combineReducers({
   common: Common,
   auth: Auth,
-  client:Client,
+  clients:Client,
   vouchertype:VoucherType
 });
 

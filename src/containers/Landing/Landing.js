@@ -5,9 +5,11 @@ import { Row, Col } from 'react-bootstrap';
 import CommonTable from 'components/common/commonTable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faPlus  } from '@fortawesome/free-solid-svg-icons';
-import { selectFilter, textFilter, dateFilter, customFilter, Comparator } from 'react-bootstrap-table2-filter';
+import { selectFilter} from 'react-bootstrap-table2-filter';
 import InputButton from 'components/form/inputButton';
 import DisplayAmount from 'components/common/displayAmount';
+import { LANDING, VOUCHER } from '../../utils/RoutePath';
+
 
 const voucher = [
     {
@@ -174,7 +176,7 @@ class Landing extends Component {
                 <Col sm={12} className={"text-right pr-3"}>
                     <InputButton
                         valueButton={t('global.start')}
-                        urlForm={"/landing"}
+                        urlForm={LANDING}
                     />
                 </Col>
                 <Col sm={12}>
@@ -187,7 +189,7 @@ class Landing extends Component {
                     <Col className={"m-2"}>
                             <InputButton
                                 valueButton={<FontAwesomeIcon icon={faPlus} />}
-                                urlForm={"/voucher"}
+                                urlForm={VOUCHER}
                             />
                         </Col>
                 </Col>

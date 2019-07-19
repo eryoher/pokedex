@@ -49,15 +49,12 @@ class InputAutocomplete extends Component {
         }        
 
         this.props.handleSearch(query);     
-        
-
     }
 
     render() {
-        const {label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, theme, maxResults, auoptions, handleLoading } = this.props;
+        const {label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, theme, maxResults, auoptions, handleLoading, handleSelect, labelKey } = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
-        const classLabel = (label) ? colLabel : "";
-        console.log(auoptions)
+        const classLabel = (label) ? colLabel : "";        
         return (
             <Row className={"form-group"}>                
                 <label className={`${theme.inputLabel}  ${classLabel}`} style={{...styleLabel}} >
@@ -70,16 +67,17 @@ class InputAutocomplete extends Component {
                             id={inputId}
                             options={auoptions}
                             name={name}  
-                            labelKey="Clave_impo"  
-                            filterBy={['Clave_impo', 'Cod_cliente']}                                                                      
-                            minLength={3}
-                            //onInputChange={this._handleInputChange}                       
+                            labelKey={labelKey}  
+                            filterBy={(option, props) => {                                
+                               return true;
+                            }}                                                                      
+                            minLength={3}                                              
                             onSearch={this._handleSearch}
+                            onChange={handleSelect}
                             className={`${theme.inputText}`}                            
                             placeholder={placeholder}                        
                             renderMenuItemChildren={(option) => {
-                                console.log(option, 'render')
-                                return(<label key={option.Cod_cliente} >{option.Cod_cliente}</label>);
+                                return(<option key={option.Cod_cliente} >{option.Rsocial}</option>);
                             }}
 
                         />

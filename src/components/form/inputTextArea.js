@@ -7,7 +7,7 @@ import styles from './inputTextArea.module.css';
 class InputTextArea extends Component {
 
     render() {
-        const {label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, cols, rows, disable, theme} = this.props;
+        const {label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, cols, rows, disable, theme, onChange, value} = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
         const classLabel = (label) ? colLabel : "";
 
@@ -26,6 +26,8 @@ class InputTextArea extends Component {
                         cols={cols}
                         disabled={disable}
                         className={theme.inputTextArea}
+                        onChange = { (v) => onChange(v) }     
+                        value={value}  
                     />
                 </Col>
                 

@@ -9,6 +9,7 @@ import InputGroupText from 'components/form/inputGroupText';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faLock } from '@fortawesome/free-solid-svg-icons';
 import InputButton from 'components/form/inputButton';
+import { LANDING } from '../../utils/RoutePath';
 
 class LoginForm extends Component {
     render() {        
@@ -57,7 +58,7 @@ class LoginForm extends Component {
                             <Col style={{textAlign:'left', paddingLeft:'15px'}} className={"mt-2 col-6 offset-3"} >
                                 <InputButton 
                                     valueButton={t('login.form.submit')}
-                                    urlForm={"/landing"}
+                                    urlForm={LANDING}
                                 />
                             </Col> 
                         </Form>                        

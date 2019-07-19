@@ -4,13 +4,14 @@ import Steps from '../../components/common/steps';
 import { withTranslation } from 'react-i18next';
 import { Row, Col } from 'react-bootstrap';
 import GenerateForm from 'components/generate/generateForm';
+import { LOADITEMS } from '../../utils/RoutePath';
 
 class Generate extends Component {
     render() {
         const {t} = this.props
 
         const backButton = {
-            url:'/loaditems',
+            url:LOADITEMS,
         }
 
         const steps = [

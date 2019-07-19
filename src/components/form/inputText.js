@@ -13,17 +13,13 @@ class InputText extends Component {
         }
     }
 
-    handleSetValue = (data) => {
-        
-        this.setState({valueInput:data.target.value});
-    }
-
     render() {
-        const {label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, disable, theme, type} = this.props;
+        const {label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, disable, theme, type,value, onChange} = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
         const classLabel = (label) ? colLabel : "";
         const classText = ( disable ) ? theme.inputDisabled : '';
-        const customType = (type) ? type : 'text';
+        const customType = (type) ? type : 'text';       
+
         return (
             <Row className={"form-group"}>                
                 <label className={`${theme.inputLabel}  ${classLabel}`} style={{...styleLabel}} >
@@ -38,8 +34,8 @@ class InputText extends Component {
                         placeholder={placeholder} 
                         disabled={disable}   
                         className={`${theme.inputText} ${classText}`}
-                        value={this.state.valueInput}     
-                        onChange = { (value) => this.handleSetValue(value) }                                    
+                        value={value}     
+                        onChange = { (v) => onChange(v) }                                    
                     />
                 </Col>
                 

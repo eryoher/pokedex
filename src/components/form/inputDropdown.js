@@ -5,14 +5,20 @@ import styles from './inputDropdown.module.css';
 
 class InputDropdown extends Component {
 
-    renderOptions = () => {
-        const { options, placeholder } = this.props;
-        const result = [];
-        result.push(
-            //Falta logica para placeholder por defecto
-            <option value={1} key={options.length}  >{placeholder}</option>
-        );
+    componentDidUpdate = (prevProps) => {
+        const { options, onChange } = this.props;
 
+        if (prevProps.options.length !== options.length && options.length) {
+            //            console.log(options[0], 'opcioness  xxxxxxxx')
+            if (options[0]) {
+                onChange({ target: { value: options[0].id } });
+            }
+        }
+    }
+
+    renderOptions = () => {
+        const { options } = this.props;
+        const result = [];
         options.forEach(option => {
             result.push(
                 <option value={option.id} key={option.id}>{option.label}</option>
@@ -20,7 +26,6 @@ class InputDropdown extends Component {
         });
 
         return result;
-
     }
 
     getconfigField = (id) => {
@@ -40,14 +45,15 @@ class InputDropdown extends Component {
         const { label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, options, disable, theme, inputFormCol, fields } = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
         const classLabel = (label) ? colLabel : "";
-
         const config = this.getconfigField(inputId);
+        const customStyleLabel = (config.requerido) ? { ...styleLabel, paddingTop: '4px', color: 'red' } : { ...styleLabel, paddingTop: '4px' };
+
 
         if (config.visible) {
             return (
                 <Col {...inputFormCol} >
                     <Row className={"form-group"}>
-                        <label className={`${classLabel} ${theme.inputLabel}`} style={{ ...styleLabel, paddingTop: '4px' }} >
+                        <label className={`${classLabel} ${theme.inputLabel}`} style={customStyleLabel} >
                             {(config.label) ? config.label : label}
                         </label>
                         <Col className={classInput} style={{ ...divStyle }}>

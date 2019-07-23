@@ -13,7 +13,6 @@ class ClientFormInput extends Component {
         const { Sucursales } = this.props.values;
         const val = select.target.value;
         let result = null;
-
         Sucursales.forEach(opt => {
             if (opt.suc_nro === val) {
                 result = opt;
@@ -67,8 +66,8 @@ class ClientFormInput extends Component {
                     options={options}
                     disable={readOnly}
                     onChange={this.handleChange}
-                />
 
+                />
                 <InputText
                     inputFormCol={{ sm: 11 }}
                     fields={fields}

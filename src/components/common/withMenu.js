@@ -1,62 +1,64 @@
 import React, { Component } from 'react'
-import {  Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import Menu from './menu'
 import { themr } from 'react-css-themr';
 import styles from './withMenu.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAlignJustify  } from '@fortawesome/free-solid-svg-icons'
+import { faAlignJustify } from '@fortawesome/free-solid-svg-icons'
 
-function withMenu(WrappedComponent){
+function withMenu(WrappedComponent) {
     class WithMenu extends Component {
-        
-        constructor(props){
+
+        constructor(props) {
             super(props);
             this.state = {
-                showMenu : true
+                showMenu: true
             }
         }
 
         handleToggle = () => {
-            this.setState({ showMenu : !this.state.showMenu });
+            this.setState({ showMenu: !this.state.showMenu });
+            //this.props.toggleMenu(this.props.showMenu)
         }
-        
+
         render() {
             const { theme } = this.props;
             const { showMenu } = this.state;
             const toggle = (showMenu) ? theme.toggled : '';
 
             return (
-                <div >                                        
+                <div >
                     <div className="d-flex" id="wrapper">
-                        <div className={`${theme.sidebarWrapper} ${toggle}`} >                                
+                        <div className={`${theme.sidebarWrapper} ${toggle}`} >
                             <div className={` ${theme.listGroup} list-group-flush`}>
-                                {<Menu />}                                
+                                {<Menu />}
                             </div>
                         </div>
-                        
+
                         <div className={theme.pageContentWrapper} >
                             <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                                <Row className="show-grid" style={{marginRight:'0px'}} >
+                                <Row className="show-grid" style={{ marginRight: '0px' }} >
                                     <Col md={12}>
-                                        <button className={`btn btn-primary ${theme.buttonMenu} `} onClick={ () =>  this.handleToggle()  } >
+                                        <button className={`btn btn-primary ${theme.buttonMenu} `} onClick={() => this.handleToggle()} >
                                             <FontAwesomeIcon icon={faAlignJustify} />
-                                        </button>       
+                                        </button>
                                     </Col>
                                     <Col md={12}>
-                                        <WrappedComponent 
-                                            { ...this.props }
+                                        <WrappedComponent
+                                            {...this.props}
                                         />
                                     </Col>
                                 </Row>
-                            </nav>     
-                        </div>                          
+                            </nav>
+                        </div>
 
                     </div>
                 </div>
             )
         }
-    }   
-    return  themr('WithMenuTheme', styles)(WithMenu);
+    }
+
+    return themr('WithMenuTheme', styles)(WithMenu);
 }
 
 export default withMenu;

@@ -33,12 +33,13 @@ class InputText extends Component {
         const classText = (disable) ? theme.inputDisabled : '';
         const customType = (type) ? type : 'text';
         const config = this.getconfigField(inputId);
+        const customStyleLabel = (config.requerido) ? { ...styleLabel, color: 'red' } : { ...styleLabel };
 
         if (config.visible) {
             return (
                 <Col {...inputFormCol} >
                     <Row className={"form-group"}>
-                        <label className={`${theme.inputLabel}  ${classLabel}`} style={{ ...styleLabel }} >
+                        <label className={`${theme.inputLabel}  ${classLabel}`} style={customStyleLabel} >
                             {(config.label) ? config.label : label}
                         </label>
                         <Col className={classInput} style={{ ...divStyle }}>

@@ -4,139 +4,139 @@
         "change_language_to_english": "Cambiar lenguaje a ingles",
         "change_language_to_spanish": "Cambiar lenguaje a español"
     },
-    "form":{
-        "button":{
-            "next":"Siguiente",
-            "back":"Atrás"
+    "form": {
+        "button": {
+            "next": "Siguiente",
+            "back": "Atrás"
         }
     },
-    "voucher":{
-        "title":"Ingrese de Comprobante - Nota de Venta con Aprobación",
-        "step":{
-            "select_client":"Selección del cliente ",
-            "load_headboard":"Cargar cabeceras",
-            "load_items":"Cargar Items",
-            "affectation_vouchers":"Afectación comprobantes",
-            "generate":"Generar"
+    "voucher": {
+        "title": "Ingrese de Comprobante - Nota de Venta con Aprobación",
+        "step": {
+            "select_client": "Selección del cliente ",
+            "load_headboard": "Cargar cabeceras",
+            "load_items": "Cargar Items",
+            "affectation_vouchers": "Afectación comprobantes",
+            "generate": "Generar"
         },
-        "form":{
-            "insert_customer_criterion":"Ingrese el criterio cliente",
-            "business_name":"Razón social",
-            "insert_business_name":"Ingrese la Razón social",
-            "code":"Codigo",
+        "form": {
+            "insert_customer_criterion": "Ingrese el criterio cliente",
+            "business_name": "Razón social",
+            "insert_business_name": "Ingrese la Razón social",
+            "code": "Codigo",
             "insert_code_client": "Codigo del cliente",
-            "responsible_type":"Tipo responsable",
-            "insert_responsible_type":"Ingrese el Tipo responsable",
-            "cuit":"C.U.I.T",
-            "insert_cuit":"Identificador Cliente",
-            "next":"Siguiente"
-        }       
-
-    },
-    "client":{
-        "title":"Cliente",
-        "form":{
-            "contact":"Contacto",
-            "insert_contact":"Ingrese el Contacto",
-            "phone":"Teléfono",
-            "insert_phone":"Ingrese el teléfono",
-            "email":"Correo",
-            "insert_email":"Ingrese el correo",
-            "address":"Domicilio",
-            "insert_address":"Ingrese el domicilio",
-            "location":"Localidad",
-            "insert_location":"Ingrese la localidad",
-            "province":"Provincia",
-            "insert_province":"Ingrese la provincia",
-            "postalCode":"Código postal",
-            "insert_postal_code":"Ingrese el código postal",
-            "client_branch":"Cliente Sucursal",
-            "insert_client_branch":"Ingrese cliente sucursal",
-            "obs_current_account":"Obs. Cta. Cte.",
-            "insert_obs_current_account":"Ingrese las Observaciones de la cuenta corriente",
-            "obs_sales":"Obs. Ventas",
-            "insert_obs_sales":"Ingrese las Observaciones de la venta",
-            "limit_credit":"Límite Crédito",
-            "insert_limit_credit":"Ingrese límite del crédito",
-            "pendingCredit":"Crédito pendiente",
-            "insert_pending_credit":"Ingrese crédito pendiente",
-            "balance":"Saldo",
-            "insert_client_balance":"Ingrese saldo cliente"
-        }
-    },
-    "headboard":{
-        "title":"Cabecera",
-        "form":{
-            "company_branch":"Suc. Empresa",
-            "insert_company_branch":"Ingrese la Sucursal de la empresa",
-            "voucher":"Comprobante",
-            "insert_voucher":"Ingrese Comprobante",
-            "date":"Fecha",
-            "insert_date":"Ingrese Fecha",
-            "currency":"Moneda",
-            "insert_currency":"Ingrese Moneda",
-            "quotation":"Cotizacion",
-            "insert_quotation":"Ingrese la cotización",
-            "saler":"Vendedor",
-            "insert_saler":"Ingrese Vendedor",
-            "condSale":"Cond. Vta.",
-            "insert_codition_sale":"Condic. Venta",
-            "carrier":"Transportista",
-            "insert_carrier":"Ingrese Transportista"
-        }
-    },
-
-    "landing":{
-        "title":"Comprobantes Pendientes",
-        "form":{
-            "voucher":"Comprobante",
-            "branch":"Sucursal"
-        }
-    },
-    "global":{
-        "date":"Fecha",
-        "client":"Cliente",
-        "type":"Tipo",
-        "detail":"Detalle",
-        "total":"Total", 
-        "start":"Comenzar",
-        "code":"Codigo", 
-        "description":"Descripción",
-        "unit":"Unidad",
-        "quantity":"Cantidad",
-        "deal":"Oferta"
-    },
-    "login":{
-        "form":{
-            "username":"Usuario",
-            "insert_username":"Ingrese el usuario",
-            "password":"Contraseña",
-            "insert_password":"Ingrese la contraseña",
-            "submit":"Ingresar"
+            "responsible_type": "Tipo responsable",
+            "insert_responsible_type": "Ingrese el Tipo responsable",
+            "cuit": "C.U.I.T",
+            "insert_cuit": "Identificador Cliente",
+            "next": "Siguiente"
         }
 
     },
-    "loadItem":{
-        "title":"Ingreso de Comprobante",
-        "table":{
-            "cufOrigin":"CUF Origin",
-            "unitPrice":"Precio Unitario",
-            "netAmount":"Importe Neto",
-            "deliveryDate":"Fecha de Entrega",
-            "therapeutic_action":"Acción Terapéutica",
-            "require_cold_chain":"Require cadena de frío",
-            "monodroga":"Monodroga",
-            "labt_manufacturer":"Laboratorio fabricante",
-            "previos_price":"Precio Anterior",
-            "export_IMS":"Exportar a IMS/CID",
-            "traceability_type":"Tipo Trazabilidad",
-            "last_update_date":"Fecha última actualización",
-            "totalImp":"Importe Total",
-            "total_gross_margin":"Total Margen Bruto"
+    "client": {
+        "title": "Cliente",
+        "form": {
+            "contact": "Contacto",
+            "insert_contact": "Ingrese el Contacto",
+            "phone": "Teléfono",
+            "insert_phone": "Ingrese el teléfono",
+            "email": "Correo",
+            "insert_email": "Ingrese el correo",
+            "address": "Domicilio",
+            "insert_address": "Ingrese el domicilio",
+            "location": "Localidad",
+            "insert_location": "Ingrese la localidad",
+            "province": "Provincia",
+            "insert_province": "Ingrese la provincia",
+            "postalCode": "Código postal",
+            "insert_postal_code": "Ingrese el código postal",
+            "client_branch": "Cliente Sucursal",
+            "insert_client_branch": "Seleccione un cliente sucursal",
+            "obs_current_account": "Obs. Cta. Cte.",
+            "insert_obs_current_account": "Ingrese las Observaciones de la cuenta corriente",
+            "obs_sales": "Obs. Ventas",
+            "insert_obs_sales": "Ingrese las Observaciones de la venta",
+            "limit_credit": "Límite Crédito",
+            "insert_limit_credit": "Ingrese límite del crédito",
+            "pendingCredit": "Crédito pendiente",
+            "insert_pending_credit": "Ingrese crédito pendiente",
+            "balance": "Saldo",
+            "insert_client_balance": "Ingrese saldo cliente"
         }
     },
-    "shoppingCart":{
-        "title":"Ítems afectados"
+    "headboard": {
+        "title": "Cabecera",
+        "form": {
+            "company_branch": "Suc. Empresa",
+            "insert_company_branch": "Ingrese la Sucursal de la empresa",
+            "voucher": "Comprobante",
+            "insert_voucher": "Ingrese Comprobante",
+            "date": "Fecha",
+            "insert_date": "Ingrese Fecha",
+            "currency": "Moneda",
+            "insert_currency": "Ingrese Moneda",
+            "quotation": "Cotizacion",
+            "insert_quotation": "Ingrese la cotización",
+            "saler": "Vendedor",
+            "insert_saler": "Ingrese Vendedor",
+            "condSale": "Cond. Vta.",
+            "insert_codition_sale": "Condic. Venta",
+            "carrier": "Transportista",
+            "insert_carrier": "Ingrese Transportista"
+        }
+    },
+
+    "landing": {
+        "title": "Comprobantes Pendientes",
+        "form": {
+            "voucher": "Comprobante",
+            "branch": "Sucursal"
+        }
+    },
+    "global": {
+        "date": "Fecha",
+        "client": "Cliente",
+        "type": "Tipo",
+        "detail": "Detalle",
+        "total": "Total",
+        "start": "Comenzar",
+        "code": "Codigo",
+        "description": "Descripción",
+        "unit": "Unidad",
+        "quantity": "Cantidad",
+        "deal": "Oferta"
+    },
+    "login": {
+        "form": {
+            "username": "Usuario",
+            "insert_username": "Ingrese el usuario",
+            "password": "Contraseña",
+            "insert_password": "Ingrese la contraseña",
+            "submit": "Ingresar"
+        }
+
+    },
+    "loadItem": {
+        "title": "Ingreso de Comprobante",
+        "table": {
+            "cufOrigin": "CUF Origin",
+            "unitPrice": "Precio Unitario",
+            "netAmount": "Importe Neto",
+            "deliveryDate": "Fecha de Entrega",
+            "therapeutic_action": "Acción Terapéutica",
+            "require_cold_chain": "Require cadena de frío",
+            "monodroga": "Monodroga",
+            "labt_manufacturer": "Laboratorio fabricante",
+            "previos_price": "Precio Anterior",
+            "export_IMS": "Exportar a IMS/CID",
+            "traceability_type": "Tipo Trazabilidad",
+            "last_update_date": "Fecha última actualización",
+            "totalImp": "Importe Total",
+            "total_gross_margin": "Total Margen Bruto"
+        }
+    },
+    "shoppingCart": {
+        "title": "Ítems afectados"
     }
 
 }

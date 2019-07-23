@@ -3,12 +3,14 @@ import Auth from "./Auth";
 import Common from "./Common";
 import Client from './Client';
 import VoucherType from "./VoucherType";
+import Voucher from './Voucher';
 
 const reducers = combineReducers({
   common: Common,
   auth: Auth,
-  clients:Client,
-  vouchertype:VoucherType
+  clients: Client,
+  vouchertype: VoucherType,
+  voucher: Voucher
 });
 
 const rootReducer = (state, action) => {

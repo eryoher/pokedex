@@ -30,8 +30,6 @@ class VoucherFormInput extends Component {
             fields
         } = this.props;
 
-        console.log(fields);
-
         return (
             <Row>
                 <Col sm={11}>
@@ -48,6 +46,7 @@ class VoucherFormInput extends Component {
                         handleLoading={handleLoading}
                         handleSelect={handleSelect}
                         labelKey={"Rsocial"}
+                        disable={readOnly}
                     />
                 </Col>
 

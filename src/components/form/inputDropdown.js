@@ -23,34 +23,64 @@ class InputDropdown extends Component {
 
     }
 
-    render() {
-        const { label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, options, disable, theme, inputFormCol } = this.props;
+    getconfigField = (id) => {
+        const { fields } = this.props;
+        let result = {};
+
+        fields.forEach(field => {
+            if (field.idcampo == id) {
+                result = field;
+            }
+        });
+
+        return result;
+    }
+
+    renderField = () => {
+        const { label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, options, disable, theme, inputFormCol, fields } = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
         const classLabel = (label) ? colLabel : "";
 
-        return (
-            <Col {...inputFormCol} >
-                <Row className={"form-group"}>
-                    <label className={`${classLabel} ${theme.inputLabel}`} style={{ ...styleLabel, paddingTop: '4px' }} >
-                        {label}
-                    </label>
-                    <Col className={classInput} style={{ ...divStyle }}>
-                        <select
-                            id={inputId}
-                            name={name}
-                            style={{ styles }}
-                            placeholder={placeholder}
-                            disabled={disable}
-                            className={`${theme.inputDropdown} custom-select`}
-                            onChange={(value) => this.props.onChange(value)}
-                        >
-                            {options && this.renderOptions()}
-                        </select>
-                    </Col>
+        const config = this.getconfigField(inputId);
 
-                </Row>
-            </Col>
-        )
+        if (config.visible) {
+            return (
+                <Col {...inputFormCol} >
+                    <Row className={"form-group"}>
+                        <label className={`${classLabel} ${theme.inputLabel}`} style={{ ...styleLabel, paddingTop: '4px' }} >
+                            {(config.label) ? config.label : label}
+                        </label>
+                        <Col className={classInput} style={{ ...divStyle }}>
+                            <select
+                                id={inputId}
+                                name={name}
+                                style={{ styles }}
+                                placeholder={placeholder}
+                                disabled={!config.editable}
+                                className={`${theme.inputDropdown} custom-select`}
+                                onChange={(value) => this.props.onChange(value)}
+                            >
+                                {options && this.renderOptions()}
+                            </select>
+                        </Col>
+
+                    </Row>
+                </Col>
+            )
+        } else {
+            return null;
+        }
+    }
+
+    render() {
+        const { fields } = this.props;
+        if (fields) {
+            return (
+                this.renderField()
+            )
+        } else {
+            return null
+        }
     }
 }
 export default themr('InputDropdownStyle', styles)(InputDropdown);

@@ -289,6 +289,30 @@ mock.onGet('/Comprobantes/config').reply(200, {
         "visible": 1,
         "valid": "",
       },
+      {
+        "idcampo": "sucursales",
+        "descripcion": "sucursales",
+        "label": "Cliente Sucursal",
+        "editable": 1,
+        "visible": 1,
+        "valid": "",
+      },
+      {
+        "idcampo": "obs_cc",
+        "descripcion": "Observaciones cuenta corriente",
+        "label": "Obs. Cta. Cte.",
+        "editable": 1,
+        "visible": 1,
+        "valid": "",
+      },
+      {
+        "idcampo": "obs_ventas",
+        "descripcion": "Observaciones de la venta",
+        "label": "Obs. Ventas",
+        "editable": 1,
+        "visible": 1,
+        "valid": "",
+      },
     ]
   }
 });

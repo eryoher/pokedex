@@ -40,6 +40,19 @@ class HeadBoardFormInput extends Component {
         console.log(select.target.value)
     }
 
+    handleChangeCurreny = (select) => {
+        const { values, setFieldValue } = this.props;
+        const code = select.target.value;
+        values.moneda.forEach(currency => {
+            if (currency.cod_moneda === code) {
+                setFieldValue('cotiz', currency.cotiz)
+            }
+        });
+
+        console.log(select.target.value, values.moneda)
+
+    }
+
     renderCarrier = () => {
         const { readOnly, t, fields, values } = this.props;
         let result = [];
@@ -124,6 +137,10 @@ class HeadBoardFormInput extends Component {
                         colInput={"col-sm-8"}
                         divStyle={{ paddingLeft: '17px' }}
                         disable={readOnly}
+                        value={values.Titulo_comp_vta}
+                        onChange={(data) => {
+                            setFieldValue('Titulo_comp_vta', data.target.value);
+                        }}
                     />
                     <InputText
                         inputFormCol={{ sm: 6, style: { paddingRight: '0px' } }}
@@ -152,7 +169,7 @@ class HeadBoardFormInput extends Component {
                         divStyle={{ paddingLeft: '17px' }}
                         disable={readOnly}
                         options={optionsCurrency}
-                        onChange={() => { }}
+                        onChange={this.handleChangeCurreny}
                     />
                     <InputText
                         inputFormCol={{ sm: 6, style: { paddingRight: '0px' } }}
@@ -165,6 +182,11 @@ class HeadBoardFormInput extends Component {
                         colInput={"col-sm-8"}
                         styleLabel={{ textAlign: 'right' }}
                         disable={readOnly}
+                        value={values.cotiz}
+                        onChange={(data) => {
+                            setFieldValue('cotiz', data.target.value);
+                        }}
+
                     />
                 </Row>
                 <Row className={'col-11'} style={{ paddingRight: '0px' }} >

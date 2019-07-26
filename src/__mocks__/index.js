@@ -22,6 +22,7 @@ mock.onGet('/Clientes/consulta', { params: { idOperacion: 1 } }).reply(200, {
 mock.onGet('/Clientes/cliente').reply(200, {
   data: {
     "Idcliente": 309,
+    "cliente_codigo": "PSLWES",
     "Cod_categ": "GESTION ",
     "cod_sin_formato": "FAR0399 ",
     "cod_con_formato": "FAR-0399 ",
@@ -187,7 +188,7 @@ mock.onGet('/Comprobantes/config', { params: { cod_proceso: 1, idOperacion: 1 } 
         "valid": "",
       },
       {
-        "idcampo": "code",
+        "idcampo": "cliente_codigo",
         "descripcion": "Código cliente",
         "label": "Código",
         "editable": 1,
@@ -494,3 +495,17 @@ mock.onGet('/Comprobantes/ventaCabecera', { params: { idOperacion: 1 } }).reply(
     ]
   }
 });
+
+
+mock.onGet('/vta_cab_compr/atrib_autocompl').reply(200, {
+  data: [
+    {
+      "cod_dato": "01.01",
+      "desc_dato": "Administración central"
+    },
+    {
+      "cod_dato": "02.01",
+      "desc_dato": "Administración San Luis"
+    }
+  ]
+})

@@ -49,6 +49,7 @@ class VoucherClientForm extends Component {
 
         const defaultInitial = {
             rsocial: '',
+            cliente_codigo: '',
             tipo_resp: '',
             cuit: '',
             contacto: '',

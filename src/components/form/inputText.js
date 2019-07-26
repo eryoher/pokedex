@@ -18,7 +18,7 @@ class InputText extends Component {
         let result = {};
 
         fields.forEach(field => {
-            if (field.idcampo == id) {
+            if (field.idcampo === id) {
                 result = field;
             }
         });
@@ -27,14 +27,13 @@ class InputText extends Component {
     }
 
     renderField = () => {
-        const { label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, disable, theme, type, value, onChange, inputFormCol } = this.props;
+        const { label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, disable, theme, type, value, onChange, inputFormCol, fields } = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
         const classLabel = (label) ? colLabel : "";
         const classText = (disable) ? theme.inputDisabled : '';
         const customType = (type) ? type : 'text';
         const config = this.getconfigField(inputId);
         const customStyleLabel = (config.requerido) ? { ...styleLabel, color: 'red' } : { ...styleLabel };
-
         if (config.visible) {
             return (
                 <Col {...inputFormCol} >

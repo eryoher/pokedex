@@ -171,7 +171,7 @@ mock.onGet('/TipoComprobantes/consulta', { params: { "idComprobante": "C.NVCR" }
 });
 
 
-mock.onGet('/Comprobantes/config').reply(200, {
+mock.onGet('/Comprobantes/config', { params: { cod_proceso: 1, idOperacion: 1 } }).reply(200, {
   data: {
     "cod_proceso": "P_SELCLI",
     "descrip_proceso": "Selección Cliente",
@@ -330,6 +330,167 @@ mock.onGet('/Comprobantes/config').reply(200, {
         "visible": 1,
         "valid": "",
       },
+    ]
+  }
+});
+
+mock.onGet('/Comprobantes/config', { params: { cod_proceso: 'p_vtacab', idOperacion: 1 } }).reply(200, {
+  data: {
+    "cod_proceso": "P_vtacab",
+    "descrip_proceso": "Carga datos cabecera ventas",
+    "orden": "2",
+    "campos": [
+      {
+        "idcampo": "suc_empresa_venta",
+        "descripcion": "Suc.Empresa",
+        "label": "Suc.Empresa",
+        "editable": 1,
+        "visible": 1,
+        "requerido": 1,
+        "valid": "",
+      },
+      {
+        "idcampo": "Titulo_comp_vta",
+        "descripcion": "Titulo comprobante",
+        "label": "Titulo",
+        "editable": 1,
+        "visible": 1,
+        "requerido": 0,
+        "valid": "",
+      },
+      {
+        "idcampo": "fecha",
+        "descripcion": "Fecha",
+        "label": "Fecha",
+        "editable": 1,
+        "visible": 1,
+        "requerido": 1,
+        "valid": "FEC>=H",
+      },
+      {
+        "idcampo": "mon_comp_vta",
+        "descripcion": "Moneda",
+        "label": "Moneda",
+        "editable": 1,
+        "visible": 1,
+        "requerido": 1,
+        "valid": "",
+      },
+      {
+        "idcampo": "cotiz",
+        "descripcion": "Cotización",
+        "label": "Cotización",
+        "editable": 0,
+        "visible": 1,
+        "requerido": 0,
+        "valid": "",
+      },
+      { "idcampo": "vend_comp_vta", "descripcion": "Vendedor", "label": "Vendedor", "editable": 1, "visible": 1, "requerido": 0, "valid": "", },
+      { "idcampo": "cond_comp_vta", "descripcion": "Cond.Venta", "label": "Cond.Venta", "editable": 1, "visible": 1, "requerido": 1, "valid": "", },
+      { "idcampo": "transp_comp_vta", "descripcion": "Transportista", "label": "Transportista", "editable": 0, "visible": 0, "requerido": 0, "valid": "", },
+      { "idcampo": "atrib_comp_vta", "descripcion": "Atributos", "label": "Datos Adicionales", "editable": 1, "visible": 1, "requerido": 1, "valid": "", }
+
+    ]
+  }
+})
+
+mock.onGet('/Comprobantes/ventaCabecera', { params: { idOperacion: 1 } }).reply(200, {
+  data:
+  {
+    "Titulo_comp_vta": "Nota de Venta con aprobación",
+    "moneda": [
+      {
+        "cod_moneda": "$",
+        "desc_moneda": "Pesos Arg.",
+        "cotiz": 1,
+      },
+      {
+        "cod_moneda": "U$S",
+        "desc_moneda": "Dolar Estadounidense",
+        "cotiz": 43.52,
+      },
+    ],
+    "vendedor": [
+      {
+        "cod_vendedor": 32,
+        "nom_vendedor": "Carlos Fernandez",
+      },
+      {
+        "cod_vendedor": 45,
+        "nom_vendedor": "Pedro Martinez",
+      },
+    ],
+    "cond_comp_vta": [
+      {
+        "cod_cond_vta": "CO",
+        "desc_cond_vta": "Contado",
+      },
+      {
+        "cod_cond_vta": "CC30",
+        "desc_cond_vta": "Cta.Cte. 30 días",
+      }
+    ],
+    "transporte": [
+      {
+        "cod_transp": "TR01",
+        "nom_transp": "Fletes del Sur",
+      },
+      {
+        "cod_transp": "TR56",
+        "nom_transp": "Trasporte Gutierrez",
+      },
+    ],
+    "suc_empresa": [
+      {
+        "cod_suc": "00",
+        "nom_suc": "Casa Central",
+      },
+      {
+        "cod_suc": "03",
+        "nom_suc": "Suc. San Isidro",
+      },
+    ],
+    "atrib_comp_vta": [
+      {
+        "cod_atrib": "TIPOENV",
+        "descripcion": "Tipo de Envio",
+        "tipo": "char",
+        "largo": 30,
+        "formato": "",
+        "orden": 1,
+        "valores": [
+          {
+            "cod_valor": "01",
+            "desc_valor": "Normal",
+          },
+          {
+            "cod_valor": "02",
+            "desc_valor": "Urg 24 hs",
+          },
+          {
+            "cod_valor": "03",
+            "desc_valor": "Urg 12 hs",
+          },
+        ]
+      },
+      {
+        "cod_atrib": "OBSERV",
+        "descripcion": "Observación",
+        "tipo": "char",
+        "largo": 50,
+        "formato": "",
+        "orden": 2,
+        "valores": []
+      },
+      {
+        "cod_atrib": "Costo",
+        "descripcion": "Costo Flete",
+        "tipo": "num",
+        "largo": 15,
+        "formato": "999.999,99",
+        "orden": 3,
+        "valores": []
+      }
     ]
   }
 });

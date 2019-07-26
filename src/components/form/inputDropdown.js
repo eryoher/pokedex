@@ -9,8 +9,8 @@ class InputDropdown extends Component {
         const { options, onChange } = this.props;
 
         if (prevProps.options.length !== options.length && options.length) {
-            //            console.log(options[0], 'opcioness  xxxxxxxx')
-            if (options[0]) {
+            // console.log(options[0], 'opcioness  xxxxxxxx')
+            if (options[0] && onChange) {
                 onChange({ target: { value: options[0].id } });
             }
         }
@@ -19,6 +19,7 @@ class InputDropdown extends Component {
     renderOptions = () => {
         const { options } = this.props;
         const result = [];
+
         options.forEach(option => {
             result.push(
                 <option value={option.id} key={option.id}>{option.label}</option>
@@ -42,13 +43,11 @@ class InputDropdown extends Component {
     }
 
     renderField = () => {
-        const { label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, options, disable, theme, inputFormCol, fields } = this.props;
+        const { label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, options, disable, theme, inputFormCol } = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
         const classLabel = (label) ? colLabel : "";
         const config = this.getconfigField(inputId);
         const customStyleLabel = (config.requerido) ? { ...styleLabel, paddingTop: '4px', color: 'red' } : { ...styleLabel, paddingTop: '4px' };
-
-
         if (config.visible) {
             return (
                 <Col {...inputFormCol} >
@@ -89,4 +88,5 @@ class InputDropdown extends Component {
         }
     }
 }
+
 export default themr('InputDropdownStyle', styles)(InputDropdown);

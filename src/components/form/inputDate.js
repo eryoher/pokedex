@@ -1,15 +1,19 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'react-bootstrap';
+import DatePicker from "react-datepicker";
 import { themr } from 'react-css-themr';
 import styles from './inputText.module.css';
+import "react-datepicker/dist/react-datepicker.css";
 
-class InputText extends Component {
+
+class InputDate extends Component {
 
     constructor(props) {
-        super(props);
+        super(props)
+        this.state = {}
     }
 
-    getconfigField = (id) => {
+    getConfigField = (id) => {
         const { fields } = this.props;
         let result = {};
 
@@ -22,14 +26,15 @@ class InputText extends Component {
         return result;
     }
 
+
     renderField = () => {
-        const { label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, disable, theme, type, value, onChange, inputFormCol } = this.props;
+        const { label, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, disable, theme, value, onChange, inputFormCol } = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
         const classLabel = (label) ? colLabel : "";
         const classText = (disable) ? theme.inputDisabled : '';
-        const customType = (type) ? type : 'text';
-        const config = this.getconfigField(inputId);
+        const config = this.getConfigField(inputId);
         const customStyleLabel = (config.requerido) ? { ...styleLabel, color: 'red' } : { ...styleLabel };
+
         if (config.visible) {
             return (
                 <Col {...inputFormCol} >
@@ -38,16 +43,13 @@ class InputText extends Component {
                             {(config.label) ? config.label : label}
                         </label>
                         <Col className={classInput} style={{ ...divStyle }}>
-                            <input
+                            <DatePicker
+                                style={styles}
                                 id={inputId}
                                 name={name}
-                                type={customType}
-                                style={styles}
-                                placeholder={placeholder}
-                                disabled={!config.editable}
+                                selected={(value) ? value : new Date()}
+                                onChange={onChange}
                                 className={`${theme.inputText} ${classText}`}
-                                value={value}
-                                onChange={(v) => onChange(v)}
                             />
                         </Col>
                     </Row>
@@ -57,6 +59,7 @@ class InputText extends Component {
             return null;
         }
     }
+
 
     render() {
         const { fields } = this.props;
@@ -70,4 +73,5 @@ class InputText extends Component {
     }
 }
 
-export default themr('InputTextStyle', styles)(InputText);
+export default themr('InputDateStyle', styles)(InputDate);
+

@@ -6,22 +6,7 @@ import InputDropdown from 'components/form/inputDropdown';
 import { Collapse } from 'reactstrap'
 import CollapseBotton from 'components/common/collapseBoton';
 import GenericInputForm from 'components/form/genericInputForm';
-
-
-const optionsSelect = [
-    {
-        id: 1,
-        label: "Opción 1"
-    },
-    {
-        id: 2,
-        label: "Opción 2"
-    },
-    {
-        id: 3,
-        label: "Opción 3"
-    },
-]
+import InputDate from 'components/form/inputDate';
 
 class HeadBoardFormInput extends Component {
 
@@ -49,8 +34,12 @@ class HeadBoardFormInput extends Component {
             }
         });
 
-        console.log(select.target.value, values.moneda)
+    }
 
+    handleChangeDate = (data) => {
+        const { setFieldValue } = this.props;
+        setFieldValue('fecha', data);
+        this.props.setDate(data);
     }
 
     renderCarrier = () => {
@@ -142,7 +131,7 @@ class HeadBoardFormInput extends Component {
                             setFieldValue('Titulo_comp_vta', data.target.value);
                         }}
                     />
-                    <InputText
+                    <InputDate
                         inputFormCol={{ sm: 6, style: { paddingRight: '0px' } }}
                         fields={fields}
                         label={t('headboard.form.date')}
@@ -153,6 +142,8 @@ class HeadBoardFormInput extends Component {
                         colInput={"col-sm-8"}
                         styleLabel={{ textAlign: 'right' }}
                         disable={readOnly}
+                        value={values.fecha}
+                        onChange={this.handleChangeDate}
                     />
 
                 </Row>

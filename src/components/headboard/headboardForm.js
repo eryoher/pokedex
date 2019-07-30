@@ -5,11 +5,10 @@ import { Form, Row, Col } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import HeadboardFormInput from './headboardFormInput';
 import { connect } from 'react-redux';
-import { getConfigVoucher, getVoucherHead } from '../../actions';
-
+import { getConfigVoucher, getVoucherHead, voucherHeadCheckDate } from '../../actions';
 import InputButton from 'components/form/inputButton';
 import { VOUCHER, LOADITEMS } from '../../utils/RoutePath';
-
+import moment from 'moment';
 
 class HeadboardForm extends Component {
 
@@ -23,6 +22,11 @@ class HeadboardForm extends Component {
         this.props.getVoucherHead({ idOperacion: 1 });
     }
 
+    handleSetDate = (date) => {
+        //console.log(date, 'la fecha', moment(date).format("MM/DD/YYYY"));
+        const dateFormated = moment(date).format("MM/DD/YYYY");
+        this.props.voucherHeadCheckDate(dateFormated);
+    }
 
     render() {
         const { config, headSale } = this.props;
@@ -43,9 +47,10 @@ class HeadboardForm extends Component {
                     enableReinitialize={true}
                     render={({ values, handleBlur, handleChange, errors, touched, isSubmitting, handleSubmit, setFieldValue, setFieldTouched }) => (
                         <Form onSubmit={handleSubmit} className="voucher-info-form">
-                            <Col >
+                            <Col>
                                 <HeadboardFormInput
                                     fields={(config) ? config.campos : null}
+                                    setDate={this.handleSetDate}
                                     collapse
                                     {...{
                                         values,
@@ -89,4 +94,4 @@ const mapStateToProps = ({ voucher }) => {
 };
 
 
-export default connect(mapStateToProps, { getConfigVoucher, getVoucherHead })(withTranslation()(HeadboardForm));
+export default connect(mapStateToProps, { getConfigVoucher, getVoucherHead, voucherHeadCheckDate })(withTranslation()(HeadboardForm));

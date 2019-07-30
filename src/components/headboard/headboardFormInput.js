@@ -6,22 +6,10 @@ import InputDropdown from 'components/form/inputDropdown';
 import { Collapse } from 'reactstrap'
 import CollapseBotton from 'components/common/collapseBoton';
 import GenericInputForm from 'components/form/genericInputForm';
+import InputDate from 'components/form/inputDate';
+import { voucherHeadValidatekey } from '../../actions';
+import { connect } from 'react-redux';
 
-
-const optionsSelect = [
-    {
-        id: 1,
-        label: "Opción 1"
-    },
-    {
-        id: 2,
-        label: "Opción 2"
-    },
-    {
-        id: 3,
-        label: "Opción 3"
-    },
-]
 
 class HeadBoardFormInput extends Component {
 
@@ -32,12 +20,46 @@ class HeadBoardFormInput extends Component {
         }
     }
 
+    componentDidUpdate = (prevProps) => {
+        const { fields, setFieldValue } = this.props;
+
+        if (!prevProps.checkKey && this.props.checkKey) {
+            fields.forEach(field => {
+                if (field.idcampo === 'cotiz') {
+                    field.editable = 1;
+                    setFieldValue('cotiz')
+                }
+            });
+
+        }
+    }
+
     toggle() {
         this.setState(state => ({ collapse: !state.collapse }));
     }
 
     companyChange = (select) => {
-        console.log(select.target.value)
+        //console.log(select.target.value)
+    }
+
+    handleChangeCurreny = (select) => {
+        const { values, setFieldValue } = this.props;
+        const code = select.target.value;
+        values.moneda.forEach(currency => {
+            if (currency.cod_moneda === code) {
+                setFieldValue('cotiz', currency.cotiz)
+            }
+        });
+    }
+
+    handleChangeDate = (data) => {
+        const { setFieldValue } = this.props;
+        setFieldValue('fecha', data);
+        this.props.setDate(data);
+    }
+
+    handleValidateInput = (data) => {
+        this.props.voucherHeadValidatekey({ idproceso: '123456', clave: data })
     }
 
     renderCarrier = () => {
@@ -96,6 +118,7 @@ class HeadBoardFormInput extends Component {
             return ({ id: opt.cod_cond_vta, label: opt.desc_cond_vta })
         }) : []
 
+
         return (
             <Row>
                 <InputDropdown
@@ -124,8 +147,12 @@ class HeadBoardFormInput extends Component {
                         colInput={"col-sm-8"}
                         divStyle={{ paddingLeft: '17px' }}
                         disable={readOnly}
+                        value={values.Titulo_comp_vta}
+                        onChange={(data) => {
+                            setFieldValue('Titulo_comp_vta', data.target.value);
+                        }}
                     />
-                    <InputText
+                    <InputDate
                         inputFormCol={{ sm: 6, style: { paddingRight: '0px' } }}
                         fields={fields}
                         label={t('headboard.form.date')}
@@ -136,6 +163,8 @@ class HeadBoardFormInput extends Component {
                         colInput={"col-sm-8"}
                         styleLabel={{ textAlign: 'right' }}
                         disable={readOnly}
+                        value={values.fecha}
+                        onChange={this.handleChangeDate}
                     />
 
                 </Row>
@@ -152,19 +181,26 @@ class HeadBoardFormInput extends Component {
                         divStyle={{ paddingLeft: '17px' }}
                         disable={readOnly}
                         options={optionsCurrency}
-                        onChange={() => { }}
+                        onChange={this.handleChangeCurreny}
                     />
                     <InputText
-                        inputFormCol={{ sm: 6, style: { paddingRight: '0px' } }}
+                        inputFormCol={{ sm: 5, style: { paddingLeft: '12px' } }}
                         fields={fields}
+                        lock
+                        handleSubmit={this.handleValidateInput}
                         label={t('headboard.form.quotation')}
                         inputId={'cotiz'}
                         name={'cotiz'}
                         placeholder={t('headboard.form.insert_quotation')}
-                        colLabel={"col-sm-4"}
-                        colInput={"col-sm-8"}
+                        colLabel={"col-sm-5"}
+                        colInput={"col-sm-7"}
                         styleLabel={{ textAlign: 'right' }}
                         disable={readOnly}
+                        value={values.cotiz}
+                        onChange={(data) => {
+                            setFieldValue('cotiz', data.target.value);
+                        }}
+
                     />
                 </Row>
                 <Row className={'col-11'} style={{ paddingRight: '0px' }} >
@@ -228,4 +264,11 @@ class HeadBoardFormInput extends Component {
     }
 }
 
-export default (withTranslation()(HeadBoardFormInput));
+
+const mapStateToProps = ({ voucher }) => {
+    const { checkKey } = voucher;
+    return { checkKey };
+};
+
+
+export default connect(mapStateToProps, { voucherHeadValidatekey })(withTranslation()(HeadBoardFormInput));

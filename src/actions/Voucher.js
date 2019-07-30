@@ -2,7 +2,14 @@ import {
     GET_CONFIG_VOUCHER,
     GET_CONFIG_VOUCHER_SUCCESS,
     GET_VOUCHER_HEAD,
-    GET_VOUCHER_HEAD_SUCCESS
+    GET_VOUCHER_HEAD_SUCCESS,
+    VOUCHER_HEAD_AUTO,
+    VOUCHER_HEAD_AUTO_SUCCESS,
+    VOUCHER_HEAD_VALIDATE_KEY,
+    VOUCHER_HEAD_VALIDATE_KEY_SUCCESS,
+    VOUCHER_HEAD_CHECK_DATE,
+    VOUCHER_HEAD_CHECK_DATE_SUCCESS
+
 } from '../constants/ActionsTypes';
 
 
@@ -31,6 +38,50 @@ export const getVoucherHead = (params) => {
 export const getVoucherHeadSuccess = (response) => {
     return {
         type: GET_VOUCHER_HEAD_SUCCESS,
+        payload: response
+    }
+};
+
+
+export const voucherHeadAuto = (params) => {
+    return {
+        type: VOUCHER_HEAD_AUTO,
+        payload: params
+    }
+};
+
+export const voucherHeadAutoSuccess = (response) => {
+    return {
+        type: VOUCHER_HEAD_AUTO_SUCCESS,
+        payload: response
+    }
+};
+
+
+export const voucherHeadValidatekey = (params) => {
+    return {
+        type: VOUCHER_HEAD_VALIDATE_KEY,
+        payload: params
+    }
+};
+
+export const voucherHeadValidatekeySuccess = (response) => {
+    return {
+        type: VOUCHER_HEAD_VALIDATE_KEY_SUCCESS,
+        payload: response
+    }
+};
+
+export const voucherHeadCheckDate = (params) => {
+    return {
+        type: VOUCHER_HEAD_CHECK_DATE,
+        payload: params
+    }
+};
+
+export const voucherHeadCheckDateSuccess = (response) => {
+    return {
+        type: VOUCHER_HEAD_CHECK_DATE_SUCCESS,
         payload: response
     }
 };

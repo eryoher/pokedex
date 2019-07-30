@@ -79,12 +79,16 @@ class VoucherFormInput extends Component {
                     inputFormCol={{ sm: 11 }}
                     fields={fields}
                     label={t('voucher.form.code')}
-                    inputId={'code'}
-                    name={'code'}
+                    inputId={'cliente_codigo'}
+                    name={'cliente_codigo'}
                     placeholder={t('voucher.form.insert_code_client')}
                     colLabel={"col-sm-2"}
                     colInput={"col-sm-10"}
                     disable={readOnly}
+                    value={values.cliente_codigo}
+                    onChange={(data) => {
+                        setFieldValue('cliente_codigo', data.target.value);
+                    }}
                 />
 
                 <Row className={"col-11"} style={{ paddingRight: '0px' }} >

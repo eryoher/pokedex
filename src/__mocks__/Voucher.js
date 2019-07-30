@@ -19,6 +19,12 @@ export default (mockAdapter) => {
                 "fecha:_min": "20/11/2019"
             }
         ]
+    });
+
+    mockAdapter.onGet('/vta_cab_compr/clave_valid').reply(200, {
+        code: 200,
+        descripcion: 'OK',
+        mensaje: 'Clave correcta!'
     })
 
     mockAdapter.onGet('/Comprobantes/config', { params: { cod_proceso: 1, idOperacion: 1 } }).reply(200, {

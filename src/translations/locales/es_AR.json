@@ -7,7 +7,12 @@
     "form": {
         "button": {
             "next": "Siguiente",
-            "back": "Atrás"
+            "back": "Atrás",
+            "close": "Cerrar",
+            "submit": "Enviar"
+        },
+        "input": {
+            "validate_input": "Ingrese la contraseña"
         }
     },
     "voucher": {

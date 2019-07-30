@@ -25,7 +25,7 @@ function rootReducer(state = initialState, action) {
         case VOUCHER_HEAD_VALIDATE_KEY:
             return { ...state, checkKey: null }
         case VOUCHER_HEAD_VALIDATE_KEY_SUCCESS:
-            return { ...state, checkKey: action.payload.data }
+            return { ...state, checkKey: action.payload }
         case VOUCHER_HEAD_CHECK_DATE:
             return { ...state, checkDate: null }
         case VOUCHER_HEAD_CHECK_DATE_SUCCESS:

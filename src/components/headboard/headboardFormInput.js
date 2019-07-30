@@ -7,6 +7,9 @@ import { Collapse } from 'reactstrap'
 import CollapseBotton from 'components/common/collapseBoton';
 import GenericInputForm from 'components/form/genericInputForm';
 import InputDate from 'components/form/inputDate';
+import { voucherHeadValidatekey } from '../../actions';
+import { connect } from 'react-redux';
+
 
 class HeadBoardFormInput extends Component {
 
@@ -17,12 +20,26 @@ class HeadBoardFormInput extends Component {
         }
     }
 
+    componentDidUpdate = (prevProps) => {
+        const { fields, setFieldValue } = this.props;
+
+        if (!prevProps.checkKey && this.props.checkKey) {
+            fields.forEach(field => {
+                if (field.idcampo === 'cotiz') {
+                    field.editable = 1;
+                    setFieldValue('cotiz')
+                }
+            });
+
+        }
+    }
+
     toggle() {
         this.setState(state => ({ collapse: !state.collapse }));
     }
 
     companyChange = (select) => {
-        console.log(select.target.value)
+        //console.log(select.target.value)
     }
 
     handleChangeCurreny = (select) => {
@@ -33,13 +50,16 @@ class HeadBoardFormInput extends Component {
                 setFieldValue('cotiz', currency.cotiz)
             }
         });
-
     }
 
     handleChangeDate = (data) => {
         const { setFieldValue } = this.props;
         setFieldValue('fecha', data);
         this.props.setDate(data);
+    }
+
+    handleValidateInput = (data) => {
+        this.props.voucherHeadValidatekey({ idproceso: '123456', clave: data })
     }
 
     renderCarrier = () => {
@@ -97,6 +117,7 @@ class HeadBoardFormInput extends Component {
         const optionsConditions = (values.cond_comp_vta) ? values.cond_comp_vta.map((opt) => {
             return ({ id: opt.cod_cond_vta, label: opt.desc_cond_vta })
         }) : []
+
 
         return (
             <Row>
@@ -163,14 +184,16 @@ class HeadBoardFormInput extends Component {
                         onChange={this.handleChangeCurreny}
                     />
                     <InputText
-                        inputFormCol={{ sm: 6, style: { paddingRight: '0px' } }}
+                        inputFormCol={{ sm: 5, style: { paddingLeft: '12px' } }}
                         fields={fields}
+                        lock
+                        handleSubmit={this.handleValidateInput}
                         label={t('headboard.form.quotation')}
                         inputId={'cotiz'}
                         name={'cotiz'}
                         placeholder={t('headboard.form.insert_quotation')}
-                        colLabel={"col-sm-4"}
-                        colInput={"col-sm-8"}
+                        colLabel={"col-sm-5"}
+                        colInput={"col-sm-7"}
                         styleLabel={{ textAlign: 'right' }}
                         disable={readOnly}
                         value={values.cotiz}
@@ -241,4 +264,11 @@ class HeadBoardFormInput extends Component {
     }
 }
 
-export default (withTranslation()(HeadBoardFormInput));
+
+const mapStateToProps = ({ voucher }) => {
+    const { checkKey } = voucher;
+    return { checkKey };
+};
+
+
+export default connect(mapStateToProps, { voucherHeadValidatekey })(withTranslation()(HeadBoardFormInput));

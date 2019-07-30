@@ -1,16 +1,21 @@
-
-.inputLabel{
-    font-size: 10pt; 
-    padding-top:6px;    
+.inputLabel {
+    font-size: 10pt;
+    padding-top: 6px;
 }
 
-.inputText{
-    width:100% !important; 
-    height:30px;
-    padding: 0.375rem 1.75rem 0.375rem 0.75rem ;
-    font-size: 10pt;      
+.inputText {
+    width: 100% !important;
+    height: 30px;
+    padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+    font-size: 10pt;
 }
 
-.inputDisabled{
+.inputDisabled {
     background-color: #e9ecef;
+}
+
+.lock {
+    padding-left: 0px !important;
+    padding-top: 6px;
+    text-align: left;
 }

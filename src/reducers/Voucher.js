@@ -29,7 +29,7 @@ function rootReducer(state = initialState, action) {
         case VOUCHER_HEAD_CHECK_DATE:
             return { ...state, checkDate: null }
         case VOUCHER_HEAD_CHECK_DATE_SUCCESS:
-            return { ...state, checkDate: action.payload.data }
+            return { ...state, checkDate: action.payload }
 
         default:
             return state

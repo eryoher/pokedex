@@ -67,7 +67,9 @@ class VoucherClientForm extends Component {
         }
 
         const initial = (client) ? client : defaultInitial;
-
+        const optionsSync = (search) ? search.map((opt) => {
+            return ({ id: opt.Cod_cliente, label: opt.Rsocial });
+        }) : [];
         return (
             <Col sm={12} className={"mb-1"} >
                 <Formik
@@ -84,7 +86,7 @@ class VoucherClientForm extends Component {
                             <Col>
                                 <VoucherFormInput
                                     handleSearch={this.handleSearch}
-                                    auoptions={search}
+                                    auoptions={optionsSync}
                                     handleLoading={this.state.loading}
                                     handleSelect={this.handleSelect}
                                     fields={(config) ? config.campos : null}

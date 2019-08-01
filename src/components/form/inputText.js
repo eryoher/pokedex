@@ -24,9 +24,9 @@ class InputText extends Component {
         this.setState({ showLockModal: false });
     }
 
-    handleSubmit = () => {
+    handleSubmit = (data) => {
         this.handleCancelModal();
-        this.props.handleSubmit()
+        this.props.handleSubmit(data);
     }
 
     getconfigField = (id) => {

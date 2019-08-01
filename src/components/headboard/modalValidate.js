@@ -19,8 +19,14 @@ class ModalValidate extends Component {
         };
     }
 
+    handleSubmit = () => {
+        const { handleSubmit } = this.props;
+        handleSubmit(this.state.inputValue);
+        this.setState({ inputValue: '' });
+    }
+
     render() {
-        const { showModal, handleClose, t, handleSubmit } = this.props;
+        const { showModal, handleClose, t } = this.props;
         return (
             <Modal
                 show={showModal}
@@ -54,7 +60,7 @@ class ModalValidate extends Component {
 
                 <Modal.Footer>
                     <Button onClick={handleClose} variant="secondary">{t('form.button.close')}</Button>
-                    <Button onClick={() => handleSubmit(this.state.inputValue)} variant="primary">{t('form.button.submit')}</Button>
+                    <Button onClick={this.handleSubmit} variant="primary">{t('form.button.submit')}</Button>
                 </Modal.Footer>
             </Modal>
         )

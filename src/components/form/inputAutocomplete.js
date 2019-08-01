@@ -52,40 +52,41 @@ class InputAutocomplete extends Component {
     }
 
     render() {
-        const { label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, theme, maxResults, auoptions, handleLoading, handleSelect, labelKey, disable } = this.props;
+        const { label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, theme, auoptions, handleLoading, handleSelect, labelKey, disable, inputFormCol } = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
         const classLabel = (label) ? colLabel : "";
         return (
-            <Row className={"form-group"}>
-                <label className={`${theme.inputLabel}  ${classLabel}`} style={{ ...styleLabel }} >
-                    {label}
-                </label>
-                <Col className={classInput} style={{ ...divStyle }}>
-                    <Fragment>
-                        <AsyncTypeahead
-                            disabled={disable}
-                            isLoading={handleLoading}
-                            id={inputId}
-                            options={auoptions}
-                            name={name}
-                            labelKey={labelKey}
-                            filterBy={(option, props) => {
-                                return true;
-                            }}
-                            minLength={3}
-                            onSearch={this._handleSearch}
-                            onChange={handleSelect}
-                            className={`${theme.inputText}`}
-                            placeholder={placeholder}
-                            renderMenuItemChildren={(option) => {
-                                return (<option key={option.Cod_cliente} >{option.Rsocial}</option>);
-                            }}
+            <Col {...inputFormCol} >
+                <Row className={"form-group"}>
+                    <label className={`${theme.inputLabel}  ${classLabel}`} style={{ ...styleLabel }} >
+                        {label}
+                    </label>
+                    <Col className={classInput} style={{ ...divStyle }}>
+                        <Fragment>
+                            <AsyncTypeahead
+                                disabled={disable}
+                                isLoading={handleLoading}
+                                id={inputId}
+                                options={auoptions}
+                                name={name}
+                                labelKey={labelKey}
+                                filterBy={(option, props) => {
+                                    return true;
+                                }}
+                                minLength={3}
+                                onSearch={this._handleSearch}
+                                onChange={handleSelect}
+                                className={`${theme.inputText}`}
+                                placeholder={placeholder}
+                                renderMenuItemChildren={(option) => {
+                                    return (<option key={option.id} >{option.label}</option>);
+                                }}
 
-                        />
-                    </Fragment>
-                </Col>
-
-            </Row>
+                            />
+                        </Fragment>
+                    </Col>
+                </Row>
+            </Col>
         )
     }
 }

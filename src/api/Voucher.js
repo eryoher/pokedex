@@ -16,11 +16,11 @@ export const voucherHeadAuto = async (params) => {
 }
 
 export const voucherHeadValidatekey = async (params) => {
-    const response = await Axios.get('/vta_cab_compr/clave_valid', params);
+    const response = await Axios.get('/vta_cab_compr/clave_valid', { params: params });
     return response.data;
 }
 
 export const voucherHeadCheckDate = async (params) => {
-    const response = await Axios.get('/vta_cab_compr/fecha_valid', params);
+    const response = await Axios.get('/vta_cab_compr/fecha_valid', { params: params });
     return response.data;
 }

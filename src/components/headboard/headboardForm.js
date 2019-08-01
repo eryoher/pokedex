@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 import { getConfigVoucher, getVoucherHead, voucherHeadCheckDate } from '../../actions';
 import InputButton from 'components/form/inputButton';
 import { VOUCHER, LOADITEMS } from '../../utils/RoutePath';
-import moment from 'moment';
 
 class HeadboardForm extends Component {
 
@@ -20,12 +19,6 @@ class HeadboardForm extends Component {
     componentDidMount = () => {
         this.props.getConfigVoucher({ cod_proceso: 'p_vtacab', idOperacion: 1 });
         this.props.getVoucherHead({ idOperacion: 1 });
-    }
-
-    handleSetDate = (date) => {
-        //console.log(date, 'la fecha', moment(date).format("MM/DD/YYYY"));
-        const dateFormated = moment(date).format("MM/DD/YYYY");
-        this.props.voucherHeadCheckDate(dateFormated);
     }
 
     render() {
@@ -50,7 +43,6 @@ class HeadboardForm extends Component {
                             <Col>
                                 <HeadboardFormInput
                                     fields={(config) ? config.campos : null}
-                                    setDate={this.handleSetDate}
                                     collapse
                                     {...{
                                         values,

@@ -4,8 +4,7 @@ import { faPlus, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { Row, Col } from 'react-bootstrap';
 import InputText from 'components/form/inputText';
 import { withTranslation } from 'react-i18next';
-import { connect } from 'react-redux';
-import { searchClients } from '../../actions';
+
 import InputAutocomplete from 'components/form/inputAutocomplete';
 
 class VoucherFormInput extends Component {
@@ -32,23 +31,22 @@ class VoucherFormInput extends Component {
 
         return (
             <Row>
-                <Col sm={11}>
-                    <InputAutocomplete
-                        label={false}
-                        inputId={'clienteId'}
-                        name={'clienteId'}
-                        placeholder={t('voucher.form.insert_customer_criterion')}
-                        styles={{ width: '100%' }}
-                        colLabel={"col-sm-2"}
-                        colInput={"col-sm-10"}
-                        handleSearch={handleSearch}
-                        auoptions={auoptions}
-                        handleLoading={handleLoading}
-                        handleSelect={handleSelect}
-                        labelKey={"Rsocial"}
-                        disable={readOnly}
-                    />
-                </Col>
+                <InputAutocomplete
+                    inputFormCol={{ sm: 11 }}
+                    label={false}
+                    inputId={'clienteId'}
+                    name={'clienteId'}
+                    placeholder={t('voucher.form.insert_customer_criterion')}
+                    styles={{ width: '100%' }}
+                    colLabel={"col-sm-2"}
+                    colInput={"col-sm-10"}
+                    handleSearch={handleSearch}
+                    auoptions={auoptions}
+                    handleLoading={handleLoading}
+                    handleSelect={handleSelect}
+                    labelKey={"label"}
+                    disable={readOnly}
+                />
 
                 {!readOnly && <Col sm={1}>
                     <FontAwesomeIcon icon={faPlus} />

@@ -7,8 +7,10 @@ import { Collapse } from 'reactstrap'
 import CollapseBotton from 'components/common/collapseBoton';
 import GenericInputForm from 'components/form/genericInputForm';
 import InputDate from 'components/form/inputDate';
-import { voucherHeadValidatekey } from '../../actions';
+import { voucherHeadValidatekey, voucherHeadCheckDate } from '../../actions';
 import { connect } from 'react-redux';
+import moment from 'moment';
+import NotificationMessage from 'components/common/notificationMessage';
 
 
 class HeadBoardFormInput extends Component {
@@ -16,22 +18,40 @@ class HeadBoardFormInput extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            collapse: false
+            collapse: true,
+            showError: false,
+            errrorTitle: '',
+            errorMessage: ''
         }
     }
 
     componentDidUpdate = (prevProps) => {
-        const { fields, setFieldValue } = this.props;
+        const { fields, setFieldValue, checkDate, checkKey } = this.props;
 
-        if (!prevProps.checkKey && this.props.checkKey) {
-            fields.forEach(field => {
-                if (field.idcampo === 'cotiz') {
-                    field.editable = 1;
-                    setFieldValue('cotiz')
-                }
-            });
+        if (!prevProps.checkKey && checkKey) {
+            if (checkKey.codigo === 200) {
+                fields.forEach(field => {
+                    if (field.idcampo === 'cotiz') {
+                        field.editable = 1;
+                        setFieldValue('cotiz')
+                    }
+                });
+            } else {
+                this.setError(checkKey);
+            }
 
         }
+
+        if (!prevProps.checkDate && checkDate) {
+            if (checkDate.codigo !== 200) {
+                setFieldValue('date', new Date());
+                this.setError(checkDate);
+            }
+        }
+    }
+
+    setError = (error) => {
+        this.setState({ showError: true, errorMessage: error.mensaje, errrorTitle: error.descripcion });
     }
 
     toggle() {
@@ -52,14 +72,19 @@ class HeadBoardFormInput extends Component {
         });
     }
 
-    handleChangeDate = (data) => {
-        const { setFieldValue } = this.props;
-        setFieldValue('fecha', data);
-        this.props.setDate(data);
-    }
-
     handleValidateInput = (data) => {
         this.props.voucherHeadValidatekey({ idproceso: '123456', clave: data })
+    }
+
+    handleChangeDate = (date) => {
+        const { setFieldValue } = this.props;
+        setFieldValue('fecha', date);
+        const dateFormated = moment(date).format("MM/DD/YYYY");
+        this.props.voucherHeadCheckDate({ idproceso: '123456', fecha: dateFormated });
+    }
+
+    handleCloseError = () => {
+        this.setState({ showError: false })
     }
 
     renderCarrier = () => {
@@ -121,6 +146,12 @@ class HeadBoardFormInput extends Component {
 
         return (
             <Row>
+                <NotificationMessage
+                    {...this.state}
+                    handleCloseError={this.handleCloseError}
+                    type={'danger'}
+                />
+
                 <InputDropdown
                     inputFormCol={{ sm: 11 }}
                     fields={fields}
@@ -266,9 +297,9 @@ class HeadBoardFormInput extends Component {
 
 
 const mapStateToProps = ({ voucher }) => {
-    const { checkKey } = voucher;
-    return { checkKey };
+    const { checkKey, checkDate } = voucher;
+    return { checkKey, checkDate };
 };
 
 
-export default connect(mapStateToProps, { voucherHeadValidatekey })(withTranslation()(HeadBoardFormInput));
+export default connect(mapStateToProps, { voucherHeadValidatekey, voucherHeadCheckDate })(withTranslation()(HeadBoardFormInput));

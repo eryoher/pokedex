@@ -13,18 +13,28 @@ export default (mockAdapter) => {
         ]
     })
 
-    mockAdapter.onGet('/vta_cab_compr/fecha_valid').reply(200, {
-        data: [
-            {
-                "fecha:_min": "20/11/2019"
-            }
-        ]
+    mockAdapter.onGet('/vta_cab_compr/fecha_valid', { params: { idproceso: '123456', fecha: '08/01/2019' } }).reply(200, {
+        codigo: 200,
+        descripcion: 'OK',
+        mensaje: ''
     });
 
-    mockAdapter.onGet('/vta_cab_compr/clave_valid').reply(200, {
-        code: 200,
+    mockAdapter.onGet('/vta_cab_compr/fecha_valid', { params: { idproceso: '123456', fecha: '07/31/2019' } }).reply(200, {
+        codigo: 409,
+        descripcion: 'Error: Fecha menor a cierre contable',
+        mensaje: 'La fecha debe ser mayor al último cierre contable: 07/31/2019'
+    });
+
+    mockAdapter.onGet('/vta_cab_compr/clave_valid', { params: { idproceso: '123456', clave: 'password' } }).reply(200, {
+        codigo: 200,
         descripcion: 'OK',
         mensaje: 'Clave correcta!'
+    })
+
+    mockAdapter.onGet('/vta_cab_compr/clave_valid', { params: { idproceso: '123456', clave: '123456' } }).reply(200, {
+        codigo: 409,
+        descripcion: 'Clave erronea',
+        mensaje: 'La clave no coincide con la registrada, pruebe nuevamente'
     })
 
     mockAdapter.onGet('/Comprobantes/config', { params: { cod_proceso: 1, idOperacion: 1 } }).reply(200, {
@@ -344,6 +354,15 @@ export default (mockAdapter) => {
                     "tipo": "num",
                     "largo": 15,
                     "formato": "999.999,99",
+                    "orden": 3,
+                    "valores": []
+                },
+                {
+                    "cod_atrib": "sede",
+                    "descripcion": "Sede Administrativa",
+                    "tipo": "autocomp",
+                    "largo": 15,
+                    "formato": "",
                     "orden": 3,
                     "valores": []
                 }

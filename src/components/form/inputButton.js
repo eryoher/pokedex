@@ -8,7 +8,8 @@ import { themr } from "react-css-themr";
 class InputButton extends Component {
 
   render() {
-    const { theme, backButton, nextButton, valueButton, urlForm } = this.props;
+    const { theme, backButton, nextButton, valueButton, urlForm, search } = this.props;
+
     let labelButton =
       nextButton || backButton ? (
         nextButton ? (
@@ -16,18 +17,23 @@ class InputButton extends Component {
         ) : backButton ? (
           <FontAwesomeIcon icon={faAngleLeft} />
         ) : (
-          "Button"
-        )
+              "Button"
+            )
       ) : (
-        valueButton
-      );
+          valueButton
+        );
 
     return (
-        <Link className={theme.linkClass} to={urlForm}>
-            <div className={`btn btn-primary ${theme.formButton}`}>
-              {labelButton}
-            </div>            
-        </Link>
+      <Link className={theme.linkClass} to={
+        {
+          pathname: urlForm,
+          search: search,
+        }
+      }>
+        <div className={`btn btn-primary ${theme.formButton}`}>
+          {labelButton}
+        </div>
+      </Link>
     );
   }
 }

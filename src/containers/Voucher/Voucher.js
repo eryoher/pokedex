@@ -1,44 +1,46 @@
 import React, { Component } from 'react'
 import withMenu from '../../components/common/withMenu'
-import Steps from '../../components/common/steps';
 import { withTranslation } from 'react-i18next';
 import { Row, Col } from 'react-bootstrap';
 import VoucherClientForm from 'components/voucher/voucherClientForm';
-import { HEADERBOARD } from '../../utils/RoutePath';
+import { connect } from 'react-redux';
+import { getVoucherType } from '../../actions';
+import * as qs from 'qs';
+import VoucherBreadCrumbs from 'components/voucher/voucherBreadCrumbs';
+
 
 class Voucher extends Component {
-    render() {
-        const {t, theme} = this.props
-        const nextButton = {
-            url:HEADERBOARD,
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            type: null
         }
-        const steps = [
-            {
-                label:t('voucher.step.select_client'),
-                main:true
-            },
-            {
-                label:t('voucher.step.load_headboard'),
-            },
-            {
-                label:t('voucher.step.load_items'),
-            },
-            {
-                label:t('voucher.step.affectation_vouchers'),
-            },
-            {
-                label:t('voucher.step.generate'),
-            },            
-            
-        ]
+    }
+
+    componentDidMount() {
+        const { location } = window;
+        if (location && location.search) {
+            const parsedString = qs.parse(location.search.slice(1));
+            const type = parsedString.type;
+            this.setState({ type });
+            this.props.getVoucherType({ idComprobante: type });
+        }
+    }
+
+
+    render() {
+        const { t, theme, voucherType } = this.props
+
         return (
             <Row>
                 <Col sm={12} className={theme.Title} >
                     {t("voucher.title")}
                 </Col>
-                <Steps 
-                    steps={steps} 
-                    nextButton={nextButton}
+
+                <VoucherBreadCrumbs
+                    crumbs={(voucherType) ? voucherType.procesos : []}
+                    current={'p_selcli'}
                 />
 
                 <VoucherClientForm />
@@ -47,4 +49,9 @@ class Voucher extends Component {
     }
 }
 
-export default (withTranslation()(withMenu( Voucher )));
+const mapStateToProps = ({ vouchertype }) => {
+    const { voucherType } = vouchertype;
+    return { voucherType };
+};
+
+export default connect(mapStateToProps, { getVoucherType })(withTranslation()(withMenu(Voucher)));

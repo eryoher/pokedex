@@ -4,8 +4,8 @@ import { withTranslation } from 'react-i18next';
 import { Row, Col } from 'react-bootstrap';
 import CommonTable from 'components/common/commonTable';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye, faPlus  } from '@fortawesome/free-solid-svg-icons';
-import { selectFilter} from 'react-bootstrap-table2-filter';
+import { faEye, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { selectFilter } from 'react-bootstrap-table2-filter';
 import InputButton from 'components/form/inputButton';
 import DisplayAmount from 'components/common/displayAmount';
 import { LANDING, VOUCHER } from '../../utils/RoutePath';
@@ -13,24 +13,24 @@ import { LANDING, VOUCHER } from '../../utils/RoutePath';
 
 const voucher = [
     {
-        id:0,
-        date:'07022019',
-        client:14297,
-        type:1,
-        voucher:235655,
-        detail:'Notas de venta sin Aprobacion',
-        branch:'0',
-        total:'16649.50'
+        id: 0,
+        date: '07022019',
+        client: 14297,
+        type: 1,
+        voucher: 235655,
+        detail: 'Notas de venta sin Aprobacion',
+        branch: '0',
+        total: '16649.50'
     },
     {
-        id:1,        
-        date:'06222019',
-        client:14922,
-        type:2,
-        voucher:235656,
-        detail:'Notas de venta sin Aprobacion',
-        branch:'0',
-        total:'98569.50'
+        id: 1,
+        date: '06222019',
+        client: 14922,
+        type: 2,
+        voucher: 235656,
+        detail: 'Notas de venta con Aprobacion',
+        branch: '0',
+        total: '98569.50'
 
     }
 ]
@@ -41,18 +41,18 @@ const selectOptions = {
 };
 
 const dateOptions = {
-    '07022019':'07/02/2019',
-    '06222019':'06/22/2019'
+    '07022019': '07/02/2019',
+    '06222019': '06/22/2019'
 }
 
 const optionsType = {
-    1:'NV/CA',
-    2:'NV/CB'
+    1: 'NV/CA',
+    2: 'NV/CB'
 }
 
 const optionsVoucher = {
-    235655:'00235655',
-    235656:'00235656'
+    235655: '00235655',
+    235656: '00235656'
 }
 
 class Landing extends Component {
@@ -71,106 +71,106 @@ class Landing extends Component {
         const columns = [
             {
                 dataField: 'date',
-                text: '',     
-                align:'center',
-                headerAlign:'center',  
-                formatter: ( cell => dateOptions[cell]),
+                text: '',
+                align: 'center',
+                headerAlign: 'center',
+                formatter: (cell => dateOptions[cell]),
                 filter: selectFilter({
-                    options: dateOptions,    
-                    className: `${theme.inputFilter} mt-2`,     
-                    placeholder:t('global.date')           
-                }),          
+                    options: dateOptions,
+                    className: `${theme.inputFilter} mt-2`,
+                    placeholder: t('global.date')
+                }),
             }, {
                 dataField: 'client',
                 text: '',
-                align:'center',
-                headerAlign:'center',
-                formatter: ( cell => selectOptions[cell]),
+                align: 'center',
+                headerAlign: 'center',
+                formatter: (cell => selectOptions[cell]),
                 filter: selectFilter({
-                    options: selectOptions,    
-                    className: `${theme.inputFilter} mt-2`,     
-                    placeholder:t('global.client')           
-                }),               
+                    options: selectOptions,
+                    className: `${theme.inputFilter} mt-2`,
+                    placeholder: t('global.client')
+                }),
 
             }, {
                 dataField: 'type',
                 text: '',
-                align:'center',
-                headerAlign:'center',
-                formatter: ( cell => optionsType[cell]),
+                align: 'center',
+                headerAlign: 'center',
+                formatter: (cell => optionsType[cell]),
                 filter: selectFilter({
-                    options: optionsType,    
-                    className: `${theme.inputFilter} mt-2`,     
-                    placeholder:t('global.type')           
-                }),  
+                    options: optionsType,
+                    className: `${theme.inputFilter} mt-2`,
+                    placeholder: t('global.type')
+                }),
             }, {
                 dataField: 'voucher',
                 text: '',
-                align:'center',
-                headerAlign:'center',
-                formatter: ( cell => optionsVoucher[cell]),
+                align: 'center',
+                headerAlign: 'center',
+                formatter: (cell => optionsVoucher[cell]),
                 filter: selectFilter({
-                    options: optionsVoucher,    
-                    className: `${theme.inputFilter} mt-2`,     
-                    placeholder:t('landing.form.voucher')           
-                }),                
-            },{
+                    options: optionsVoucher,
+                    className: `${theme.inputFilter} mt-2`,
+                    placeholder: t('landing.form.voucher')
+                }),
+            }, {
                 dataField: 'detail',
                 text: t('global.detail'),
-                headerAlign:'center',
-                align:'left',
-            },{
+                headerAlign: 'center',
+                align: 'left',
+            }, {
                 dataField: 'branch',
                 text: t('landing.form.branch'),
-                align:'center',
-                headerAlign:'center', 
-            },{
+                align: 'center',
+                headerAlign: 'center',
+            }, {
                 dataField: 'total',
                 text: t('global.total'),
-                align:'center',
-                headerAlign:'center',
-                formatter:((cell, row, rowIndex) => {
+                align: 'center',
+                headerAlign: 'center',
+                formatter: ((cell, row, rowIndex) => {
                     //console.log(cell, row, rowIndex);
-                    return(
+                    return (
                         <DisplayAmount amount={cell} />
                     )
                 }),
-            },{
+            }, {
                 dataField: 'actions',
                 text: '',
-                align:'center',
-                headerAlign:'center',
-                formatter:((cell, row, rowIndex) => {
+                align: 'center',
+                headerAlign: 'center',
+                formatter: ((cell, row, rowIndex) => {
                     //console.log(cell, row, rowIndex);
-                    return(
+                    return (
                         <FontAwesomeIcon icon={faEye} />
                     )
                 }),
-                
+
             }
         ];
-        
+
         const selectRow = {
             mode: 'checkbox',
             clickToSelect: true,
-            onSelect: this.handleOnSelect, 
-            onSelectAll:this.handleOnSelectAll,            
+            onSelect: this.handleOnSelect,
+            onSelectAll: this.handleOnSelectAll,
             //selectionHeaderRenderer: ({ mode, checked, indeterminate }) => ( <div>Prueba</div> ),
             //selectionRenderer: ({ mode, checked, disabled }) => (<div>columns</div>)
         };
-                
+
         return (
             <Row>
                 <Col sm={12} className={`${theme.Title} mt-4`} >
                     {t("landing.title")}
                 </Col>
                 <Col className={"m-4"}>
-                    <CommonTable 
+                    <CommonTable
                         columns={columns}
                         data={voucher}
                         selectRow={selectRow}
-                        rowClasses={ theme.tableRow }
-                        headerClasses={ theme.tableHeader }
+                        rowClasses={theme.tableRow}
+                        headerClasses={theme.tableHeader}
                     />
                 </Col>
                 <Col sm={12} className={"text-right pr-3"}>
@@ -186,19 +186,29 @@ class Landing extends Component {
                     <div className={theme.Title}>
                         Comprobantes
                     </div>
-                    <Col className={"m-2"}>
+                    <Row>
+                        <Col sm={1} className={"m-2"}>
                             <InputButton
                                 valueButton={<FontAwesomeIcon icon={faPlus} />}
                                 urlForm={VOUCHER}
+                                search={"type=C.NVCR"}
                             />
                         </Col>
+                        <Col sm={1} className={"m-2"}>
+                            <InputButton
+                                valueButton={<FontAwesomeIcon icon={faPlus} />}
+                                urlForm={VOUCHER}
+                                search={"type=C.NVAP"}
+                            />
+                        </Col>
+                    </Row>
                 </Col>
                 <Col sm={12}>
                     <div className="dropdown-divider col-12 p-2" />
                 </Col>
                 <Col sm={12}>
                     <div className={theme.Title}>
-                        Filtros Guardados                        
+                        Filtros Guardados
                     </div>
                     <div className={"mt-4"}>
                         <a href={"#"} >
@@ -210,4 +220,4 @@ class Landing extends Component {
         )
     }
 }
-export default (withTranslation()(withMenu( Landing )));
+export default (withTranslation()(withMenu(Landing)));

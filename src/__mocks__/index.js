@@ -20,12 +20,39 @@ mockAdapter.onGet('/TipoComprobantes/consulta', { params: { "idComprobante": "C.
       {
         "cod_proceso": "p_selcli",
         "desc_proceso": "Selección cliente",
-        "orden:": 1
+        "orden": 1
       },
       {
         "cod_proceso": "p_vtacab",
         "desc_proceso": "Datos de Cabecera",
-        "orden:": 2
+        "orden": 2
+      },
+      {
+        "cod_proceso": "p_cargaitemvta",
+        "desc_proceso": "Carga de Items",
+        "orden": 3
+      },
+      {
+        "cod_proceso": "p_fincomprob",
+        "desc_proceso": "Final Comprobante",
+        "orden": 9
+      },
+    ]
+  }
+});
+
+
+mockAdapter.onGet('/TipoComprobantes/consulta', { params: { "idComprobante": "C.NVAP" } }).reply(200, {
+  data: {
+    "idOperacion": 12345,
+    "cod_comprob": "C.NVAP",
+    "descrip_comprob": "Pedido reserva autom.",
+    "descrip_tipocomp": "Pedido",
+    "procesos": [
+      {
+        "cod_proceso": "p_selcli",
+        "desc_proceso": "Selección cliente",
+        "orden:": 1
       },
       {
         "cod_proceso": "p_cargaitemvta",
@@ -40,3 +67,4 @@ mockAdapter.onGet('/TipoComprobantes/consulta', { params: { "idComprobante": "C.
     ]
   }
 });
+

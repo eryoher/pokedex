@@ -27,7 +27,6 @@ class InputButton extends Component {
       <Link className={theme.linkClass} to={
         {
           pathname: urlForm,
-          search: search,
         }
       }>
         <div className={`btn btn-primary ${theme.formButton}`}>

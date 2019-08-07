@@ -4,10 +4,27 @@ import { withTranslation } from 'react-i18next';
 import { Row, Col } from 'react-bootstrap';
 import HeadboardForm from 'components/headboard/headboardForm';
 import { connect } from 'react-redux';
-
+import { getVoucherType } from '../../actions';
 import VoucherBreadCrumbs from 'components/voucher/voucherBreadCrumbs';
 
 class Headboard extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            idComprobante: null
+        }
+    }
+
+    componentDidMount() {
+        const { match } = this.props;
+        if (match.params.idComprobante) {
+            const idComprobante = match.params.idComprobante;
+            this.setState({ idComprobante });
+            this.props.getVoucherType({ idComprobante });
+        }
+    }
+
     render() {
         const { t, voucherType } = this.props;
 
@@ -20,6 +37,7 @@ class Headboard extends Component {
                 <VoucherBreadCrumbs
                     crumbs={(voucherType) ? voucherType.procesos : []}
                     current={'p_vtacab'}
+                    urlParameter={this.state.idComprobante}
                 />
                 <HeadboardForm />
             </Row>
@@ -34,4 +52,4 @@ const mapStateToProps = ({ vouchertype }) => {
     return { voucherType };
 };
 
-export default connect(mapStateToProps)(withTranslation()(withMenu(Headboard)));
+export default connect(mapStateToProps, { getVoucherType })(withTranslation()(withMenu(Headboard)));

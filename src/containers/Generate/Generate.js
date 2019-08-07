@@ -1,53 +1,42 @@
 import React, { Component } from 'react'
 import withMenu from '../../components/common/withMenu'
-import Steps from '../../components/common/steps';
 import { withTranslation } from 'react-i18next';
 import { Row, Col } from 'react-bootstrap';
 import GenerateForm from 'components/generate/generateForm';
-import { LOADITEMS } from '../../utils/RoutePath';
+import { getVoucherType } from '../../actions';
+import VoucherBreadCrumbs from 'components/voucher/voucherBreadCrumbs';
+import { connect } from 'react-redux';
 
 class Generate extends Component {
-    render() {
-        const {t} = this.props
 
-        const backButton = {
-            url:LOADITEMS,
+    constructor(props) {
+        super(props);
+        this.state = {
+            idComprobante: null
         }
+    }
 
-        const steps = [
-            {
-                label:t('voucher.step.select_client'),                
-                before:true,
-            },
-            {
-                label:t('voucher.step.load_headboard'),
-                before:true,
-                
-            },
-            {
-                label:t('voucher.step.load_items'),
-                before:true,
+    componentDidMount() {
+        const { match } = this.props;
+        if (match.params.idComprobante) {
+            const type = match.params.idComprobante;
+            this.setState({ idComprobante: type });
+            this.props.getVoucherType({ idComprobante: type });
+        }
+    }
 
-            },
-            {
-                label:t('voucher.step.affectation_vouchers'),
-                before:true,
+    render() {
+        const { t, voucherType } = this.props
 
-            },
-            {
-                label:t('voucher.step.generate'),
-                main:true
-            },            
-            
-        ]
         return (
             <Row>
-                <Col sm={12} className={"title mt-3 "} style={{fontSize:'14pt'}} >
+                <Col sm={12} className={"title mt-3 "} style={{ fontSize: '14pt' }} >
                     {t("voucher.title")}
                 </Col>
-                
-                <Steps steps={steps}
-                    backButton = {backButton}
+                <VoucherBreadCrumbs
+                    crumbs={(voucherType) ? voucherType.procesos : []}
+                    current={'p_fincomprob'}
+                    urlParameter={this.state.idComprobante}
                 />
                 <GenerateForm />
             </Row>
@@ -55,4 +44,10 @@ class Generate extends Component {
     }
 }
 
-export default (withTranslation()(withMenu( Generate )));
+
+const mapStateToProps = ({ vouchertype }) => {
+    const { voucherType } = vouchertype;
+    return { voucherType };
+};
+
+export default connect(mapStateToProps, { getVoucherType })(withTranslation()(withMenu(Generate)));

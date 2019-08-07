@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import withMenu from '../../components/common/withMenu'
 import { withTranslation } from 'react-i18next';
 import { Row, Col } from 'react-bootstrap';
-import Steps from '../../components/common/steps';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import DisplayAmount from 'components/common/displayAmount';
@@ -10,66 +9,48 @@ import LoadItemsTable from 'components/loadItems/loadItemsTable';
 import ShoppingCart from 'components/loadItems/shoppingCart';
 import InputButton from 'components/form/inputButton';
 import { HEADERBOARD, GENERATE } from '../../utils/RoutePath';
+import { getVoucherType } from '../../actions';
+import { connect } from 'react-redux';
+import VoucherBreadCrumbs from 'components/voucher/voucherBreadCrumbs';
+
 
 class Loaditems extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            showModal: false
+            showModal: false,
+            idComprobante: null
         }
     }
 
-    handleOpen = () => {        
+    componentDidMount() {
+        const { match } = this.props;
+        if (match.params.idComprobante) {
+            const idComprobante = match.params.idComprobante;
+            this.setState({ idComprobante });
+            this.props.getVoucherType({ idComprobante });
+        }
+    }
+
+    handleOpen = () => {
         this.setState({ showModal: true });
     }
 
     handleClose = () => {
         this.setState({ showModal: false });
     }
-    
+
 
     render() {
-        const { theme, t } = this.props;
-
-        const nextButton = {
-            url: GENERATE,
-        }
-
-        const backButton = {
-            url: HEADERBOARD,
-        }
-
-        const steps = [
-            {
-                label: t('voucher.step.select_client'),
-                before: true,
-            },
-            {
-                label: t('voucher.step.load_headboard'),
-                before: true
-            },
-            {
-                label: t('voucher.step.load_items'),
-                main: true
-
-            },
-            {
-                label: t('voucher.step.affectation_vouchers'),
-            },
-            {
-                label: t('voucher.step.generate'),
-            },
-
-        ]
+        const { theme, t, voucherType } = this.props;
 
         return (
             <Row>
                 <Col sm={12}>
                     <ShoppingCart
                         showModal={this.state.showModal}
-                        handleClose = {this.handleClose}
-
+                        handleClose={this.handleClose}
                     />
                 </Col>
                 <Col sm={6} className={`${theme.Title} col-12 mt-3`} >
@@ -85,40 +66,46 @@ class Loaditems extends Component {
                 {
                     //Temporal, no se conoce el componente.
                 }
-                <Col sm={6} style={{lineHeight:'1.4'}} >
-                    <span style={{fontSize:'13pt'}}>Nota de Venta con Aprobación</span> <br/>
-                    <span style={{fontSize:'9pt', color:'grey'}}>CCFCIAFC01101-ASOCIACION MUTUAL DE LA POLICIA DE FSA </span><br/>
-                    <span style={{fontSize:'9pt', color:'grey'}}>0006-18/04/2019-Boris Nicolas Lucasvez</span>
+                <Col sm={6} style={{ lineHeight: '1.4' }} >
+                    <span style={{ fontSize: '13pt' }}>Nota de Venta con Aprobación</span> <br />
+                    <span style={{ fontSize: '9pt', color: 'grey' }}>CCFCIAFC01101-ASOCIACION MUTUAL DE LA POLICIA DE FSA </span><br />
+                    <span style={{ fontSize: '9pt', color: 'grey' }}>0006-18/04/2019-Boris Nicolas Lucasvez</span>
                 </Col>
-                
+
                 <Col sm={12}>
-                    <Steps
-                        steps={steps}
-                        nextButton={nextButton}
-                        backButton={backButton}
+                    <VoucherBreadCrumbs
+                        crumbs={(voucherType) ? voucherType.procesos : []}
+                        current={'p_cargaitemvta'}
+                        urlParameter={this.state.idComprobante}
                     />
                 </Col>
-                <Col sm={12}>                    
+                <Col sm={12}>
                     <LoadItemsTable
                         searchBox
-                        divClass = {"mt-4"}
+                        divClass={"mt-4"}
                     />
                 </Col>
-                <Col sm={1} style={{textAlign:'left', paddingLeft:'2rem'}} className={"mt-2"} >                                    
+                <Col sm={1} style={{ textAlign: 'left', paddingLeft: '2rem' }} className={"mt-2"} >
                     <InputButton
                         backButton
                         urlForm={HEADERBOARD}
                     />
-                </Col>          
-                <Col style={{textAlign:'center'}} className={"mt-2 col-2 offset-9"} >                                                                        
+                </Col>
+                <Col style={{ textAlign: 'center' }} className={"mt-2 col-2 offset-9"} >
                     <InputButton
                         nextButton
                         urlForm={GENERATE}
                     />
-                </Col>   
+                </Col>
             </Row>
-            
+
         )
     }
 }
-export default (withTranslation()(withMenu(Loaditems)));
+
+const mapStateToProps = ({ vouchertype }) => {
+    const { voucherType } = vouchertype;
+    return { voucherType };
+};
+
+export default connect(mapStateToProps, { getVoucherType })(withTranslation()(withMenu(Loaditems)));

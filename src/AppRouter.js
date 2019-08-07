@@ -20,27 +20,28 @@ const publicRoutes = [
 
 const privateRoutes = [
   { path: ORDER, component: Order },
-  { path: VOUCHER, component: Voucher },
-  { path: HEADERBOARD, component: HeaderBoard },
-  { path: GENERATE, component: Generate },
+
+  { path: `${VOUCHER}/:idComprobante?/:idOperacion?`, component: Voucher },
+  { path: `${HEADERBOARD}/:idComprobante?/:idOperacion?`, component: HeaderBoard },
+  { path: `${GENERATE}/:idComprobante?/:idOperacion?`, component: Generate },
   { path: LANDING, component: Landing },
-  { path: LOADITEMS, component: Loaditems },
+  { path: `${LOADITEMS}/:idComprobante?/:idOperacion?`, component: Loaditems },
 ]
 
 const AppRouter = props => (
   <BrowserRouter basename={process.env.PUBLIC_URL}>
     <Switch>
       {publicRoutes.map((route, index) => <RouteWithSubRoutes key={index} {...route} />)}
-      {privateRoutes.map((route, index) => <PrivateRouteWithSubRoutes key={index} { ...route } { ...props }/>)}
+      {privateRoutes.map((route, index) => <PrivateRouteWithSubRoutes key={index} {...route} {...props} />)}
     </Switch>
   </BrowserRouter>
 )
 
-const mapStateToProps = ({auth}) => {
-    return {
-      auth
-    }
+const mapStateToProps = ({ auth }) => {
+  return {
+    auth
   }
+}
 
 const mapDispatchToProps = {}
 

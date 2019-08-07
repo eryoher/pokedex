@@ -190,15 +190,13 @@ class Landing extends Component {
                         <Col sm={1} className={"m-2"}>
                             <InputButton
                                 valueButton={<FontAwesomeIcon icon={faPlus} />}
-                                urlForm={VOUCHER}
-                                search={"type=C.NVCR"}
+                                urlForm={`${VOUCHER}/C.NVCR`}
                             />
                         </Col>
                         <Col sm={1} className={"m-2"}>
                             <InputButton
                                 valueButton={<FontAwesomeIcon icon={faPlus} />}
-                                urlForm={VOUCHER}
-                                search={"type=C.NVAP"}
+                                urlForm={`${VOUCHER}/C.NVAP`}
                             />
                         </Col>
                     </Row>

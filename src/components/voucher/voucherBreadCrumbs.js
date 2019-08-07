@@ -16,8 +16,6 @@ export default class VoucherBreadCrumbs extends Component {
         return result;
     }
 
-
-
     getButtons = (crumbs) => {
         let next, back, nextButton, backButton = false;
         let mainIndex = null;
@@ -47,7 +45,7 @@ export default class VoucherBreadCrumbs extends Component {
     }
 
     getUrl = (proccess) => {
-
+        const { urlParameter } = this.props;
         const urls = {
             p_vtacab: HEADERBOARD,
             p_selcli: VOUCHER,
@@ -55,7 +53,7 @@ export default class VoucherBreadCrumbs extends Component {
             p_fincomprob: GENERATE
         }
 
-        return urls[proccess];
+        return (urlParameter) ? `${urls[proccess]}/${urlParameter}` : urls[proccess];
     }
 
 

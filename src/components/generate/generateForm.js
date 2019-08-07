@@ -47,6 +47,7 @@ class GenerateForm extends Component {
             suc_local: '',
             suc_nom_prov: '',
             suc_cpos: '',
+            suc_empresa: null
         }
         return (
             <Col sm={12}>
@@ -61,6 +62,7 @@ class GenerateForm extends Component {
                     </Row>
                     <VoucherFormInput
                         auoptions={[]}
+                        handleLoading={false}
                         values={defaultInitial}
                         readOnly
 
@@ -107,6 +109,7 @@ class GenerateForm extends Component {
                     <HeadboardFormInput
                         readOnly
                         collapse
+                        values={defaultInitial}
                     />
                 </Card>
                 <Col style={{ textAlign: 'left' }} className={"mt-2 col-1 "} >

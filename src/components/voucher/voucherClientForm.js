@@ -23,7 +23,6 @@ class VoucherClientForm extends Component {
     }
 
     componentDidMount = () => {
-        //this.props.getVoucherType({ idComprobante: 1, idOperacion: 1 });
         this.props.getConfigVoucher({ cod_proceso: 1, idOperacion: 1 })
 
     }

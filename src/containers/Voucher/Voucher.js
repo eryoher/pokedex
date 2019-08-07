@@ -5,7 +5,6 @@ import { Row, Col } from 'react-bootstrap';
 import VoucherClientForm from 'components/voucher/voucherClientForm';
 import { connect } from 'react-redux';
 import { getVoucherType } from '../../actions';
-import * as qs from 'qs';
 import VoucherBreadCrumbs from 'components/voucher/voucherBreadCrumbs';
 
 
@@ -19,10 +18,9 @@ class Voucher extends Component {
     }
 
     componentDidMount() {
-        const { location } = window;
-        if (location && location.search) {
-            const parsedString = qs.parse(location.search.slice(1));
-            const type = parsedString.type;
+        const { match } = this.props;
+        if (match.params.idComprobante) {
+            const type = match.params.idComprobante;
             this.setState({ type });
             this.props.getVoucherType({ idComprobante: type });
         }
@@ -41,6 +39,7 @@ class Voucher extends Component {
                 <VoucherBreadCrumbs
                     crumbs={(voucherType) ? voucherType.procesos : []}
                     current={'p_selcli'}
+                    urlParameter={this.state.type}
                 />
 
                 <VoucherClientForm />

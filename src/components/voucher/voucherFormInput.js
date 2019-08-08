@@ -50,9 +50,9 @@ class VoucherFormInput extends Component {
 
                 {!readOnly &&
                     <Col sm={1}>
-                        <a href={"/selecttype"}>
-                            <FontAwesomeIcon icon={faPlus} />
-                        </a>
+
+                        <FontAwesomeIcon icon={faPlus} />
+
                     </Col>
                 }
 

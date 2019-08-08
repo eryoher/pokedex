@@ -127,6 +127,11 @@ class HeadBoardFormInput extends Component {
     render() {
         const { t, errors, touched, values, handleChange, handleBlur, setFieldValue, setFieldTouched, readOnly, collapse, fields } = this.props;
 
+
+        if (!values) {
+            return null;
+        }
+
         const optionsCompany = (values.suc_empresa) ? values.suc_empresa.map((opt) => {
             return ({ id: opt.cod_suc, label: opt.nom_suc });
         }) : []

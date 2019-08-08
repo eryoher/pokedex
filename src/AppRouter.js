@@ -10,8 +10,9 @@ import Order from './containers/Order';
 import Voucher from './containers/Voucher';
 import Landing from './containers/Landing';
 import Loaditems from './containers/Loaditems';
+import SelectType from './containers/SelectType';
 
-import { GENERATE, HEADERBOARD, HOME, LOGIN, ORDER, VOUCHER, LANDING, LOADITEMS } from './utils/RoutePath';
+import { GENERATE, HEADERBOARD, HOME, LOGIN, ORDER, VOUCHER, LANDING, LOADITEMS, SELECTTYPE } from './utils/RoutePath';
 
 const publicRoutes = [
   { path: HOME, component: Login, exact: true },
@@ -25,6 +26,7 @@ const privateRoutes = [
   { path: `${HEADERBOARD}/:idComprobante?/:idOperacion?`, component: HeaderBoard },
   { path: `${GENERATE}/:idComprobante?/:idOperacion?`, component: Generate },
   { path: LANDING, component: Landing },
+  { path: SELECTTYPE, component: SelectType },
   { path: `${LOADITEMS}/:idComprobante?/:idOperacion?`, component: Loaditems },
 ]
 

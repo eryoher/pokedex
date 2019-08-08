@@ -48,9 +48,13 @@ class VoucherFormInput extends Component {
                     disable={readOnly}
                 />
 
-                {!readOnly && <Col sm={1}>
-                    <FontAwesomeIcon icon={faPlus} />
-                </Col>}
+                {!readOnly &&
+                    <Col sm={1}>
+                        <a href={"/selecttype"}>
+                            <FontAwesomeIcon icon={faPlus} />
+                        </a>
+                    </Col>
+                }
 
                 <InputText
                     inputFormCol={{ sm: 11 }}

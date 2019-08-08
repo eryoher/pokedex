@@ -6,3 +6,4 @@ export const HEADERBOARD = '/headerboard';
 export const GENERATE = '/generate';
 export const LANDING = '/landing';
 export const LOADITEMS = '/loaditems';
+export const SELECTTYPE = '/selecttype';

@@ -142,6 +142,9 @@
     },
     "shoppingCart": {
         "title": "Ítems afectados"
+    },
+    "selectType": {
+        "title": "Seleccione un Tipo de Comprobante"
     }
 
 }

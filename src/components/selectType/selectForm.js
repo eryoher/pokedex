@@ -64,7 +64,6 @@ class SelectForm extends Component {
                                     colInput={"col-sm-8"}
                                     options={optionsSelect}
                                     onChange={(value) => {
-                                        console.log(value.target.value)
                                         setFieldValue('voucherType', value.target.value)
                                     }}
                                 />

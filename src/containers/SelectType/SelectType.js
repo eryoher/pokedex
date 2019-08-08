@@ -26,7 +26,10 @@ class SelectType extends Component {
                 <Col sm={12} className={theme.Title} >
                     {t("selectType.title")}
                 </Col>
-                <SelectForm />
+                <Col sm={12} className={theme.Title} >
+                    <SelectForm />
+                </Col>
+
             </Row>
         )
     }

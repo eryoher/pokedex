@@ -35,7 +35,7 @@ class SelectForm extends Component {
         const inputConfig = [{ idcampo: 'voucherType', label: 'Tipo de comprobante', visible: 1, requerido: 0, editable: 1 }]
 
         return (
-            <Col sm={12} className={"mb-1"} >
+            <Col sm={12} className={"mb-1 pt-3"} >
                 <Formik
                     initialValues={{ ...initial }}
                     onSubmit={(values, actions) => {
@@ -53,7 +53,7 @@ class SelectForm extends Component {
                         <Form onSubmit={handleSubmit} className="voucher-info-form">
                             <Col>
                                 <InputDropdown
-                                    inputFormCol={{ sm: 11 }}
+                                    inputFormCol={{ sm: 12 }}
                                     fields={inputConfig}
                                     label={t('client.form.client_branch')}
                                     inputId={'voucherType'}
@@ -70,7 +70,7 @@ class SelectForm extends Component {
                                 />
                             </Col>
 
-                            <Col style={{ textAlign: 'left', paddingLeft: '0px' }} className={"mt-2 offset-11 col-1"} >
+                            <Col style={{ textAlign: 'left', paddingLeft: '0px' }} className={"mt-5 offset-6 col-1"} >
                                 <Button type={"primary"} >Enviar</Button>
                             </Col>
                         </Form>

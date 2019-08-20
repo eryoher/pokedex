@@ -5,16 +5,18 @@ import {
   SIGNOUT_USER_SUCCESS,
 } from 'constants/ActionsTypes'
 
-const initialState = {}
+const initialState = {
+  authUser: (typeof window !== 'undefined') ? ((window.localStorage.getItem('user')) ? JSON.parse(window.localStorage.getItem('user')) : undefined) : undefined,
+}
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
     case SIGNIN_USER_SUCCESS:
-      return { ...state, authUser: action.payload }
+      return { ...state, authUser: action.payload.data }
     case SIGNOUT_USER_SUCCESS:
-      return { ...initialState }
+      return { state: undefined }
     case GET_USER_SUCCESS:
-      return { ...state, user: action.payload }
+      return { ...state, authUser: action.payload }
     case GET_PERMISSIONS_SUCCESS:
       return { ...state, permissions: action.payload }
     default:

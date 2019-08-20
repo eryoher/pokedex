@@ -8,20 +8,7 @@ import { Router, Redirect, withRouter } from "react-router-dom";
 
 import { VOUCHER } from '../../utils/RoutePath';
 
-const optionsSelect = [
-    {
-        id: null,
-        label: 'Seleccione un tipo'
-    },
-    {
-        id: 'C.NVCR',
-        label: 'Comprobante con Nota de aprobacion'
-    },
-    {
-        id: 'C.NVAP',
-        label: 'Comprobante sin Nota de aprobacion'
-    }
-]
+
 
 class SelectForm extends Component {
 
@@ -30,7 +17,7 @@ class SelectForm extends Component {
     }
 
     render() {
-        const { t } = this.props
+        const { t, optionsSelect } = this.props
         const initial = {}
         const inputConfig = [{ idcampo: 'voucherType', label: 'Tipo de comprobante', visible: 1, requerido: 0, editable: 1 }]
 

@@ -78,6 +78,7 @@ export default (mockAdapter) => {
                     "requerido": 0,
                     "visible": 1,
                     "valid": "",
+                    "mascara": "idTrabajador"
                 },
                 {
                     "idcampo": "contacto",
@@ -232,6 +233,7 @@ export default (mockAdapter) => {
                     "visible": 1,
                     "requerido": 1,
                     "valid": "FEC>=H",
+                    "mascara": "fechaLarga"
                 },
                 {
                     "idcampo": "mon_comp_vta",

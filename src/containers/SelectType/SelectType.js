@@ -2,10 +2,8 @@ import React, { Component } from 'react'
 import withMenu from '../../components/common/withMenu'
 import { withTranslation } from 'react-i18next';
 import { Row, Col } from 'react-bootstrap';
-import VoucherClientForm from 'components/voucher/voucherClientForm';
 import { connect } from 'react-redux';
-import { getVoucherType } from '../../actions';
-import VoucherBreadCrumbs from 'components/voucher/voucherBreadCrumbs';
+import { getVoucherTypeByUser } from '../../actions';
 import SelectForm from 'components/selectType/selectForm';
 
 
@@ -18,16 +16,29 @@ class SelectType extends Component {
         }
     }
 
-    render() {
-        const { t, theme, voucherType } = this.props
+    componentDidMount = () => {
+        this.props.getVoucherTypeByUser()
+    }
 
+    render() {
+        const { t, theme, userVoucherType } = this.props
+        const voucherOptions = (userVoucherType) ? userVoucherType.map((voucher) => {
+            return (
+                {
+                    id: voucher.cod_comprob,
+                    label: voucher.descrip_comprob
+                }
+            )
+        }) : [];
         return (
             <Row>
                 <Col sm={12} className={theme.Title} >
                     {t("selectType.title")}
                 </Col>
                 <Col sm={12} className={theme.Title} >
-                    <SelectForm />
+                    <SelectForm
+                        optionsSelect={voucherOptions}
+                    />
                 </Col>
 
             </Row>
@@ -36,8 +47,8 @@ class SelectType extends Component {
 }
 
 const mapStateToProps = ({ vouchertype }) => {
-    const { voucherType } = vouchertype;
-    return { voucherType };
+    const { userVoucherType } = vouchertype;
+    return { userVoucherType };
 };
 
-export default connect(mapStateToProps, { getVoucherType })(withTranslation()(withMenu(SelectType)));
+export default connect(mapStateToProps, { getVoucherTypeByUser })(withTranslation()(withMenu(SelectType)));

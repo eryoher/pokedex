@@ -27,6 +27,19 @@ class InputDate extends Component {
     }
 
 
+    getMask = (config) => {
+        const { authUser } = this.props
+
+        if (config.mascara) {
+            const maskInput = (authUser.configApp.mascaras[config.mascara]) ? authUser.configApp.mascaras[config.mascara].valor : null;
+            return (maskInput) ? maskInput : false;
+        }
+
+        return false
+
+    }
+
+
     renderField = () => {
         const { label, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, disable, theme, value, onChange, inputFormCol } = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
@@ -34,6 +47,7 @@ class InputDate extends Component {
         const classText = (disable) ? theme.inputDisabled : '';
         const config = this.getConfigField(inputId);
         const customStyleLabel = (config.requerido) ? { ...styleLabel, color: 'red' } : { ...styleLabel };
+
 
         if (config.visible) {
             return (

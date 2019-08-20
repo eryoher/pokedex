@@ -1,5 +1,5 @@
 import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
-import { BrowserRouter as Router } from "react-router-dom"; // TODO jfarina: perhaps we should retrieve the router from AppConfiguration
+import { withRouter } from "react-router-dom"; // TODO jfarina: perhaps we should retrieve the router from AppConfiguration
 import Axios from 'axios';
 
 import {
@@ -15,7 +15,11 @@ import {
   getPermissions,
 } from '../api/Auth'
 
-import { 
+import {
+  getVoucherTypeByUser
+} from '../api/VoucherType'
+
+import {
   userSignInSuccess,
   userSignOutSuccess,
   getUserSuccess,
@@ -26,16 +30,21 @@ import {
   showError,
 } from '../actions/Common';
 
+import { getVoucherTypeByUserSuccess } from 'actions';
+
 function* signInUserRequest({ payload }) {
-  const { user, password} = payload;
+
   try {
-    const token = yield call(signInUser, user, password);
-    localStorage.setItem('token', token);
-    Axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    yield put(userSignInSuccess());
-    Router.push('/main');//TODO jfarina replace with logic to refer to route by ID
+    const user = yield call(signInUser, payload);
+    localStorage.setItem('user', JSON.stringify(user.data));
+    const voucherType = yield call(getVoucherTypeByUser, user.data);
+    localStorage.setItem('userVoucherType', JSON.stringify(voucherType.data));
+
+    yield put(userSignInSuccess(user));
+    yield put(getVoucherTypeByUserSuccess(voucherType));
+
   } catch (error) {
-    if(error.response && error.response.status === 401) {
+    if (error.response && error.response.status === 401) {
       yield put(showError('Invalid username or password'));
     } else if (!error.response && error.request && error.request.status === 0) {
       yield put(showError('Network error'));
@@ -46,10 +55,8 @@ function* signInUserRequest({ payload }) {
 }
 
 function* signOutUserRequest() {
-  localStorage.removeItem('token');
-  delete Axios.defaults.headers.common['Authorization'];
+  localStorage.removeItem('user');
   yield put(userSignOutSuccess());
-  Router.push('/')//TODO jfarina replace with logic to refer to route by ID
 }
 
 function* getUserRequest() {

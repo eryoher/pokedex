@@ -30,7 +30,7 @@ class Headboard extends Component {
 
         return (
             <Row className="" >
-                <Col sm={12} className={"title mt-3 "} style={{ fontSize: '14pt' }} >
+                <Col sm={12} className={"title m-3 "} style={{ fontSize: '14pt' }} >
                     {t("voucher.title")}
                 </Col>
 

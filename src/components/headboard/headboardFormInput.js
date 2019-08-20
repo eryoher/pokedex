@@ -73,13 +73,17 @@ class HeadBoardFormInput extends Component {
     }
 
     handleValidateInput = (data) => {
+        //Se debe adicionar el idproceso
         this.props.voucherHeadValidatekey({ idproceso: '123456', clave: data })
     }
 
     handleChangeDate = (date) => {
+        console.log(date, 'esta es la fecha')
         const { setFieldValue } = this.props;
         setFieldValue('fecha', date);
         const dateFormated = moment(date).format("MM/DD/YYYY");
+
+        //Se debe adicionar el idproceso
         this.props.voucherHeadCheckDate({ idproceso: '123456', fecha: dateFormated });
     }
 
@@ -188,7 +192,7 @@ class HeadBoardFormInput extends Component {
                             setFieldValue('Titulo_comp_vta', data.target.value);
                         }}
                     />
-                    <InputDate
+                    <InputText
                         inputFormCol={{ sm: 6, style: { paddingRight: '0px' } }}
                         fields={fields}
                         label={t('headboard.form.date')}

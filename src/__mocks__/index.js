@@ -2,6 +2,7 @@ import Axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import clientMock from './Clients';
 import voucherMock from './Voucher';
+import voucherTypeMock from './VoucherType';
 
 const mockAdapter = new MockAdapter(Axios, {
   delayResponse: 2000
@@ -9,62 +10,30 @@ const mockAdapter = new MockAdapter(Axios, {
 
 clientMock(mockAdapter);
 voucherMock(mockAdapter);
+voucherTypeMock(mockAdapter);
 
-mockAdapter.onGet('/TipoComprobantes/consulta', { params: { "idComprobante": "C.NVCR" } }).reply(200, {
+mockAdapter.onPost('/login').reply(200, {
   data: {
-    "idOperacion": 12345,
-    "cod_comprob": "C.NVCR",
-    "descrip_comprob": "Pedido reserva autom.",
-    "descrip_tipocomp": "Pedido",
-    "procesos": [
-      {
-        "cod_proceso": "p_selcli",
-        "desc_proceso": "Selección cliente",
-        "orden": 1
-      },
-      {
-        "cod_proceso": "p_vtacab",
-        "desc_proceso": "Datos de Cabecera",
-        "orden": 2
-      },
-      {
-        "cod_proceso": "p_cargaitemvta",
-        "desc_proceso": "Carga de Items",
-        "orden": 3
-      },
-      {
-        "cod_proceso": "p_fincomprob",
-        "desc_proceso": "Final Comprobante",
-        "orden": 9
-      },
-    ]
+    userId: "fsdjj35359ugiu",
+    token: "fdsjt43t0*(&gj3k5",
+    nombre: "ericson Hernandez",
+    usuario: "eryoher",
+    email: "eryoher@agminen.com",
+    configApp: {
+      mascaras: {
+        precioUnitario: {
+          valor: '00000000.00',
+          tipo: 'personalizado'
+        },
+        idTrabajador: {
+          valor: '00-00000000-0',
+          tipo: 'personalizado'
+        },
+        fechaLarga: {
+          valor: 'dd/MM/yyyy',
+          tipo: 'fecha'
+        }
+      }
+    }
   }
 });
-
-
-mockAdapter.onGet('/TipoComprobantes/consulta', { params: { "idComprobante": "C.NVAP" } }).reply(200, {
-  data: {
-    "idOperacion": 12345,
-    "cod_comprob": "C.NVAP",
-    "descrip_comprob": "Pedido reserva autom.",
-    "descrip_tipocomp": "Pedido",
-    "procesos": [
-      {
-        "cod_proceso": "p_selcli",
-        "desc_proceso": "Selección cliente",
-        "orden:": 1
-      },
-      {
-        "cod_proceso": "p_cargaitemvta",
-        "desc_proceso": "Carga de Items",
-        "orden:": 3
-      },
-      {
-        "cod_proceso": "p_fincomprob",
-        "desc_proceso": "Final Comprobante",
-        "orden:": 9
-      },
-    ]
-  }
-});
-

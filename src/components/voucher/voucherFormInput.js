@@ -4,8 +4,8 @@ import { faPlus, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { Row, Col } from 'react-bootstrap';
 import InputText from 'components/form/inputText';
 import { withTranslation } from 'react-i18next';
-
 import InputAutocomplete from 'components/form/inputAutocomplete';
+import InputTextMask from 'components/form/inputTextMask';
 
 class VoucherFormInput extends Component {
 
@@ -50,9 +50,7 @@ class VoucherFormInput extends Component {
 
                 {!readOnly &&
                     <Col sm={1}>
-
                         <FontAwesomeIcon icon={faPlus} />
-
                     </Col>
                 }
 

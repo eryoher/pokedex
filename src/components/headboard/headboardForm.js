@@ -23,7 +23,7 @@ class HeadboardForm extends Component {
 
     render() {
         const { config, headSale } = this.props;
-        const defaultInitial = {};
+        const defaultInitial = { Titulo_comp_vta: '', fecha: '' };
         const initial = (headSale) ? headSale : defaultInitial;
 
         return (

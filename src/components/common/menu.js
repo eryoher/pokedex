@@ -1,10 +1,35 @@
 import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStar, faSearch, faPlus, faBell, faCog, faUserCircle } from '@fortawesome/free-solid-svg-icons'
+import { faStar, faSearch, faPlus, faBell, faCog, faUserCircle, faSignOutAlt } from '@fortawesome/free-solid-svg-icons'
 import { themr } from 'react-css-themr';
 import styles from './menu.module.css';
+import { SELECTTYPE, LOGIN } from 'utils/RoutePath';
+import { connect } from 'react-redux';
+import { userSignOut } from '../../actions';
+import { isLoggedIn } from 'lib/AuthUtils';
+
 
 class Menu extends Component {
+
+    handleSingOut = () => {
+        this.props.userSignOut();
+    }
+
+    componentDidUpdate = (prevProps) => {
+        const { auth } = this.props;
+        if (prevProps.auth !== auth && !isLoggedIn(auth)) {
+            this.props.history.push(LOGIN) //Accion para cuando deslogea
+        }
+    }
+
+    componentDidMount = () => {
+        const { auth } = this.props
+        if (!isLoggedIn(auth)) {
+            this.props.history.push(LOGIN) //Accion para cuando se carga el form y se encuentra logeado
+        }
+    }
+
+
     render() {
         const { theme } = this.props;
 
@@ -18,7 +43,7 @@ class Menu extends Component {
                         <FontAwesomeIcon icon={faSearch} />
                     </div>
                     <div className="mb-auto p-2 bd-highlight" style={{ margin: "0px auto" }}>
-                        <a style={{ textDecoration: 'none', color: '#fff' }} href={"/selecttype"}>
+                        <a style={{ textDecoration: 'none', color: '#fff' }} href={SELECTTYPE}>
                             <FontAwesomeIcon icon={faPlus} />
                         </a>
                     </div>
@@ -31,10 +56,21 @@ class Menu extends Component {
                     <div className="p-2 bd-highlight" style={{ margin: "0px auto" }}>
                         <FontAwesomeIcon icon={faUserCircle} />
                     </div>
+                    <div className="p-2 bd-highlight" style={{ margin: "0px auto" }}>
+                        <a style={{ textDecoration: 'none', color: '#fff' }} href={'#'} onClick={this.handleSingOut} >
+                            <FontAwesomeIcon icon={faSignOutAlt} />
+                        </a>
+                    </div>
                 </div>
             </div>
         )
     }
 }
 
-export default themr('MenuTheme', styles)(Menu);
+const mapStateToProps = ({ auth }) => {
+    return { auth };
+};
+
+
+
+export default connect(mapStateToProps, { userSignOut })(themr('MenuTheme', styles)(Menu));

@@ -1,6 +1,8 @@
 import {
   GET_VOUCHER_TYPE,
   GET_VOUCHER_TYPE_SUCCESS,
+  GET_VOUCHER_TYPE_BY_USER,
+  GET_VOUCHER_TYPE_BY_USER_SUCCESS,
 
 } from '../constants/ActionsTypes';
 
@@ -18,3 +20,18 @@ export const getVoucherTypeSuccess = (response) => {
     payload: response
   }
 };
+
+export const getVoucherTypeByUser = (params) => {
+  return {
+    type: GET_VOUCHER_TYPE_BY_USER,
+    payload: params
+  }
+};
+
+export const getVoucherTypeByUserSuccess = (response) => {
+  return {
+    type: GET_VOUCHER_TYPE_BY_USER_SUCCESS,
+    payload: response
+  }
+};
+

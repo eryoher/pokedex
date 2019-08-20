@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect, Route } from "react-router-dom";
-import { LOGIN } from './RoutePath'
+import { LOGIN, LANDING } from './RoutePath';
+import { isLoggedIn } from '../lib/AuthUtils';
 
 export const RouteWithSubRoutes = ({ component: Component, routes, ...rest }) => {
   return (
@@ -18,16 +19,16 @@ export const PrivateRouteWithSubRoutes = ({ component: Component, routes, auth, 
     <Route
       {...rest}
       render={props =>
-        /*auth.authUser*/ true ? ( // TODO fix when login is ready
+        isLoggedIn(auth) ? ( // TODO fix when login is readyisLoggedIn
           <Component {...props} routes={routes} />
         ) : (
-          <Redirect
-            to={{
-              pathname: LOGIN,
-              state: { from: props.location }
-            }}
-          />
-        )
+            <Redirect
+              to={{
+                pathname: LOGIN,
+                state: { from: props.location }
+              }}
+            />
+          )
       }
     />
   );

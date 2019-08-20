@@ -5,6 +5,10 @@ import styles from './inputText.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 import ModalValidate from 'components/headboard/modalValidate';
+import { connect } from 'react-redux';
+import { IMaskInput } from 'react-imask';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 
 class InputText extends Component {
@@ -42,6 +46,48 @@ class InputText extends Component {
         return result;
     }
 
+    getMask = (config) => {
+        const { authUser } = this.props
+        const maskInput = (authUser.configApp.mascaras[config.mascara]) ? authUser.configApp.mascaras[config.mascara] : null;
+        return (maskInput) ? maskInput : false;
+    }
+
+    renderInput = (options, config) => {
+        let response;
+        if (config.mascara) {
+            const mask = this.getMask(config); //Se obtiene las posibles opciones de mascara.. aca se agregan validaciones.
+            if (mask.tipo === 'fecha') {
+                const formatDate = (mask.valor) ? mask.valor : 'MM-dd-yyyy';
+                response = (
+                    <DatePicker
+                        {...options}
+                        selected={(options.value) ? options.value : new Date()}
+                        dateFormat={formatDate}
+                    />
+                )
+            } else if (mask.tipo === 'personalizado') {
+                const maskInput = (mask.valor) ? mask.valor : null;
+                response = (
+                    <IMaskInput
+                        {...options}
+                        mask={maskInput}
+                    />
+                )
+            } else {
+                response = (<input
+                    {...options}
+                />)
+            }
+
+        } else {
+            response = (<input
+                {...options}
+            />)
+        }
+
+        return response;
+    }
+
     renderField = () => {
         const { label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, disable, theme, type, value, onChange, inputFormCol, lock } = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
@@ -52,6 +98,18 @@ class InputText extends Component {
         const customStyleLabel = (config.requerido) ? { ...styleLabel, color: 'red' } : { ...styleLabel };
 
         if (config.visible) {
+            const optionsInput = {
+                id: inputId,
+                name: name,
+                type: customType,
+                style: styles,
+                placeholder: placeholder,
+                disabled: !config.editable,
+                className: `${theme.inputText} ${classText}`,
+                value: value,
+                onChange: (v) => onChange(v)
+            }
+
             return (
                 <>
                     <Col {...inputFormCol} >
@@ -60,28 +118,22 @@ class InputText extends Component {
                                 {(config.label) ? config.label : label}
                             </label>
                             <Col className={classInput} style={{ ...divStyle }}>
-                                <input
-                                    id={inputId}
-                                    name={name}
-                                    type={customType}
-                                    style={styles}
-                                    placeholder={placeholder}
-                                    disabled={!config.editable}
-                                    className={`${theme.inputText} ${classText}`}
-                                    value={value}
-                                    onChange={(v) => onChange(v)}
-                                />
+                                {
+                                    this.renderInput(optionsInput, config)
+                                }
                             </Col>
                         </Row>
                     </Col>
-                    {lock && <Col className={theme.lock} sm={1}>
-                        <FontAwesomeIcon icon={faLock} onClick={this.handleShowModal} style={{ cursor: 'pointer' }} />
-                        <ModalValidate
-                            showModal={this.state.showLockModal}
-                            handleClose={this.handleCancelModal}
-                            handleSubmit={this.handleSubmit}
-                        />
-                    </Col>}
+                    {
+                        lock && <Col className={theme.lock} sm={1}>
+                            <FontAwesomeIcon icon={faLock} onClick={this.handleShowModal} style={{ cursor: 'pointer' }} />
+                            <ModalValidate
+                                showModal={this.state.showLockModal}
+                                handleClose={this.handleCancelModal}
+                                handleSubmit={this.handleSubmit}
+                            />
+                        </Col>
+                    }
                 </>
             )
         } else {
@@ -101,4 +153,10 @@ class InputText extends Component {
     }
 }
 
-export default themr('InputTextStyle', styles)(InputText);
+
+const mapStateToProps = ({ auth }) => {
+    const { authUser } = auth;
+    return { authUser };
+};
+
+export default connect(mapStateToProps)(themr('InputTextStyle', styles)(InputText));

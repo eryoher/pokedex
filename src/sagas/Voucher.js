@@ -5,15 +5,15 @@ import {
     getVoucherHead,
     voucherHeadAuto,
     voucherHeadValidatekey,
-    voucherHeadCheckDate
+    voucherHeadCheckDate,
 } from '../api/Voucher'
 
 import {
-    GET_CONFIG_VOUCHER, GET_VOUCHER_HEAD, VOUCHER_HEAD_AUTO, VOUCHER_HEAD_VALIDATE_KEY, VOUCHER_HEAD_CHECK_DATE
+    GET_CONFIG_VOUCHER, GET_VOUCHER_HEAD, VOUCHER_HEAD_AUTO, VOUCHER_HEAD_VALIDATE_KEY, VOUCHER_HEAD_CHECK_DATE, GET_VOUCHER_BY_USER
 } from '../constants/ActionsTypes';
 
 
-import { getConfigVoucherSuccess, getVoucherHeadSuccess, voucherHeadAutoSuccess, voucherHeadValidatekeySuccess, voucherHeadCheckDateSuccess } from '../actions/Voucher';
+import { getConfigVoucherSuccess, getVoucherHeadSuccess, voucherHeadAutoSuccess, voucherHeadValidatekeySuccess, voucherHeadCheckDateSuccess, getVoucherByUserSuccess } from '../actions/Voucher';
 
 
 function* getConfigVoucherRequest({ payload }) {
@@ -77,12 +77,14 @@ export function* voucherHeadCheckDateSaga() {
     yield takeEvery(VOUCHER_HEAD_CHECK_DATE, voucherHeadCheckDateRequest);
 }
 
+
+
 export default function* rootSaga() {
     yield all([
         fork(getConfigVoucherSaga),
         fork(getVoucherHeadSaga),
         fork(voucherHeadAutoSaga),
         fork(voucherHeadValidatekeySaga),
-        fork(voucherHeadCheckDateSaga)
+        fork(voucherHeadCheckDateSaga),
     ]);
 }

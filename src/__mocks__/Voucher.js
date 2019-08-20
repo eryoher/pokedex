@@ -51,6 +51,7 @@ export default (mockAdapter) => {
                     "requerido": 0,
                     "visible": 1,
                     "valid": "",
+                    "mascara": ""
                 },
                 {
                     "idcampo": "cliente_codigo",
@@ -60,6 +61,7 @@ export default (mockAdapter) => {
                     "requerido": 0,
                     "visible": 1,
                     "valid": "",
+                    "mascara": ""
                 },
                 {
                     "idcampo": "tipo_resp",
@@ -69,6 +71,7 @@ export default (mockAdapter) => {
                     "requerido": 0,
                     "visible": 1,
                     "valid": "",
+                    "mascara": ""
                 },
                 {
                     "idcampo": "cuit",
@@ -88,6 +91,7 @@ export default (mockAdapter) => {
                     "requerido": 0,
                     "visible": 1,
                     "valid": "",
+                    "mascara": ""
                 },
                 {
                     "idcampo": "suc_tel",
@@ -97,6 +101,7 @@ export default (mockAdapter) => {
                     "requerido": 0,
                     "visible": 1,
                     "valid": "",
+                    "mascara": ""
                 },
                 {
                     "idcampo": "suc_email",
@@ -106,6 +111,7 @@ export default (mockAdapter) => {
                     "requerido": 0,
                     "visible": 1,
                     "valid": "",
+                    "mascara": ""
                 },
                 {
                     "idcampo": "suc_address",
@@ -115,6 +121,7 @@ export default (mockAdapter) => {
                     "requerido": 0,
                     "visible": 1,
                     "valid": "",
+                    "mascara": ""
                 },
                 {
                     "idcampo": "suc_local",
@@ -124,6 +131,7 @@ export default (mockAdapter) => {
                     "requerido": 0,
                     "visible": 1,
                     "valid": "",
+                    "mascara": ""
                 },
                 {
                     "idcampo": "suc_nom_prov",
@@ -133,6 +141,7 @@ export default (mockAdapter) => {
                     "requerido": 0,
                     "visible": 1,
                     "valid": "",
+                    "mascara": ""
                 },
                 {
                     "idcampo": "suc_cpos",
@@ -142,6 +151,7 @@ export default (mockAdapter) => {
                     "requerido": 0,
                     "visible": 1,
                     "valid": "",
+                    "mascara": ""
                 },
                 {
                     "idcampo": "credito",
@@ -151,6 +161,7 @@ export default (mockAdapter) => {
                     "requerido": 0,
                     "visible": 1,
                     "valid": "",
+                    "mascara": ""
                 },
                 {
                     "idcampo": "saldo_pend",
@@ -160,6 +171,7 @@ export default (mockAdapter) => {
                     "requerido": 0,
                     "visible": 1,
                     "valid": "",
+                    "mascara": ""
                 },
                 {
                     "idcampo": "credito_saldo",
@@ -169,6 +181,7 @@ export default (mockAdapter) => {
                     "requerido": 0,
                     "visible": 1,
                     "valid": "",
+                    "mascara": ""
                 },
                 {
                     "idcampo": "sucursales",
@@ -178,6 +191,7 @@ export default (mockAdapter) => {
                     "requerido": 1,
                     "visible": 1,
                     "valid": "",
+                    "mascara": ""
                 },
                 {
                     "idcampo": "obs_cc",
@@ -187,6 +201,7 @@ export default (mockAdapter) => {
                     "requerido": 0,
                     "visible": 1,
                     "valid": "",
+                    "mascara": ""
                 },
                 {
                     "idcampo": "obs_ventas",
@@ -196,6 +211,7 @@ export default (mockAdapter) => {
                     "requerido": 0,
                     "visible": 1,
                     "valid": "",
+                    "mascara": ""
                 },
             ]
         }
@@ -215,6 +231,7 @@ export default (mockAdapter) => {
                     "visible": 1,
                     "requerido": 1,
                     "valid": "",
+                    "mascara": ""
                 },
                 {
                     "idcampo": "Titulo_comp_vta",
@@ -224,6 +241,7 @@ export default (mockAdapter) => {
                     "visible": 1,
                     "requerido": 0,
                     "valid": "",
+                    "mascara": ""
                 },
                 {
                     "idcampo": "fecha",
@@ -243,6 +261,7 @@ export default (mockAdapter) => {
                     "visible": 1,
                     "requerido": 1,
                     "valid": "",
+                    "mascara": ""
                 },
                 {
                     "idcampo": "cotiz",
@@ -252,11 +271,12 @@ export default (mockAdapter) => {
                     "visible": 1,
                     "requerido": 0,
                     "valid": "",
+                    "mascara": ""
                 },
-                { "idcampo": "vend_comp_vta", "descripcion": "Vendedor", "label": "Vendedor", "editable": 1, "visible": 1, "requerido": 0, "valid": "", },
-                { "idcampo": "cond_comp_vta", "descripcion": "Cond.Venta", "label": "Cond.Venta", "editable": 1, "visible": 1, "requerido": 1, "valid": "", },
-                { "idcampo": "transp_comp_vta", "descripcion": "Transportista", "label": "Transportista", "editable": 0, "visible": 0, "requerido": 0, "valid": "", },
-                { "idcampo": "atrib_comp_vta", "descripcion": "Atributos", "label": "Datos Adicionales", "editable": 1, "visible": 1, "requerido": 1, "valid": "", }
+                { "idcampo": "vend_comp_vta", "descripcion": "Vendedor", "label": "Vendedor", "editable": 1, "visible": 1, "requerido": 0, "valid": "", "mascara": "" },
+                { "idcampo": "cond_comp_vta", "descripcion": "Cond.Venta", "label": "Cond.Venta", "editable": 1, "visible": 1, "requerido": 1, "valid": "", "mascara": "" },
+                { "idcampo": "transp_comp_vta", "descripcion": "Transportista", "label": "Transportista", "editable": 0, "visible": 0, "requerido": 0, "valid": "", "mascara": "" },
+                { "idcampo": "atrib_comp_vta", "descripcion": "Atributos", "label": "Datos Adicionales", "editable": 1, "visible": 1, "requerido": 1, "valid": "", "mascara": "" }
 
             ]
         }

@@ -12,7 +12,6 @@ class InputAutocomplete extends Component {
         super(props);
         this.state = {
             isLoading: false,
-
         };
     }
 
@@ -62,28 +61,26 @@ class InputAutocomplete extends Component {
                         {label}
                     </label>
                     <Col className={classInput} style={{ ...divStyle }}>
-                        <Fragment>
-                            <AsyncTypeahead
-                                disabled={disable}
-                                isLoading={handleLoading}
-                                id={inputId}
-                                options={auoptions}
-                                name={name}
-                                labelKey={labelKey}
-                                filterBy={(option, props) => {
-                                    return true;
-                                }}
-                                minLength={3}
-                                onSearch={this._handleSearch}
-                                onChange={handleSelect}
-                                className={`${theme.inputText}`}
-                                placeholder={placeholder}
-                                renderMenuItemChildren={(option) => {
-                                    return (<option key={option.id} >{option.label}</option>);
-                                }}
+                        <AsyncTypeahead
+                            disabled={disable}
+                            isLoading={handleLoading}
+                            id={inputId}
+                            options={auoptions}
+                            name={name}
+                            labelKey={labelKey}
+                            filterBy={(option, props) => {
+                                return true;
+                            }}
+                            minLength={3}
+                            onSearch={this._handleSearch}
+                            onChange={handleSelect}
+                            className={`${theme.inputText}`}
+                            placeholder={placeholder}
+                            renderMenuItemChildren={(option) => {
+                                return (<option key={option.id} >{option.label}</option>);
+                            }}
 
-                            />
-                        </Fragment>
+                        />
                     </Col>
                 </Row>
             </Col>

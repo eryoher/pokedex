@@ -4,13 +4,15 @@ import Common from "./Common";
 import Client from './Client';
 import VoucherType from "./VoucherType";
 import Voucher from './Voucher';
+import ProductReducer from './Product';
 
 const reducers = combineReducers({
   common: Common,
   auth: Auth,
   clients: Client,
   vouchertype: VoucherType,
-  voucher: Voucher
+  voucher: Voucher,
+  product: ProductReducer
 });
 
 const rootReducer = (state, action) => {

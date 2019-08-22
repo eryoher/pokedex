@@ -145,6 +145,12 @@
     },
     "selectType": {
         "title": "Seleccione un Tipo de Comprobante"
+    },
+    "searchBox": {
+        "form": {
+            "insert_product": "Ingrese un producto",
+            "insert_code": "Ingrese el codigo"
+        }
     }
 
 }

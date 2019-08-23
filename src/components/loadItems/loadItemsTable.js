@@ -13,34 +13,35 @@ import styles from './itemsTable.module.css';
 import SearchBox from 'components/common/searchBox';
 import { selectFilter } from 'react-bootstrap-table2-filter';
 import PopupImage from 'components/common/popupImage';
-
+import { connect } from 'react-redux';
+import { getConfigVoucher } from '../../actions';
 const Items = [
     {
         id: 1,
-        code: 'KLN000003',
-        description: 'KLONAL AMOX-G 500 MG X 90 ML 51%',
-        unit: 'UN',
-        quantity: '100',
+        cod_prod: 'KLN000003',
+        desc_prod: 'KLONAL AMOX-G 500 MG X 90 ML 51%',
+        unid_v: 'UN',
+        ind_stock: '100',
         status: 'R',
         cufOrigin: '20032',
-        unitPrice: '38.79',
-        netAmount: '3879',
-        deliveryDate: '07/02/2019',
+        pcio_unit: '38.79',
+        neto: '3879',
+        fec_entrega: '07/02/2019',
         client: 14297,
-        deal: 1,
+        avisos: 1,
     },
     {
         id: 2,
-        code: 'KLN000007',
-        description: 'KLONAL DIPIRONA K JARABE 5GR 100 ML 55%',
-        unit: 'UN',
-        quantity: '0',
+        cod_prod: 'KLN000007',
+        desc_prod: 'KLONAL DIPIRONA K JARABE 5GR 100 ML 55%',
+        unid_v: 'UN',
+        ind_stock: '0',
         status: 'V',
         cufOrigin: '20020',
-        unitPrice: '37.42',
-        netAmount: '0',
-        deliveryDate: '06/22/2019',
-        deal: 2,
+        pcio_unit: '37.42',
+        neto: '0',
+        fec_entrega: '06/22/2019',
+        avisos: 2,
     }
 ]
 
@@ -51,8 +52,56 @@ const optionsDeal = {
 
 class LoadItemsTable extends Component {
 
+    componentDidMount = () => {
+        this.props.getConfigVoucher({ cod_proceso: 'P_CargaItemenVentas', idOperacion: 1 });
+    }
+
+    getColumns = () => {
+        const { config } = this.props;
+        const columns = [];
+
+        const rows = config.campos.map((field) => {
+
+            return {
+                dataField: field.idcampo,
+                text: (field.label) ? field.label : '',
+                align: 'center',
+                headerAlign: 'center',
+                headerStyle: { width: '10%' },
+                hidden: !field.visible,
+                formatter: (field.editable) ? ((cell, row, rowIndex) => {
+                    return (
+                        <InputText
+                            inputFormCol={{ sm: 11 }}
+                            fields={[{ ...field, label: false }]} //Propiedades.. del campo se envia el label en false
+                            label={false}
+                            inputId={field.idcampo}
+                            name={field.idcampo}
+                            colLabel={"col-sm-2"}
+                            colInput={"col-sm-10"}
+                            disable={false}
+                            value={cell}
+                            onChange={(data) => {
+                                console.log(field.idcampo, data);
+                            }}
+                        />
+                    )
+                }) : null,
+            }
+
+        });
+
+        console.log(rows)
+
+        return rows;
+    }
+
+
     render() {
-        const { theme, t, searchBox, divClass } = this.props;
+        const { theme, t, searchBox, divClass, config, search } = this.props;
+
+        const tableColumns = (config) ? this.getColumns() : [];
+
 
         const columns = [
             {
@@ -213,7 +262,6 @@ class LoadItemsTable extends Component {
             showExpandColumn: true,
             nonExpandable: noExpand,
             expandHeaderColumnRenderer: ({ isAnyExpands }) => {
-
                 return <CollapseBotton status={isAnyExpands} />
             },
             expandColumnRenderer: ({ expanded, rowKey }) => {
@@ -226,18 +274,28 @@ class LoadItemsTable extends Component {
         return (
             <Row className={divClass}>
                 {searchBox && <SearchBox />}
-                <Col className={`${divClass} col-12`}>
+                {config && search.Productos && <Col className={`${divClass} col-12`}>
                     <CommonTable
-                        columns={columns}
-                        data={Items}
+                        columns={tableColumns}
+                        data={search.Productos}
                         rowClasses={theme.tableRow}
                         headerClasses={theme.tableHeader}
                         expandRow={expandRow}
                     />
-                </Col>
+                </Col>}
             </Row>
         )
     }
 }
 
-export default themr('LoadItemsTableStyles', styles)(withTranslation()(LoadItemsTable));
+
+
+const mapStateToProps = ({ voucher, product }) => {
+    const { config } = voucher;
+    const { search } = product
+    return { config, search };
+};
+
+const connectForm = connect(mapStateToProps, { getConfigVoucher })(LoadItemsTable);
+
+export default themr('LoadItemsTableStyles', styles)(withTranslation()(connectForm));

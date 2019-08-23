@@ -17,6 +17,7 @@ function rootReducer(state = initialState, action) {
         case SEARCH_PRODUCTS:
             return { ...state, search: [] }
         case SEARCH_PRODUCTS_SUCCESS:
+            console.log(action.payload)
             return { ...state, search: action.payload.data }
         case GET_PRICE_BY_PRODUCT:
             return { ...state, price: null }

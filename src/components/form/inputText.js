@@ -61,12 +61,13 @@ class InputText extends Component {
                 response = (
                     <DatePicker
                         {...options}
-                        selected={(options.value) ? options.value : new Date()}
+                        selected={(options.value) ? new Date(options.value) : new Date()}
                         dateFormat={formatDate}
                     />
                 )
             } else if (mask.tipo === 'personalizado') {
                 const maskInput = (mask.valor) ? mask.valor : null;
+
                 response = (
                     <IMaskInput
                         {...options}

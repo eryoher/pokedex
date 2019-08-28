@@ -62,7 +62,7 @@ export default (mockAdapter) => {
                         {
                             "tipo_bonif": "P",
                             "cod_bonif": "PL02",
-                            "desc_bon": "Lapices Faber",
+                            "desc_bonif": "Lapices Faber",
                         },
                         {
                             "tipo_bonif": "C",
@@ -78,6 +78,39 @@ export default (mockAdapter) => {
                             "desc_dato": "Faber"
                         }
                     ]
+                },
+                {
+                    "niprod": 36575,
+                    "cod_prod": "PERSEL00454",
+                    "desc_prod": "Desodorante Axe musk",
+                    "codbarra": "07795555225225",
+                    "unid_v": "UN",
+                    "base_v": 1,
+                    "ind_stock": 2,
+                    "precio_unit": 32.56,
+                    "id_imagen": 77656,
+                    "presentaciones": [
+                        {
+                            "cod_pres": "CJ",
+                            "desc_pres": "Cajax10UN",
+                            "cant": 10,
+                            "codbarra": "07977688566503",
+                        },
+                        {
+                            "cod_pres": "PK",
+                            "desc_pres": "Packx100UN",
+                            "cant": 100,
+                            "codbarra": "07977688566504",
+                        }
+                    ],
+                    "Bonificaciones": [
+                        {
+                            "tipo_bonif": "P",
+                            "cod_bonif": "PL02",
+                            "desc_bonif": "Lapices Faber",
+                        },
+                    ],
+                    "Atributos": null
                 }
             ]
         }

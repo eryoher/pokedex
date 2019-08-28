@@ -288,8 +288,8 @@ export default (mockAdapter) => {
             "descrip_proceso": "Carga Items de Ventas",
             "orden": "3",
             "campos": [
-                { "idcampo": "desc_prod", "descripcion": "Nombre Producto", "label": "Producto", "editable": 1, "visible": 1, "mascara": "" },
                 { "idcampo": "cod_prod", "descripcion": "Código Producto", "label": "Código", "editable": 0, "visible": 1, "mascara": "" },
+                { "idcampo": "desc_prod", "descripcion": "Nombre Producto", "label": "Producto", "editable": 0, "visible": 1, "mascara": "" },
                 { "idcampo": "unid_v", "descripcion": "Presentación", "label": "Unid/Pres", "editable": 1, "visible": 1, "mascara": "" },
                 { "idcampo": "cantidad", "descripcion": "cantidad", "label": "Cant", "editable": 1, "visible": 1, "mascara": "" },
                 { "idcampo": "ind_stock", "descripcion": "Indic.Stock", "label": "", "editable": 0, "visible": 1, "mascara": "" },
@@ -297,7 +297,7 @@ export default (mockAdapter) => {
                 { "idcampo": "modif_pcio", "descripcion": "Clave para modificar precio", "label": "", "editable": 1, "visible": 0, "mascara": "" },
                 { "idcampo": "neto", "descripcion": "Importe neto", "label": "Neto", "editable": 1, "visible": 1, "mascara": "importeNeto" },
                 { "idcampo": "fec_entrega", "descripcion": "Fecha entrega", "label": "Fec.Entr.", "editable": 1, "visible": 1, "valid": "FEC>=H", "mascara": "fechaLarga" },
-                { "idcampo": "avisos", "descripcion": "avisos", "label": "Ofertas", "editable": 1, "visible": 1, "mascara": "" },
+                { "idcampo": "avisos", "descripcion": "avisos", "label": "Ofertas", "editable": 0, "visible": 1, "mascara": "" },
                 //{ "idcampo": "fin_item", "visible": 1, "mascara": "" },
             ]
         }

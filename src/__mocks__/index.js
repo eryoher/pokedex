@@ -25,8 +25,9 @@ mockAdapter.onPost('/login').reply(200, {
     configApp: {
       mascaras: {
         precioUnitario: {
-          valor: '#.##0,00',
-          tipo: 'numero'
+          tipo: 'numero',
+          cantDecimales: 2,
+          usarSeparadorMil: true
         },
         idTrabajador: {
           valor: '00-00000000-0',

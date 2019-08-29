@@ -38,7 +38,7 @@ class InputText extends Component {
     handleChage = (data) => {
         const { onChange } = this.props;
         const value = (data.target) ? data.target.value : data;
-        console.log(value, 'inpu valor')
+        //console.log(value, 'inpu valor')
         this.setState({ inputValue: value });
         if (onChange) {
             onChange(data);
@@ -95,14 +95,12 @@ class InputText extends Component {
                     />
                 )
             } else if (mask.tipo === 'numero') {
-                const pattern = (mask.valor) ? mask.valor : null;
-                const opts = { reverse: true };
-                const newmask = MaskImp(pattern, opts);
-                console.log(newmask.masked(options.value))
+                //console.log(mask)
                 response = (
-                    <input
+                    <IMaskInput
+                        mask={Number}
+                        scale={mask.cantDecimales}
                         {...options}
-                        value={newmask.masked(options.value)}
                     />
                 )
             } else {

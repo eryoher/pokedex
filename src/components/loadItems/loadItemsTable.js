@@ -251,7 +251,7 @@ class LoadItemsTable extends Component {
 
         }) : null;
 
-        console.log(rowData, '????')
+        //        console.log(rowData, '????')
         return (
             <Row className={divClass}>
                 {searchBox && <SearchBox />}

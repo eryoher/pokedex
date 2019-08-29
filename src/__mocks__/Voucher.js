@@ -288,7 +288,7 @@ export default (mockAdapter) => {
             "descrip_proceso": "Carga Items de Ventas",
             "orden": "3",
             "campos": [
-                { "idcampo": "cod_prod", "descripcion": "Código Producto", "label": "Código", "editable": 1, "visible": 1, "mascara": "" },
+                { "idcampo": "cod_prod", "descripcion": "Código Producto", "label": "Código", "editable": 0, "visible": 1, "mascara": "" },
                 { "idcampo": "desc_prod", "descripcion": "Nombre Producto", "label": "Producto", "editable": 0, "visible": 1, "mascara": "" },
                 { "idcampo": "unid_v", "descripcion": "Presentación", "label": "Unid/Pres", "editable": 1, "visible": 1, "mascara": "" },
                 { "idcampo": "cantidad", "descripcion": "cantidad", "label": "Cant", "editable": 1, "visible": 1, "mascara": "" },

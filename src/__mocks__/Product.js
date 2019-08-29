@@ -42,7 +42,7 @@ export default (mockAdapter) => {
                     "unid_v": "UN",
                     "base_v": 1,
                     "ind_stock": 2,
-                    "precio_unit": '30.25',
+                    "precio_unit": '3025',
                     "id_imagen": 77656,
                     "presentaciones": [
                         {
@@ -87,7 +87,7 @@ export default (mockAdapter) => {
                     "unid_v": "UN",
                     "base_v": 1,
                     "ind_stock": '0',
-                    "precio_unit": '32.56',
+                    "precio_unit": '3256',
                     "id_imagen": 77656,
                     "presentaciones": [
                         {

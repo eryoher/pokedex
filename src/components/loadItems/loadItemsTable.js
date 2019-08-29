@@ -50,7 +50,7 @@ class LoadItemsTable extends Component {
                 text: (field.label) ? field.label : '',
                 align: 'center',
                 headerAlign: 'center',
-                headerStyle: { width: '10%' },
+                headerStyle: (field.idcampo === 'desc_prod' || field.idcampo === 'fec_entrega') ? { width: '15%' } : { width: '10%' },
                 hidden: !field.visible,
                 title: (field.idcampo === 'avisos') ? (cell, row, ) => {
                     let title = '';

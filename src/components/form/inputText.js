@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { IMaskInput } from 'react-imask';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-
+import MaskImp from 'mask-imp';
 
 class InputText extends Component {
 
@@ -38,6 +38,7 @@ class InputText extends Component {
     handleChage = (data) => {
         const { onChange } = this.props;
         const value = (data.target) ? data.target.value : data;
+        console.log(value, 'inpu valor')
         this.setState({ inputValue: value });
         if (onChange) {
             onChange(data);
@@ -86,10 +87,22 @@ class InputText extends Component {
                 )
             } else if (mask.tipo === 'personalizado') {
                 const maskInput = (mask.valor) ? mask.valor : null;
+
                 response = (
                     <IMaskInput
                         {...options}
                         mask={maskInput}
+                    />
+                )
+            } else if (mask.tipo === 'numero') {
+                const pattern = (mask.valor) ? mask.valor : null;
+                const opts = { reverse: true };
+                const newmask = MaskImp(pattern, opts);
+                console.log(newmask.masked(options.value))
+                response = (
+                    <input
+                        {...options}
+                        value={newmask.masked(options.value)}
                     />
                 )
             } else {

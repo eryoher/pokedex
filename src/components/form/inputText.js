@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Row, Col, Modal } from 'react-bootstrap';
+import { Row, Col, Modal, Form } from 'react-bootstrap';
 import { themr } from 'react-css-themr';
 import styles from './inputText.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -15,8 +15,10 @@ class InputText extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
-            showLockModal: false
+            showLockModal: false,
+            inputValue: this.props.value
         }
     }
 
@@ -31,6 +33,22 @@ class InputText extends Component {
     handleSubmit = (data) => {
         this.handleCancelModal();
         this.props.handleSubmit(data);
+    }
+
+    handleChage = (data) => {
+        const { onChange } = this.props;
+        const value = (data.target) ? data.target.value : data;
+        this.setState({ inputValue: value });
+        if (onChange) {
+            onChange(data);
+        }
+    }
+
+    handleOnblur = () => {
+        const { onBlur } = this.props;
+        if (onBlur) {
+            onBlur(this.state.inputValue);
+        }
     }
 
     getconfigField = (id) => {
@@ -54,6 +72,7 @@ class InputText extends Component {
 
     renderInput = (options, config) => {
         let response;
+
         if (config.mascara) {
             const mask = this.getMask(config); //Se obtiene las posibles opciones de mascara.. aca se agregan validaciones.
             if (mask.tipo === 'fecha') {
@@ -67,7 +86,6 @@ class InputText extends Component {
                 )
             } else if (mask.tipo === 'personalizado') {
                 const maskInput = (mask.valor) ? mask.valor : null;
-
                 response = (
                     <IMaskInput
                         {...options}
@@ -75,15 +93,18 @@ class InputText extends Component {
                     />
                 )
             } else {
-                response = (<input
-                    {...options}
-                />)
+                response = (
+                    <input
+                        {...options}
+                    />
+                )
             }
-
         } else {
-            response = (<input
-                {...options}
-            />)
+            response = (
+                <input
+                    {...options}
+                />
+            )
         }
 
         return response;
@@ -107,8 +128,9 @@ class InputText extends Component {
                 placeholder: placeholder,
                 disabled: !config.editable,
                 className: `${theme.inputText} ${classText}`,
-                value: value,
-                onChange: (v) => onChange(v)
+                value: (this.state.inputValue) ? this.state.inputValue : value,
+                onChange: (v) => this.handleChage(v),
+                onBlur: (v) => this.handleOnblur(v)
             }
 
             return (

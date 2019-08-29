@@ -3,20 +3,20 @@ import { themr } from 'react-css-themr';
 import styles from './displayLight.module.css';
 
 const mapper = {
-    'A': 'yellow',
-    'V': 'green',
-    'R': 'red',
-} 
+    '1': 'yellow',
+    '2': 'green',
+    '0': 'red',
+}
 
 class DisplayLight extends Component {
     render() {
-        const { semaforo, theme } = this.props;        
-        const divClass =  ((semaforo && semaforo in mapper) ? theme[mapper[semaforo]] : theme["grey"]);        
+        const { semaforo, theme } = this.props;
+        const divClass = ((semaforo && semaforo in mapper) ? theme[mapper[semaforo]] : theme["grey"]);
         return (
             <div className={`${theme.semaforo} ${divClass}`} />
         )
     }
 }
-  
+
 
 export default themr('DisplayLightStyles', styles)(DisplayLight); 

@@ -7,14 +7,13 @@ import CommonTable from 'components/common/commonTable';
 import CollapseBotton from 'components/common/collapseBoton';
 import InputText from 'components/form/inputText';
 import DisplayLight from 'components/common/displayLight';
-import DisplayAmount from 'components/common/displayAmount';
 import { themr } from 'react-css-themr';
 import styles from './itemsTable.module.css';
 import SearchBox from 'components/common/searchBox';
 import { selectFilter, Comparator } from 'react-bootstrap-table2-filter';
 import PopupImage from 'components/common/popupImage';
 import { connect } from 'react-redux';
-import { getConfigVoucher } from '../../actions';
+import { getConfigVoucher, setTableDataProducts } from '../../actions';
 import InputDropdown from 'components/form/inputDropdown';
 
 
@@ -44,7 +43,6 @@ class LoadItemsTable extends Component {
 
     getColumns = () => {
         const { config, theme } = this.props;
-        const columns = [];
 
         const rows = config.campos.map((field) => {
             return {
@@ -80,7 +78,7 @@ class LoadItemsTable extends Component {
 
                     return filter;
                 },
-                formatter: (field.editable || field.idcampo === 'avisos') ? ((cell, row, rowIndex) => {
+                formatter: (field.editable || field.idcampo === 'avisos' || field.idcampo === 'ind_stock') ? ((cell, row, rowIndex) => {
                     return this.renderFormat(field, cell, row)
                 }) : null
             }
@@ -129,7 +127,8 @@ class LoadItemsTable extends Component {
             colInput: "col-sm-8",
             divStyle: { paddingLeft: '17px' },
             disable: false,
-            value: value
+            value: value,
+            onChange: () => { }
         }
 
         if (field.idcampo === 'avisos') {
@@ -145,12 +144,15 @@ class LoadItemsTable extends Component {
                     onChange={() => { }}
                 />
             )
+        } else if (field.idcampo === 'ind_stock') {
+            result = (<DisplayLight semaforo={value} />)
         } else {
             result = (
                 <InputText
                     {...optionsInput}
-                    onChange={(data) => {
-                        console.log(field.idcampo, data);
+                    onBlur={(value) => {
+                        const params = { niprod: row.niprod, idcampo: field.idcampo, value }
+                        this.props.setTableDataProducts(params)
                     }}
                 />
             )
@@ -208,7 +210,7 @@ class LoadItemsTable extends Component {
     }
 
     render() {
-        const { theme, t, searchBox, divClass, config, search } = this.props;
+        const { theme, t, searchBox, divClass, config, search, productsUpdate } = this.props;
         const tableColumns = (config && search) ? this.getColumns() : [];
         const noExpand = this.getNoexpandRows();
         const expandRow = {
@@ -226,12 +228,30 @@ class LoadItemsTable extends Component {
         };
 
         const rowData = (search.Productos) ? search.Productos.map((prod) => {
-            return {
-                ...prod,
-                id: prod.niprod
+            let result = {};
+
+            if (productsUpdate) {
+                productsUpdate.forEach(update => {
+                    if (update.niprod === prod.niprod) {
+                        result = {
+                            ...update,
+                            id: prod.niprod
+                        }
+                    }
+                });
+
+            } else {
+                result = {
+                    ...prod,
+                    id: prod.niprod
+                }
             }
+
+            return result;
+
         }) : null;
 
+        console.log(rowData, '????')
         return (
             <Row className={divClass}>
                 {searchBox && <SearchBox />}
@@ -254,10 +274,10 @@ class LoadItemsTable extends Component {
 
 const mapStateToProps = ({ voucher, product }) => {
     const { config } = voucher;
-    const { search } = product
-    return { config, search };
+    const { search, productsUpdate } = product
+    return { config, search, productsUpdate };
 };
 
-const connectForm = connect(mapStateToProps, { getConfigVoucher })(LoadItemsTable);
+const connectForm = connect(mapStateToProps, { getConfigVoucher, setTableDataProducts })(LoadItemsTable);
 
 export default themr('LoadItemsTableStyles', styles)(withTranslation()(connectForm));

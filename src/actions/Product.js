@@ -6,7 +6,8 @@ import {
     GET_PRICE_BY_PRODUCT,
     GET_PRICE_BY_PRODUCT_SUCCESS,
     CHECK_ITEM_BY_PRODUCT,
-    CHECK_ITEM_BY_PRODUCT_SUCCESS
+    CHECK_ITEM_BY_PRODUCT_SUCCESS,
+    SET_TABLE_DATA_PRODUCTS
 } from '../constants/ActionsTypes';
 
 
@@ -64,5 +65,13 @@ export const checkItemByProductSuccess = (response) => {
     return {
         type: CHECK_ITEM_BY_PRODUCT_SUCCESS,
         payload: response
+    }
+};
+
+
+export const setTableDataProducts = (params) => {
+    return {
+        type: SET_TABLE_DATA_PRODUCTS,
+        payload: params
     }
 };

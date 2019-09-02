@@ -295,7 +295,7 @@ export default (mockAdapter) => {
                 { "idcampo": "ind_stock", "descripcion": "Indic.Stock", "label": "", "editable": 0, "visible": 1, "mascara": "" },
                 { "idcampo": "precio_unit", "descripcion": "Precio unit.", "label": "Precio Unit", "editable": 1, "visible": 1, "mascara": "precioUnitario" },
                 { "idcampo": "modif_pcio", "descripcion": "Clave para modificar precio", "label": "", "editable": 1, "visible": 0, "mascara": "" },
-                { "idcampo": "neto", "descripcion": "Importe neto", "label": "Neto", "editable": 1, "visible": 1, "mascara": "importeNeto" },
+                { "idcampo": "neto", "descripcion": "Importe neto", "label": "Neto", "editable": 1, "visible": 1, "mascara": "precioUnitario" },
                 { "idcampo": "fec_entrega", "descripcion": "Fecha entrega", "label": "Fec.Entr.", "editable": 1, "visible": 1, "valid": "FEC>=H", "mascara": "fechaLarga" },
                 { "idcampo": "avisos", "descripcion": "avisos", "label": "Ofertas", "editable": 0, "visible": 1, "mascara": "" },
                 //{ "idcampo": "fin_item", "visible": 1, "mascara": "" },

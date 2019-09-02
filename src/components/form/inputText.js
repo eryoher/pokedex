@@ -38,6 +38,7 @@ class InputText extends Component {
     handleChage = (data) => {
         const { onChange } = this.props;
         const value = (data.target) ? data.target.value : data;
+        //console.log(value, 'input value')
         this.setState({ inputValue: value });
         if (onChange) {
             onChange(data);
@@ -52,8 +53,12 @@ class InputText extends Component {
     }
 
     handleNumberOnblur = (data) => {
-        const { onBlur } = this.props
-        const newValue = data.target.value.split('.').join('');
+        const { onBlur } = this.props;
+        const { inputValue } = this.state
+        const value = data.target.value;
+        //console.log(inputValue, '<<<>>>', value);
+        const newValue = (inputValue === '') ? inputValue : value.split('.').join('');
+        this.setState({ inputValue: newValue });
         onBlur(newValue);
     }
 
@@ -146,7 +151,7 @@ class InputText extends Component {
                 placeholder: placeholder,
                 disabled: !config.editable,
                 className: `${theme.inputText} ${classText}`,
-                value: (this.state.inputValue) ? this.state.inputValue : value,
+                value: this.state.inputValue,
                 onChange: (v) => this.handleChage(v),
                 onBlur: (v) => this.handleOnblur(v)
             }

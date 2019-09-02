@@ -41,6 +41,28 @@ class LoadItemsTable extends Component {
         return result;
     }
 
+    getWithColumn = (idField) => {
+        switch (idField) {
+            case 'desc_prod':
+                return { width: '15%' }
+            case 'fec_entrega':
+                return { width: '13%' }
+            case 'avisos':
+                return { width: '8%' }
+            case 'ind_stock':
+                return { width: '3%' }
+            case 'precio_unit':
+                return { width: '13%' }
+            case 'neto':
+                return { width: '13%' }
+            default:
+                return { width: '10%' }
+
+        }
+
+        //(field.idcampo === 'desc_prod' || field.idcampo === 'fec_entrega') ? { width: '15%' } : { width: '10%' }
+    }
+
     getColumns = () => {
         const { config, theme } = this.props;
 
@@ -50,7 +72,7 @@ class LoadItemsTable extends Component {
                 text: (field.label) ? field.label : '',
                 align: 'center',
                 headerAlign: 'center',
-                headerStyle: (field.idcampo === 'desc_prod' || field.idcampo === 'fec_entrega') ? { width: '15%' } : { width: '10%' },
+                headerStyle: this.getWithColumn(field.idcampo),
                 hidden: !field.visible,
                 title: (field.idcampo === 'avisos') ? (cell, row, ) => {
                     let title = '';
@@ -251,7 +273,7 @@ class LoadItemsTable extends Component {
 
         }) : null;
 
-        //        console.log(rowData, '????')
+        //console.log(rowData, '????')
         return (
             <Row className={divClass}>
                 {searchBox && <SearchBox />}

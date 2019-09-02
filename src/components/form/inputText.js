@@ -111,7 +111,7 @@ class InputText extends Component {
                         {...options}
                         mask={Number}
                         scale={mask.cantDecimales}
-                        thousandsSeparator={'.'}
+                        thousandsSeparator={(mask.usarSeparadorMil) ? '.' : ''}
                         onBlur={(v) => this.handleNumberOnblur(v)}
                     />
                 )

@@ -27,7 +27,7 @@ mockAdapter.onPost('/login').reply(200, {
         precioUnitario: {
           tipo: 'numero',
           cantDecimales: 2,
-          usarSeparadorMil: true
+          usarSeparadorMil: false
         },
         idTrabajador: {
           valor: '00-00000000-0',

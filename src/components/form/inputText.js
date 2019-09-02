@@ -38,7 +38,6 @@ class InputText extends Component {
     handleChage = (data) => {
         const { onChange } = this.props;
         const value = (data.target) ? data.target.value : data;
-        //console.log(value, 'inpu valor')
         this.setState({ inputValue: value });
         if (onChange) {
             onChange(data);
@@ -50,6 +49,12 @@ class InputText extends Component {
         if (onBlur) {
             onBlur(this.state.inputValue);
         }
+    }
+
+    handleNumberOnblur = (data) => {
+        const { onBlur } = this.props
+        const newValue = data.target.value.split('.').join('');
+        onBlur(newValue);
     }
 
     getconfigField = (id) => {
@@ -98,9 +103,11 @@ class InputText extends Component {
                 //console.log(mask)
                 response = (
                     <IMaskInput
+                        {...options}
                         mask={Number}
                         scale={mask.cantDecimales}
-                        {...options}
+                        thousandsSeparator={'.'}
+                        onBlur={(v) => this.handleNumberOnblur(v)}
                     />
                 )
             } else {

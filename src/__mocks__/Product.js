@@ -2,7 +2,7 @@ export default (mockAdapter) => {
 
     mockAdapter.onGet('/Productos/precio').reply(200, {
         data: {
-            "prod_pcio_vta": 35.43
+            "prod_pcio_vta": '3245.05'
         }
     });
 
@@ -39,7 +39,7 @@ export default (mockAdapter) => {
                     "cod_prod": "PERSEL00454",
                     "desc_prod": "Desodorante Axe musk",
                     "codbarra": "07795555225225",
-                    "unid_v": "UN",
+                    "unid_v": "PK",
                     "base_v": 1,
                     "ind_stock": 2,
                     "precio_unit": '3025',
@@ -84,7 +84,7 @@ export default (mockAdapter) => {
                     "cod_prod": "PERSEL00454",
                     "desc_prod": "Desodorante Axe musk",
                     "codbarra": "07795555225225",
-                    "unid_v": "UN",
+                    "unid_v": "CJ",
                     "base_v": 1,
                     "ind_stock": '0',
                     "precio_unit": '3256',

@@ -11,7 +11,8 @@ import {
 const initialState = {
     search: [],
     price: null,
-    productsUpdate: null
+    productsUpdate: null,
+    paramsPrice: null
 }
 
 function rootReducer(state = initialState, action) {
@@ -21,9 +22,28 @@ function rootReducer(state = initialState, action) {
         case SEARCH_PRODUCTS_SUCCESS:
             return { ...state, search: action.payload.data }
         case GET_PRICE_BY_PRODUCT:
-            return { ...state, price: null }
+            return { ...state, price: null, paramsPrice: action.payload }
         case GET_PRICE_BY_PRODUCT_SUCCESS:
-            return { ...state, price: action.payload.data }
+            const price = action.payload.data;
+            const { paramsPrice } = state;
+            let updateState = {
+                ...state,
+                productsUpdate: [
+                    ...state.search.Productos,
+                ],
+                price
+            }
+
+            if (updateState.productsUpdate) {
+                updateState.productsUpdate.forEach(prd => {
+                    if (prd.niprod === paramsPrice.Idproducto) {
+                        prd.precio_unit = price.prod_pcio_vta
+                        prd.neto = (parseFloat(price.prod_pcio_vta) * parseInt(paramsPrice.cantidad)).toString();
+                    }
+                });
+            }
+
+            return updateState;
         case CHECK_ITEM_BY_PRODUCT:
             return { ...state, itemTable: null }
         case CHECK_ITEM_BY_PRODUCT_SUCCESS:
@@ -36,7 +56,6 @@ function rootReducer(state = initialState, action) {
                     ...state.search.Productos,
                 ]
             }
-
             if (createState.productsUpdate) {
                 createState.productsUpdate.forEach(prd => {
                     if (prd.niprod === params.niprod) {

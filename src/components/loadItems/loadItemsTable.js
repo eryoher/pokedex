@@ -13,7 +13,7 @@ import SearchBox from 'components/common/searchBox';
 import { selectFilter, Comparator } from 'react-bootstrap-table2-filter';
 import PopupImage from 'components/common/popupImage';
 import { connect } from 'react-redux';
-import { getConfigVoucher, setTableDataProducts } from '../../actions';
+import { getConfigVoucher, setTableDataProducts, getPriceByProduct } from '../../actions';
 import InputDropdown from 'components/form/inputDropdown';
 
 
@@ -163,7 +163,10 @@ class LoadItemsTable extends Component {
                 <InputDropdown
                     {...optionsInput}
                     options={selectOptions}
-                    onChange={() => { }}
+                    onChange={(data) => {
+                        const value = data.target.value;
+                        this.props.setTableDataProducts({ niprod: row.niprod, idcampo: field.idcampo, value });
+                    }}
                 />
             )
         } else if (field.idcampo === 'ind_stock') {
@@ -175,6 +178,14 @@ class LoadItemsTable extends Component {
                     onBlur={(value) => {
                         const params = { niprod: row.niprod, idcampo: field.idcampo, value }
                         this.props.setTableDataProducts(params)
+                        if (field.idcampo === 'cantidad') {
+                            this.props.getPriceByProduct({
+                                "IdOperacion": 123456, //Falta adicionar id Operacion.
+                                "Idproducto": row.niprod,
+                                "cantidad": value,
+                                "unid_vta": row.unid_v
+                            });
+                        }
                     }}
                 />
             )
@@ -300,6 +311,6 @@ const mapStateToProps = ({ voucher, product }) => {
     return { config, search, productsUpdate };
 };
 
-const connectForm = connect(mapStateToProps, { getConfigVoucher, setTableDataProducts })(LoadItemsTable);
+const connectForm = connect(mapStateToProps, { getConfigVoucher, setTableDataProducts, getPriceByProduct })(LoadItemsTable);
 
 export default themr('LoadItemsTableStyles', styles)(withTranslation()(connectForm));

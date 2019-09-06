@@ -43,7 +43,21 @@ class InputDropdown extends Component {
     }
 
     renderField = () => {
-        const { label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, options, disable, theme, inputFormCol } = this.props;
+        const { label,
+            placeholder,
+            name,
+            styles,
+            inputId,
+            colInput,
+            colLabel,
+            styleLabel,
+            divStyle,
+            options,
+            disable,
+            theme,
+            inputFormCol,
+            value } = this.props;
+
         const classInput = (label) ? colInput : "col-sm-12";
         const classLabel = (label) ? colLabel : "";
         const config = this.getconfigField(inputId);
@@ -64,6 +78,7 @@ class InputDropdown extends Component {
                                 disabled={!config.editable}
                                 className={`${theme.inputDropdown} custom-select`}
                                 onChange={(value) => this.props.onChange(value)}
+                                value={value}
                             >
                                 {options && this.renderOptions()}
                             </select>

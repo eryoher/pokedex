@@ -4,6 +4,7 @@ import clientMock from './Clients';
 import voucherMock from './Voucher';
 import voucherTypeMock from './VoucherType';
 import productMock from './Product';
+import itemsMock from './Items';
 
 const mockAdapter = new MockAdapter(Axios, {
   delayResponse: 2000
@@ -13,7 +14,7 @@ clientMock(mockAdapter);
 voucherMock(mockAdapter);
 voucherTypeMock(mockAdapter);
 productMock(mockAdapter);
-
+itemsMock(mockAdapter);
 
 mockAdapter.onPost('/login').reply(200, {
   data: {

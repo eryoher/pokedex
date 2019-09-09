@@ -13,7 +13,7 @@ import SearchBox from 'components/common/searchBox';
 import { selectFilter, Comparator } from 'react-bootstrap-table2-filter';
 import PopupImage from 'components/common/popupImage';
 import { connect } from 'react-redux';
-import { getConfigVoucher, setTableDataProducts, getPriceByProduct } from '../../actions';
+import { getConfigVoucher, setTableDataProducts, getPriceByProduct, getLoadItems } from '../../actions';
 import InputDropdown from 'components/form/inputDropdown';
 
 
@@ -28,6 +28,22 @@ class LoadItemsTable extends Component {
 
     componentDidMount = () => {
         this.props.getConfigVoucher({ cod_proceso: 'P_CargaItemenVentas', idOperacion: 1 });
+    }
+
+    handleAddToCart = (row) => {
+
+        const params = {
+            idOperacion: 221223, //Falta idoperacion
+            niprod: row.niprod,
+            /*cod_unid: row.unid_v,
+            cantidad: row.cantidad,
+            precio_unit: row.precio_unit,
+            neto: row.neto,
+            fecha_entrega: row.fec_entrega*/ //Se comenta temporal hasta usar servicios reales.
+        }
+
+        this.props.getLoadItems(params);
+
     }
 
     getOptionsDeal = () => {
@@ -115,9 +131,19 @@ class LoadItemsTable extends Component {
                 headerAlign: 'center',
                 headerStyle: { width: '5%' },
                 formatter: ((cell, row, rowIndex) => {
-                    return (
-                        <FontAwesomeIcon icon={faShoppingCart} />
-                    )
+                    if (row.fec_entrega) {
+                        return (
+                            <a href={'#'} onClick={() => this.handleAddToCart(row)}>
+                                <FontAwesomeIcon icon={faShoppingCart} />
+                            </a>
+                        )
+                    } else {
+                        return (
+
+                            <FontAwesomeIcon icon={faShoppingCart} />
+
+                        )
+                    }
                 }),
 
             }
@@ -311,6 +337,6 @@ const mapStateToProps = ({ voucher, product }) => {
     return { config, search, productsUpdate };
 };
 
-const connectForm = connect(mapStateToProps, { getConfigVoucher, setTableDataProducts, getPriceByProduct })(LoadItemsTable);
+const connectForm = connect(mapStateToProps, { getConfigVoucher, setTableDataProducts, getPriceByProduct, getLoadItems })(LoadItemsTable);
 
 export default themr('LoadItemsTableStyles', styles)(withTranslation()(connectForm));

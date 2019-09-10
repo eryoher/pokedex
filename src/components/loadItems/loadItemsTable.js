@@ -211,6 +211,11 @@ class LoadItemsTable extends Component {
                             const newPrice = (parseFloat(row.base_v) * parseFloat(value)) / parseFloat(row.cantidad);
                             const params = { niprod: row.niprod, idcampo: 'precio_unit', value: newPrice.toString() }
                             this.props.setTableDataProducts(params);
+                        } else if (field.idcampo === 'precio_unit') {
+                            const newPrice = (parseFloat(row.cantidad) * parseFloat(value)) / parseFloat(row.base_v);
+                            const params = { niprod: row.niprod, idcampo: 'neto', value: newPrice.toString() }
+                            this.props.setTableDataProducts(params);
+
                         } else {
                             const params = { niprod: row.niprod, idcampo: field.idcampo, value };
                             this.props.setTableDataProducts(params);

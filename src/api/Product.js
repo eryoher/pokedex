@@ -6,7 +6,14 @@ export const getProducts = async (params) => {
 }
 
 export const searchProducts = async (params) => {
-    const response = await Axios.get('/Productos/busqueda', { params: params });
+    let customParams = null;
+
+    if (params.cod_prod) {
+        customParams = { cod_prod: params.cod_prod }
+    } else {
+        customParams = { desc_prod: params.desc_prod }
+    }
+    const response = await Axios.get('/Productos/busqueda', { params: customParams });
     return response.data;
 }
 

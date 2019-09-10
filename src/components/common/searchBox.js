@@ -75,7 +75,7 @@ class SearchBox extends Component {
                     <input type="checkbox" className={"form-check-input"} value="1" /> <label className={"form-check-label pt-1"}>Con Stock</label>
                 </Col>
                 <Col sm={1} className={"text-left"}>
-                    <a onClick={this.handleSearch}>
+                    <a href={"#"} onClick={this.handleSearch}>
                         <FontAwesomeIcon icon={faSearch} />
                     </a>
                 </Col>

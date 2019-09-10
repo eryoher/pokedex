@@ -139,9 +139,7 @@ class LoadItemsTable extends Component {
                         )
                     } else {
                         return (
-
                             <FontAwesomeIcon icon={faShoppingCart} />
-
                         )
                     }
                 }),

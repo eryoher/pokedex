@@ -200,8 +200,6 @@ class LoadItemsTable extends Component {
                 <InputText
                     {...optionsInput}
                     onBlur={(value) => {
-                        const params = { niprod: row.niprod, idcampo: field.idcampo, value }
-                        this.props.setTableDataProducts(params)
                         if (field.idcampo === 'cantidad') {
                             this.props.getPriceByProduct({
                                 "IdOperacion": 123456, //Falta adicionar id Operacion.
@@ -209,6 +207,13 @@ class LoadItemsTable extends Component {
                                 "cantidad": value,
                                 "unid_vta": row.unid_v
                             });
+                        } else if (field.idcampo === 'neto') {
+                            const newPrice = (parseFloat(row.base_v) * parseFloat(value)) / parseFloat(row.cantidad);
+                            const params = { niprod: row.niprod, idcampo: 'precio_unit', value: newPrice.toString() }
+                            this.props.setTableDataProducts(params);
+                        } else {
+                            const params = { niprod: row.niprod, idcampo: field.idcampo, value };
+                            this.props.setTableDataProducts(params);
                         }
                     }}
                 />

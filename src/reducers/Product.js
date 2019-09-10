@@ -39,6 +39,7 @@ function rootReducer(state = initialState, action) {
                     if (prd.niprod === paramsPrice.Idproducto) {
                         prd.precio_unit = price.prod_pcio_vta
                         prd.neto = (parseFloat(price.prod_pcio_vta) * parseInt(paramsPrice.cantidad)).toString();
+                        prd.cantidad = parseInt(paramsPrice.cantidad);
                     }
                 });
             }

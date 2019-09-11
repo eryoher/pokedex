@@ -138,6 +138,9 @@
             "last_update_date": "Fecha última actualización",
             "totalImp": "Importe Total",
             "total_gross_margin": "Total Margen Bruto"
+        },
+        "modal": {
+            "title": "Modificación de precio"
         }
     },
     "shoppingCart": {

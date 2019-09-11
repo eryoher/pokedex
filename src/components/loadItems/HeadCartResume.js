@@ -44,7 +44,7 @@ class HeadCartResume extends Component {
                 </Col>
                 {itemsCart &&
                     <>
-                        <Col sm={3} className={"text-right  mt-3 mb-3"} >
+                        <Col sm={3} className={"text-center  mt-3 mb-3"} >
                             {`${t('loadItem.table.totalImp')} :`} <DisplayAmount amount={itemsCart.total_importe} />
                         </Col>
                         <Col sm={1} className={"text-right  mb-3"} >
@@ -55,7 +55,7 @@ class HeadCartResume extends Component {
                     </>
                 }
 
-                <Col sm={2} className={"text-center  mt-3"} >
+                <Col sm={2} className={"text-left  mt-3"} >
                     <FontAwesomeIcon icon={faShoppingCart} onClick={this.handleOpen} />
                 </Col>
                 {

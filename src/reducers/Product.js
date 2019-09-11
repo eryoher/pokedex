@@ -38,8 +38,14 @@ function rootReducer(state = initialState, action) {
                 updateState.productsUpdate.forEach(prd => {
                     if (prd.niprod === paramsPrice.Idproducto) {
                         prd.precio_unit = price.prod_pcio_vta
-                        prd.neto = (parseFloat(price.prod_pcio_vta) * parseInt(paramsPrice.cantidad)).toString();
-                        prd.cantidad = parseInt(paramsPrice.cantidad);
+                        if (paramsPrice.cantidad && parseInt(paramsPrice.cantidad) > 0) {
+                            prd.neto = (parseFloat(price.prod_pcio_vta) * parseInt(paramsPrice.cantidad)).toString();
+                            prd.cantidad = parseInt(paramsPrice.cantidad);
+                        } else {
+                            prd.neto = '0';
+                            prd.cantidad = '0';
+                        }
+
                     }
                 });
             }

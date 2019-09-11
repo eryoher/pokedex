@@ -37,7 +37,7 @@ class InputText extends Component {
 
     handleChage = (data) => {
         const { onChange } = this.props;
-        const value = (data.target) ? data.target.value : data;
+        const value = (data && data.target) ? data.target.value : data;
         //console.log(value, 'input value')
         this.setState({ inputValue: value });
         if (onChange) {
@@ -91,8 +91,9 @@ class InputText extends Component {
                 response = (
                     <DatePicker
                         {...options}
-                        selected={(options.value) ? new Date(options.value) : new Date()}
+                        selected={(options.value) ? new Date(options.value) : null}
                         dateFormat={formatDate}
+                        isClearable={true}
                     />
                 )
             } else if (mask.tipo === 'personalizado') {

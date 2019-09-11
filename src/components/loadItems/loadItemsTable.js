@@ -15,6 +15,7 @@ import PopupImage from 'components/common/popupImage';
 import { connect } from 'react-redux';
 import { getConfigVoucher, setTableDataProducts, getPriceByProduct, getLoadItems } from '../../actions';
 import InputDropdown from 'components/form/inputDropdown';
+import InputPriceUnit from './inputPriceUnit';
 
 
 class LoadItemsTable extends Component {
@@ -195,6 +196,13 @@ class LoadItemsTable extends Component {
             )
         } else if (field.idcampo === 'ind_stock') {
             result = (<DisplayLight semaforo={value} />)
+        } else if (field.idcampo === 'precio_unit') {
+            result = (
+                <InputPriceUnit
+                    optionsInput={optionsInput}
+                    row={row}
+                />
+            )
         } else {
             result = (
                 <InputText
@@ -211,11 +219,6 @@ class LoadItemsTable extends Component {
                             const newPrice = (parseFloat(row.base_v) * parseFloat(value)) / parseFloat(row.cantidad);
                             const params = { niprod: row.niprod, idcampo: 'precio_unit', value: newPrice.toString() }
                             this.props.setTableDataProducts(params);
-                        } else if (field.idcampo === 'precio_unit') {
-                            const newPrice = (parseFloat(row.cantidad) * parseFloat(value)) / parseFloat(row.base_v);
-                            const params = { niprod: row.niprod, idcampo: 'neto', value: newPrice.toString() }
-                            this.props.setTableDataProducts(params);
-
                         } else {
                             const params = { niprod: row.niprod, idcampo: field.idcampo, value };
                             this.props.setTableDataProducts(params);
@@ -336,8 +339,6 @@ class LoadItemsTable extends Component {
         )
     }
 }
-
-
 
 const mapStateToProps = ({ voucher, product }) => {
     const { config } = voucher;

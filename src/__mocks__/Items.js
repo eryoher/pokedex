@@ -3,9 +3,9 @@ export default (mockAdapter) => {
     mockAdapter.onGet('/Items/carga_item_vta', { params: { "niprod": 123456 } }).reply(200, {
         data: {
             "solic_stock": 0,
-            "total_importe": 12541.35,
-            "total_item": 5,
-            "total_cant": 150
+            "total_importe": 0.00,
+            "total_item": 0,
+            "total_cant": 0
         }
     });
 

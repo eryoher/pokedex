@@ -14,11 +14,16 @@ import MaskImp from 'mask-imp';
 class InputText extends Component {
 
     constructor(props) {
-        super(props);
-
+        super(props)
         this.state = {
             showLockModal: false,
             inputValue: this.props.value
+        }
+    }
+
+    componentWillReceiveProps = (nextProps) => {
+        if (nextProps.value !== this.state.inputValue) {
+            this.setState({ inputValue: nextProps.value }) //Valor inicial 
         }
     }
 
@@ -38,7 +43,6 @@ class InputText extends Component {
     handleChage = (data) => {
         const { onChange } = this.props;
         const value = (data && data.target) ? data.target.value : data;
-        //console.log(value, 'input value')
         this.setState({ inputValue: value });
         if (onChange) {
             onChange(data);
@@ -56,7 +60,6 @@ class InputText extends Component {
         const { onBlur } = this.props;
         const { inputValue } = this.state
         const value = data.target.value;
-        //console.log(inputValue, '<<<>>>', value);
         const newValue = (inputValue === '') ? inputValue : value.split('.').join('');
         this.setState({ inputValue: newValue });
         onBlur(newValue);

@@ -132,17 +132,11 @@ class LoadItemsTable extends Component {
                 headerAlign: 'center',
                 headerStyle: { width: '5%' },
                 formatter: ((cell, row, rowIndex) => {
-                    if (row.fec_entrega) {
-                        return (
-                            <a href={'#'} onClick={() => this.handleAddToCart(row)}>
-                                <FontAwesomeIcon icon={faShoppingCart} />
-                            </a>
-                        )
-                    } else {
-                        return (
+                    return (
+                        <a href={'#'} onClick={() => this.handleAddToCart(row)}>
                             <FontAwesomeIcon icon={faShoppingCart} />
-                        )
-                    }
+                        </a>
+                    )
                 }),
 
             }
@@ -287,6 +281,7 @@ class LoadItemsTable extends Component {
             renderer: row => this.renderExpandRow(row),
             showExpandColumn: true,
             nonExpandable: noExpand,
+            expandByColumnOnly: true,
             expandHeaderColumnRenderer: ({ isAnyExpands }) => {
                 return <CollapseBotton status={isAnyExpands} />
             },

@@ -11,24 +11,24 @@ export default class CommonTable extends Component {
         console.log(row, isSelect);
     }
 
-    render() {        
+    render() {
         const { columns, wrapperClasses, bordered, rowStyle, rowClasses, headerClasses, data, selectRow, expandRow } = this.props;
         const border = (bordered) ? bordered : false;
         return (
             <>
-                <BootstrapTable 
-                    keyField='id' 
-                    data={ data } 
-                    columns={ columns }                     
+                <BootstrapTable
+                    keyField='id'
+                    data={data}
+                    columns={columns}
                     rowClasses={rowClasses}
                     headerClasses={headerClasses}
-                    rowStyle={ rowStyle }                    
+                    rowStyle={rowStyle}
                     bordered={border}
                     wrapperClasses={wrapperClasses}
-                    selectRow={ selectRow }
+                    selectRow={selectRow}
                     filter={filterFactory()}
                     expandRow={expandRow}
-                />   
+                />
             </>
         )
     }

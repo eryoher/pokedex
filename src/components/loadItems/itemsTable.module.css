@@ -5,6 +5,8 @@
 
 .tableRow>td {
     padding-bottom: 0px !important;
+    padding-top: 7px !important;
+    vertical-align: middle !important;
 }
 
 .tableHeader {

@@ -47,7 +47,7 @@ class HeadCartResume extends Component {
                         <Col sm={3} className={"text-center  mt-3 mb-3"} >
                             {`${t('loadItem.table.totalImp')} :`} <DisplayAmount amount={itemsCart.total_importe} />
                         </Col>
-                        <Col sm={1} className={"text-right  mb-3"} >
+                        <Col sm={1} className={"text-right  mb-3"} style={{ paddingRight: '5px' }} >
                             <span className={`badge badge-primary ${theme.cantBadge}`}>
                                 {`${itemsCart.total_item} / ${itemsCart.total_cant}`}
                             </span>
@@ -55,7 +55,7 @@ class HeadCartResume extends Component {
                     </>
                 }
 
-                <Col sm={2} className={"text-left  mt-3"} >
+                <Col sm={2} className={"text-left  mt-3"} style={{ paddingLeft: '5px' }} >
                     <FontAwesomeIcon icon={faShoppingCart} onClick={this.handleOpen} />
                 </Col>
                 {

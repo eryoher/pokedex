@@ -40,8 +40,9 @@ class InputPriceUnit extends Component {
                     inputFormCol={{ sm: 10 }}
                     divStyle={{ paddingRight: '5px', paddingLeft: "17px" }}
                     onBlur={(value) => {
-                        const customValue = value.split(',').join('.');
-                        const newPrice = (parseFloat(row.cantidad) * parseFloat(customValue)) / parseFloat(row.base_v);
+                        const customValue = (value) ? parseFloat(value.split(',').join('.')) : 0;
+                        const customCantidad = (row.cantidad) ? parseFloat(row.cantidad) : 0;
+                        const newPrice = (customCantidad * customValue) / parseFloat(row.base_v);
                         const params = { niprod: row.niprod, idcampo: 'neto', value: newPrice.toString() }
                         this.props.setTableDataProducts(params);
                         this.props.setTableDataProducts({ niprod: row.niprod, idcampo: 'precio_unit', value: value });

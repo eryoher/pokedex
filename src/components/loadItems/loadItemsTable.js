@@ -16,6 +16,8 @@ import { connect } from 'react-redux';
 import { getConfigVoucher, setTableDataProducts, getPriceByProduct, getLoadItems } from '../../actions';
 import InputDropdown from 'components/form/inputDropdown';
 import InputPriceUnit from './inputPriceUnit';
+import { validateField } from 'lib/FieldValidations';
+import NotificationMessage from 'components/common/notificationMessage';
 
 
 class LoadItemsTable extends Component {
@@ -23,7 +25,11 @@ class LoadItemsTable extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            filterVal: null
+            filterVal: null,
+            inputsError: [],
+            showError: false,
+            errrorTitle: '',
+            errorMessage: ''
         }
     }
 
@@ -31,8 +37,14 @@ class LoadItemsTable extends Component {
         this.props.getConfigVoucher({ cod_proceso: 'P_CargaItemenVentas', idOperacion: 1 });
     }
 
-    handleAddToCart = (row) => {
+    handleCloseError = () => {
+        this.setState({ showError: false })
+    }
 
+
+    handleAddToCart = (row) => {
+        const { config, t } = this.props;
+        const message = [];
         const params = {
             idOperacion: 221223, //Falta idoperacion
             niprod: row.niprod,
@@ -43,8 +55,25 @@ class LoadItemsTable extends Component {
             fecha_entrega: row.fec_entrega*/ //Se comenta temporal hasta usar servicios reales.
         }
 
-        this.props.getLoadItems(params);
+        let flag = true;
 
+        config.campos.forEach(field => {
+            if (parseInt(field.requerido)) {
+                if (!validateField(row[field.idcampo], field.valid)) {
+                    this.props.setTableDataProducts({ niprod: row.niprod, idcampo: field.idcampo, value: 'error_input' });
+                    message.push(`El campo ${field.label} es requerido.`);
+                    flag = false;
+                }
+            }
+        });
+
+        if (flag) {
+            this.props.getLoadItems(params);
+            this.setState({ showError: false });
+
+        } else {
+            this.setState({ showError: true, errorMessage: message, errorTitle: t('global.input_require') });
+        }
     }
 
     getOptionsDeal = () => {
@@ -77,12 +106,10 @@ class LoadItemsTable extends Component {
 
         }
 
-        //(field.idcampo === 'desc_prod' || field.idcampo === 'fec_entrega') ? { width: '15%' } : { width: '10%' }
     }
 
     getColumns = () => {
         const { config, theme } = this.props;
-
         const rows = config.campos.map((field) => {
             return {
                 dataField: field.idcampo,
@@ -156,7 +183,10 @@ class LoadItemsTable extends Component {
     }
 
     renderFormat = (field, value, row) => {
+
         let result = null;
+        const inputError = (value === 'error_input') ? true : false;
+        const customValue = (value === 'error_input') ? '' : value;
 
         const optionsInput = {
             inputFormCol: { sm: 12 },
@@ -168,7 +198,8 @@ class LoadItemsTable extends Component {
             colInput: "col-sm-8",
             divStyle: { paddingLeft: '17px' },
             disable: false,
-            value: value,
+            value: customValue,
+            showError: inputError,
             onChange: () => { }
         }
 
@@ -210,9 +241,14 @@ class LoadItemsTable extends Component {
                                 "unid_vta": row.unid_v
                             });
                         } else if (field.idcampo === 'neto') {
-                            const newPrice = (parseFloat(row.base_v) * parseFloat(value)) / parseFloat(row.cantidad);
+                            const newValue = (value) ? parseFloat(value) : 0;
+                            const cantidad = (row.cantidad) ? parseFloat(row.cantidad) : 0;
+                            const newPrice = (parseFloat(row.base_v) * newValue) / cantidad;
                             const params = { niprod: row.niprod, idcampo: 'precio_unit', value: newPrice.toString() }
+                            const paramsNeto = { niprod: row.niprod, idcampo: 'neto', value: newValue.toString() }
                             this.props.setTableDataProducts(params);
+                            this.props.setTableDataProducts(paramsNeto);
+
                         } else {
                             const params = { niprod: row.niprod, idcampo: field.idcampo, value };
                             this.props.setTableDataProducts(params);
@@ -294,7 +330,6 @@ class LoadItemsTable extends Component {
 
         const rowData = (search.Productos) ? search.Productos.map((prod) => {
             let result = {};
-
             if (productsUpdate) {
                 productsUpdate.forEach(update => {
                     if (update.niprod === prod.niprod) {
@@ -319,6 +354,13 @@ class LoadItemsTable extends Component {
         //console.log(rowData, '????')
         return (
             <Row className={divClass}>
+                <Col sm={12} className={"mb-3"} >
+                    <NotificationMessage
+                        {...this.state}
+                        handleCloseError={this.handleCloseError}
+                        type={'danger'}
+                    />
+                </Col>
                 {searchBox && <SearchBox />}
                 {config && rowData &&
                     <Col className={`${divClass} col-12`}>

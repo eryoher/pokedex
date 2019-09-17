@@ -51,7 +51,7 @@ class HeadBoardFormInput extends Component {
     }
 
     setError = (error) => {
-        this.setState({ showError: true, errorMessage: error.mensaje, errrorTitle: error.descripcion });
+        this.setState({ showError: true, errorMessage: error.mensaje, errorTitle: error.descripcion });
     }
 
     toggle() {
@@ -78,7 +78,7 @@ class HeadBoardFormInput extends Component {
     }
 
     handleChangeDate = (date) => {
-        console.log(date, 'esta es la fecha')
+        //console.log(date, 'esta es la fecha')
         const { setFieldValue } = this.props;
         setFieldValue('fecha', date);
         const dateFormated = moment(date).format("MM/DD/YYYY");
@@ -152,155 +152,158 @@ class HeadBoardFormInput extends Component {
             return ({ id: opt.cod_cond_vta, label: opt.desc_cond_vta })
         }) : []
 
-
-        return (
-            <Row>
-                <NotificationMessage
-                    {...this.state}
-                    handleCloseError={this.handleCloseError}
-                    type={'danger'}
-                />
-
-                <InputDropdown
-                    inputFormCol={{ sm: 11 }}
-                    fields={fields}
-                    label={t('headboard.form.company_branch')}
-                    inputId={'suc_empresa_venta'}
-                    name={'suc_empresa_venta'}
-                    placeholder={t('voucher.headboard.form.insert_company_branch')}
-                    styles={{ width: '100%' }}
-                    colLabel={"col-sm-2"}
-                    colInput={"col-sm-10"}
-                    options={optionsCompany}
-                    disable={readOnly}
-                    onChange={() => { }}
-                />
-                <Row className={'col-11'} style={{ paddingRight: '0px' }} >
-                    <InputText
-                        inputFormCol={{ sm: 6 }}
-                        fields={fields}
-                        label={t('headboard.form.voucher')}
-                        inputId={"Titulo_comp_vta"}
-                        name={"Titulo_comp_vta"}
-                        placeholder={t('headboard.form.insert_voucher')}
-                        colLabel={"col-sm-4"}
-                        colInput={"col-sm-8"}
-                        divStyle={{ paddingLeft: '17px' }}
-                        disable={readOnly}
-                        value={values.Titulo_comp_vta}
-                        onChange={(data) => {
-                            setFieldValue('Titulo_comp_vta', data.target.value);
-                        }}
+        if (fields) {
+            return (
+                <Row>
+                    <NotificationMessage
+                        {...this.state}
+                        handleCloseError={this.handleCloseError}
+                        type={'danger'}
                     />
-                    <InputText
-                        inputFormCol={{ sm: 6, style: { paddingRight: '0px' } }}
-                        fields={fields}
-                        label={t('headboard.form.date')}
-                        inputId={'fecha'}
-                        name={'fecha'}
-                        placeholder={t('headboard.form.insert_date')}
-                        colLabel={"col-sm-4"}
-                        colInput={"col-sm-8"}
-                        styleLabel={{ textAlign: 'right' }}
-                        disable={readOnly}
-                        value={values.fecha}
-                        onChange={this.handleChangeDate}
-                    />
-
-                </Row>
-                <Row className={'col-11'} style={{ paddingRight: '0px' }} >
-                    <InputDropdown
-                        inputFormCol={{ sm: 6 }}
-                        fields={fields}
-                        label={t('headboard.form.currency')}
-                        inputId={"mon_comp_vta"}
-                        name={"mon_comp_vta"}
-                        placeholder={t('headboard.form.insert_currency')}
-                        colLabel={"col-sm-4"}
-                        colInput={"col-sm-8"}
-                        divStyle={{ paddingLeft: '17px' }}
-                        disable={readOnly}
-                        options={optionsCurrency}
-                        onChange={this.handleChangeCurreny}
-                    />
-                    <InputText
-                        inputFormCol={{ sm: 5, style: { paddingLeft: '12px' } }}
-                        fields={fields}
-                        lock
-                        handleSubmit={this.handleValidateInput}
-                        label={t('headboard.form.quotation')}
-                        inputId={'cotiz'}
-                        name={'cotiz'}
-                        placeholder={t('headboard.form.insert_quotation')}
-                        colLabel={"col-sm-5"}
-                        colInput={"col-sm-7"}
-                        styleLabel={{ textAlign: 'right' }}
-                        disable={readOnly}
-                        value={values.cotiz}
-                        onChange={(data) => {
-                            setFieldValue('cotiz', data.target.value);
-                        }}
-
-                    />
-                </Row>
-                <Row className={'col-11'} style={{ paddingRight: '0px' }} >
 
                     <InputDropdown
-                        inputFormCol={{ sm: 6 }}
+                        inputFormCol={{ sm: 11 }}
                         fields={fields}
-                        label={t('headboard.form.saler')}
-                        inputId={"vend_comp_vta"}
-                        name={"vend_comp_vta"}
-                        placeholder={t('headboard.form.insert_saler')}
-                        colLabel={"col-sm-4"}
-                        colInput={"col-sm-8"}
-                        divStyle={{ paddingLeft: '17px' }}
+                        label={t('headboard.form.company_branch')}
+                        inputId={'suc_empresa_venta'}
+                        name={'suc_empresa_venta'}
+                        placeholder={t('voucher.headboard.form.insert_company_branch')}
+                        styles={{ width: '100%' }}
+                        colLabel={"col-sm-2"}
+                        colInput={"col-sm-10"}
+                        options={optionsCompany}
                         disable={readOnly}
-                        options={optionsSaler}
                         onChange={() => { }}
                     />
+                    <Row className={'col-11'} style={{ paddingRight: '0px' }} >
+                        <InputText
+                            inputFormCol={{ sm: 6 }}
+                            fields={fields}
+                            label={t('headboard.form.voucher')}
+                            inputId={"Titulo_comp_vta"}
+                            name={"Titulo_comp_vta"}
+                            placeholder={t('headboard.form.insert_voucher')}
+                            colLabel={"col-sm-4"}
+                            colInput={"col-sm-8"}
+                            divStyle={{ paddingLeft: '17px' }}
+                            disable={readOnly}
+                            value={values.Titulo_comp_vta}
+                            onChange={(data) => {
+                                setFieldValue('Titulo_comp_vta', data.target.value);
+                            }}
+                        />
+                        <InputText
+                            inputFormCol={{ sm: 6, style: { paddingRight: '0px' } }}
+                            fields={fields}
+                            label={t('headboard.form.date')}
+                            inputId={'fecha'}
+                            name={'fecha'}
+                            placeholder={t('headboard.form.insert_date')}
+                            colLabel={"col-sm-4"}
+                            colInput={"col-sm-8"}
+                            styleLabel={{ textAlign: 'right' }}
+                            disable={readOnly}
+                            value={values.fecha}
+                            onChange={this.handleChangeDate}
+                        />
 
-                    <InputDropdown
-                        inputFormCol={{ sm: 6, style: { paddingRight: '0px' } }}
-                        fields={fields}
-                        label={t('headboard.form.condSale')}
-                        inputId={"cond_comp_vta"}
-                        name={"cond_comp_vta"}
-                        placeholder={t('headboard.form.insert_condition_sale')}
-                        colLabel={"col-sm-4"}
-                        colInput={"col-sm-8"}
-                        styleLabel={{ textAlign: 'right' }}
-                        disable={readOnly}
-                        options={optionsConditions}
-                        onChange={() => { }}
-                    />
+                    </Row>
+                    <Row className={'col-11'} style={{ paddingRight: '0px' }} >
+                        <InputDropdown
+                            inputFormCol={{ sm: 6 }}
+                            fields={fields}
+                            label={t('headboard.form.currency')}
+                            inputId={"mon_comp_vta"}
+                            name={"mon_comp_vta"}
+                            placeholder={t('headboard.form.insert_currency')}
+                            colLabel={"col-sm-4"}
+                            colInput={"col-sm-8"}
+                            divStyle={{ paddingLeft: '17px' }}
+                            disable={readOnly}
+                            options={optionsCurrency}
+                            onChange={this.handleChangeCurreny}
+                        />
+                        <InputText
+                            inputFormCol={{ sm: 5, style: { paddingLeft: '12px' } }}
+                            fields={fields}
+                            lock
+                            handleSubmit={this.handleValidateInput}
+                            label={t('headboard.form.quotation')}
+                            inputId={'cotiz'}
+                            name={'cotiz'}
+                            placeholder={t('headboard.form.insert_quotation')}
+                            colLabel={"col-sm-5"}
+                            colInput={"col-sm-7"}
+                            styleLabel={{ textAlign: 'right' }}
+                            disable={readOnly}
+                            value={values.cotiz}
+                            onChange={(data) => {
+                                setFieldValue('cotiz', data.target.value);
+                            }}
 
+                        />
+                    </Row>
+                    <Row className={'col-11'} style={{ paddingRight: '0px' }} >
+
+                        <InputDropdown
+                            inputFormCol={{ sm: 6 }}
+                            fields={fields}
+                            label={t('headboard.form.saler')}
+                            inputId={"vend_comp_vta"}
+                            name={"vend_comp_vta"}
+                            placeholder={t('headboard.form.insert_saler')}
+                            colLabel={"col-sm-4"}
+                            colInput={"col-sm-8"}
+                            divStyle={{ paddingLeft: '17px' }}
+                            disable={readOnly}
+                            options={optionsSaler}
+                            onChange={() => { }}
+                        />
+
+                        <InputDropdown
+                            inputFormCol={{ sm: 6, style: { paddingRight: '0px' } }}
+                            fields={fields}
+                            label={t('headboard.form.condSale')}
+                            inputId={"cond_comp_vta"}
+                            name={"cond_comp_vta"}
+                            placeholder={t('headboard.form.insert_condition_sale')}
+                            colLabel={"col-sm-4"}
+                            colInput={"col-sm-8"}
+                            styleLabel={{ textAlign: 'right' }}
+                            disable={readOnly}
+                            options={optionsConditions}
+                            onChange={() => { }}
+                        />
+
+                    </Row>
+                    {
+                        collapse &&
+                        <>
+                            <Row className={"col-12"}>
+                                <Col sm={1}>
+                                    <CollapseBotton
+                                        onPress={() => this.toggle()}
+                                        status={this.state.collapse}
+                                    />
+                                </Col>
+                                <Col sm={11}>
+                                    <div className="dropdown-divider col-11 p-2" />
+                                </Col>
+                            </Row>
+
+                            <Collapse style={{ width: '100%' }} isOpen={this.state.collapse && collapse}>
+                                {values && this.renderCarrier()}
+                            </Collapse>
+                        </>
+                    }
+                    {
+                        !collapse && this.renderCarrier()
+                    }
                 </Row>
-                {
-                    collapse &&
-                    <>
-                        <Row className={"col-12"}>
-                            <Col sm={1}>
-                                <CollapseBotton
-                                    onPress={() => this.toggle()}
-                                    status={this.state.collapse}
-                                />
-                            </Col>
-                            <Col sm={11}>
-                                <div className="dropdown-divider col-11 p-2" />
-                            </Col>
-                        </Row>
-
-                        <Collapse style={{ width: '100%' }} isOpen={this.state.collapse && collapse}>
-                            {values && this.renderCarrier()}
-                        </Collapse>
-                    </>
-                }
-                {
-                    !collapse && this.renderCarrier()
-                }
-            </Row>
-        )
+            )
+        } else {
+            return null;
+        }
     }
 }
 

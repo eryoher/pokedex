@@ -109,7 +109,9 @@
         "description": "Descripción",
         "unit": "Unidad",
         "quantity": "Cantidad",
-        "deal": "Oferta"
+        "deal": "Oferta",
+        "input_require": "Campo requerido"
+
     },
     "login": {
         "form": {

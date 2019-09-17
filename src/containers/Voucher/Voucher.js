@@ -35,13 +35,11 @@ class Voucher extends Component {
                 <Col sm={12} className={theme.Title} >
                     {t("voucher.title")}
                 </Col>
-
                 <VoucherBreadCrumbs
                     crumbs={(voucherType) ? voucherType.procesos : []}
                     current={'p_selcli'}
                     urlParameter={this.state.type}
                 />
-
                 <VoucherClientForm />
             </Row>
         )

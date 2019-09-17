@@ -17,7 +17,9 @@ class InputText extends Component {
         super(props)
         this.state = {
             showLockModal: false,
-            inputValue: this.props.value
+            inputValue: this.props.value,
+            configInput: this.getconfigField(props.inputId),
+            requireError: (this.props.showError) ? this.props.showError : false
         }
     }
 
@@ -51,29 +53,42 @@ class InputText extends Component {
 
     handleOnblur = () => {
         const { onBlur } = this.props;
+        const { configInput } = this.state;
         if (onBlur) {
             onBlur(this.state.inputValue);
         }
+
+        if (configInput.requerido && !this.state.inputValue) {
+            this.setState({ requireError: true });
+        }
+
     }
 
     handleNumberOnblur = (data) => {
         const { onBlur } = this.props;
-        const { inputValue } = this.state
+        const { inputValue, configInput } = this.state
         const value = data.target.value;
         const newValue = (inputValue === '') ? inputValue : value.split('.').join('');
         this.setState({ inputValue: newValue });
+
+        if (configInput.requerido && !inputValue) {
+            console.log('cambia estado')
+            this.setState({ requireError: true });
+        }
+
         onBlur(newValue);
     }
 
     getconfigField = (id) => {
         const { fields } = this.props;
         let result = {};
-
-        fields.forEach(field => {
-            if (field.idcampo === id) {
-                result = field;
-            }
-        });
+        if (fields) {
+            fields.forEach(field => {
+                if (field.idcampo === id) {
+                    result = field;
+                }
+            });
+        }
 
         return result;
     }
@@ -86,7 +101,6 @@ class InputText extends Component {
 
     renderInput = (options, config) => {
         let response;
-
         if (config.mascara) {
             const mask = this.getMask(config); //Se obtiene las posibles opciones de mascara.. aca se agregan validaciones.
             if (mask.tipo === 'fecha') {
@@ -101,7 +115,6 @@ class InputText extends Component {
                 )
             } else if (mask.tipo === 'personalizado') {
                 const maskInput = (mask.valor) ? mask.valor : null;
-
                 response = (
                     <IMaskInput
                         {...options}
@@ -109,7 +122,6 @@ class InputText extends Component {
                     />
                 )
             } else if (mask.tipo === 'numero') {
-                //console.log(mask)
                 response = (
                     <IMaskInput
                         {...options}
@@ -143,15 +155,15 @@ class InputText extends Component {
         const classLabel = (label) ? colLabel : "";
         const classText = (disable) ? theme.inputDisabled : '';
         const customType = (type) ? type : 'text';
-        const config = this.getconfigField(inputId);
+        const config = this.state.configInput;
         const customStyleLabel = (config.requerido) ? { ...styleLabel, color: 'red' } : { ...styleLabel };
-
+        const inputStyles = (this.state.requireError) ? { ...styles, border: '1px solid red' } : styles;
         if (config.visible) {
             const optionsInput = {
                 id: inputId,
                 name: name,
                 type: customType,
-                style: styles,
+                style: inputStyles,
                 placeholder: placeholder,
                 disabled: !config.editable,
                 className: `${theme.inputText} ${classText}`,

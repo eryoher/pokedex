@@ -3,13 +3,13 @@ import { Row, Col, Modal, Form } from 'react-bootstrap';
 import { themr } from 'react-css-themr';
 import styles from './inputText.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLock } from '@fortawesome/free-solid-svg-icons'
+import { faLock, faTimesCircle } from '@fortawesome/free-solid-svg-icons'
 import ModalValidate from 'components/headboard/modalValidate';
 import { connect } from 'react-redux';
 import { IMaskInput } from 'react-imask';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import MaskImp from 'mask-imp';
+
 
 class InputText extends Component {
 
@@ -37,6 +37,18 @@ class InputText extends Component {
         this.setState({ showLockModal: false });
     }
 
+    handleClearValue = () => {
+        const { onBlur, onChange } = this.props
+        this.setState({ inputValue: '' })
+        if (onBlur) {
+            onBlur('');
+        }
+        if (onChange) {
+            onChange('');
+        }
+
+    }
+
     handleSubmit = (data) => {
         this.handleCancelModal();
         this.props.handleSubmit(data);
@@ -47,7 +59,7 @@ class InputText extends Component {
         const value = (data && data.target) ? data.target.value : data;
         this.setState({ inputValue: value });
         if (onChange) {
-            onChange(data);
+            onChange(value);
         }
     }
 
@@ -72,7 +84,6 @@ class InputText extends Component {
         this.setState({ inputValue: newValue });
 
         if (configInput.requerido && !inputValue) {
-            console.log('cambia estado')
             this.setState({ requireError: true });
         }
 
@@ -101,6 +112,8 @@ class InputText extends Component {
 
     renderInput = (options, config) => {
         let response;
+        const { allowClear } = this.props;
+
         if (config.mascara) {
             const mask = this.getMask(config); //Se obtiene las posibles opciones de mascara.. aca se agregan validaciones.
             if (mask.tipo === 'fecha') {
@@ -139,18 +152,32 @@ class InputText extends Component {
                 )
             }
         } else {
-            response = (
-                <input
-                    {...options}
-                />
-            )
+
+            if (allowClear) {
+                response = (
+                    <div className="input-group mb-3">
+                        <input {...options} style={{ height: '30px', fontSize: '10pt' }} className="form-control" />
+                        <div className="input-group-prepend" style={{ height: '30px' }}>
+                            <span className="input-group-text">
+                                <FontAwesomeIcon icon={faTimesCircle} onClick={this.handleClearValue} style={{ cursor: 'pointer' }} />
+                            </span>
+                        </div>
+                    </div>
+                )
+            } else {
+                response = (
+                    <input
+                        {...options}
+                    />
+                )
+            }
         }
 
         return response;
     }
 
     renderField = () => {
-        const { label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, disable, theme, type, value, onChange, inputFormCol, lock } = this.props;
+        const { label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, disable, theme, type, inputFormCol, lock } = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
         const classLabel = (label) ? colLabel : "";
         const classText = (disable) ? theme.inputDisabled : '';
@@ -158,7 +185,9 @@ class InputText extends Component {
         const config = this.state.configInput;
         const customStyleLabel = (config.requerido) ? { ...styleLabel, color: 'red' } : { ...styleLabel };
         const inputStyles = (this.state.requireError) ? { ...styles, border: '1px solid red' } : styles;
+
         if (config.visible) {
+
             const optionsInput = {
                 id: inputId,
                 name: name,
@@ -169,7 +198,7 @@ class InputText extends Component {
                 className: `${theme.inputText} ${classText}`,
                 value: this.state.inputValue,
                 onChange: (v) => this.handleChage(v),
-                onBlur: (v) => this.handleOnblur(v)
+                onBlur: (v) => this.handleOnblur(v),
             }
 
             return (

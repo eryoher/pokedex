@@ -1,5 +1,4 @@
 import React, { Component, Fragment } from 'react';
-import { Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import InputAutocomplete from 'components/form/inputAutocomplete';
@@ -7,7 +6,9 @@ import { withTranslation } from 'react-i18next';
 import { searchProducts } from '../../actions';
 import { connect } from 'react-redux';
 import InputText from 'components/form/inputText';
-
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+import { Form, Col, Row, Button } from 'react-bootstrap';
 
 class SearchBox extends Component {
 
@@ -37,49 +38,59 @@ class SearchBox extends Component {
             { idcampo: 'cod_prod', label: false, visible: 1, requerido: 0, editable: 1 },
         ]
         return (
-            <Fragment>
-                <InputText
-                    inputFormCol={{ sm: 6 }}
-                    label={false}
-                    fields={inputConfig}
-                    inputId={'desc_prod'}
-                    name={'desc_prod'}
-                    styles={{ width: '100%' }}
-                    placeholder={t('searchBox.form.insert_product')}
-                    colLabel={"col-sm-2"}
-                    colInput={"col-sm-10"}
-                    handleSearch={this.handleSearch}
-                    disable={false}
-                    value={this.state.descProd}
-                    onChange={(data) => {
-                        this.setState({ descProd: data.target.value })
-                    }}
-                />
-                <InputText
-                    inputFormCol={{ sm: 3 }}
-                    label={false}
-                    fields={inputConfig}
-                    placeholder={t('searchBox.form.insert_code')}
-                    inputId={'cod_prod'}
-                    name={'cod_prod'}
-                    styles={{ width: '100%' }}
-                    colLabel={"col-sm-2"}
-                    colInput={"col-sm-10"}
-                    disable={false}
-                    value={this.state.codProd}
-                    onChange={(data) => {
-                        this.setState({ codProd: data.target.value })
-                    }}
-                />
-                <Col sm={1}>
-                    <input type="checkbox" className={"form-check-input"} value="1" /> <label className={"form-check-label pt-1"}>Con Stock</label>
-                </Col>
-                <Col sm={1} className={"text-left"}>
-                    <a href={"#"} onClick={this.handleSearch}>
-                        <FontAwesomeIcon icon={faSearch} />
-                    </a>
-                </Col>
-            </Fragment>
+            <Formik
+                onSubmit={(values, actions) => {
+                    this.handleSearch();
+
+                }}
+                enableReinitialize={true}
+                render={({ values, handleBlur, handleChange, errors, touched, isSubmitting, handleSubmit, setFieldValue, setFieldTouched }) => (
+                    <Form onSubmit={handleSubmit} className="voucher-info-form col-12">
+                        <Row>
+                            <InputText
+                                inputFormCol={{ sm: 6 }}
+                                label={false}
+                                fields={inputConfig}
+                                inputId={'desc_prod'}
+                                name={'desc_prod'}
+                                styles={{ width: '100%' }}
+                                placeholder={t('searchBox.form.insert_product')}
+                                colLabel={"col-sm-2"}
+                                colInput={"col-sm-10"}
+                                disable={false}
+                                value={this.state.descProd}
+                                allowClear
+                                onChange={(data) => {
+                                    this.setState({ descProd: data })
+                                }}
+                            />
+                            <InputText
+                                inputFormCol={{ sm: 3 }}
+                                label={false}
+                                fields={inputConfig}
+                                placeholder={t('searchBox.form.insert_code')}
+                                inputId={'cod_prod'}
+                                name={'cod_prod'}
+                                styles={{ width: '100%' }}
+                                colLabel={"col-sm-2"}
+                                colInput={"col-sm-10"}
+                                disable={false}
+                                value={this.state.codProd}
+                                allowClear
+                                onChange={(data) => {
+                                    this.setState({ codProd: data })
+                                }}
+                            />
+                            <Col sm={1} className={"pt-1"}>
+                                <input type="checkbox" className={"form-check-input"} value="1" /> <label className={"form-check-label pt-1"}>Con Stock</label>
+                            </Col>
+                            <Col sm={1} className={"text-left"}>
+                                <Button style={{ color: '#000', backgroundColor: '#fff', borderColor: '#fff' }} type={"submit"} > <FontAwesomeIcon icon={faSearch} /></Button>
+                            </Col>
+                        </Row>
+                    </Form>
+                )}
+            />
         )
     }
 }

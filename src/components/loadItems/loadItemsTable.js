@@ -87,25 +87,41 @@ class LoadItemsTable extends Component {
         return result;
     }
 
-    getWithColumn = (idField) => {
+    getStyleColumn = (field) => {
+        const idField = field.idcampo;
+
+        let style = {};
+
         switch (idField) {
             case 'desc_prod':
-                return { width: '15%' }
+                style = { width: '20%' }
+                break;
             case 'fec_entrega':
-                return { width: '13%' }
+                style = { width: '13%' }
+                break;
             case 'avisos':
-                return { width: '8%' }
+                style = { width: '8%' }
+                break;
             case 'ind_stock':
-                return { width: '3%' }
+                style = { width: '3%' }
+                break;
             case 'precio_unit':
-                return { width: '13%' }
+                style = { width: '13%' }
+                break;
             case 'neto':
-                return { width: '13%' }
+                style = { width: '13%', color: 'red' }
+                break;
             default:
-                return { width: '10%' }
+                style = { width: '10%' }
+                break;
 
         }
 
+        if (field.requerido === '1') {
+            style.color = 'red';
+        }
+
+        return style;
     }
 
     getColumns = () => {
@@ -116,7 +132,7 @@ class LoadItemsTable extends Component {
                 text: (field.label) ? field.label : '',
                 align: 'center',
                 headerAlign: 'center',
-                headerStyle: this.getWithColumn(field.idcampo),
+                headerStyle: this.getStyleColumn(field),
                 hidden: !field.visible,
                 title: (field.idcampo === 'avisos') ? (cell, row, ) => {
                     let title = '';
@@ -187,7 +203,7 @@ class LoadItemsTable extends Component {
         let result = null;
         const inputError = (value === 'error_input') ? true : false;
         const customValue = (value === 'error_input') ? '' : value;
-
+        const inputStyle = (field.idcampo === 'cantidad' || field.idcampo === 'precio_unit' || field.idcampo === 'neto') ? { textAlign: 'right' } : {}
         const optionsInput = {
             inputFormCol: { sm: 12 },
             fields: [{ ...field, label: false }],
@@ -200,6 +216,7 @@ class LoadItemsTable extends Component {
             disable: false,
             value: customValue,
             showError: inputError,
+            styles: inputStyle,
             onChange: () => { }
         }
 

@@ -4,20 +4,21 @@ import {
     getProducts,
     searchProducts,
     getPriceByProduct,
-    checkItemByProduct
+    checkItemByProduct,
+    getProductsCart
 } from '../api/Product'
 
 import {
-    GET_PRODUCTS, SEARCH_PRODUCTS, GET_PRICE_BY_PRODUCT, CHECK_ITEM_BY_PRODUCT
+    GET_PRODUCTS, SEARCH_PRODUCTS, GET_PRICE_BY_PRODUCT, CHECK_ITEM_BY_PRODUCT, GET_PRODUCTS_CART
 } from '../constants/ActionsTypes';
 
 import {
     getProductsSuccess,
     searchProductsSuccess,
     getPriceByProductSuccess,
-    checkItemByProductSuccess
+    checkItemByProductSuccess,
+    getProductsCartSuccess
 } from 'actions';
-
 
 
 function* getProductsRequest({ payload }) {
@@ -52,6 +53,14 @@ function* checkItemByProductRequest({ payload }) {
     }
 }
 
+function* getProductsCartRequest({ payload }) {
+    try {
+        const products = yield call(getProductsCart, payload);
+        yield put(getProductsCartSuccess(products));
+    } catch (error) {
+    }
+}
+
 export function* getProductsSaga() {
     yield takeEvery(GET_PRODUCTS, getProductsRequest);
 }
@@ -68,11 +77,16 @@ export function* checkItemByProductSaga() {
     yield takeEvery(CHECK_ITEM_BY_PRODUCT, checkItemByProductRequest);
 }
 
+export function* getProductsCartSaga() {
+    yield takeEvery(GET_PRODUCTS_CART, getProductsCartRequest);
+}
+
 export default function* rootSaga() {
     yield all([
         fork(getProductsSaga),
         fork(searchProductsSaga),
         fork(getPriceByProductSaga),
         fork(checkItemByProductSaga),
+        fork(getProductsCartSaga),
     ]);
 }

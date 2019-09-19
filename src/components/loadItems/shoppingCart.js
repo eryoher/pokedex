@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { Row, Col, Button, Modal } from 'react-bootstrap';
-import LoadItemsTable from './loadItemsTable';
+import { Row, Col, Modal } from 'react-bootstrap';
 import { withTranslation } from 'react-i18next';
 import { themr } from 'react-css-themr';
 import styles from './shoppingCart.module.css';
 import DisplayAmount from 'components/common/displayAmount';
+import { connect } from 'react-redux';
+import { getProductsCart, getConfigVoucher } from '../../actions/';
+import ShoppingCartTable from './shoppingCartTable';
 
 
 class ShoppingCart extends Component {
@@ -17,8 +19,13 @@ class ShoppingCart extends Component {
         };
     }
 
+    componentDidMount = () => {
+        this.props.getConfigVoucher({ cod_proceso: 'P_CargaItemenVentas', idOperacion: 1 });
+        this.props.getProductsCart({ "idoperacion": 1 })
+    }
+
     render() {
-        const { showModal, handleClose, t, theme } = this.props;
+        const { showModal, handleClose, t, theme, productsCart, config } = this.props;
         return (
             <Modal
                 show={showModal}
@@ -34,27 +41,24 @@ class ShoppingCart extends Component {
                 </Modal.Header>
                 <Modal.Body>
                     <Row>
-                        {
-                            //Temporal, no se conoce el componente.
-                        }
                         <Col sm={6} style={{ lineHeight: '1.4' }} >
                             <span style={{ fontSize: '13pt' }}>Nota de Venta con Aprobación</span> <br />
                             <span style={{ fontSize: '9pt', color: 'grey' }}>CCFCIAFC01101-ASOCIACION MUTUAL DE LA POLICIA DE FSA </span><br />
                             <span style={{ fontSize: '9pt', color: 'grey' }}>0006-18/04/2019-Boris Nicolas Lucasvez</span>
                         </Col>
-                        <Col md={{ span: 4, offset: 2 }} sm style={{ lineHeight: '1.4', fontWeight: 'bold', fontSize: '11pt' }} >
-                            <span> Total Ítems: 2</span> <br />
-                            <span>{`${t('loadItem.table.totalImp')} :`} <DisplayAmount amount={'3595,25'} /> </span><br />
-                            <span>{`${t('loadItem.table.total_gross_margin')} : 22.5%`}</span>
-                        </Col>
+                        {productsCart && <Col md={{ span: 4, offset: 2 }} sm style={{ lineHeight: '1.4', fontWeight: 'bold', fontSize: '11pt' }} >
+                            <span> {`Total Ítems: ${productsCart.total_item}`}</span> <br />
+                            <span>{`${t('loadItem.table.totalImp')} :`} <DisplayAmount amount={productsCart.total_importe} /> </span><br />
+                            <span>{`${t('loadItem.table.total_gross_margin')} : ${productsCart.total_margen_bruto}`}</span>
+                        </Col>}
                     </Row>
-                    <LoadItemsTable />
+                    {productsCart && config && <ShoppingCartTable config={config} cartProducts={productsCart} />}
                     <Row>
-                        <Col md={{ span: 4, offset: 8 }} sm style={{ lineHeight: '1.4', fontWeight: 'bold', fontSize: '11pt' }} >
-                            <span> Total Ítems: 2</span> <br />
-                            <span>{`${t('loadItem.table.totalImp')} :`} <DisplayAmount amount={'3595,25'} /> </span><br />
-                            <span>{`${t('loadItem.table.total_gross_margin')} : 22.5%`}</span>
-                        </Col>
+                        {productsCart && <Col md={{ span: 4, offset: 8 }} sm style={{ lineHeight: '1.4', fontWeight: 'bold', fontSize: '11pt' }} >
+                            <span> {`Total Ítems: ${productsCart.total_item}`}</span> <br />
+                            <span>{`${t('loadItem.table.totalImp')} :`} <DisplayAmount amount={productsCart.total_importe} /> </span><br />
+                            <span>{`${t('loadItem.table.total_gross_margin')} : ${productsCart.total_margen_bruto}`}</span>
+                        </Col>}
                     </Row>
                 </Modal.Body>
 
@@ -64,4 +68,13 @@ class ShoppingCart extends Component {
     }
 }
 
-export default themr('LoadItemsTableStyles', styles)(withTranslation()(ShoppingCart));
+
+const mapStateToProps = ({ product, voucher }) => {
+    const { config } = voucher;
+
+    const { productsCart } = product;
+    return { productsCart, config };
+};
+
+const connectForm = connect(mapStateToProps, { getProductsCart, getConfigVoucher })(ShoppingCart);
+export default themr('LoadItemsTableStyles', styles)(withTranslation()(connectForm));

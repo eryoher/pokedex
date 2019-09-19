@@ -34,10 +34,10 @@ class HeadCartResume extends Component {
         return (
             <>
                 <Col sm={12}>
-                    <ShoppingCart
+                    {this.state.showModal && <ShoppingCart
                         showModal={this.state.showModal}
                         handleClose={this.handleClose}
-                    />
+                    />}
                 </Col>
                 <Col sm={6} className={`${theme.Title} col-12 mt-3`} >
                     {t("loadItem.title")}

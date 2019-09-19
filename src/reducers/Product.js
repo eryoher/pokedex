@@ -5,14 +5,17 @@ import {
     GET_PRICE_BY_PRODUCT_SUCCESS,
     CHECK_ITEM_BY_PRODUCT,
     CHECK_ITEM_BY_PRODUCT_SUCCESS,
-    SET_TABLE_DATA_PRODUCTS
+    SET_TABLE_DATA_PRODUCTS,
+    GET_PRODUCTS_CART,
+    GET_PRODUCTS_CART_SUCCESS
 } from 'constants/ActionsTypes'
 
 const initialState = {
     search: [],
     price: null,
     productsUpdate: null,
-    paramsPrice: null
+    paramsPrice: null,
+    productsCart: null
 }
 
 function rootReducer(state = initialState, action) {
@@ -72,6 +75,10 @@ function rootReducer(state = initialState, action) {
             }
 
             return createState;
+        case GET_PRODUCTS_CART:
+            return { ...state, productsCart: null }
+        case GET_PRODUCTS_CART_SUCCESS:
+            return { ...state, productsCart: action.payload.data }
         default:
             return state
     }

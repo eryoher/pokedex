@@ -7,7 +7,9 @@ import {
     GET_PRICE_BY_PRODUCT_SUCCESS,
     CHECK_ITEM_BY_PRODUCT,
     CHECK_ITEM_BY_PRODUCT_SUCCESS,
-    SET_TABLE_DATA_PRODUCTS
+    SET_TABLE_DATA_PRODUCTS,
+    GET_PRODUCTS_CART,
+    GET_PRODUCTS_CART_SUCCESS
 } from '../constants/ActionsTypes';
 
 
@@ -73,5 +75,19 @@ export const setTableDataProducts = (params) => {
     return {
         type: SET_TABLE_DATA_PRODUCTS,
         payload: params
+    }
+};
+
+export const getProductsCart = (params) => {
+    return {
+        type: GET_PRODUCTS_CART,
+        payload: params
+    }
+};
+
+export const getProductsCartSuccess = (response) => {
+    return {
+        type: GET_PRODUCTS_CART_SUCCESS,
+        payload: response
     }
 };

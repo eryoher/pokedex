@@ -94,7 +94,7 @@ class LoadItemsTable extends Component {
 
         switch (idField) {
             case 'desc_prod':
-                style = { width: '20%' }
+                style = { width: '15%' }
                 break;
             case 'fec_entrega':
                 style = { width: '13%' }
@@ -109,7 +109,10 @@ class LoadItemsTable extends Component {
                 style = { width: '13%' }
                 break;
             case 'neto':
-                style = { width: '13%', color: 'red' }
+                style = { width: '13%' }
+                break;
+            case 'unid_v':
+                style = { width: '15%' }
                 break;
             default:
                 style = { width: '10%' }
@@ -217,6 +220,7 @@ class LoadItemsTable extends Component {
             value: customValue,
             showError: inputError,
             styles: inputStyle,
+            rowStyle: { marginBottom: '5px' },
             onChange: () => { }
         }
 
@@ -368,10 +372,9 @@ class LoadItemsTable extends Component {
 
         }) : null;
 
-        //console.log(rowData, '????')
         return (
             <Row className={divClass}>
-                <Col sm={12} className={"mb-3"} >
+                <Col sm={12} className={"mb-1"} >
                     <NotificationMessage
                         {...this.state}
                         handleCloseError={this.handleCloseError}

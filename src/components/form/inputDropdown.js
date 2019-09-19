@@ -56,6 +56,7 @@ class InputDropdown extends Component {
             disable,
             theme,
             inputFormCol,
+            rowStyle,
             value } = this.props;
 
         const classInput = (label) ? colInput : "col-sm-12";
@@ -65,7 +66,7 @@ class InputDropdown extends Component {
         if (config.visible) {
             return (
                 <Col {...inputFormCol} >
-                    <Row className={"form-group"}>
+                    <Row className={"form-group"} style={rowStyle}>
                         <label className={`${classLabel} ${theme.inputLabel}`} style={customStyleLabel} >
                             {(config.label) ? config.label : label}
                         </label>

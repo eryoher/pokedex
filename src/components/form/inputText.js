@@ -177,7 +177,7 @@ class InputText extends Component {
     }
 
     renderField = () => {
-        const { label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, disable, theme, type, inputFormCol, lock } = this.props;
+        const { label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, disable, theme, type, inputFormCol, lock, rowStyle } = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
         const classLabel = (label) ? colLabel : "";
         const classText = (disable) ? theme.inputDisabled : '';
@@ -204,7 +204,7 @@ class InputText extends Component {
             return (
                 <>
                     <Col {...inputFormCol} >
-                        <Row className={"form-group"}>
+                        <Row className={"form-group"} style={rowStyle} >
                             <label className={`${theme.inputLabel}  ${classLabel}`} style={customStyleLabel} >
                                 {(config.label) ? config.label : label}
                             </label>

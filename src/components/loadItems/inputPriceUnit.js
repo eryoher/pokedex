@@ -48,7 +48,7 @@ class InputPriceUnit extends Component {
                         this.props.setTableDataProducts({ niprod: row.niprod, idcampo: 'precio_unit', value: value });
                     }}
                 />
-                <Col sm={1} style={{ paddingLeft: '0px', paddingTop: '10%' }} >
+                <Col sm={1} style={{ paddingLeft: '0px', paddingTop: '8%' }} >
                     <span style={{ cursor: 'pointer' }} onClick={this.openModal} > ...</span>
                 </Col>
                 <ModalPriceUnit

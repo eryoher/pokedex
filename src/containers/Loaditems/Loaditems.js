@@ -45,7 +45,7 @@ class Loaditems extends Component {
                 <Col sm={12}>
                     <LoadItemsTable
                         searchBox
-                        divClass={"mt-4"}
+                        divClass={"mt-1"}
                     />
                 </Col>
                 <Col sm={1} style={{ textAlign: 'left', paddingLeft: '2rem' }} className={"mt-2"} >

@@ -207,17 +207,21 @@ class LoadItemsTable extends Component {
         const inputError = (value === 'error_input') ? true : false;
         const customValue = (value === 'error_input') ? '' : value;
         const inputStyle = (field.idcampo === 'cantidad' || field.idcampo === 'precio_unit' || field.idcampo === 'neto') ? { textAlign: 'right' } : {}
+        const customRef = React.createRef();
+        console.log(customRef, this.refs[0]);
         const optionsInput = {
             inputFormCol: { sm: 12 },
             fields: [{ ...field, label: false }],
             label: false,
             inputId: field.idcampo,
             name: field.idcampo,
+            _ref: `${field.idcampo}_${row.niprod}`,
             colLabel: "col-sm-4",
             colInput: "col-sm-8",
             divStyle: { paddingLeft: '17px' },
             disable: false,
             value: customValue,
+            customRef: customRef,
             showError: inputError,
             styles: inputStyle,
             rowStyle: { marginBottom: '5px' },
@@ -250,6 +254,7 @@ class LoadItemsTable extends Component {
                 />
             )
         } else {
+
             result = (
                 <InputText
                     {...optionsInput}
@@ -277,6 +282,7 @@ class LoadItemsTable extends Component {
                     }}
                 />
             )
+
         }
 
         return result;

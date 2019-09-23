@@ -15,17 +15,37 @@ class InputText extends Component {
 
     constructor(props) {
         super(props)
+        this.inputRef = React.createRef();
+
         this.state = {
             showLockModal: false,
             inputValue: this.props.value,
             configInput: this.getconfigField(props.inputId),
-            requireError: (this.props.showError) ? this.props.showError : false
+            requireError: (this.props.showError) ? this.props.showError : false,
         }
     }
 
     componentWillReceiveProps = (nextProps) => {
         if (nextProps.value !== this.state.inputValue) {
             this.setState({ inputValue: nextProps.value }) //Valor inicial 
+        }
+    }
+
+    componentDidMount() {
+        document.addEventListener("keydown", this._handleKeyDown);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener("keydown", this._handleKeyDown);
+    }
+
+    _handleKeyDown = (e) => {
+        //Enter
+        if (e.keyCode === 13) {
+            console.log('enter')
+            if (this.props.onBlur) {
+                this.props.onBlur();
+            }
         }
     }
 
@@ -112,8 +132,7 @@ class InputText extends Component {
 
     renderInput = (options, config) => {
         let response;
-        const { allowClear } = this.props;
-
+        const { allowClear, refTest } = this.props;
         if (config.mascara) {
             const mask = this.getMask(config); //Se obtiene las posibles opciones de mascara.. aca se agregan validaciones.
             if (mask.tipo === 'fecha') {
@@ -177,7 +196,7 @@ class InputText extends Component {
     }
 
     renderField = () => {
-        const { label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, disable, theme, type, inputFormCol, lock, rowStyle } = this.props;
+        const { label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, disable, theme, type, inputFormCol, lock, rowStyle, customRef } = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
         const classLabel = (label) ? colLabel : "";
         const classText = (disable) ? theme.inputDisabled : '';
@@ -187,7 +206,6 @@ class InputText extends Component {
         const inputStyles = (this.state.requireError) ? { ...styles, border: '1px solid red' } : styles;
 
         if (config.visible) {
-
             const optionsInput = {
                 id: inputId,
                 name: name,
@@ -197,6 +215,7 @@ class InputText extends Component {
                 disabled: !config.editable,
                 className: `${theme.inputText} ${classText}`,
                 value: this.state.inputValue,
+                ref: customRef,
                 onChange: (v) => this.handleChage(v),
                 onBlur: (v) => this.handleOnblur(v),
             }

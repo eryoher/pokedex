@@ -15,7 +15,6 @@ class InputText extends Component {
 
     constructor(props) {
         super(props)
-        this.inputRef = React.createRef();
 
         this.state = {
             showLockModal: false,
@@ -215,7 +214,7 @@ class InputText extends Component {
                 disabled: !config.editable,
                 className: `${theme.inputText} ${classText}`,
                 value: this.state.inputValue,
-                ref: customRef,
+                ref: this.props.fwRef,
                 onChange: (v) => this.handleChage(v),
                 onBlur: (v) => this.handleOnblur(v),
             }

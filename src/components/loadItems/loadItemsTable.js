@@ -31,6 +31,8 @@ class LoadItemsTable extends Component {
             errrorTitle: '',
             errorMessage: ''
         }
+
+        this.inputRefs = {};
     }
 
     componentDidMount = () => {
@@ -207,9 +209,18 @@ class LoadItemsTable extends Component {
         const inputError = (value === 'error_input') ? true : false;
         const customValue = (value === 'error_input') ? '' : value;
         const inputStyle = (field.idcampo === 'cantidad' || field.idcampo === 'precio_unit' || field.idcampo === 'neto') ? { textAlign: 'right' } : {}
-        const customRef = React.createRef();
-        console.log(customRef, this.refs[0]);
+        
+        if (! this.inputRefs[field.idcampo]){
+            this.inputRefs[field.idcampo] = {}
+        }
+
+        if (! this.inputRefs[field.idcampo][row.id]) {
+            const customRef = React.createRef();
+            this.inputRefs[field.idcampo][row.id] = customRef
+        }
+
         const optionsInput = {
+            fwRef: this.inputRefs[field.idcampo][row.id],
             inputFormCol: { sm: 12 },
             fields: [{ ...field, label: false }],
             label: false,
@@ -221,7 +232,6 @@ class LoadItemsTable extends Component {
             divStyle: { paddingLeft: '17px' },
             disable: false,
             value: customValue,
-            customRef: customRef,
             showError: inputError,
             styles: inputStyle,
             rowStyle: { marginBottom: '5px' },
@@ -266,6 +276,11 @@ class LoadItemsTable extends Component {
                                 "cantidad": value,
                                 "unid_vta": row.unid_v
                             });
+
+                            // Focus next input
+                            const nextRef = this.inputRefs['precio_unit'][row.id]
+                            nextRef.current.element.focus()
+
                         } else if (field.idcampo === 'neto') {
                             const newValue = (value) ? parseFloat(value) : 0;
                             const cantidad = (row.cantidad) ? parseFloat(row.cantidad) : 0;

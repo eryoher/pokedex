@@ -111,6 +111,39 @@ export default (mockAdapter) => {
                         },
                     ],
                     "Atributos": null
+                },
+                {
+                    "niprod": 36576,
+                    "cod_prod": "PERSEL00456",
+                    "desc_prod": "Desodorante Axe musk 3",
+                    "codbarra": "07795555225226",
+                    "unid_v": "PK",
+                    "base_v": 1,
+                    "ind_stock": '0',
+                    "precio_unit": '3236',
+                    "id_imagen": 77654,
+                    "presentaciones": [
+                        {
+                            "cod_pres": "CJ",
+                            "desc_pres": "Cajax10UN",
+                            "cant": 10,
+                            "codbarra": "07977688566503",
+                        },
+                        {
+                            "cod_pres": "PK",
+                            "desc_pres": "Packx100UN",
+                            "cant": 100,
+                            "codbarra": "07977688566504",
+                        }
+                    ],
+                    "Bonificaciones": [
+                        {
+                            "tipo_bonif": "P",
+                            "cod_bonif": "PL02",
+                            "desc_bonif": "Lapices Faber",
+                        },
+                    ],
+                    "Atributos": null
                 }
             ]
         }

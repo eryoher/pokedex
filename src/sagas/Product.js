@@ -1,4 +1,4 @@
-import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
+import { all, call, fork, put, takeEvery, throttle } from 'redux-saga/effects';
 
 import {
     getProducts,
@@ -9,7 +9,7 @@ import {
 } from '../api/Product'
 
 import {
-    GET_PRODUCTS, SEARCH_PRODUCTS, GET_PRICE_BY_PRODUCT, CHECK_ITEM_BY_PRODUCT, GET_PRODUCTS_CART
+    GET_PRODUCTS, SEARCH_PRODUCTS, GET_PRICE_BY_PRODUCT, CHECK_ITEM_BY_PRODUCT, GET_PRODUCTS_CART, SET_INPUT_FOCUS
 } from '../constants/ActionsTypes';
 
 import {
@@ -17,7 +17,8 @@ import {
     searchProductsSuccess,
     getPriceByProductSuccess,
     checkItemByProductSuccess,
-    getProductsCartSuccess
+    getProductsCartSuccess,
+    setInputFocusSuccess
 } from 'actions';
 
 
@@ -61,6 +62,14 @@ function* getProductsCartRequest({ payload }) {
     }
 }
 
+
+function* setInputFocusRequest({ payload }) {
+    try {
+        yield put(setInputFocusSuccess(payload));
+    } catch (error) {
+    }
+}
+
 export function* getProductsSaga() {
     yield takeEvery(GET_PRODUCTS, getProductsRequest);
 }
@@ -81,6 +90,11 @@ export function* getProductsCartSaga() {
     yield takeEvery(GET_PRODUCTS_CART, getProductsCartRequest);
 }
 
+export function* setFocusInputSaga() {
+    yield throttle(10000, SET_INPUT_FOCUS, setInputFocusRequest);
+}
+
+
 export default function* rootSaga() {
     yield all([
         fork(getProductsSaga),
@@ -88,5 +102,6 @@ export default function* rootSaga() {
         fork(getPriceByProductSaga),
         fork(checkItemByProductSaga),
         fork(getProductsCartSaga),
+        fork(setFocusInputSaga),
     ]);
 }

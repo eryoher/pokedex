@@ -30,20 +30,11 @@ class InputText extends Component {
         }
     }
 
-    componentDidMount() {
-        document.addEventListener("keydown", this._handleKeyDown);
-    }
-
-    componentWillUnmount() {
-        document.removeEventListener("keydown", this._handleKeyDown);
-    }
-
     _handleKeyDown = (e) => {
         //Enter
         if (e.keyCode === 13) {
-            console.log('enter')
-            if (this.props.onBlur) {
-                this.props.onBlur();
+            if (this.props.handleEnterKey) {
+                this.props.handleEnterKey(e);
             }
         }
     }
@@ -195,7 +186,7 @@ class InputText extends Component {
     }
 
     renderField = () => {
-        const { label, placeholder, name, styles, inputId, colInput, colLabel, styleLabel, divStyle, disable, theme, type, inputFormCol, lock, rowStyle, customRef } = this.props;
+        const { label, placeholder, name, styles, inputId, id, colInput, colLabel, styleLabel, divStyle, disable, theme, type, inputFormCol, lock, rowStyle, autoFocus } = this.props;
         const classInput = (label) ? colInput : "col-sm-12";
         const classLabel = (label) ? colLabel : "";
         const classText = (disable) ? theme.inputDisabled : '';
@@ -206,17 +197,19 @@ class InputText extends Component {
 
         if (config.visible) {
             const optionsInput = {
-                id: inputId,
+                id: (id) ? id : inputId,
                 name: name,
                 type: customType,
                 style: inputStyles,
                 placeholder: placeholder,
+                autoFocus: autoFocus,
                 disabled: !config.editable,
                 className: `${theme.inputText} ${classText}`,
                 value: this.state.inputValue,
                 ref: this.props.fwRef,
                 onChange: (v) => this.handleChage(v),
                 onBlur: (v) => this.handleOnblur(v),
+                onKeyDown: this._handleKeyDown
             }
 
             return (

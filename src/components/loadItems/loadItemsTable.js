@@ -43,6 +43,14 @@ class LoadItemsTable extends Component {
         this.setState({ showError: false })
     }
 
+    handleSetFocus = (input, rowId) => {
+        const nextRef = this.inputRefs[input][rowId];
+        if (input === 'fec_entrega') {
+            nextRef.current.setFocus();
+        } else if (nextRef.current) {
+            nextRef.current.element.focus();
+        }
+    }
 
     handleAddToCart = (row) => {
         const { config, t } = this.props;
@@ -62,7 +70,7 @@ class LoadItemsTable extends Component {
         config.campos.forEach(field => {
             if (parseInt(field.requerido)) {
                 if (!validateField(row[field.idcampo], field.valid)) {
-                    this.props.setTableDataProducts({ niprod: row.niprod, idcampo: field.idcampo, value: 'error_input' });
+                    this.props.setTableDataProducts([{ niprod: row.niprod, idcampo: field.idcampo, value: 'error_input' }]);
                     message.push(`El campo ${field.label} es requerido.`);
                     flag = false;
                 }
@@ -209,14 +217,16 @@ class LoadItemsTable extends Component {
         const inputError = (value === 'error_input') ? true : false;
         const customValue = (value === 'error_input') ? '' : value;
         const inputStyle = (field.idcampo === 'cantidad' || field.idcampo === 'precio_unit' || field.idcampo === 'neto') ? { textAlign: 'right' } : {}
-        
-        if (! this.inputRefs[field.idcampo]){
+        const { focusInput } = this.props;
+
+
+        if (!this.inputRefs[field.idcampo]) {
             this.inputRefs[field.idcampo] = {}
         }
 
-        if (! this.inputRefs[field.idcampo][row.id]) {
+        if (!this.inputRefs[field.idcampo][row.niprod]) {
             const customRef = React.createRef();
-            this.inputRefs[field.idcampo][row.id] = customRef
+            this.inputRefs[field.idcampo][row.niprod] = customRef
         }
 
         const optionsInput = {
@@ -224,9 +234,9 @@ class LoadItemsTable extends Component {
             inputFormCol: { sm: 12 },
             fields: [{ ...field, label: false }],
             label: false,
-            inputId: field.idcampo,
-            name: field.idcampo,
-            _ref: `${field.idcampo}_${row.niprod}`,
+            inputId: `${field.idcampo}`,
+            id: `${field.idcampo}_${row.niprod}`,
+            name: `${field.idcampo}_${row.niprod}`,
             colLabel: "col-sm-4",
             colInput: "col-sm-8",
             divStyle: { paddingLeft: '17px' },
@@ -250,7 +260,7 @@ class LoadItemsTable extends Component {
                     options={selectOptions}
                     onChange={(data) => {
                         const value = data.target.value;
-                        this.props.setTableDataProducts({ niprod: row.niprod, idcampo: field.idcampo, value });
+                        this.props.setTableDataProducts([{ niprod: row.niprod, idcampo: field.idcampo, value }]);
                     }}
                 />
             )
@@ -260,6 +270,14 @@ class LoadItemsTable extends Component {
             result = (
                 <InputPriceUnit
                     optionsInput={optionsInput}
+                    handleFocus={(rowId) => {
+                        // Focus next input                           
+                        if (row.niprod == rowId) {
+                            this.handleSetFocus('neto', row.niprod);
+                        }
+                        return true;
+
+                    }}
                     row={row}
                 />
             )
@@ -268,6 +286,16 @@ class LoadItemsTable extends Component {
             result = (
                 <InputText
                     {...optionsInput}
+                    autoFocus={(focusInput && focusInput.input === 'neto' && focusInput.rowId === row.niprod) ? true : false}
+                    handleEnterKey={(e) => {
+                        if (field.idcampo === 'cantidad') {
+                            // Focus next input                                                       
+                            this.handleSetFocus('precio_unit', row.niprod);
+                        } else if (field.idcampo === 'neto') {
+                            this.handleSetFocus('fec_entrega', row.niprod);
+                        }
+                        return true;
+                    }}
                     onBlur={(value) => {
                         if (field.idcampo === 'cantidad') {
                             this.props.getPriceByProduct({
@@ -277,22 +305,16 @@ class LoadItemsTable extends Component {
                                 "unid_vta": row.unid_v
                             });
 
-                            // Focus next input
-                            const nextRef = this.inputRefs['precio_unit'][row.id]
-                            nextRef.current.element.focus()
-
                         } else if (field.idcampo === 'neto') {
                             const newValue = (value) ? parseFloat(value) : 0;
                             const cantidad = (row.cantidad) ? parseFloat(row.cantidad) : 0;
                             const newPrice = (parseFloat(row.base_v) * newValue) / cantidad;
                             const params = { niprod: row.niprod, idcampo: 'precio_unit', value: newPrice.toString() }
                             const paramsNeto = { niprod: row.niprod, idcampo: 'neto', value: newValue.toString() }
-                            this.props.setTableDataProducts(params);
-                            this.props.setTableDataProducts(paramsNeto);
-
+                            this.props.setTableDataProducts([params, paramsNeto]);
                         } else {
                             const params = { niprod: row.niprod, idcampo: field.idcampo, value };
-                            this.props.setTableDataProducts(params);
+                            this.props.setTableDataProducts([params]);
                         }
                     }}
                 />
@@ -355,6 +377,7 @@ class LoadItemsTable extends Component {
         const { theme, t, searchBox, divClass, config, search, productsUpdate } = this.props;
         const tableColumns = (config && search) ? this.getColumns() : [];
         const noExpand = this.getNoexpandRows();
+
         const expandRow = {
             renderer: row => this.renderExpandRow(row),
             showExpandColumn: true,
@@ -420,8 +443,8 @@ class LoadItemsTable extends Component {
 
 const mapStateToProps = ({ voucher, product }) => {
     const { config } = voucher;
-    const { search, productsUpdate } = product
-    return { config, search, productsUpdate };
+    const { search, productsUpdate, focusInput } = product
+    return { config, search, productsUpdate, focusInput };
 };
 
 const connectForm = connect(mapStateToProps, { getConfigVoucher, setTableDataProducts, getPriceByProduct, getLoadItems })(LoadItemsTable);

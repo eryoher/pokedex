@@ -7,7 +7,9 @@ import {
     CHECK_ITEM_BY_PRODUCT_SUCCESS,
     SET_TABLE_DATA_PRODUCTS,
     GET_PRODUCTS_CART,
-    GET_PRODUCTS_CART_SUCCESS
+    GET_PRODUCTS_CART_SUCCESS,
+    SET_INPUT_FOCUS,
+    SET_INPUT_FOCUS_SUCCESS
 } from 'constants/ActionsTypes'
 
 const initialState = {
@@ -15,7 +17,8 @@ const initialState = {
     price: null,
     productsUpdate: null,
     paramsPrice: null,
-    productsCart: null
+    productsCart: null,
+    focusInput: null
 }
 
 function rootReducer(state = initialState, action) {
@@ -59,7 +62,7 @@ function rootReducer(state = initialState, action) {
         case CHECK_ITEM_BY_PRODUCT_SUCCESS:
             return { ...state, itemTable: action.payload.data }
         case SET_TABLE_DATA_PRODUCTS:
-            const params = action.payload;
+            const paramsArray = action.payload;
             let createState = {
                 ...state,
                 productsUpdate: [
@@ -68,9 +71,11 @@ function rootReducer(state = initialState, action) {
             }
             if (createState.productsUpdate) {
                 createState.productsUpdate.forEach(prd => {
-                    if (prd.niprod === params.niprod) {
-                        prd[params.idcampo] = params.value
-                    }
+                    paramsArray.forEach(params => {
+                        if (prd.niprod === params.niprod) {
+                            prd[params.idcampo] = params.value
+                        }
+                    });
                 });
             }
 
@@ -79,6 +84,10 @@ function rootReducer(state = initialState, action) {
             return { ...state, productsCart: null }
         case GET_PRODUCTS_CART_SUCCESS:
             return { ...state, productsCart: action.payload.data }
+        case SET_INPUT_FOCUS:
+            return { ...state, focusInput: null }
+        case SET_INPUT_FOCUS_SUCCESS:
+            return { ...state, focusInput: action.payload }
         default:
             return state
     }

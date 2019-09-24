@@ -9,7 +9,10 @@ import {
     CHECK_ITEM_BY_PRODUCT_SUCCESS,
     SET_TABLE_DATA_PRODUCTS,
     GET_PRODUCTS_CART,
-    GET_PRODUCTS_CART_SUCCESS
+    GET_PRODUCTS_CART_SUCCESS,
+    SET_INPUT_FOCUS,
+    SET_INPUT_FOCUS_SUCCESS
+
 } from '../constants/ActionsTypes';
 
 
@@ -88,6 +91,21 @@ export const getProductsCart = (params) => {
 export const getProductsCartSuccess = (response) => {
     return {
         type: GET_PRODUCTS_CART_SUCCESS,
+        payload: response
+    }
+};
+
+
+export const setInputFocus = (field) => {
+    return {
+        type: SET_INPUT_FOCUS,
+        payload: field
+    }
+};
+
+export const setInputFocusSuccess = (response) => {
+    return {
+        type: SET_INPUT_FOCUS_SUCCESS,
         payload: response
     }
 };

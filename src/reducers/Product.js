@@ -18,7 +18,8 @@ const initialState = {
     productsUpdate: null,
     paramsPrice: null,
     productsCart: null,
-    focusInput: null
+    focusInput: null,
+    updateCant: false
 }
 
 function rootReducer(state = initialState, action) {
@@ -28,7 +29,7 @@ function rootReducer(state = initialState, action) {
         case SEARCH_PRODUCTS_SUCCESS:
             return { ...state, search: action.payload.data }
         case GET_PRICE_BY_PRODUCT:
-            return { ...state, price: null, paramsPrice: action.payload }
+            return { ...state, price: null, paramsPrice: action.payload, updateCant: false }
         case GET_PRICE_BY_PRODUCT_SUCCESS:
             const price = action.payload.data;
             const { paramsPrice } = state;
@@ -37,7 +38,8 @@ function rootReducer(state = initialState, action) {
                 productsUpdate: [
                     ...state.search.Productos,
                 ],
-                price
+                price,
+                updateCant: true
             }
 
             if (updateState.productsUpdate) {

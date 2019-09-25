@@ -39,6 +39,13 @@ class LoadItemsTable extends Component {
         this.props.getConfigVoucher({ cod_proceso: 'P_CargaItemenVentas', idOperacion: 1 });
     }
 
+    componentWillReceiveProps = (nextProps) => {
+        //console.log(nextProps.updateCant, 'comparar', this.props.updateCant)
+        if (nextProps.updateCant !== this.props.updateCant && nextProps.updateCant) {
+            //this.handleSetFocus('precio_unit', '36575');
+        }
+    }
+
     handleCloseError = () => {
         this.setState({ showError: false })
     }
@@ -47,7 +54,7 @@ class LoadItemsTable extends Component {
         const nextRef = this.inputRefs[input][rowId];
         if (input === 'fec_entrega') {
             nextRef.current.setFocus();
-        } else if (nextRef.current) {
+        } else if (nextRef.current && nextRef.current.element) {
             nextRef.current.element.focus();
         }
     }
@@ -219,18 +226,17 @@ class LoadItemsTable extends Component {
         const inputStyle = (field.idcampo === 'cantidad' || field.idcampo === 'precio_unit' || field.idcampo === 'neto') ? { textAlign: 'right' } : {}
         const { focusInput } = this.props;
 
-
-        if (!this.inputRefs[field.idcampo]) {
+        if (field.editable && !this.inputRefs[field.idcampo]) {
             this.inputRefs[field.idcampo] = {}
         }
 
-        if (!this.inputRefs[field.idcampo][row.niprod]) {
+        if (field.editable && !this.inputRefs[field.idcampo][row.niprod]) {
             const customRef = React.createRef();
             this.inputRefs[field.idcampo][row.niprod] = customRef
         }
 
         const optionsInput = {
-            fwRef: this.inputRefs[field.idcampo][row.id],
+            fwRef: (field.editable) ? this.inputRefs[field.idcampo][row.id] : null,
             inputFormCol: { sm: 12 },
             fields: [{ ...field, label: false }],
             label: false,
@@ -272,7 +278,7 @@ class LoadItemsTable extends Component {
                     optionsInput={optionsInput}
                     handleFocus={(rowId) => {
                         // Focus next input                           
-                        if (row.niprod == rowId) {
+                        if (row.niprod === rowId) {
                             this.handleSetFocus('neto', row.niprod);
                         }
                         return true;
@@ -287,9 +293,15 @@ class LoadItemsTable extends Component {
                 <InputText
                     {...optionsInput}
                     autoFocus={(focusInput && focusInput.input === 'neto' && focusInput.rowId === row.niprod) ? true : false}
-                    handleEnterKey={(e) => {
+                    handleEnterKey={(e, value) => {
                         if (field.idcampo === 'cantidad') {
-                            // Focus next input                                                       
+                            // Focus next input            
+                            this.props.getPriceByProduct({
+                                "IdOperacion": 123456, //Falta adicionar id Operacion.
+                                "Idproducto": row.niprod,
+                                "cantidad": value,
+                                "unid_vta": row.unid_v
+                            });
                             this.handleSetFocus('precio_unit', row.niprod);
                         } else if (field.idcampo === 'neto') {
                             this.handleSetFocus('fec_entrega', row.niprod);
@@ -306,8 +318,9 @@ class LoadItemsTable extends Component {
                             });
 
                         } else if (field.idcampo === 'neto') {
-                            const newValue = (value) ? parseFloat(value) : 0;
+                            const newValue = (value) ? parseFloat(value.split(',').join('.')) : 0;
                             const cantidad = (row.cantidad) ? parseFloat(row.cantidad) : 0;
+
                             const newPrice = (parseFloat(row.base_v) * newValue) / cantidad;
                             const params = { niprod: row.niprod, idcampo: 'precio_unit', value: newPrice.toString() }
                             const paramsNeto = { niprod: row.niprod, idcampo: 'neto', value: newValue.toString() }
@@ -443,8 +456,8 @@ class LoadItemsTable extends Component {
 
 const mapStateToProps = ({ voucher, product }) => {
     const { config } = voucher;
-    const { search, productsUpdate, focusInput } = product
-    return { config, search, productsUpdate, focusInput };
+    const { search, productsUpdate, focusInput, updateCant } = product
+    return { config, search, productsUpdate, focusInput, updateCant };
 };
 
 const connectForm = connect(mapStateToProps, { getConfigVoucher, setTableDataProducts, getPriceByProduct, getLoadItems })(LoadItemsTable);

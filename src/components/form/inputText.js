@@ -34,7 +34,7 @@ class InputText extends Component {
         //Enter
         if (e.keyCode === 13) {
             if (this.props.handleEnterKey) {
-                this.props.handleEnterKey(e);
+                this.props.handleEnterKey(e, this.state.inputValue);
             }
         }
     }

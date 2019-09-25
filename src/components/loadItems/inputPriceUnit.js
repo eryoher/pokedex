@@ -26,7 +26,6 @@ class InputPriceUnit extends Component {
     componentDidUpdate = (prevProps) => {
 
         if (this.props.focusInput !== prevProps.focusInput && this.props.focusInput) {
-            console.log('update------', this.props.focusInput)
             this.props.handleFocus(this.props.focusInput);
         }
     }

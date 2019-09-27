@@ -24,6 +24,11 @@ export default (mockAdapter) => {
                     "orden": 3
                 },
                 {
+                    "cod_proceso": "p_afectcomprob",
+                    "desc_proceso": "Afectacion Comprobante",
+                    "orden": 5
+                },
+                {
                     "cod_proceso": "p_fincomprob",
                     "desc_proceso": "Final Comprobante",
                     "orden": 9

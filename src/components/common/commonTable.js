@@ -12,24 +12,25 @@ export default class CommonTable extends Component {
     }
 
     render() {
-        const { columns, wrapperClasses, bordered, rowStyle, rowClasses, headerClasses, data, selectRow, expandRow } = this.props;
+        const { columns, wrapperClasses, bordered, rowStyle, rowClasses, headerClasses, data, selectRow, expandRow, defaultSorted, keyField } = this.props;
         const border = (bordered) ? bordered : false;
+        const customkeyField = (keyField) ? keyField : 'id';
         return (
-            <>
-                <BootstrapTable
-                    keyField='id'
-                    data={data}
-                    columns={columns}
-                    rowClasses={rowClasses}
-                    headerClasses={headerClasses}
-                    rowStyle={rowStyle}
-                    bordered={border}
-                    wrapperClasses={wrapperClasses}
-                    selectRow={selectRow}
-                    filter={filterFactory()}
-                    expandRow={expandRow}
-                />
-            </>
+            <BootstrapTable
+                keyField={customkeyField}
+                data={data}
+                columns={columns}
+                rowClasses={rowClasses}
+                headerClasses={headerClasses}
+                rowStyle={rowStyle}
+                bordered={border}
+                wrapperClasses={wrapperClasses}
+                selectRow={selectRow}
+                filter={filterFactory()}
+                expandRow={expandRow}
+                defaultSorted={defaultSorted}
+            />
+
         )
     }
 }

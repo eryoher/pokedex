@@ -11,7 +11,9 @@ import {
     GET_PRODUCTS_CART,
     GET_PRODUCTS_CART_SUCCESS,
     SET_INPUT_FOCUS,
-    SET_INPUT_FOCUS_SUCCESS
+    SET_INPUT_FOCUS_SUCCESS,
+    GET_PRODUCTS_INVOLVEMENT,
+    GET_PRODUCTS_INVOLVEMENT_SUCCESS
 
 } from '../constants/ActionsTypes';
 
@@ -106,6 +108,22 @@ export const setInputFocus = (field) => {
 export const setInputFocusSuccess = (response) => {
     return {
         type: SET_INPUT_FOCUS_SUCCESS,
+        payload: response
+    }
+};
+
+
+
+export const getProductsInvolvement = (params) => {
+    return {
+        type: GET_PRODUCTS_INVOLVEMENT,
+        payload: params
+    }
+};
+
+export const getProductsInvolvementSuccess = (response) => {
+    return {
+        type: GET_PRODUCTS_INVOLVEMENT_SUCCESS,
         payload: response
     }
 };

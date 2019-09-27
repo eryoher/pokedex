@@ -5,11 +5,12 @@ import {
     searchProducts,
     getPriceByProduct,
     checkItemByProduct,
-    getProductsCart
+    getProductsCart,
+    getProductsInvolvement
 } from '../api/Product'
 
 import {
-    GET_PRODUCTS, SEARCH_PRODUCTS, GET_PRICE_BY_PRODUCT, CHECK_ITEM_BY_PRODUCT, GET_PRODUCTS_CART, SET_INPUT_FOCUS
+    GET_PRODUCTS, SEARCH_PRODUCTS, GET_PRICE_BY_PRODUCT, CHECK_ITEM_BY_PRODUCT, GET_PRODUCTS_CART, SET_INPUT_FOCUS, GET_PRODUCTS_INVOLVEMENT
 } from '../constants/ActionsTypes';
 
 import {
@@ -18,7 +19,8 @@ import {
     getPriceByProductSuccess,
     checkItemByProductSuccess,
     getProductsCartSuccess,
-    setInputFocusSuccess
+    setInputFocusSuccess,
+    getProductsInvolvementSuccess
 } from 'actions';
 
 
@@ -70,6 +72,15 @@ function* setInputFocusRequest({ payload }) {
     }
 }
 
+
+function* getProductsInvolvementRequest({ payload }) {
+    try {
+        const products = yield call(getProductsInvolvement, payload);
+        yield put(getProductsInvolvementSuccess(products));
+    } catch (error) {
+    }
+}
+
 export function* getProductsSaga() {
     yield takeEvery(GET_PRODUCTS, getProductsRequest);
 }
@@ -94,6 +105,9 @@ export function* setFocusInputSaga() {
     yield throttle(10000, SET_INPUT_FOCUS, setInputFocusRequest);
 }
 
+export function* getProductsInvolvementSaga() {
+    yield takeEvery(GET_PRODUCTS_INVOLVEMENT, getProductsInvolvementRequest);
+}
 
 export default function* rootSaga() {
     yield all([
@@ -103,5 +117,6 @@ export default function* rootSaga() {
         fork(checkItemByProductSaga),
         fork(getProductsCartSaga),
         fork(setFocusInputSaga),
+        fork(getProductsInvolvementSaga)
     ]);
 }

@@ -7,6 +7,7 @@ import DisplayAmount from 'components/common/displayAmount';
 import { connect } from 'react-redux';
 import { getProductsCart, getConfigVoucher } from '../../actions/';
 import ShoppingCartTable from './shoppingCartTable';
+import ProductsTotalResume from './productsTotalResume';
 
 
 class ShoppingCart extends Component {
@@ -46,19 +47,11 @@ class ShoppingCart extends Component {
                             <span style={{ fontSize: '9pt', color: 'grey' }}>CCFCIAFC01101-ASOCIACION MUTUAL DE LA POLICIA DE FSA </span><br />
                             <span style={{ fontSize: '9pt', color: 'grey' }}>0006-18/04/2019-Boris Nicolas Lucasvez</span>
                         </Col>
-                        {productsCart && <Col md={{ span: 4, offset: 2 }} sm style={{ lineHeight: '1.4', fontWeight: 'bold', fontSize: '11pt' }} >
-                            <span> {`Total Ítems: ${productsCart.total_item}`}</span> <br />
-                            <span>{`${t('loadItem.table.totalImp')} :`} <DisplayAmount amount={productsCart.total_importe} /> </span><br />
-                            <span>{`${t('loadItem.table.total_gross_margin')} : ${productsCart.total_margen_bruto}`}</span>
-                        </Col>}
+                        {productsCart && <ProductsTotalResume formatCol={{ span: 4, offset: 2 }} data={productsCart} />}
                     </Row>
                     {productsCart && config && <ShoppingCartTable config={config} cartProducts={productsCart} />}
                     <Row>
-                        {productsCart && <Col md={{ span: 4, offset: 8 }} sm style={{ lineHeight: '1.4', fontWeight: 'bold', fontSize: '11pt' }} >
-                            <span> {`Total Ítems: ${productsCart.total_item}`}</span> <br />
-                            <span>{`${t('loadItem.table.totalImp')} :`} <DisplayAmount amount={productsCart.total_importe} /> </span><br />
-                            <span>{`${t('loadItem.table.total_gross_margin')} : ${productsCart.total_margen_bruto}`}</span>
-                        </Col>}
+                        {productsCart && <ProductsTotalResume formatCol={{ span: 4, offset: 8 }} data={productsCart} />}
                     </Row>
                 </Modal.Body>
 

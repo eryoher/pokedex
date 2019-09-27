@@ -9,7 +9,9 @@ import {
     GET_PRODUCTS_CART,
     GET_PRODUCTS_CART_SUCCESS,
     SET_INPUT_FOCUS,
-    SET_INPUT_FOCUS_SUCCESS
+    SET_INPUT_FOCUS_SUCCESS,
+    GET_PRODUCTS_INVOLVEMENT,
+    GET_PRODUCTS_INVOLVEMENT_SUCCESS
 } from 'constants/ActionsTypes'
 
 const initialState = {
@@ -19,7 +21,8 @@ const initialState = {
     paramsPrice: null,
     productsCart: null,
     focusInput: null,
-    updateCant: false
+    updateCant: false,
+    productsInvol: null
 }
 
 function rootReducer(state = initialState, action) {
@@ -86,6 +89,10 @@ function rootReducer(state = initialState, action) {
             return { ...state, productsCart: null }
         case GET_PRODUCTS_CART_SUCCESS:
             return { ...state, productsCart: action.payload.data }
+        case GET_PRODUCTS_INVOLVEMENT:
+            return { ...state, productsInvol: null }
+        case GET_PRODUCTS_INVOLVEMENT_SUCCESS:
+            return { ...state, productsInvol: action.payload.data }
         case SET_INPUT_FOCUS:
             return { ...state, focusInput: null }
         case SET_INPUT_FOCUS_SUCCESS:

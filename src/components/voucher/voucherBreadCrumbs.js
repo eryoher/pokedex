@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Steps from 'components/common/steps';
-import { HEADERBOARD, GENERATE, LOADITEMS, VOUCHER } from '../../utils/RoutePath';
+import { HEADERBOARD, GENERATE, LOADITEMS, VOUCHER, VOUCHERINVOLVEMENT } from '../../utils/RoutePath';
 
 export default class VoucherBreadCrumbs extends Component {
 
@@ -50,6 +50,7 @@ export default class VoucherBreadCrumbs extends Component {
             p_vtacab: HEADERBOARD,
             p_selcli: VOUCHER,
             p_cargaitemvta: LOADITEMS,
+            p_afectcomprob: VOUCHERINVOLVEMENT,
             p_fincomprob: GENERATE
         }
 

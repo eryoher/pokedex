@@ -11,6 +11,7 @@ import { connect } from 'react-redux';
 import { getLoadItems } from '../../actions/';
 
 class HeadCartResume extends Component {
+
     constructor(props) {
         super(props);
         this.state = {

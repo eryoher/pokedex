@@ -15,7 +15,7 @@ class Steps extends Component {
 
         if (backButton) {
             rows.push(
-                <Col className={'col-1'} key={101}>
+                <Col style={{ "textAlign": 'left' }} className={'col-sm'} key={101}>
                     <InputButton
                         backButton
                         urlForm={backButton.url}
@@ -44,7 +44,7 @@ class Steps extends Component {
 
         if (nextButton) {
             result.push(
-                <Col className={'col-1'} key={result.length * 5} >
+                <Col style={{ textAlign: 'right' }} className={'col-sm'} key={result.length * 5} >
                     <InputButton
                         nextButton
                         urlForm={nextButton.url}

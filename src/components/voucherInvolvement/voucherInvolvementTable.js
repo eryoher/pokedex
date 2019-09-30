@@ -3,14 +3,14 @@ import { Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import InputDropdown from 'components/form/inputDropdown';
-import { getProductsInvolvement } from '../../actions/';
+import { salesAffectedCant } from '../../actions/';
 import ProductsTotalResume from 'components/loadItems/productsTotalResume';
 import InvolvementTable from './involvementTable';
 
 class VoucherInvolvementTable extends Component {
 
     componentDidMount = () => {
-        this.props.getProductsInvolvement();
+        this.props.salesAffectedCant();
     }
 
     render() {
@@ -48,7 +48,7 @@ class VoucherInvolvementTable extends Component {
                 <Col sm={12} className={"pt-5"}>
                     {productsInvol &&
                         <InvolvementTable
-                            products={productsInvol.Productos}
+                            products={productsInvol.Items}
                         />
                     }
                     {productsInvol && <ProductsTotalResume formatCol={{ span: 4, offset: 7 }} data={productsInvol} />}
@@ -58,10 +58,10 @@ class VoucherInvolvementTable extends Component {
     }
 }
 
-const mapStateToProps = ({ vouchertype, product }) => {
+const mapStateToProps = ({ vouchertype, salesAffected }) => {
     const { voucherType } = vouchertype;
-    const { productsInvol } = product;
+    const { productsInvol } = salesAffected;
     return { voucherType, productsInvol };
 };
 
-export default connect(mapStateToProps, { getProductsInvolvement })(withTranslation()(VoucherInvolvementTable));
+export default connect(mapStateToProps, { salesAffectedCant })(withTranslation()(VoucherInvolvementTable));

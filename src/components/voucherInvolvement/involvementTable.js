@@ -8,13 +8,13 @@ export default class InvolvementTable extends Component {
         super(props);
         this.columns = [
             {
-                dataField: 'fec_entrega',
+                dataField: 'fec_vto',
                 text: 'Fecha',
                 headerStyle: { width: '10%' },
                 sort: true,
             },
             {
-                dataField: 'comprobante',
+                dataField: 'comprob_nro',
                 text: 'Comprobante',
                 headerStyle: { width: '12%' },
                 sort: true
@@ -32,17 +32,17 @@ export default class InvolvementTable extends Component {
 
             },
             {
-                dataField: 'cantidad',
+                dataField: 'cant_pend',
                 text: 'Cant. Pend.'
             },
             {
-                dataField: 'unid_v',
+                dataField: 'cod_unid',
                 text: 'Unidad',
                 headerStyle: { width: '5%' }
 
             },
             {
-                dataField: 'cant_afect',
+                dataField: 'cant_afec',
                 text: 'Cantidad Afectada',
                 headerStyle: { width: '10%', color: 'red' }
             },
@@ -87,7 +87,7 @@ export default class InvolvementTable extends Component {
             <Col className={`col-12`}>
                 <CommonTable
                     columns={this.columns}
-                    keyField={'id'}
+                    keyField={'nimovcli'}
                     data={products}
                     selectRow={selectRow}
                     defaultSorted={defaultSorted}

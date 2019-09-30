@@ -5,6 +5,7 @@ import voucherTypeSaga from './VoucherType';
 import voucherSaga from './Voucher';
 import productSaga from './Product';
 import loadItemsSaga from './LoadItems';
+import salesAffectedSaga from './SalesAffected';
 
 export default function* rootSaga(getState) {
   yield all([
@@ -13,6 +14,7 @@ export default function* rootSaga(getState) {
     voucherTypeSaga(),
     voucherSaga(),
     productSaga(),
-    loadItemsSaga()
+    loadItemsSaga(),
+    salesAffectedSaga()
   ]);
 }

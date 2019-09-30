@@ -5,3 +5,4 @@ export * from './VoucherType';
 export * from './Voucher';
 export * from './Product';
 export * from './LoadItems';
+export * from './SalesAffected';

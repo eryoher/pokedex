@@ -6,6 +6,7 @@ import VoucherType from "./VoucherType";
 import Voucher from './Voucher';
 import ProductReducer from './Product';
 import LoadItemsReducer from './LoadItems';
+import SalesAffectedReducer from './SalesAffected';
 
 const reducers = combineReducers({
   common: Common,
@@ -14,7 +15,8 @@ const reducers = combineReducers({
   vouchertype: VoucherType,
   voucher: Voucher,
   product: ProductReducer,
-  loadItems: LoadItemsReducer
+  loadItems: LoadItemsReducer,
+  salesAffected: SalesAffectedReducer
 });
 
 const rootReducer = (state, action) => {

@@ -111,19 +111,3 @@ export const setInputFocusSuccess = (response) => {
         payload: response
     }
 };
-
-
-
-export const getProductsInvolvement = (params) => {
-    return {
-        type: GET_PRODUCTS_INVOLVEMENT,
-        payload: params
-    }
-};
-
-export const getProductsInvolvementSuccess = (response) => {
-    return {
-        type: GET_PRODUCTS_INVOLVEMENT_SUCCESS,
-        payload: response
-    }
-};

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import InputText from 'components/form/inputText'
-import { setTableDataProducts, setInputFocus } from '../../actions';
+import { setInputFocus } from '../../actions';
 import { connect } from 'react-redux';
 import { Col, Row } from 'react-bootstrap';
 import ModalPriceUnit from './modalPriceUnit';
@@ -35,12 +35,12 @@ class InputPriceUnit extends Component {
         const params = { niprod: row.niprod, idcampo: 'precio_unit', value: selectPrice };
         const newPrice = (parseFloat(row.cantidad) * parseFloat(selectPrice)) / parseFloat(row.base_v);
         const paramsNeto = { niprod: row.niprod, idcampo: 'neto', value: newPrice.toString() }
-        this.props.setTableDataProducts(params);
-        this.props.setTableDataProducts(paramsNeto);
+        this.props.setData(params);
+        this.props.setData(paramsNeto);
     }
 
     render() {
-        const { optionsInput, row, t } = this.props;
+        const { optionsInput, row } = this.props;
         return (
             <Row>
                 <InputText
@@ -52,7 +52,7 @@ class InputPriceUnit extends Component {
                         const customCantidad = (row.cantidad) ? parseFloat(row.cantidad) : 0;
                         const newPrice = (customCantidad * customValue) / parseFloat(row.base_v);
                         const params = { niprod: row.niprod, idcampo: 'neto', value: newPrice.toString() };
-                        this.props.setTableDataProducts([params, { niprod: row.niprod, idcampo: 'precio_unit', value: value }]);
+                        this.props.setData([params, { niprod: row.niprod, idcampo: 'precio_unit', value: value }]);
                         this.props.setInputFocus({ input: 'neto', rowId: row.niprod })
                     }}
                     handleEnterKey={() => this.props.handleFocus(row.niprod)}
@@ -77,4 +77,4 @@ const mapStateToProps = ({ product }) => {
     return { productsUpdate, focusInput };
 };
 
-export default connect(mapStateToProps, { setTableDataProducts, setInputFocus })(withTranslation()(InputPriceUnit));
+export default connect(mapStateToProps, { setInputFocus })(withTranslation()(InputPriceUnit));

@@ -4,15 +4,15 @@ import {
     salesAffectedValidate,
     salesAffectedCant,
     salesAffectedSubCalculation,
-    salesAffectedConfirm
+    salesAffectedConfirm,
 } from '../api/SalesAffected'
 
 import {
-    SALES_AFFECTED_VALIDATE, SALES_AFFECTED_QUANTITY, SALES_AFFECTED_SUB_CALCULATION, SALES_AFFECTED_CONFIRM
+    SALES_AFFECTED_VALIDATE, SALES_AFFECTED_QUANTITY, SALES_AFFECTED_SUB_CALCULATION, SALES_AFFECTED_CONFIRM, SET_TABLE_DATA_INVOLVEMENT
 } from '../constants/ActionsTypes';
 
 
-import { salesAffectedValidateSuccess, salesAffectedCantSuccess, salesAffectedSubCalculationSuccess, salesAffectedConfirmSuccess } from 'actions';
+import { salesAffectedValidateSuccess, salesAffectedCantSuccess, salesAffectedSubCalculationSuccess, salesAffectedConfirmSuccess, setTableDataInvolvementSuccess } from 'actions';
 
 
 function* salesAffectedValidateRequest({ payload }) {
@@ -48,7 +48,6 @@ function* salesAffectedConfirmRequest({ payload }) {
     }
 }
 
-
 export function* salesAffectedValidateSaga() {
     yield takeEvery(SALES_AFFECTED_VALIDATE, salesAffectedValidateRequest);
 }
@@ -64,6 +63,7 @@ export function* salesAffectedSubCalculationSaga() {
 export function* salesAffectedConfirmSaga() {
     yield takeEvery(SALES_AFFECTED_CONFIRM, salesAffectedConfirmRequest);
 }
+
 
 export default function* rootSaga() {
     yield all([

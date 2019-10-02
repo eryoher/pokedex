@@ -24,7 +24,7 @@ export default (mockAdapter) => {
                     "cod_unid": "UN",
                     "desc_unid": "unid",
                     "base_v": 1,
-                    "precio_unit": 32.56,
+                    "precio_unit": '32.56',
                     "cant_pend": 100,
                     "cant_afec": 0,
                     "cant_saldo": 100,
@@ -44,7 +44,7 @@ export default (mockAdapter) => {
                     "cod_unid": "UN",
                     "desc_unid": "unid",
                     "base_v": 1,
-                    "precio_unit": 32.56,
+                    "precio_unit": '32.56',
                     "cant_pend": 500,
                     "cant_afec": 0,
                     "neto": '1628, 00'
@@ -53,29 +53,68 @@ export default (mockAdapter) => {
         }
     });
 
+    mockAdapter.onGet('/AfectaVentas/cantidad/Validar', { params: { idOperacion: 45334 } }).reply(200, {
+        data: {
+            "Items": [
+                {
+                    "nimovcli": 45334,
+                    "nitem": 1,
+                    "cant_afec": 100,
+                    "prod_pcio_vta": '36.54',
+                    "neto": '36545.25',
+                    "ind_stock": 0
+                },
+
+            ],
+            "total_importe": 54454,
+            "total_item": 1,
+            "total_cant": 100
+        }
+    });
+
+    mockAdapter.onGet('/AfectaVentas/cantidad/Validar', { params: { idOperacion: 45335 } }).reply(200, {
+        data: {
+            "Items": [
+                {
+                    "nimovcli": 45335,
+                    "nitem": 1,
+                    "cant_afec": 500,
+                    "prod_pcio_vta": '36.54',
+                    "neto": '3332.25',
+                    "ind_stock": 0
+                },
+
+            ],
+            "total_importe": 154454,
+            "total_item": 2,
+            "total_cant": 600
+        }
+    });
+
     mockAdapter.onGet('/AfectaVentas/cantidad/Validar').reply(200, {
         data: {
             "Items": [
                 {
-                    "nimovcli": 574,
+                    "nimovcli": 45335,
                     "nitem": 1,
-                    "cant_afec": 100,
+                    "cant_afec": 500,
                     "prod_pcio_vta": '36.54',
-                    "neto": 3654,
+                    "neto": '3332.25',
                     "ind_stock": 0
                 },
                 {
-                    "nimovcli": 575,
-                    "nitem": 3,
-                    "cant_afec": 20,
-                    "prod_pcio_vta": 100,
-                    "neto": 2000,
+                    "nimovcli": 45334,
+                    "nitem": 1,
+                    "cant_afec": 100,
+                    "prod_pcio_vta": '36.54',
+                    "neto": '36545.25',
                     "ind_stock": 0
                 }
+
             ],
-            "total_importe": 5654,
+            "total_importe": 154454,
             "total_item": 2,
-            "total_cant": 120
+            "total_cant": 600
         }
     });
 

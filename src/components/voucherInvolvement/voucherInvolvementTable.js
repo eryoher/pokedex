@@ -14,7 +14,7 @@ class VoucherInvolvementTable extends Component {
     }
 
     render() {
-        const { t, productsInvol } = this.props;
+        const { t, productsInvol, cantValidate } = this.props;
         const inputConfig = [{ idcampo: 'checkComprobAvencer', label: t('voucherInvolvement.form.sample'), visible: 1, requerido: 0, editable: 1 }]
 
         return (
@@ -43,15 +43,15 @@ class VoucherInvolvementTable extends Component {
                     />
                 </Col>
                 <Col sm={3}>
-                    {productsInvol && <ProductsTotalResume formatCol={{ span: 9, offset: 3 }} data={productsInvol} />}
+                    {productsInvol && <ProductsTotalResume formatCol={{ span: 10, offset: 3 }} data={cantValidate} />}
                 </Col>
-                <Col sm={12} className={"pt-5"}>
+                <Col sm={12} className={"pt-5 pb-3"}>
                     {productsInvol &&
                         <InvolvementTable
                             products={productsInvol.Items}
                         />
                     }
-                    {productsInvol && <ProductsTotalResume formatCol={{ span: 4, offset: 7 }} data={productsInvol} />}
+                    {productsInvol && <ProductsTotalResume formatCol={{ span: 4, offset: 7 }} data={cantValidate} />}
                 </Col>
             </Row>
         )
@@ -60,8 +60,8 @@ class VoucherInvolvementTable extends Component {
 
 const mapStateToProps = ({ vouchertype, salesAffected }) => {
     const { voucherType } = vouchertype;
-    const { productsInvol } = salesAffected;
-    return { voucherType, productsInvol };
+    const { productsInvol, cantValidate } = salesAffected;
+    return { voucherType, productsInvol, cantValidate };
 };
 
 export default connect(mapStateToProps, { salesAffectedCant })(withTranslation()(VoucherInvolvementTable));

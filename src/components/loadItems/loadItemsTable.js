@@ -276,6 +276,7 @@ class LoadItemsTable extends Component {
             result = (
                 <InputPriceUnit
                     optionsInput={optionsInput}
+                    setData={this.props.setTableDataProducts}
                     handleFocus={(rowId) => {
                         // Focus next input                           
                         if (row.niprod === rowId) {

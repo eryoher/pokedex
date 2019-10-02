@@ -303,6 +303,34 @@ export default (mockAdapter) => {
         }
     });
 
+    mockAdapter.onGet('/Comprobantes/config', { params: { cod_proceso: 'p_afectcomprob', idOperacion: 1 } }).reply(200, {
+        data: {
+            "cod_proceso": "p_afectcomprob",
+            "descrip_proceso": "Afectacion Comprobante",
+            "orden": "3",
+            "campos": [
+                { "idcampo": "fec_emis", "descripcion": "Fecha", "label": "Fecha", "editable": 0, "visible": 1, "requerido": "0", "valid": "FEC>=H", "mascara": "fechaLarga" },
+                { "idcampo": "fec_vto", "descripcion": "Fecha Venta", "label": "Fecha Venta", "editable": 0, "visible": 0, "requerido": "0", "valid": "FEC>=H", "mascara": "fechaLarga" },
+                { "idcampo": "comprob_nro", "descripcion": "Comprobante", "label": "Comprobante", "editable": 0, "visible": 1, "mascara": "", "requerido": "0" },
+                { "idcampo": "comprob_desc", "descripcion": "Comprobante Nombre", "label": "Nombre Comprobante", "editable": 0, "visible": 0, "mascara": "", "requerido": "0" },
+                { "idcampo": "cod_prod", "descripcion": "Código Producto", "label": "Código", "editable": 0, "visible": 1, "mascara": "", "requerido": "0" },
+                { "idcampo": "desc_prod", "descripcion": "Nombre Producto", "label": "Producto", "editable": 0, "visible": 1, "mascara": "", "requerido": "0" },
+                { "idcampo": "codbarra", "descripcion": "Codigo de Barra", "label": "Codigo de Barras", "editable": 0, "visible": 0, "mascara": "", "requerido": "0" },
+                { "idcampo": "base_v", "descripcion": "Base", "label": "Base", "editable": 0, "visible": 0, "mascara": "", "requerido": "0" },
+                { "idcampo": "cod_unid", "descripcion": "Presentación", "label": "Unid/Pres", "editable": 0, "visible": 1, "mascara": "", "requerido": "0" },
+                { "idcampo": "cant_pend", "descripcion": "cantidad", "label": "Cant", "editable": 0, "visible": 1, "mascara": "", "requerido": "0", "valid": "VAL>0" },
+                { "idcampo": "cant_afec", "descripcion": "Cantidad Afectada", "label": "Cant. Afectada", "editable": 0, "visible": 1, "mascara": "", "requerido": "1", "valid": "VAL>0" },
+                { "idcampo": "ind_stock", "descripcion": "Indic.Stock", "label": "", "editable": 0, "visible": 1, "mascara": "", "requerido": "0" },
+                { "idcampo": "precio_unit", "descripcion": "Precio unit.", "label": "Precio Unit", "editable": 1, "visible": 1, "requerido": "1", "valid": "VAL>0", "mascara": "precioUnitario" },
+                { "idcampo": "modif_pcio", "descripcion": "Clave para modificar precio", "label": "", "editable": 1, "visible": 0, "requerido": "0", "mascara": "" },
+                { "idcampo": "neto", "descripcion": "Importe neto", "label": "Neto", "editable": 1, "visible": 1, "mascara": "precioUnitario", "requerido": "1", "valid": "VAL>0" },
+                { "idcampo": "cant_saldo", "descripcion": "Saldo", "label": "Saldo", "editable": 0, "visible": 1, "mascara": "", "requerido": "0", "valid": "VAL>0" },
+
+
+            ]
+        }
+    });
+
     mockAdapter.onGet('/Comprobantes/ventaCabecera', { params: { idOperacion: 1 } }).reply(200, {
         data:
         {

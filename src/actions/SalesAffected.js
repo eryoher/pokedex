@@ -6,7 +6,9 @@ import {
     SALES_AFFECTED_SUB_CALCULATION,
     SALES_AFFECTED_SUB_CALCULATION_SUCCESS,
     SALES_AFFECTED_CONFIRM,
-    SALES_AFFECTED_CONFIRM_SUCCESS
+    SALES_AFFECTED_CONFIRM_SUCCESS,
+    SET_TABLE_DATA_INVOLVEMENT,
+    SET_TABLE_DATA_INVOLVEMENT_SUCCESS
 } from '../constants/ActionsTypes';
 
 
@@ -63,5 +65,12 @@ export const salesAffectedConfirmSuccess = (response) => {
     return {
         type: SALES_AFFECTED_CONFIRM_SUCCESS,
         payload: response
+    }
+};
+
+export const setTableDataInvolvement = (params) => {
+    return {
+        type: SET_TABLE_DATA_INVOLVEMENT,
+        payload: params
     }
 };

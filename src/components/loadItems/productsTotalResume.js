@@ -7,9 +7,9 @@ import { withTranslation } from 'react-i18next';
 class ProductsTotalResume extends Component {
     render() {
         const { data, t, formatCol } = this.props
-        const totalItem = (data.total_item) ? data.total_item : 0;
-        const totalImporte = (data.total_importe) ? data.total_importe : 0;
-        const totalBruto = (data.total_margen_bruto) ? data.total_margen_bruto : 0;
+        const totalItem = (data && data.total_item) ? data.total_item : 0;
+        const totalImporte = (data && data.total_importe) ? data.total_importe : 0;
+        const totalBruto = (data && data.total_margen_bruto) ? data.total_margen_bruto : 0;
 
         return (
             <Col md={formatCol} style={{ lineHeight: '1.4', fontWeight: 'bold', fontSize: '11pt' }} >

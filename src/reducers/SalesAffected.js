@@ -24,7 +24,6 @@ function rootReducer(state = initialState, action) {
             return { ...state, cantValidate: null }
         case SALES_AFFECTED_VALIDATE_SUCCESS:
             const validateItems = action.payload.data.Items;
-
             let updateState = {
                 ...state,
                 productsUpdate: [
@@ -36,9 +35,13 @@ function rootReducer(state = initialState, action) {
             if (updateState.productsUpdate) {
                 updateState.productsUpdate.forEach(prd => {
                     validateItems.forEach(item => {
-                        if (prd.nimovcli === item.nimovcli) {
-                            prd['cant_afec'] = item.cant_afec;
+                        if (prd.nimovcli === item.nimovcli && item.ind_stock === 0) {
+                            prd.cant_afec = item.cant_afec;
                             prd.neto = item.neto;
+                            prd.cant_saldo = parseFloat(prd.cant_pend) - parseFloat(item.cant_afec);
+                        } else if (prd.nimovcli === item.nimovcli && item.ind_stock !== 0) {
+                            prd['error'] = true;
+                            prd['type_error'] = item.ind_stock;
                         }
                     });
                 });

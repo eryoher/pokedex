@@ -8,6 +8,9 @@ import { withTranslation } from 'react-i18next';
 import { getConfigVoucher, setTableDataInvolvement, salesAffectedValidate } from '../../actions/';
 import InputText from 'components/form/inputText';
 import InputPriceUnit from 'components/loadItems/inputPriceUnit';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart, faComment } from '@fortawesome/free-solid-svg-icons';
+import NotificationMessage from 'components/common/notificationMessage';
 
 class InvolvementTable extends Component {
 
@@ -15,13 +18,25 @@ class InvolvementTable extends Component {
         super(props);
         this.inputRefs = {};
         this.state = {
-            rowSelected: []
+            rowSelected: [],
+            showError: false,
+            errorMessage: ''
         }
 
     }
 
     componentDidMount = () => {
         this.props.getConfigVoucher({ cod_proceso: 'p_afectcomprob', idOperacion: 1 });
+    }
+
+    componentWillReceiveProps = (nextProps) => {
+        if (nextProps.productsUpdate) {
+            nextProps.productsUpdate.forEach(field => {
+                if (field.error && field.type_error === 1) {
+                    this.setState({ showError: 'true', errorMessage: 'No es valido para seleccion manual.' })
+                }
+            });
+        }
     }
 
     getColumns = () => {
@@ -51,8 +66,37 @@ class InvolvementTable extends Component {
 
         });
 
+        rows.push(
+            {
+                dataField: 'error',
+                text: '',
+                align: 'center',
+                headerAlign: 'center',
+                headerStyle: { width: '3%' },
+                formatter: ((cell, row, rowIndex) => {
+                    if (row.error) {
+                        if (row.type_error === 2) {
+                            const message = (row.type_error === 2) ? 'error Stock Insuficiente' : ''
+                            return (
+                                <FontAwesomeIcon icon={faComment} title={message} />
+                            )
+                        } else if (row.type_error === 1) {
+                            //this.setState({ showError: 'true', errorMessage: 'No es valido para seleccion manual.' })
+                        }
+                    } else {
+                        return null
+                    }
+                }),
+
+            }
+        )
+
 
         return rows;
+    }
+
+    handleCloseError = () => {
+        this.setState({ showError: false })
     }
 
     getStyleColumn = (field) => {
@@ -101,7 +145,7 @@ class InvolvementTable extends Component {
         const inputError = (value === 'error_input') ? true : false;
         const customValue = (value === 'error_input') ? '' : value;
         const inputStyle = (field.idcampo === 'cantidad' || field.idcampo === 'precio_unit' || field.idcampo === 'neto') ? { textAlign: 'right' } : {}
-        const { focusInput } = this.props;
+
 
         if (field.editable && !this.inputRefs[field.idcampo]) {
             this.inputRefs[field.idcampo] = {}
@@ -153,7 +197,7 @@ class InvolvementTable extends Component {
             result = (
                 <InputText
                     {...optionsInput}
-                    autoFocus={(focusInput && focusInput.input === 'neto' && focusInput.rowId === row.niprod) ? true : false}
+                    //autoFocus={(focusInput && focusInput.input === 'neto' && focusInput.rowId === row.niprod) ? true : false}
                     handleEnterKey={(e, value) => {
                         /* if (field.idcampo === 'cantidad') {
                              // Focus next input            
@@ -200,11 +244,6 @@ class InvolvementTable extends Component {
 
     }
 
-    handleClickRow = (row) => {
-        console.log(row);
-    }
-
-
 
     render() {
         const { products, theme, config, productsUpdate, cantValidate } = this.props;
@@ -212,8 +251,12 @@ class InvolvementTable extends Component {
 
         const selectRow = {
             mode: 'checkbox',
-            clickToSelect: true,
+
             selectColumnPosition: 'right',
+            style: (row) => {
+                const backgroundColor = row.error ? '#f8d7da' : '#FFF';
+                return { backgroundColor };
+            },
             onSelect: (row, isSelect, rowIndex, e) => {
 
                 const rows = (this.state.rowSelected) ? this.state.rowSelected : [];
@@ -227,7 +270,6 @@ class InvolvementTable extends Component {
                     });
                 }
                 this.setState({ rowSelected: rows });
-                console.log(rows)
                 this.props.salesAffectedValidate({ idOperacion: row.nimovcli /*item: rows*/ }); //Falta adicionar idOperacion
 
             },
@@ -275,18 +317,27 @@ class InvolvementTable extends Component {
 
 
         return (
-            <Col className={`col-12`}>
-                {config && <CommonTable
-                    columns={tableColumns}
-                    keyField={'nimovcli'}
-                    data={rowData}
-                    selectRow={selectRow}
-                    defaultSorted={defaultSorted}
-                    rowClasses={theme.tableRow}
-                    headerClasses={theme.tableHeader}
+            <>
+                <Col sm={12} className={"mb-1"} >
+                    <NotificationMessage
+                        {...this.state}
+                        handleCloseError={this.handleCloseError}
+                        type={'danger'}
+                    />
+                </Col>
+                <Col className={`col-12`}>
+                    {config && <CommonTable
+                        columns={tableColumns}
+                        keyField={'nimovcli'}
+                        data={rowData}
+                        selectRow={selectRow}
+                        defaultSorted={defaultSorted}
+                        rowClasses={theme.tableRow}
+                        headerClasses={theme.tableHeader}
 
-                />}
-            </Col>
+                    />}
+                </Col>
+            </>
         )
     }
 }

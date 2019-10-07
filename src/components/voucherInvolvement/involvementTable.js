@@ -9,8 +9,9 @@ import { getConfigVoucher, setTableDataInvolvement, salesAffectedValidate } from
 import InputText from 'components/form/inputText';
 import InputPriceUnit from 'components/loadItems/inputPriceUnit';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShoppingCart, faComment } from '@fortawesome/free-solid-svg-icons';
+import { faComment } from '@fortawesome/free-solid-svg-icons';
 import NotificationMessage from 'components/common/notificationMessage';
+import { selectFilter } from 'react-bootstrap-table2-filter';
 
 class InvolvementTable extends Component {
 
@@ -20,8 +21,10 @@ class InvolvementTable extends Component {
         this.state = {
             rowSelected: [],
             showError: false,
-            errorMessage: ''
+            errorMessage: '',
         }
+
+        this.rowErrors = []
 
     }
 
@@ -32,15 +35,16 @@ class InvolvementTable extends Component {
     componentWillReceiveProps = (nextProps) => {
         if (nextProps.productsUpdate) {
             nextProps.productsUpdate.forEach(field => {
-                if (field.error && field.type_error === 1) {
-                    this.setState({ showError: 'true', errorMessage: 'No es valido para seleccion manual.' })
+                if (field.error && field.type_error === 1 && !this.rowErrors[field.nimovcli]) {
+                    this.rowErrors[field.nimovcli] = true;
+                    this.setState({ showError: 'true', errorMessage: 'No se soporta selección Manual de Stock.' })
                 }
             });
         }
     }
 
     getColumns = () => {
-        const { config } = this.props;
+        const { config, theme } = this.props;
         const rows = config.campos.map((field) => {
             return {
                 dataField: field.idcampo,
@@ -49,6 +53,11 @@ class InvolvementTable extends Component {
                 headerAlign: 'center',
                 headerStyle: this.getStyleColumn(field),
                 hidden: !field.visible,
+                filter: (field.idcampo === 'fec_emis' || field.idcampo === 'comprob_nro' || field.idcampo === 'cod_prod') ? selectFilter({
+                    options: [],
+                    className: `${theme.inputFilter} mt-2`,
+                    onFilter: filterVal => this.setState({ filterVal }),
+                }) : null,
                 filterValue: (cell, row) => {
                     const filter = []
                     row.Bonificaciones.forEach(bonif => {
@@ -144,7 +153,7 @@ class InvolvementTable extends Component {
         let result = null;
         const inputError = (value === 'error_input') ? true : false;
         const customValue = (value === 'error_input') ? '' : value;
-        const inputStyle = (field.idcampo === 'cantidad' || field.idcampo === 'precio_unit' || field.idcampo === 'neto') ? { textAlign: 'right' } : {}
+        const inputStyle = (field.idcampo === 'cant_afec' || field.idcampo === 'precio_unit' || field.idcampo === 'neto') ? { textAlign: 'right' } : {}
 
 
         if (field.editable && !this.inputRefs[field.idcampo]) {
@@ -251,7 +260,6 @@ class InvolvementTable extends Component {
 
         const selectRow = {
             mode: 'checkbox',
-
             selectColumnPosition: 'right',
             style: (row) => {
                 const backgroundColor = row.error ? '#f8d7da' : '#FFF';
@@ -315,7 +323,11 @@ class InvolvementTable extends Component {
 
         }) : null;
 
-
+        const options = {
+            paginationSize: 4,
+            pageStartIndex: 0,
+            sizePerPage: 5,
+        }
         return (
             <>
                 <Col sm={12} className={"mb-1"} >
@@ -334,7 +346,7 @@ class InvolvementTable extends Component {
                         defaultSorted={defaultSorted}
                         rowClasses={theme.tableRow}
                         headerClasses={theme.tableHeader}
-
+                        paginationOptions={options}
                     />}
                 </Col>
             </>

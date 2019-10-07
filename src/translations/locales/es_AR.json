@@ -43,6 +43,9 @@
             "checkbox": "Incluir comprobantes previos a vencer",
             "sample": "Muestra",
             "select_sample": "Seleccione una muestra"
+        },
+        "table": {
+            "total_item_quantity": "Total Cantidad Ítems"
         }
 
     },

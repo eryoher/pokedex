@@ -6,8 +6,27 @@ import InputDropdown from 'components/form/inputDropdown';
 import { salesAffectedCant } from '../../actions/';
 import ProductsTotalResume from 'components/loadItems/productsTotalResume';
 import InvolvementTable from './involvementTable';
+import InvolvementTotalResume from './involvementTotalResume';
 
 class VoucherInvolvementTable extends Component {
+
+    constructor(props) {
+        super(props);
+        this.optionsInput = [
+            {
+                id: 0,
+                label: 'Todos'
+            },
+            {
+                id: 1,
+                label: 'Solo comprob.afectados(cant_afec <> 0)'
+            },
+            {
+                id: 2,
+                label: 'Solo comprob.sin afectar(cant_afec = 0)'
+            }
+        ]
+    }
 
     componentDidMount = () => {
         this.props.salesAffectedCant();
@@ -36,22 +55,22 @@ class VoucherInvolvementTable extends Component {
                         styles={{ width: '100%' }}
                         colLabel={"col-sm-4"}
                         colInput={"col-sm-8"}
-                        options={[]}
+                        options={this.optionsInput}
                         onChange={(value) => {
                             console.log('value')
                         }}
                     />
                 </Col>
                 <Col sm={3}>
-                    {productsInvol && <ProductsTotalResume formatCol={{ span: 10, offset: 3 }} data={cantValidate} />}
+                    {productsInvol && <InvolvementTotalResume classDiv={'pl-5'} formatCol={{ span: 9, offset: 3 }} data={cantValidate} />}
                 </Col>
-                <Col sm={12} className={"pt-5 pb-3"}>
+                <Col sm={12} className={"pb-2"}>
                     {productsInvol &&
                         <InvolvementTable
                             products={productsInvol.Items}
                         />
                     }
-                    {productsInvol && <ProductsTotalResume formatCol={{ span: 4, offset: 7 }} data={cantValidate} />}
+                    {productsInvol && <InvolvementTotalResume classDiv={'pl-3'} formatCol={{ span: 4, offset: 7 }} data={cantValidate} />}
                 </Col>
             </Row>
         )

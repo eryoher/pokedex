@@ -18,7 +18,7 @@ export default class CommonTable extends Component {
         const border = (bordered) ? bordered : false;
         const customkeyField = (keyField) ? keyField : 'id';
         const customPagination = (paginationOptions) ? paginationOptions : {};
-        console.log(customPagination, 'la paginacion')
+
         return (
             <BootstrapTable
                 keyField={customkeyField}

@@ -5,7 +5,7 @@ import styles from './involvementTable.module.css';
 import { themr } from 'react-css-themr';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { getConfigVoucher, setTableDataInvolvement, salesAffectedValidate } from '../../actions/';
+import { getConfigVoucher, setTableDataInvolvement, salesAffectedValidate, salesAffectedSubCalculation } from '../../actions/';
 import InputText from 'components/form/inputText';
 import InputPriceUnit from 'components/loadItems/inputPriceUnit';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -22,6 +22,7 @@ class InvolvementTable extends Component {
             rowSelected: [],
             showError: false,
             errorMessage: '',
+            selectedCheck: []
         }
 
         this.rowErrors = []
@@ -152,6 +153,15 @@ class InvolvementTable extends Component {
         return style;
     }
 
+    handleSetFocus = (input, rowId) => {
+        const nextRef = this.inputRefs[input][rowId];
+        if (input === 'fec_entrega') {
+            nextRef.current.setFocus();
+        } else if (nextRef.current && nextRef.current.element) {
+            nextRef.current.element.focus();
+        }
+    }
+
     renderFormat = (field, value, row) => {
 
         let result = null;
@@ -193,7 +203,9 @@ class InvolvementTable extends Component {
             result = (
                 <InputPriceUnit
                     optionsInput={optionsInput}
+                    fieldCant={'cant_afec'}
                     setData={this.props.setTableDataInvolvement}
+                    calSubTotal={this.props.salesAffectedSubCalculation}
                     handleFocus={(rowId) => {
                         // Focus next input                           
                         if (row.niprod === rowId) {
@@ -212,41 +224,55 @@ class InvolvementTable extends Component {
                     {...optionsInput}
                     //autoFocus={(focusInput && focusInput.input === 'neto' && focusInput.rowId === row.niprod) ? true : false}
                     handleEnterKey={(e, value) => {
-                        /* if (field.idcampo === 'cantidad') {
-                             // Focus next input            
-                             this.props.getPriceByProduct({
-                                 "IdOperacion": 123456, //Falta adicionar id Operacion.
-                                 "Idproducto": row.niprod,
-                                 "cantidad": value,
-                                 "unid_vta": row.unid_v
-                             });
-                             this.handleSetFocus('precio_unit', row.niprod);
-                         } else if (field.idcampo === 'neto') {
-                             this.handleSetFocus('fec_entrega', row.niprod);
-                         }*/
+                        if (field.idcampo === 'cant_afec') {
+                            const items = [{ Nimovcli: row.nimovcli, Nitem: row.nitem, Cant_afec: row.cant_afec }];
+                            const selected = (this.state.selectedCheck) ? this.state.selectedCheck : [];
+                            selected.push(row.nimovcli);
+                            this.setState({ selectedCheck: selected });
+                            this.props.salesAffectedValidate({ idOperacion: row.nimovcli /*items*/ }); //Falta adicionar idOperacion   
+                            this.handleSetFocus('precio_unit', row.niprod);
+                        } else if (field.idcampo === 'neto') {
+                            const params = {
+                                "IdOperacion": 12345,
+                                "nimovcli": row.nimovcli,
+                                "nitem": row.nitem,
+                                "niprod": row.niprod,
+                                "cod_unid": row.cod_unid,
+                                "cant_afec": row.cant_afec,
+                                "precio_unit": row.precio_unit,
+                                "neto": value
+                            }
+
+                            this.props.salesAffectedSubCalculation(params)
+                        }
                         return true;
                     }}
                     onBlur={(value) => {
-                        /*if (field.idcampo === 'cantidad') { //pendiente logica.
-                            this.props.getPriceByProduct({
-                                "IdOperacion": 123456, //Falta adicionar id Operacion.
-                                "Idproducto": row.niprod,
-                                "cantidad": value,
-                                "unid_vta": row.unid_v
-                            });
+                        if (field.idcampo === 'cant_afec') { //pendiente logica.
+                            const items = [{ Nimovcli: row.nimovcli, Nitem: row.nitem, Cant_afec: row.cant_afec }];
+                            const selected = (this.state.selectedCheck) ? this.state.selectedCheck : [];
+                            selected.push(row.nimovcli);
+                            this.setState({ selectedCheck: selected });
+                            this.props.salesAffectedValidate({ idOperacion: row.nimovcli /*items*/ }); //Falta adicionar idOperacion   
 
                         } else if (field.idcampo === 'neto') {
-                            const newValue = (value) ? parseFloat(value.split(',').join('.')) : 0;
-                            const cantidad = (row.cantidad) ? parseFloat(row.cantidad) : 0;
+                            const params = {
+                                "IdOperacion": 12345,
+                                "nimovcli": row.nimovcli,
+                                "nitem": row.nitem,
+                                "niprod": row.niprod,
+                                "cod_unid": row.cod_unid,
+                                "cant_afec": row.cant_afec,
+                                "precio_unit": row.precio_unit,
+                                "neto": value
+                            }
 
-                            const newPrice = (parseFloat(row.base_v) * newValue) / cantidad;
-                            const params = { niprod: row.niprod, idcampo: 'precio_unit', value: newPrice.toString() }
-                            const paramsNeto = { niprod: row.niprod, idcampo: 'neto', value: newValue.toString() }
-                            this.props.setTableDataProducts([params, paramsNeto]);
-                        } else {*/
-                        const params = { niprod: row.niprod, idcampo: field.idcampo, value };
-                        this.props.setTableDataInvolvement([params]);
-                        //}
+                            this.props.salesAffectedSubCalculation(params)
+
+                        } else {
+                            const params = { niprod: row.niprod, idcampo: field.idcampo, value };
+                            this.props.setTableDataInvolvement([params]);
+                        }
                     }}
                 />
             )
@@ -264,32 +290,62 @@ class InvolvementTable extends Component {
         const selectRow = {
             mode: 'checkbox',
             selectColumnPosition: 'right',
+            selected: this.state.selectedCheck,
             style: (row) => {
                 const backgroundColor = row.error ? '#f8d7da' : '#FFF';
                 return { backgroundColor };
             },
             onSelect: (row, isSelect, rowIndex, e) => {
-
+                const selected = (this.state.selectedCheck) ? this.state.selectedCheck : [];
                 const rows = (this.state.rowSelected) ? this.state.rowSelected : [];
                 if (isSelect) { //Se adiciona                    
                     rows.push({ Nimovcli: row.nimovcli, Nitem: row.nitem, Cant_afec: row.cant_afec });
+                    selected.push(row.nimovcli)
                 } else { //Se resta
                     rows.forEach((toDelete, index) => {
                         if (toDelete.Nimovcli === row.nimovcli) {
                             rows.splice(index, 1);
                         }
                     });
+
+                    selected.forEach((delet, index) => {
+                        if (delet === row.nimovcli) {
+                            selected.splice(index, 1);
+                        }
+                    });
+
                 }
-                this.setState({ rowSelected: rows });
+                this.setState({ rowSelected: rows, selectedCheck: selected });
                 this.props.salesAffectedValidate({ idOperacion: row.nimovcli /*item: rows*/ }); //Falta adicionar idOperacion
 
             },
             onSelectAll: (isSelect, rows, e) => {
                 let selected = []
+                const checks = (this.state.selectedCheck) ? this.state.selectedCheck : [];
+
                 if (isSelect) {
+                    this.setState({ selectedCheck: null });
+                    rows.forEach(check => {
+                        checks.push(check.nimovcli);
+                    });
+
                     selected = rows.map(fila => {
                         return ({ Nimovcli: fila.nimovcli, Nitem: fila.nitem, Cant_afec: fila.cant_afec });
                     });
+
+                    this.setState({ selectedCheck: checks })
+                } else {
+                    for (let index = 0; index < checks.length; index++) {
+                        const check = checks[index];
+                        rows.forEach(fila => {
+                            if (check === fila.nimovcli) {
+                                delete checks[index]
+                            }
+                        });
+
+                    }
+
+                    this.setState({ selectedCheck: checks });
                 }
 
                 this.setState({ rowSelected: selected });
@@ -363,6 +419,6 @@ const mapStateToProps = ({ voucher, salesAffected }) => {
     return { config, productsUpdate, cantValidate };
 };
 
-const connectForm = connect(mapStateToProps, { getConfigVoucher, setTableDataInvolvement, salesAffectedValidate })(InvolvementTable);
+const connectForm = connect(mapStateToProps, { getConfigVoucher, setTableDataInvolvement, salesAffectedValidate, salesAffectedSubCalculation })(InvolvementTable);
 
 export default themr('InvolvementTableStyles', styles)(withTranslation()(connectForm));

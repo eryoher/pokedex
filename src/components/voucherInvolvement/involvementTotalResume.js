@@ -9,7 +9,7 @@ class InvolvementTotalResume extends Component {
         const { data, t, formatCol, classDiv } = this.props
         const totalItem = (data && data.total_item) ? data.total_item : 0;
         const totalImporte = (data && data.total_importe) ? data.total_importe : 0;
-        const totalquantity = (data && data.total_margen_bruto) ? data.total_margen_bruto : 0;
+        const totalquantity = (data && data.total_cant) ? data.total_cant : 0;
 
 
         return (

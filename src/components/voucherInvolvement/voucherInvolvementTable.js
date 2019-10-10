@@ -12,6 +12,11 @@ class VoucherInvolvementTable extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            total_item: 0,
+            total_cant: 0,
+            total_importe: 0
+        }
         this.optionsInput = [
             {
                 id: 0,
@@ -30,6 +35,19 @@ class VoucherInvolvementTable extends Component {
 
     componentDidMount = () => {
         this.props.salesAffectedCant();
+    }
+
+    componentDidUpdate = (prevProps) => {
+        const { subCalculations, cantValidate } = this.props;
+
+        if (prevProps.subCalculations !== subCalculations && !prevProps.subCalculations) {
+            this.setState({ total_item: subCalculations.total_item, total_cant: subCalculations.total_cant, total_importe: subCalculations.total_importe })
+        }
+
+        if (prevProps.cantValidate !== cantValidate && !prevProps.cantValidate) {
+            this.setState({ total_item: cantValidate.total_item, total_cant: cantValidate.total_cant, total_importe: cantValidate.total_importe })
+        }
+
     }
 
     render() {
@@ -62,7 +80,7 @@ class VoucherInvolvementTable extends Component {
                     />
                 </Col>
                 <Col sm={3}>
-                    {productsInvol && <InvolvementTotalResume classDiv={'pl-5'} formatCol={{ span: 9, offset: 3 }} data={cantValidate} />}
+                    {productsInvol && <InvolvementTotalResume classDiv={'pl-5'} formatCol={{ span: 9, offset: 3 }} data={this.state} />}
                 </Col>
                 <Col sm={12} className={"pb-2"}>
                     {productsInvol &&
@@ -70,7 +88,7 @@ class VoucherInvolvementTable extends Component {
                             products={productsInvol.Items}
                         />
                     }
-                    {productsInvol && <InvolvementTotalResume classDiv={'pl-3'} formatCol={{ span: 4, offset: 7 }} data={cantValidate} />}
+                    {productsInvol && <InvolvementTotalResume classDiv={'pl-3'} formatCol={{ span: 4, offset: 7 }} data={this.state} />}
                 </Col>
             </Row>
         )
@@ -79,8 +97,8 @@ class VoucherInvolvementTable extends Component {
 
 const mapStateToProps = ({ vouchertype, salesAffected }) => {
     const { voucherType } = vouchertype;
-    const { productsInvol, cantValidate } = salesAffected;
-    return { voucherType, productsInvol, cantValidate };
+    const { productsInvol, cantValidate, subCalculations } = salesAffected;
+    return { voucherType, productsInvol, cantValidate, subCalculations };
 };
 
 export default connect(mapStateToProps, { salesAffectedCant })(withTranslation()(VoucherInvolvementTable));

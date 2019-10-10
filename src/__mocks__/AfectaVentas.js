@@ -323,7 +323,7 @@ export default (mockAdapter) => {
                     "nitem": 1,
                     "cant_afec": 100,
                     "prod_pcio_vta": '36.54',
-                    "neto": '36545.25',
+                    "neto": '365450',
                     "ind_stock": 0
                 },
 
@@ -342,7 +342,7 @@ export default (mockAdapter) => {
                     "nitem": 1,
                     "cant_afec": 250,
                     "prod_pcio_vta": '36.54',
-                    "neto": '3332.25',
+                    "neto": '9135',
                     "ind_stock": 0
                 },
 
@@ -424,6 +424,9 @@ export default (mockAdapter) => {
             "total_importe": 12541.35,
             "total_item": 5,
             "total_cant": 150,
+            "nimovcli": 45338,
+            "precio_unit": '325.26',
+            "neto": '3332.25',
             "Resultado": 'T',
             "mens_error": "Item correcto",
         },

@@ -38,6 +38,7 @@ function rootReducer(state = initialState, action) {
                         if (prd.nimovcli === item.nimovcli && item.ind_stock === 0) {
                             prd.cant_afec = item.cant_afec;
                             prd.neto = item.neto;
+                            prd.precio_unit = item.prod_pcio_vta;
                             prd.cant_saldo = parseFloat(prd.cant_pend) - parseFloat(item.cant_afec);
                         } else if (prd.nimovcli === item.nimovcli && item.ind_stock !== 0) {
                             prd['error'] = true;
@@ -54,7 +55,27 @@ function rootReducer(state = initialState, action) {
         case SALES_AFFECTED_SUB_CALCULATION:
             return { ...state, subCalculations: null }
         case SALES_AFFECTED_SUB_CALCULATION_SUCCESS:
-            return { ...state, subCalculations: action.payload.data }
+            const updateItem = action.payload.data;
+            let updateCalsub = {
+                ...state,
+                productsUpdate: [
+                    ...state.productsInvol.Items,
+                ],
+                subCalculations: action.payload.data
+            }
+            if (updateCalsub.productsUpdate) {
+
+                updateCalsub.productsUpdate.forEach(prd => {
+                    if (prd.nimovcli === updateItem.nimovcli) {
+                        prd.neto = updateItem.neto;
+                        prd.precio_unit = updateItem.precio_unit;
+                        // prd.cant_saldo = parseFloat(prd.cant_pend) - parseFloat(updateItem.cant_afec);
+                    }
+                });
+
+            }
+
+            return updateCalsub;
         case SALES_AFFECTED_CONFIRM:
             return { ...state, salesconfirm: null }
         case SALES_AFFECTED_CONFIRM_SUCCESS:

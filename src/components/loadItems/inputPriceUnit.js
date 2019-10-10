@@ -40,7 +40,8 @@ class InputPriceUnit extends Component {
     }
 
     render() {
-        const { optionsInput, row } = this.props;
+        const { optionsInput, row, fieldCant, calSubTotal } = this.props;
+        const cantField = (fieldCant) ? fieldCant : 'cantidad';
         return (
             <Row>
                 <InputText
@@ -49,9 +50,21 @@ class InputPriceUnit extends Component {
                     divStyle={{ paddingRight: '5px', paddingLeft: "17px" }}
                     onBlur={(value) => {
                         const customValue = (value) ? parseFloat(value.split(',').join('.')) : 0;
-                        const customCantidad = (row.cantidad) ? parseFloat(row.cantidad) : 0;
+                        const customCantidad = (row[cantField]) ? parseFloat(row[cantField]) : 0;
                         const newPrice = (customCantidad * customValue) / parseFloat(row.base_v);
                         const params = { niprod: row.niprod, idcampo: 'neto', value: newPrice.toString() };
+                        if (calSubTotal) {
+                            calSubTotal({
+                                "IdOperacion": 12345,
+                                "nimovcli": row.nimovcli,
+                                "nitem": row.nitem,
+                                "niprod": row.niprod,
+                                "cod_unid": row.cod_unid,
+                                "cant_afec": row[cantField],
+                                "precio_unit": value,
+                                "neto": newPrice
+                            })
+                        }
                         this.props.setData([params, { niprod: row.niprod, idcampo: 'precio_unit', value: value }]);
                         this.props.setInputFocus({ input: 'neto', rowId: row.niprod })
                     }}

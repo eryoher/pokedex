@@ -5,7 +5,7 @@ import styles from './involvementTable.module.css';
 import { themr } from 'react-css-themr';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
-import { getConfigVoucher, setTableDataInvolvement, salesAffectedValidate, salesAffectedSubCalculation } from '../../actions/';
+import { getConfigVoucher, setTableDataInvolvement, salesAffectedValidate, salesAffectedSubCalculation, salesAffectedConfirm } from '../../actions/';
 import InputText from 'components/form/inputText';
 import InputPriceUnit from 'components/loadItems/inputPriceUnit';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -22,7 +22,8 @@ class InvolvementTable extends Component {
             rowSelected: [],
             showError: false,
             errorMessage: '',
-            selectedCheck: []
+            selectedCheck: [],
+            checksByPage: []
         }
 
         this.rowErrors = []
@@ -383,9 +384,28 @@ class InvolvementTable extends Component {
         }) : null;
 
         const options = {
-            paginationSize: 4,
-            pageStartIndex: 0,
-            sizePerPage: 5,
+            pageStartIndex: 1,
+            sizePerPage: 10,
+            onPageChange: (page, sizePerPage) => {
+                const { selectedCheck } = this.state;
+                const items = [];
+                rowData.forEach(row => {
+                    selectedCheck.forEach(check => {
+                        if (row.nimovcli === check) {
+                            items.push({
+                                nimovcli: row.nimovcli,
+                                nitem: row.nitem,
+                                cant_afec: row.cant_afec,
+                                precio_unit: row.precio_unit,
+                                neto: row.neto
+                            })
+                        }
+                    });
+                });
+                if (items.length) {
+                    this.props.salesAffectedConfirm({ idOperacion: '123456', items })
+                }
+            }
         }
         return (
             <>
@@ -419,6 +439,6 @@ const mapStateToProps = ({ voucher, salesAffected }) => {
     return { config, productsUpdate, cantValidate };
 };
 
-const connectForm = connect(mapStateToProps, { getConfigVoucher, setTableDataInvolvement, salesAffectedValidate, salesAffectedSubCalculation })(InvolvementTable);
+const connectForm = connect(mapStateToProps, { getConfigVoucher, setTableDataInvolvement, salesAffectedValidate, salesAffectedSubCalculation, salesAffectedConfirm })(InvolvementTable);
 
 export default themr('InvolvementTableStyles', styles)(withTranslation()(connectForm));

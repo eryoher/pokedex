@@ -38,8 +38,7 @@ class VoucherInvolvementTable extends Component {
     }
 
     componentDidUpdate = (prevProps) => {
-        const { subCalculations, cantValidate } = this.props;
-
+        const { subCalculations, cantValidate, salesconfirm } = this.props;
         if (prevProps.subCalculations !== subCalculations && !prevProps.subCalculations) {
             this.setState({ total_item: subCalculations.total_item, total_cant: subCalculations.total_cant, total_importe: subCalculations.total_importe })
         }
@@ -48,10 +47,14 @@ class VoucherInvolvementTable extends Component {
             this.setState({ total_item: cantValidate.total_item, total_cant: cantValidate.total_cant, total_importe: cantValidate.total_importe })
         }
 
+        if (prevProps.salesconfirm !== salesconfirm && !prevProps.salesconfirm && salesconfirm) {
+            this.setState({ total_item: salesconfirm.total_item, total_cant: salesconfirm.total_cant, total_importe: salesconfirm.total_importe })
+        }
+
     }
 
     render() {
-        const { t, productsInvol, cantValidate } = this.props;
+        const { t, productsInvol } = this.props;
         const inputConfig = [{ idcampo: 'checkComprobAvencer', label: t('voucherInvolvement.form.sample'), visible: 1, requerido: 0, editable: 1 }]
 
         return (
@@ -97,8 +100,8 @@ class VoucherInvolvementTable extends Component {
 
 const mapStateToProps = ({ vouchertype, salesAffected }) => {
     const { voucherType } = vouchertype;
-    const { productsInvol, cantValidate, subCalculations } = salesAffected;
-    return { voucherType, productsInvol, cantValidate, subCalculations };
+    const { productsInvol, cantValidate, subCalculations, salesconfirm } = salesAffected;
+    return { voucherType, productsInvol, cantValidate, subCalculations, salesconfirm };
 };
 
 export default connect(mapStateToProps, { salesAffectedCant })(withTranslation()(VoucherInvolvementTable));

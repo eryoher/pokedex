@@ -436,8 +436,8 @@ export default (mockAdapter) => {
         data: {
             "solic_stock": 0,
             "total_importe": 12541.35,
-            "total_item": 5,
-            "total_cant": 150,
+            "total_item": 9,
+            "total_cant": 335,
             "Resultado": 'T',
             "mens_error": "Item correcto",
         },

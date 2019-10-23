@@ -3,8 +3,6 @@ import createSagaMiddleware from 'redux-saga'
 import reducers from '../reducers'
 import rootSaga from '../sagas'
 
-import configureAxios from 'lib/AxiosInterceptors'
-
 import { Constants } from 'constants/index';
 
 const sagaMiddleware = createSagaMiddleware()
@@ -29,9 +27,7 @@ export function configureStore() {
     store.sagaTask = sagaMiddleware.run(rootSaga)
   }
 
-  store.runSagaTask()
-
-  configureAxios(store);
+  store.runSagaTask()  
 
   return store
 }

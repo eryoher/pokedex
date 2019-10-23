@@ -1,27 +1,15 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Provider } from "react-redux";
-import { ThemeProvider } from 'react-css-themr';
-import contextTheme from './themes';
-import AppRouter from './AppRouter'
-
+import AppRouter from './AppRouter';
 import configureStore from './store';
-import { translate, setLocale } from 'translations/index';
-
-type Props = {
-  className?: string,
-  disabled?: boolean
-};
 
 const store = configureStore();
 
-class App extends Component<Props> {
+class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <ThemeProvider theme={contextTheme}>
-          <AppRouter/>
-        </ThemeProvider>
+      <Provider store={store}>        
+        <AppRouter/>        
       </Provider>
     );
   }

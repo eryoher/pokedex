@@ -1,33 +1,52 @@
-// @flow
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from 'reactstrap';
-import { VOUCHER } from '../../utils/RoutePath';
-import logo from './../../logo.svg';
+import React, { Component } from 'react'
+import { Row, Col, Container } from 'react-bootstrap';
+//import SearchBox from 'components/common/searchBox';
+import { connect } from 'react-redux';
+import GridPokemons from '../../components/pokemon/gridPokemons';
+import PokemonDetail from '../../components/pokemon/pokemonDetail';
+import { searchPokemons, getPokemonAbility } from '../../actions';
 
-type Props = {
-  className?: string,
-  disabled?: boolean,
-  theme: Object
-};
+class Home extends Component {
 
-class Home extends Component<Props> {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedPokemon: null,
+    }
+  }
+
+  componentDidMount = () => {
+    this.props.searchPokemons();
+  }
+
   render() {
-    const { theme } = this.props;
-    console.log(theme.App);
+    const { theme, search, pokeability } = this.props;
+
     return (
-      <div className={theme.App}>
-        <header className={theme.AppHeader}>
-          <img src={logo} className={theme.AppLogo} alt="logo" />
-          <h1>Carena Gestión</h1> 
-          <small>Homepage</small>  
-          <Link to={VOUCHER}>
-            <Button>Submit</Button>
-          </Link>
-        </header>        
-      </div>
-    );
+      <Container>
+        <Row>
+          <Col sm={8} >
+            {search && <GridPokemons pokemons={search.results} onSelectPokemon={selectedPokemon => this.setState({ selectedPokemon })} />}
+          </Col>
+          <Col sm={4}>
+            <Container>
+              <PokemonDetail
+                handleGetAbility={this.props.getPokemonAbility}
+                pokemon={this.state.selectedPokemon}
+                pokeability={pokeability}
+              />
+            </Container>
+          </Col>
+        </Row>
+      </Container>
+    )
   }
 }
 
-export default Home;
+const mapStateToProps = ({ pokeRedux }) => {
+  const { search, pokeability } = pokeRedux;
+  return { search, pokeability }
+}
+
+
+export default connect(mapStateToProps, { searchPokemons, getPokemonAbility })(Home);   

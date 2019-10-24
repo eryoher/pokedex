@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import { getPokemon, fetchPokemons } from '../../actions/Pokemon';
 import PokemonItem from '../pokemon/pokemonItem';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -59,10 +59,11 @@ class GridPokemons extends Component {
         return result;
     }
 
-    render() {              
+    render() {   
+        const { searchError } = this.props           
         return (
             <div id={'scrollableDiv'} style={{ height: '800px', overflow: 'auto', overflowX: 'hidden' }}>
-                <InfiniteScroll
+                {!searchError && <InfiniteScroll
                     dataLength={this.state.pokeSearch.length} //This is important field to render the next data
                     next={this.handleFetchdata}
                     hasMore={this.state.infinitHasMore}
@@ -72,15 +73,18 @@ class GridPokemons extends Component {
                     <Row>
                         {this.renderPokemons()}
                     </Row>
-                </InfiniteScroll>
+                </InfiniteScroll>}
+                { searchError && <Col className={"error-search"} sm={12}>
+                    {searchError.message}
+                </Col> }
             </div>
         )
     }
 }
 
 const mapStateToProps = ({ pokeRedux }) => {
-    const { search, pokemonSearch, pokemonList, fetchpokemons } = pokeRedux;
-    return { search, pokemonSearch, pokemonList, fetchpokemons }
+    const { search, pokemonSearch, pokemonList, fetchpokemons, searchError } = pokeRedux;
+    return { search, pokemonSearch, pokemonList, fetchpokemons, searchError }
 }
 
 

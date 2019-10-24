@@ -3,6 +3,7 @@ import {
     SEARCH_POKEMONS_SUCCESS,
     GET_POKEMON,
     GET_POKEMON_SUCCESS,
+    GET_POKEMON_ERROR,
     GET_POKEMON_DESCRIPTION,
     GET_POKEMON_DESCRIPTION_SUCCESS,
     GET_POKEMON_ABILITY,
@@ -36,6 +37,13 @@ export const getPokemon = (params) => {
 export const getPokemonSuccess = (response) => {
   return {
     type: GET_POKEMON_SUCCESS,
+    payload: response
+  }
+};
+
+export const getPokemonError = (response) => {
+  return {
+    type: GET_POKEMON_ERROR,
     payload: response
   }
 };

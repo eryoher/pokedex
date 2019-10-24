@@ -100,7 +100,6 @@ li {
     border: 1px solid #2565b770;
     padding: 5px;     
     text-transform: capitalize;
-
 }
 
 .pokemon-item{
@@ -114,4 +113,10 @@ li {
 
 .control-next-icon{    
     color:#2565b770 !important;
+}
+
+.error-search{    
+    font-weight: bold;
+    font-size: 16pt;
+    text-align: center;
 }

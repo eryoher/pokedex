@@ -8,7 +8,8 @@ import {
     GET_POKEMON_ABILITY,
     GET_POKEMON_ABILITY_SUCCESS,
     FETCH_POKEMONS,
-    FETCH_POKEMONS_SUCCESS
+    FETCH_POKEMONS_SUCCESS,
+    GET_POKEMON_ERROR
 } from 'constants/ActionsTypes'
 
 const initialState = {
@@ -18,19 +19,22 @@ const initialState = {
     pokedescription: null,
     pokeability: null,
     pokemonSearch: [],
-    fetchpokemons: null
+    fetchpokemons: null,
+    searchError: null
 }
 
 function rootReducer(state = initialState, action) {
     switch (action.type) {
         case SEARCH_POKEMONS:
-            return { ...state, search: null, searchParamaters:action.payload, pokemonList: [] }
+            return { ...state, search: null, searchParamaters: action.payload, pokemonList: [] }
         case SEARCH_POKEMONS_SUCCESS:
             return { ...state, search: action.payload }
         case GET_POKEMON:
-            return { ...state }
+            return { ...state, searchError: null }
         case GET_POKEMON_SUCCESS:
             return { ...state, pokemonList: state.pokemonList.concat(action.payload) }
+        case GET_POKEMON_ERROR:
+            return { ...state, searchError: action.payload }
         case GET_POKEMON_DESCRIPTION:
             return { ...state, pokedescription: null }
         case GET_POKEMON_DESCRIPTION_SUCCESS:

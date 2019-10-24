@@ -19,7 +19,8 @@ import {
     getPokemonSuccess,
     getPokemonDescriptionSuccess,
     getPokemonAbilitySuccess,
-    fetchPokemonsSuccess
+    fetchPokemonsSuccess,
+    getPokemonError
 } from '../actions/Pokemon';
 
 
@@ -52,7 +53,9 @@ function* getPokemonRequest({ payload }) {
     try {
         const pokemon = yield call(getPokemon, payload);
         yield put(getPokemonSuccess(pokemon));
-    } catch (error) {
+    } catch (error) {        
+        yield put(getPokemonError({message:'El pokemon no se ha encontrado'}));
+        
     }
 }
 

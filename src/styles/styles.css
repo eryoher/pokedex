@@ -1,90 +1,117 @@
-ol, ul {
+ol,
+ul {
     list-style: none;
     padding-left: 10px;
 }
 
-li{
+li {
     line-height: 2;
 }
 
-.detail-stadistic{
+.detail-stadistic {
     background-color: #30a7d7;
     color: #fff;
-    border-radius: 10px;    
-    float: left;    
+    border-radius: 10px;
+    float: left;
     position: relative;
     width: 100%;
     min-height: 243px;
 }
 
-.detail-title{
-    font-family:'Comic Sans MS', arial;
+.detail-title {
+    font-family: 'Comic Sans MS', arial;
     font-size: 16pt;
-    color: #212121;    
+    color: #212121;
     font-weight: bold;
     text-transform: capitalize;
 }
 
-.attribute-title{
-    font-family:'Comic Sans MS', arial;
+.attribute-title {
+    font-family: 'Comic Sans MS', arial;
     clear: both;
-    color: #fff;    
-    font-size: 14pt;    
+    color: #fff;
+    font-size: 14pt;
     text-transform: none;
     white-space: normal;
     word-break: break-word;
 }
 
-.attribute-value{
+.attribute-value {
     font-family: 'Comic Sans MS', arial;
     clear: both;
-    color: #212121;    
-    font-size: 15pt;    
+    color: #212121;
+    font-size: 15pt;
     white-space: normal;
-    word-break: break-word;   
+    word-break: break-word;
     text-transform: capitalize;
 }
 
-.attribute-value-item{
+.attribute-value-item {
     font-family: 'Comic Sans MS', arial;
     clear: both;
-    color: #212121;    
-    font-size: 13pt;    
+    color: #212121;
+    font-size: 13pt;
     white-space: normal;
-    word-break: break-word;   
+    word-break: break-word;
     text-transform: capitalize;
 }
 
-.ability-div{
+.ability-div {
     background-color: #313131;
     position: absolute;
     top: 0;
     z-index: 3;
     height: 100%;
     width: 100%;
-    border-radius: 10px;    
+    border-radius: 10px;
 }
 
-.ability-div-hidden{
+.ability-div-hidden {
     display: none;
     opacity: 0;
     transition: visibility 0s 2s, opacity 2s linear;
 }
-.ability-div-show{
+
+.ability-div-show {
     display: block !important;
     opacity: 1 !important;
     transition: opacity 2s linear;
 }
 
-.ability-name{
+.ability-name {
     text-transform: capitalize;
     font-weight: bold;
-    font-size: 14pt;    
+    font-size: 14pt;
 
 }
 
-.ability-description{
+.ability-description {
     text-align: justify;
-    font-size: 12pt;    
+    font-size: 12pt;
+}
 
+.infinite-scroll-component {
+    overflow-x: hidden !important;
+}
+
+.pokemon-item-nopicture {
+    height: 200px;
+    cursor: pointer;
+    border: 1px solid #2565b770;
+    padding: 5px;     
+    text-transform: capitalize;
+
+}
+
+.pokemon-item{
+    border: 1px solid #2565b770;
+    text-align: center;
+}
+
+.pokemon-item-img{
+    cursor: pointer;
+}
+
+.control-next-icon{    
+    color:#2565b770 !important;
 }

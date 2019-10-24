@@ -6,14 +6,44 @@ import {
     getPokemonUrl,
 } from '../api/Pokemons'
 
-import { SEARCH_POKEMONS, GET_POKEMON, GET_POKEMON_DESCRIPTION, GET_POKEMON_ABILITY, FETCH_POKEMONS } from '../constants/ActionsTypes';
-import { searchPokemonsSuccess, getPokemonSuccess, getPokemonDescriptionSuccess, getPokemonAbilitySuccess, fetchPokemonsSuccess } from '../actions/Pokemon';
+import {
+    SEARCH_POKEMONS,
+    GET_POKEMON,
+    GET_POKEMON_DESCRIPTION,
+    GET_POKEMON_ABILITY,
+    FETCH_POKEMONS
+} from '../constants/ActionsTypes';
+
+import {
+    searchPokemonsSuccess,
+    getPokemonSuccess,
+    getPokemonDescriptionSuccess,
+    getPokemonAbilitySuccess,
+    fetchPokemonsSuccess
+} from '../actions/Pokemon';
 
 
 function* searchPokemonsRequest({ payload }) {
+    let pokemons = {}
     try {
-        const pokemons = yield call(searchPokemons, payload);
+        if (payload && payload.pokemon) {
+            pokemons = {
+                count: 1,
+                next: null,
+                previous: null,
+                results: [
+                    {
+                        name: payload.pokemon,
+                        url: `https://pokeapi.co/api/v2/pokemon/${payload.pokemon}`
+                    }
+                ]
+            }
+        } else {
+            pokemons = yield call(searchPokemons, payload);
+        }
+
         yield put(searchPokemonsSuccess(pokemons));
+
     } catch (error) {
     }
 }
@@ -43,7 +73,7 @@ function* getPokemonAbilittyRequest({ payload }) {
 }
 
 function* fetchPokemonsRequest({ payload }) {
-    try {
+    try {        
         const pokemons = yield call(getPokemonUrl, payload);
         yield put(fetchPokemonsSuccess(pokemons));
     } catch (error) {

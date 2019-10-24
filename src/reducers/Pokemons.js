@@ -24,11 +24,11 @@ const initialState = {
 function rootReducer(state = initialState, action) {
     switch (action.type) {
         case SEARCH_POKEMONS:
-            return { ...state, search: null }
+            return { ...state, search: null, searchParamaters:action.payload, pokemonList: [] }
         case SEARCH_POKEMONS_SUCCESS:
-            return { ...state, search: action.payload, pokemonSearch: action.payload.results }
+            return { ...state, search: action.payload }
         case GET_POKEMON:
-            return { ...state, pokeItem: null }
+            return { ...state }
         case GET_POKEMON_SUCCESS:
             return { ...state, pokemonList: state.pokemonList.concat(action.payload) }
         case GET_POKEMON_DESCRIPTION:

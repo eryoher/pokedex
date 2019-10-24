@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Row, Col, Container, Carousel } from 'react-bootstrap';
 import PokemonDescription from './pokemonDescription';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faQuestionCircle, faTimes, faTimesCircle } from '@fortawesome/free-solid-svg-icons';
+import { faQuestionCircle, faTimesCircle, faArrowCircleRight, faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons';
+
+const { Item } = Carousel;
 
 export default class PokemonDetail extends Component {
 
@@ -10,8 +12,17 @@ export default class PokemonDetail extends Component {
         super(props);
         this.state = {
             showAbility: false,
-            abilityName:''
+            abilityName: ''
         }
+    }
+
+    handleShowAbility = (ability) => {
+        this.props.handleGetAbility({ url: ability.url });
+        this.setState({ showAbility: true, abilityName: ability.name });
+    }
+
+    handleCloseAbility = () => {
+        this.setState({ showAbility: false });
     }
 
     renderTypes = (types) => {
@@ -41,42 +52,75 @@ export default class PokemonDetail extends Component {
         return result;
     }
 
-    handleShowAbility = (ability) => {          
-        this.props.handleGetAbility({url:ability.url});
-        this.setState({showAbility:true, abilityName:ability.name});
-    }
+    renderCarouselImage = (sprites) => {
+        const result = [];
+        console.log(sprites)
+        for (const key in sprites) {
+            if (sprites.hasOwnProperty(key)) {
+                const urlImg = sprites[key];
+                console.log(urlImg)
+                if (urlImg) {
+                    result.push(
+                        <Item className={"text-center pl-5"} key={key}>
+                            <img
+                                className={"d-block"}
+                                src={urlImg}
+                                alt={key}           
+                                width={'80%'}                     
+                            />
+                        </Item>
+                    )
+                }
+            }
+        }
 
-    handleCloseAbility = () => {
-        this.setState({showAbility:false});
+        return (
+            <Carousel
+                nextIcon ={
+                    <span aria-hidden="true" className="control-next-icon" >
+                        <FontAwesomeIcon icon={ faArrowCircleRight } />
+                    </span>
+                }
+                prevIcon = {
+                    <span aria-hidden="true" className="control-next-icon" >
+                        <FontAwesomeIcon icon={ faArrowCircleLeft } />
+                    </span>
+                }
+                indicators={false}
+            >
+                {result}
+            </Carousel>
+        )
     }
 
     renderDetail = (pokemon) => {
-        //console.log(pokemon)
-
-        const { showAbility } = this.state;    
-        const { pokeability } = this.props;    
-        const abilityDiv = (showAbility) ? 'ability-div-show' : 'ability-div-hidden';        
+        const { sprites } = pokemon;
+        const { showAbility } = this.state;
+        const { pokeability } = this.props;
+        const abilityDiv = (showAbility) ? 'ability-div-show' : 'ability-div-hidden';
         return (
             <>
                 <Col sm={12} className={'text-center detail-title'} > {pokemon.name} </Col>
-                <Col sm={12} className={'text-center detail-description pl-0 pr-0 pb-3'} >
+                {
+                    sprites.front_default && <Col sm={12}> {this.renderCarouselImage(sprites)} </Col>
+                }
+                <Col sm={12} className={'text-center detail-description pb-3'} >
                     <PokemonDescription url={pokemon.species.url} />
                 </Col>
                 <Row sm={12} className={'detail-stadistic mr-0 ml-0'}>
                     <div className={`ability-div ${abilityDiv}`}>
-                        <Col className={"text-right pt-2"} sm={{span:2, offset:10}} >
-                            <FontAwesomeIcon onClick={this.handleCloseAbility} icon={faTimesCircle} style={{cursor:'pointer'}}  /> 
+                        <Col className={"text-right pt-2"} sm={{ span: 2, offset: 10 }} >
+                            <FontAwesomeIcon onClick={this.handleCloseAbility} icon={faTimesCircle} style={{ cursor: 'pointer' }} />
                         </Col>
                         <Container className={"mt-2"}>
                             <Col className={'ability-name mb-3'} sm={12}>
                                 {this.state.abilityName}
                             </Col>
                             <Col className={'ability-description'} sm={12}>
-                                {pokeability}     
+                                {pokeability}
                             </Col>
-                            
+
                         </Container>
-                       
                     </div>
                     <Col sm={12}>
                         <ul>

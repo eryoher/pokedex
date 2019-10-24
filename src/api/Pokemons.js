@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-export const searchPokemons = async (params) => {
+export const searchPokemons = async () => {        
     const response = await Axios.get('https://pokeapi.co/api/v2/pokemon/');
     return response.data;
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Row, Col } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import { getPokemon, fetchPokemons } from '../../actions/Pokemon';
 import PokemonItem from '../pokemon/pokemonItem';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -11,7 +11,8 @@ class GridPokemons extends Component {
         super(props);
         this.state = {
             pokeSearch: [],
-            nextPageUrl: this.props.search.next
+            nextPageUrl: this.props.search.next,
+            infinitHasMore: true
         }
     }
 
@@ -20,12 +21,13 @@ class GridPokemons extends Component {
         this.props.getPokemon(pokemons);
     }
 
-    handleFetchdata = () => {        
+    handleFetchdata = () => {                
         this.props.fetchPokemons({ url: this.state.nextPageUrl })
     }
 
+    
     componentWillReceiveProps = (nextProps) => {
-        if (nextProps.pokemonList !== this.props.pokemonList) {            
+        if (nextProps.pokemonList !== this.props.pokemonList) { 
             const { pokemonList } = nextProps;
             const pokemons = pokemonList.map(pokemon => {
                 return pokemon.data
@@ -34,8 +36,16 @@ class GridPokemons extends Component {
         }
 
         if( this.props.fetchpokemons !== nextProps.fetchpokemons && !this.props.fetchpokemons ){            
-            this.props.getPokemon(nextProps.fetchpokemons.results);            
-            this.setState({nextPageUrl:nextProps.fetchpokemons.next})
+            this.props.getPokemon(nextProps.fetchpokemons.results);   
+            if (nextProps.fetchpokemons.next){         
+                this.setState({nextPageUrl:nextProps.fetchpokemons.next})
+            }else{
+                this.setState({infinitHasMore:false})
+            }
+        }
+        
+        if( !nextProps.search.next  ){            
+            this.setState({infinitHasMore:false})
         }
     }
 
@@ -49,19 +59,18 @@ class GridPokemons extends Component {
         return result;
     }
 
-    render() {
-        const { pokemons } = this.props;        
+    render() {              
         return (
-            <div id={'scrollableDiv'} style={{ height: '800px', overflow: 'auto' }}>
+            <div id={'scrollableDiv'} style={{ height: '800px', overflow: 'auto', overflowX: 'hidden' }}>
                 <InfiniteScroll
                     dataLength={this.state.pokeSearch.length} //This is important field to render the next data
                     next={this.handleFetchdata}
-                    hasMore={true}
-                    loader={<h4>Loading...</h4>}
+                    hasMore={this.state.infinitHasMore}
+                    loader={<div className={"w-100"}><h3>Loading...</h3></div>}
                     scrollableTarget="scrollableDiv"
                 >
                     <Row>
-                        {pokemons && this.renderPokemons()}
+                        {this.renderPokemons()}
                     </Row>
                 </InfiniteScroll>
             </div>

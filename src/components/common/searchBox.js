@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { searchImage } from '../../actions';
+import { searchPokemons } from '../../actions';
 import { connect } from 'react-redux';
 import { Col, Row, Button, InputGroup, FormControl, Form } from 'react-bootstrap';
 import { Formik } from 'formik';
@@ -15,9 +15,7 @@ class SearchBox extends Component {
 
     handleSearch = () => {
         const { searchValue } = this.state;
-        const { listSellers } = this.props;
-        const count = (listSellers.length > 0) ? listSellers.length : 1;
-        this.props.searchImage({ image: searchValue, count });
+        this.props.searchPokemons({ pokemon: searchValue.toLowerCase() });
     }
 
     handleClear = () => {
@@ -25,13 +23,6 @@ class SearchBox extends Component {
     }
 
     render() {
-        const { listSellers } = this.props;
-        let disableSearch = false;
-        listSellers.forEach(seller => {
-            if (seller.score > 20) {
-                disableSearch = true;
-            }
-        });
         return (
             <Row>
                 <Formik
@@ -39,15 +30,15 @@ class SearchBox extends Component {
                         this.handleSearch();
                     }}
                     enableReinitialize={true}
-                    render={({ values, handleBlur, handleChange, errors, touched, isSubmitting, handleSubmit, setFieldValue, setFieldTouched }) => (
+                    render={({ handleSubmit }) => (
                         <Form onSubmit={handleSubmit} className="col-12">
                             <Col sm={12}>
                                 <InputGroup className="mb-3">
                                     <FormControl
                                         name={"imagen"}
                                         id={"imagen"}
-                                        placeholder={(disableSearch) ? "La carrera termino." : "Buscar Imagen"}
-                                        aria-label="Buscar Imagen"
+                                        placeholder={"Buscar un Pokemon"}
+                                        aria-label="Buscar un Pokemon"
                                         value={this.state.searchValue}
                                         onChange={(e) => {
                                             this.setState({ searchValue: e.target.value })
@@ -55,7 +46,7 @@ class SearchBox extends Component {
                                     />
                                     <InputGroup.Append>
                                         <Button variant="info" onClick={this.handleClear} type={'button'}> Borrar </Button>
-                                        <Button variant="primary" disabled={disableSearch} type={'submit'}> Buscar </Button>
+                                        <Button variant="primary" type={'submit'}> Buscar </Button>
                                     </InputGroup.Append>
                                 </InputGroup>
                             </Col>
@@ -68,11 +59,10 @@ class SearchBox extends Component {
     }
 }
 
-const mapStateToProps = ({ sellerRedux }) => {
-    const { listSellers } = sellerRedux;
-    return { listSellers }
+const mapStateToProps = () => {
+    return {}
 }
 
 
 
-export default connect(mapStateToProps, { searchImage })(SearchBox);   
+export default connect(mapStateToProps, { searchPokemons })(SearchBox);   
